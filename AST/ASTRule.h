@@ -1,0 +1,34 @@
+#pragma once
+
+#include <AST/ASTElement.h>
+#include <AST/ASTArgList.h>
+#include <AST/ASTFunctionParameters.h>
+
+
+namespace roe
+{
+
+class Context;
+
+class ASTRule
+{
+public:
+    ASTRule(  Context& context
+            , const std::string& ruleID
+            , ASTFunctionParametersPtr params
+            , ASTElement::ASTElementPtr ruleAST);  
+    void evaluate();
+    const std::string& name() const;
+    Context& context() {return context_;};
+private:
+    std::string ruleID_; 
+    Context& context_;
+    ASTElement::ASTElementPtr ruleAST_;
+    ASTFunctionParametersPtr params_;
+};
+
+using ASTRulePtr = std::shared_ptr<ASTRule>;
+
+
+}
+

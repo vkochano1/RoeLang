@@ -1,0 +1,54 @@
+
+
+
+ruleid = TST (A,B)
+{ 
+
+  jok = "dfgfg";
+  
+}
+
+ruleid = JOPA(A,B)
+{
+t= 1;
+y= 2;
+rob = "ghh";
+hop = "ghh";
+utr="fff";
+A.fieldTest = utr;
+
+
+ps(A.fieldTest);
+vt = "a";
+vt = str(3);
+ps(vt);
+
+A.fieldTest = vt;
+vg = int(vt);
+//vg=98;
+    if(vg > 2)
+    {
+      
+      kk="HHH";
+      kk = kk + hop;
+      //ps(kk);
+      tag12="kkjj";
+      ut = "UTQQ";
+      o = "IsasI";
+      o = o + ut + "yyyyy";
+      
+      o = o + tag12;
+      
+      ps(o);
+    }else if (hop == rob)
+    {
+      ps(hop);
+    }
+    else
+    {
+      y=3;
+    };
+    
+
+   
+}

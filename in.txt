@@ -1,0 +1,49 @@
+
+
+// Dummy rule
+ruleid = TST (A,B)
+{ 
+  A.tag18 = "ISOSweep";
+}
+
+
+ruleid = JOPA(A,B)
+{
+/* silly initialization */
+
+A.fieldSymbol = "IBM";
+A.fieldSuffix = "A";
+A.fieldOrdQty = str(200);
+A.fieldSide = "Buy";
+A.fieldAccount = "FA";
+A.fieldLimitPrice  = str(150);
+A.fieldOrdType  = "Limit";
+
+
+/* 
+    a few silly transformations
+*/
+
+localQty = int(A.fieldOrdQty);
+localSell = "Sell";
+localBuy = "Buy";
+if (localQty == 200 and A.fieldSide == localSell)
+{
+   B.fieldSide = A.fieldSide;
+}
+else if ( (localQty == 200 and A.fieldSide == localSell) or  1 > 0 )
+{
+   B.fieldSide = "ShortSell";
+}
+else
+{
+   B.fieldSide = "Unk";
+
+  // do nothing
+}
+
+B.fieldOrdQty = str(localQty * (10 + 3)) + str(0);
+   
+B.fieldSymbol = A.fieldSymbol + "o" +  A.fieldSuffix;
+   
+}
