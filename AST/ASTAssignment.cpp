@@ -14,51 +14,65 @@ namespace roe
        
     }
 
+    void ASTAssignment::processAssignmentToLocalStrVar(const ASTVariable& var, llvm::Value* to, llvm::Value* from)
+    {
+        if(from->getType() == Types::instance().charPtrType())
+        {
+            FunctionRegistrar::instance().makeCall(context_,"inits", {to, from} );
+        }
+        else
+        {
+            FunctionRegistrar::instance().makeCall(context_,"assign", {to, from} );
+        }
+    }
         
+    void ASTAssignment::processAssignmentToField(const ASTVariable& astVar, llvm::Value* to, llvm::Value* from)
+    {
+        llvm::Value* container = context_.rule().getParamValue(astVar.baseName());
+        llvm::Value* tagVal = llvm::ConstantInt::get(Types::instance().longType(), astVar.tag());  
+        
+        if(from->getType() == Types::instance().charPtrType())
+        {
+            FunctionRegistrar::instance().makeCall(context_,"setFieldCharPtr", {container, tagVal, from} );
+        }
+        else
+        {
+            FunctionRegistrar::instance().makeCall(context_,"setField", {container, tagVal, from} );
+        }
+    }
+    
+    void ASTAssignment::processAssignmentToLocalIntVar(const ASTVariable& var, llvm::Value* to, llvm::Value* from)
+    {
+        from = loadValueIfNeeded(from);
+        context_.builder().CreateStore(from, to); 
+    }
+    
     llvm::Value* ASTAssignment::evaluate()
     {
-        auto rightVal = right_->evaluate();
+        auto from = right_->evaluate();
         auto* astVar = dynamic_cast<ASTVariable*>(left_.get());
         
-        llvm::Type* varType = Types::instance().varTypeFromRVal(rightVal->getType());
-        auto v1 = context_.getOrCreateVariable(astVar->name(), varType); 
+        {
+            llvm::Type* varType = Types::instance().varTypeFromRVal(from->getType());
+            context_.getOrCreateVariable(astVar->name(), varType); 
+        }
         
-        auto* leftVal = left_->evaluate();
+        auto* to = left_->evaluate();
         
         if(astVar->isField())
         {
-             llvm::Value* container = context_.rule().getParamValue(astVar->baseName());
-             llvm::Value* tagVal = llvm::ConstantInt::get(Types::instance().longType(), astVar->tag());              
-               if(rightVal->getType() == Types::instance().charPtrType())
-               {
-                  FunctionRegistrar::instance().makeCall(context_,"setFieldCharPtr", {container, tagVal, rightVal} );
-               }
-               else
-               {
-                 FunctionRegistrar::instance().makeCall(context_,"setField", {container, tagVal, rightVal} );
-               }
-             
+            processAssignmentToField(*astVar, to, from);
         }
-        if(leftVal->getType() == Types::instance().stringPtrType() )
+        else if(to->getType() == Types::instance().stringPtrType() )
         {
-               
-               if(rightVal->getType() == Types::instance().charPtrType())
-               {
-                        FunctionRegistrar::instance().makeCall(context_,"inits", {leftVal, rightVal} );
-               }
-               else
-               {
-                        FunctionRegistrar::instance().makeCall(context_,"assign", {leftVal, rightVal} );
-               }
+            processAssignmentToLocalStrVar(*astVar, to, from);
         }
         else 
         {
-                rightVal = loadValueIfNeeded(rightVal);
-                context_.builder().CreateStore(rightVal, leftVal); 
-                           
+            processAssignmentToLocalIntVar(*astVar, to, from);            
         }
             
-        return leftVal;
+        return to;
     }
  
 }

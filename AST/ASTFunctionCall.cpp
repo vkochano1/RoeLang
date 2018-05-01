@@ -7,10 +7,11 @@ namespace roe
 {
    
    ASTFunctionCall::ASTFunctionCall(Context& context
-    , const std::string& name, ASTElementPtr  args)
-    : ASTElement(context)
-     , name_(name) 
-     , args_(args)
+                                    , const std::string& name
+                                    , ASTElementPtr  args)
+                                    : ASTElement(context)
+                                    , name_(name) 
+                                    , args_(args)
     {
     }
     
@@ -18,46 +19,84 @@ namespace roe
     {
     }
     
-    llvm::Value* ASTFunctionCall::processBuiltins()
+    bool ASTFunctionCall::processBuiltins(llvm::Value*& retValue)
     {
         if (name_ == "str")
         {
             auto& builder = context_.builder();
-            this->args_->evaluate();
-            auto* argList = dynamic_cast<ASTArgList*> (this->args_.get());
+
+            args_->evaluate();
+
+            auto* argList = dynamic_cast<ASTArgList*> (args_.get());
             auto values = argList->values();
-            auto* ret = builder.CreateAlloca(Types::instance().stringType());
-            values.push_back(ret);
+
+            retValue = builder.CreateAlloca(Types::instance().stringType());
+            values.push_back(retValue);
+
             FunctionRegistrar::instance().makeCall(context_, "str", values);
-            return ret;
+
+            return true;
         }
         
-        return nullptr;
+        return false;
     }
-    
-    llvm::Value* ASTFunctionCall::evaluate()
+ 
+    bool ASTFunctionCall::processModuleFunction(llvm::Value*& retValue)
     {
         auto& builder = context_.builder();
         
         auto fit = context_.rules().find(name_);
+        
         if(fit != context_.rules().end())
         {
             auto& rule = *fit->second;
-            llvm::Value* arg1 = rule.funcPtr()->arg_begin();
-            return  builder.CreateCall(rule.funcPtr(), {arg1});   
+            
+            std::vector<llvm::Value*> args;
+            for (auto& arg : rule.funcPtr()->args())
+            {
+                    args.push_back(&arg);
+            }
+            
+            retValue = builder.CreateCall(rule.funcPtr(), args);  
+            return true;
         }
+        return false;
+    }
+    
+    bool ASTFunctionCall::processRegularFunction(llvm::Value*& retValue)
+    {
+        args_->evaluate();
         
-        llvm::Value* ret = processBuiltins();
-        if (ret)
-        {
-            return ret;
-        }
-        
-        this->args_->evaluate();
-        auto* argList = dynamic_cast<ASTArgList*> (this->args_.get());
+        auto* argList = dynamic_cast<ASTArgList*> (args_.get());
         auto& values = argList->values();
         
-        return FunctionRegistrar::instance().makeCall(context_, this->name_, values);
+        retValue =  FunctionRegistrar::instance().makeCall(context_, name_, values);
+        
+        return true;
+    }
+    
+    llvm::Value* ASTFunctionCall::evaluate()
+    {
+        llvm::Value* value = nullptr;
+        
+        bool processed = processModuleFunction(value);
+        
+        if (!processed)
+        {
+            processed = processBuiltins(value);
+        }
+        
+        if (!processed)
+        {
+            processed = processRegularFunction(value);
+        }
+        
+        if(!processed)
+        {
+            throw std::logic_error("Call failed");
+        }
+        
+        return value;
     }
 
 }

@@ -9,9 +9,12 @@ class ASTCstr: public ASTElement
 {
 public:
     ASTCstr(Context& context, const std::string& v);
+    
+public:
     virtual llvm::Value* evaluate() override;
+    
 private:
-   std::string value_; 
+    std::string value_; 
 };
 
 }

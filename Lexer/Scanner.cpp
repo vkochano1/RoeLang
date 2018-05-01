@@ -546,8 +546,8 @@ static yyconst flex_int16_t yy_rule_linenum[33] =
     {   0,
        44,   48,   52,   56,   60,   64,   68,   72,   76,   80,
        84,   88,   92,   96,  100,  104,  108,  112,  116,  120,
-      124,  128,  133,  138,  143,  148,  154,  161,  165,  167,
-      170,  176
+      124,  128,  133,  138,  143,  148,  153,  160,  164,  166,
+      169,  175
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -1050,7 +1050,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 154 "Lexer/Scanner.ll"
+#line 153 "Lexer/Scanner.ll"
 {
     yylval->stringVal_ = std::string(yytext, yyleng);
     return token::NAME;
@@ -1060,7 +1060,7 @@ YY_RULE_SETUP
 case 28:
 /* rule 28 can match eol */
 YY_RULE_SETUP
-#line 161 "Lexer/Scanner.ll"
+#line 160 "Lexer/Scanner.ll"
 {
     yylloc->step();
 }
@@ -1068,20 +1068,20 @@ YY_RULE_SETUP
 case 29:
 /* rule 29 can match eol */
 YY_RULE_SETUP
-#line 165 "Lexer/Scanner.ll"
+#line 164 "Lexer/Scanner.ll"
 { }
 	YY_BREAK
 case 30:
 /* rule 30 can match eol */
 YY_RULE_SETUP
-#line 167 "Lexer/Scanner.ll"
+#line 166 "Lexer/Scanner.ll"
 { /* DO NOTHING */ }
 	YY_BREAK
 /* gobble up end-of-lines */
 case 31:
 /* rule 31 can match eol */
 YY_RULE_SETUP
-#line 170 "Lexer/Scanner.ll"
+#line 169 "Lexer/Scanner.ll"
 {
     yylloc->lines(yyleng); yylloc->step();
     return token::EOL;
@@ -1090,14 +1090,14 @@ YY_RULE_SETUP
 /* pass all other characters up to bison */
 case 32:
 YY_RULE_SETUP
-#line 176 "Lexer/Scanner.ll"
+#line 175 "Lexer/Scanner.ll"
 {
     return static_cast<token_type>(*yytext);
 }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 181 "Lexer/Scanner.ll"
+#line 180 "Lexer/Scanner.ll"
 ECHO;
 	YY_BREAK
 #line 1104 "Lexer/Scanner.cpp"
@@ -2213,7 +2213,7 @@ void Roefree (void * ptr )
 
 /* %ok-for-header */
 
-#line 181 "Lexer/Scanner.ll"
+#line 180 "Lexer/Scanner.ll"
 
 
 

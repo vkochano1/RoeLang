@@ -17,7 +17,6 @@ namespace roe
     ASTElement::ASTElement(Context& context)
      : context_(context)
     {
-
     }    
 }
 

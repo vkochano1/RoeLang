@@ -150,7 +150,6 @@ typedef roe::Parser::token_type token_type;
     return token::NAME;
 }
 
-
 [A-Za-z][A-Za-z0-9]* {
     yylval->stringVal_ = std::string(yytext, yyleng);
     return token::NAME;

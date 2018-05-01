@@ -13,7 +13,9 @@ public:
     virtual llvm::Value* evaluate() override;
     ~ASTFunctionCall();
 protected:
-    llvm::Value* processBuiltins();
+    bool processBuiltins(llvm::Value*& retValue);
+    bool processModuleFunction(llvm::Value*& retValue);
+    bool processRegularFunction(llvm::Value*& retValue);
 private:
    std::string name_; 
    std::shared_ptr<ASTElement> args_;

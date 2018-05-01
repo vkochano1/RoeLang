@@ -12,7 +12,7 @@ namespace roe
     llvm::Value*  ASTDouble::evaluate()
     {
         auto& builder = context_.builder();
-        return  llvm::ConstantInt::get(builder.getFloatTy(), value_);
+        return  llvm::ConstantFP::get(builder.getFloatTy(), value_);
     }
     
 }

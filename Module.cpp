@@ -40,9 +40,8 @@ namespace roe
         raw_string_ostream file_stream(std_file_stream);
         module_->print(file_stream, nullptr);
         std::cout << std_file_stream << std::endl;
-        
-        
     }
+    
     void Module::buildNative()
     {
         roe::FunctionRegistrar::instance().addAllMappings(*executionEngine_);
