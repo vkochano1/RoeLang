@@ -18,11 +18,11 @@ namespace roe
     {
         if(from->getType() == Types::instance().charPtrType())
         {
-            FunctionRegistrar::instance().makeCall(context_,"inits", {to, from} );
+            FunctionRegistrar::instance().makeCall(context_,StringOps::ASSIGN_CHPTR, {to, from} );
         }
         else
         {
-            FunctionRegistrar::instance().makeCall(context_,"assign", {to, from} );
+            FunctionRegistrar::instance().makeCall(context_,StringOps::ASSIGN_STR, {to, from} );
         }
     }
         

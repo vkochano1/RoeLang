@@ -5,6 +5,9 @@
 
 namespace roe
 {
+    
+   const std::string  ASTFunctionCall::TO_STRING_BUILTIN  = "str";
+   const std::string  ASTFunctionCall::TO_INT_BUILTIN  = "int";
    
    ASTFunctionCall::ASTFunctionCall(Context& context
                                     , const std::string& name
@@ -21,7 +24,7 @@ namespace roe
     
     bool ASTFunctionCall::processBuiltins(llvm::Value*& retValue)
     {
-        if (name_ == "str")
+        if (name_ == TO_STRING_BUILTIN)
         {
             auto& builder = context_.builder();
 
@@ -33,8 +36,22 @@ namespace roe
             retValue = builder.CreateAlloca(Types::instance().stringType());
             values.push_back(retValue);
 
-            FunctionRegistrar::instance().makeCall(context_, "str", values);
+            FunctionRegistrar::instance().makeCall(context_, StringOps::INT_TO_STR, values);
+            return true;
+        }
+        else if (name_ == TO_INT_BUILTIN)
+        {
+            auto& builder = context_.builder();
 
+            args_->evaluate();
+
+            auto* argList = dynamic_cast<ASTArgList*> (args_.get());
+            auto values = argList->values();
+
+            if(values[0]->getType() == Types::instance().stringType())
+                FunctionRegistrar::instance().makeCall(context_, StringOps::TO_INT_STR, values);
+            else
+                FunctionRegistrar::instance().makeCall(context_, StringOps::TO_INT_CHPTR, values);
             return true;
         }
         
@@ -54,7 +71,7 @@ namespace roe
             std::vector<llvm::Value*> args;
             for (auto& arg : rule.funcPtr()->args())
             {
-                    args.push_back(&arg);
+                args.push_back(&arg);
             }
             
             retValue = builder.CreateCall(rule.funcPtr(), args);  
@@ -93,7 +110,7 @@ namespace roe
         
         if(!processed)
         {
-            throw std::logic_error("Call failed");
+            throw ASTException("Not a function call");
         }
         
         return value;

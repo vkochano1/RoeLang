@@ -1,5 +1,6 @@
 #include <AST/ASTArithmetical.h>
 #include <FunctionRegistrar.h>
+#include <StringOps.h>
 
 namespace roe
 {
@@ -8,55 +9,83 @@ namespace roe
     , op_(op)
     , operand1_(op1)
     , operand2_(op2)
-    {
-        
+    {        
     }
+    
+    bool ASTArithmetical::processStringConcat(llvm::Value* left
+                                            , llvm::Value* right
+                                            , llvm::Value*& out)
+    {
+        auto& builder = context_.builder();
+      
+        out = nullptr;
+        
+        if(    left->getType() == Types::instance().stringPtrType() 
+            && right->getType() == Types::instance().stringPtrType())
+        {
+            out = builder.CreateAlloca(Types::instance().stringType());
+            FunctionRegistrar::instance().makeCall(context_,StringOps::CONCAT_STR_AND_STR, { left, left, right} );
+        }
+        else if (left->getType() == Types::instance().stringPtrType() 
+                 && right->getType() == Types::instance().charPtrType()
+                )
+        {
+            out = builder.CreateAlloca(Types::instance().stringType());
+            FunctionRegistrar::instance().makeCall(context_,StringOps::CONCAT_STR_AND_CHPTR, { left, right, out} );
+        }
+        else if (left->getType() == Types::instance().charPtrType() 
+                 && right->getType() == Types::instance().stringPtrType()
+                )
+        {
+            out = builder.CreateAlloca(Types::instance().stringType());
+            FunctionRegistrar::instance().makeCall(context_,StringOps::CONCAT_CHPTR_AND_STR, { left, right, out} );
+        }
+        else if (left->getType() == Types::instance().charPtrType() 
+                 && right->getType() == Types::instance().charPtrType()
+                )
+        {
+            out = builder.CreateAlloca(Types::instance().stringType());
+            FunctionRegistrar::instance().makeCall(context_,StringOps::CONCAT_CHPTR_AND_CHPTR, { left, right, out} );
+        }
+        
+        return out != nullptr;
+    }
+    
     llvm::Value* ASTArithmetical::evaluate()
     {
       auto& builder = context_.builder();
       
-      auto v1 = operand1_->evaluate();
-      auto v2 = operand2_->evaluate();
+      auto left = operand1_->evaluate();
+      auto right = operand2_->evaluate();
       
-      v1 = loadValueIfNeeded(v1);
-      v2 = loadValueIfNeeded(v2);
+      left = loadValueIfNeeded(left);
+      right = loadValueIfNeeded(right);
       
       llvm::Value* out = nullptr;
       switch(op_)
       {
           case Operator::PLUS :
           {
-              std::cerr << "PLUS";
-              llvm::errs() << *v2;
-              std::cerr << std::endl;
-              if( v1->getType() == Types::instance().stringPtrType())
-              {
-                  out = builder.CreateAlloca(Types::instance().stringType());
-            
-                  if(v2->getType() != Types::instance().stringPtrType())
-                  {
-                      FunctionRegistrar::instance().makeCall(context_,"concatSCHPtr", { v1, v2, out} );
-              
-                  }
-                  else
-                  {
-                      FunctionRegistrar::instance().makeCall(context_,"concat", { v1, v2, out} );
-                  }
+            bool processed = processStringConcat(left, right, out);
+            if (processed)
+            {
+                return out;
             }
-              else
-              {
-                out = builder.CreateAdd(v1,v2);
-              }
+                
+            out = builder.CreateAdd(left,right);
           }
           break;
+          
            case Operator::MINUS :
-              out = builder.CreateSub(v1,v2);
+              out = builder.CreateSub(left,right);
           break;
+          
            case Operator::MUL :
-              out = builder.CreateMul(v1,v2);
+              out = builder.CreateMul(left,right);
           break;
+          
            case Operator::DIV :
-              out = builder.CreateExactSDiv(v1,v2);
+              out = builder.CreateExactSDiv(left,right);
           break;
       };
       

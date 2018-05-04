@@ -80,14 +80,34 @@ namespace roe
           break;
            case Operator::EQUAL :
            {
-              if( v1->getType() == Types::instance().stringPtrType())
+              if( v1->getType() == Types::instance().stringPtrType()
+                  && v2->getType() == Types::instance().stringPtrType()
+                )
               {
-                  out = FunctionRegistrar::instance().makeCall(context_,"equals", { v1, v2 } );
-                  
+                  out = FunctionRegistrar::instance().makeCall(context_,StringOps::EQUALS_STR_AND_STR, { v1, v2 } );
               }
+              else  if( v1->getType() == Types::instance().charPtrType()
+                      && v2->getType() == Types::instance().stringPtrType()
+                      )
+              {
+                    out = FunctionRegistrar::instance().makeCall(context_,StringOps::EQUALS_CHPTR_AND_STR, { v1, v2 } );
+              }
+              else  if( v1->getType() == Types::instance().stringPtrType()
+                      && v2->getType() == Types::instance().charPtrType()
+                      )
+              {
+                    out = FunctionRegistrar::instance().makeCall(context_,StringOps::EQUALS_STR_AND_CHPTR, { v1, v2 } );
+              }
+              else  if( v1->getType() == Types::instance().charPtrType()
+                      && v2->getType() == Types::instance().charPtrType()
+                      )
+              {
+                    out = FunctionRegistrar::instance().makeCall(context_,StringOps::EQUALS_CHPTR_AND_CHPTR, { v1, v2 } );
+              }
+              
               else
               {
-                   out = builder.CreateICmpEQ(v1,v2);
+                  out = builder.CreateICmpEQ(v1,v2);
               }
            }
           break;

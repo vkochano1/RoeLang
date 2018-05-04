@@ -17,7 +17,12 @@ public:
     };
 public:
     ASTArithmetical(Context& context, Operator op, ASTElementPtr op1, ASTElementPtr op2);
-    virtual llvm::Value* evaluate();
+
+public:
+    virtual llvm::Value* evaluate() override;
+    
+private:
+    bool processStringConcat(llvm::Value*, llvm::Value*, llvm::Value*& out);
 private:
    Operator op_; 
    ASTElementPtr operand1_;

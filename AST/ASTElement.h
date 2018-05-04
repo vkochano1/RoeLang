@@ -2,6 +2,7 @@
 
 #include <Context.h>
 #include <llvm/IR/DerivedTypes.h>
+#include <AST/ASTException.h>
 
 namespace roe
 {
