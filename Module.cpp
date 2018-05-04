@@ -17,7 +17,7 @@ namespace roe
     
         roe::Types::instance().init(context_);
     
-        roe::StringOps::registerBuilins(context_);
+        roe::StringOps::registerBuiltins(context_);
 
         roe::Bindings::registerBuiltins(context_);
 

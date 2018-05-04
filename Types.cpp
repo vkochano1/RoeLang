@@ -26,6 +26,7 @@ void Types::init(Context& context)
     longPtrType_ = llvm::PointerType::get(longType_,0);
 
     boolType_ = llvm::Type::getInt1Ty(context);
+    voidType_ = llvm::Type::getVoidTy(context);
 
     rvalueToVarType_ =   TypeMapping
     {
@@ -112,6 +113,10 @@ llvm::Type* Types::boolType ()
 };
 
 
+llvm::Type* Types::voidType () 
+{
+    return voidType_;
+};
 
 
 Types::Types()
