@@ -37,6 +37,8 @@ namespace roe
         
         llvm::Type* boolType ();
         
+        llvm::Type* voidType();
+        
     private:
         llvm::Type* longType_= nullptr;
         llvm::Type* longPtrType_= nullptr;
@@ -45,6 +47,7 @@ namespace roe
         llvm::Type* stringPtrType_ = nullptr;
         llvm::Type* voidPtrType_ = nullptr;
         llvm::Type* boolType_ = nullptr;
+        llvm::Type* voidType_ = nullptr;
         
         TypeMapping  rvalueToVarType_;
         TypeMapping  pointerTyToValueTy_;
