@@ -76,7 +76,14 @@ int main(int argc, char *argv[])
     
     roe::ContainerAccess access1;
     roe::ContainerAccess access2;
+    try
+    {
     f.call(&access1, &access2);
+    }
+    catch(std::exception& ex)
+    {
+        std::cerr << ex.what();
+    }
     
     access1.dump(std::cout);
     access2.dump(std::cout);
