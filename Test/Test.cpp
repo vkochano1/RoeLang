@@ -38,53 +38,110 @@
 #include <Module.h>
 
 
-
-void writeModuleToFile(llvm::Module *module)
+class ContainerAccess : public roe::IContainerAccess
 {
-    using namespace llvm;
-	std::string std_file_stream;
-	raw_string_ostream file_stream(std_file_stream);
-	module->print(file_stream, nullptr);
-    std::cout << file_stream.str();
-}
+public:
+    virtual void  setField(int64_t tag, const roe::StringOps::String_t& value)
+    {
+     data_ [tag] = std::string(value.data, value.len_);
+    }
+
+    virtual void  setField(int64_t tag, const char* value, size_t len)
+    {
+     data_ [tag] = std::string(value, len);
+    }
+
+    virtual void  getField(int64_t tag, roe::StringOps::String_t& value)
+    {
+        std::string& val =  data_[tag];
+        if (val.length() == 0)
+        {
+            value.len_ = 0;
+            return;
+        }
+        std::strncpy(&value.data[0], &val[0], val.length());
+        value.len_ = val.length();
+    }
+
+    void dump(std::ostream& ostrm) const
+    {
+        for ( const auto& p : data_)
+        {
+            ostrm << p.first <<  " -> " << p.second << std::endl;
+        }
+    }
+
+    void setTagFromFieldNameMapping(roe::IContainerAccess::FieldNameToTagMapping&& mapping)
+    {
+      fieldNameToTagMapping_.swap(mapping);
+    }
+
+public:
+    std::unordered_map<int64_t, std::string>  data_;
+};
+
 
 int main(int argc, char *argv[])
 {
     llvm::InitializeNativeTarget();
     llvm::InitializeNativeTargetAsmParser();
     llvm::InitializeNativeTargetAsmPrinter();
-        
-    
-    
-   // std::cout << "Reading expressions from in.txt" << std::endl;
 
    std::ifstream in ("in.txt");
    std::string line;
    std::string tmp;
    while (!std::getline(in, tmp).eof())
    {
-    line += tmp + '\n';
+     line += tmp + '\n';
    }
-    
+
     roe::Module m("newMod");
-    roe::Context::FieldNameToTagMapping mapping = { {"Symbol", 55}, {"Suffix", 65}, {"Side", 54}, {"OrdType", 40}, {"OrdQty", 38}, {"Account", 1}, {"LimitPrice", 44} };
-    m.context().setTagFromFieldNameMapping(std::move(mapping));
-    m.compileToIR(line);
+
+    roe::IContainerAccess::FieldNameToTagMapping mapping =
+    {
+        {"Symbol", 55}
+      , {"Suffix", 65}
+      , {"Side", 54}
+      , {"OrdType", 40}
+      , {"OrdQty", 38}
+      , {"Account", 1}
+      , {"LimitPrice", 44}
+    };
+
+    auto mapping2 = mapping;
+
+
+
+    std::shared_ptr<roe::IContainerAccess> access1 (new ContainerAccess());
+
+    ContainerAccess* paccess1 = (ContainerAccess*)access1.get();
+    paccess1->setTagFromFieldNameMapping(std::move(mapping));
+
+    std::shared_ptr<roe::IContainerAccess> access2 (new ContainerAccess());
+    ContainerAccess* paccess2 = (ContainerAccess*)access2.get();
+    paccess2->setTagFromFieldNameMapping(std::move(mapping2));
+
+    m.constructAST(line);
+    auto& r = m.context().rule("JOPA");
+    r.bindParameter("A", access1);
+    r.bindParameter("B", access2);
+
+    m.compileToIR();
     m.dumpIR();
     m.buildNative();
+
     auto& f = m.getFunc("JOPA");
-    
-    roe::ContainerAccess access1;
-    roe::ContainerAccess access2;
+
+
     try
     {
-    f.call(&access1, &access2);
+      f.call(access1.get(), access2.get());
     }
     catch(std::exception& ex)
     {
         std::cerr << ex.what();
     }
-    
-    access1.dump(std::cout);
-    access2.dump(std::cout);
+
+    paccess1->dump(std::cout);
+    paccess2->dump(std::cout);
 }
