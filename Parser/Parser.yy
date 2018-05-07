@@ -163,6 +163,16 @@ atomexpr : variable
 	   {
 	       $$ = $1;
 	   }
+	   |
+	   variable '[' atomexpr ']'
+	   {
+	       $$ = std::shared_ptr<ASTElement> ( new ASTStrSlice (driver.context(), $1, $3, ASTElement::ASTElementPtr()));
+	   }
+       |
+	   variable '[' atomexpr ':' atomexpr  ']'
+	   {
+	       $$ = std::shared_ptr<ASTElement> ( new ASTStrSlice (driver.context(), $1, $3, $5));
+	   }
 	   |func_call
 	   {
            $$ = $1;

@@ -739,31 +739,47 @@ namespace roe {
     break;
 
   case 14:
-#line 167 "Parser/Parser.yy" // lalr1.cc:859
+#line 168 "Parser/Parser.yy" // lalr1.cc:859
     {
-           (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+	       (yylhs.value.astElement_) = std::shared_ptr<ASTElement> ( new ASTStrSlice (driver.context(), (yystack_[3].value.astElement_), (yystack_[1].value.astElement_), ASTElement::ASTElementPtr()));
 	   }
 #line 747 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 15:
-#line 171 "Parser/Parser.yy" // lalr1.cc:859
+#line 173 "Parser/Parser.yy" // lalr1.cc:859
     {
-	       (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+	       (yylhs.value.astElement_) = std::shared_ptr<ASTElement> ( new ASTStrSlice (driver.context(), (yystack_[5].value.astElement_), (yystack_[3].value.astElement_), (yystack_[1].value.astElement_)));
 	   }
 #line 755 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 16:
-#line 175 "Parser/Parser.yy" // lalr1.cc:859
+#line 177 "Parser/Parser.yy" // lalr1.cc:859
     {
-            (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
+           (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
 	   }
 #line 763 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 17:
-#line 179 "Parser/Parser.yy" // lalr1.cc:859
+#line 181 "Parser/Parser.yy" // lalr1.cc:859
+    {
+	       (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+	   }
+#line 771 "Parser/Parser.cpp" // lalr1.cc:859
+    break;
+
+  case 18:
+#line 185 "Parser/Parser.yy" // lalr1.cc:859
+    {
+            (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
+	   }
+#line 779 "Parser/Parser.cpp" // lalr1.cc:859
+    break;
+
+  case 19:
+#line 189 "Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
             (
@@ -773,19 +789,19 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 777 "Parser/Parser.cpp" // lalr1.cc:859
+#line 793 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 18:
-#line 189 "Parser/Parser.yy" // lalr1.cc:859
+  case 20:
+#line 199 "Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
           }
-#line 785 "Parser/Parser.cpp" // lalr1.cc:859
+#line 801 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 19:
-#line 193 "Parser/Parser.yy" // lalr1.cc:859
+  case 21:
+#line 203 "Parser/Parser.yy" // lalr1.cc:859
     {
           (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
             (
@@ -796,38 +812,38 @@ namespace roe {
             );
             
           }
-#line 800 "Parser/Parser.cpp" // lalr1.cc:859
+#line 816 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 20:
-#line 204 "Parser/Parser.yy" // lalr1.cc:859
+  case 22:
+#line 214 "Parser/Parser.yy" // lalr1.cc:859
     {
              (yylhs.value.astElement_) =(yystack_[0].value.astElement_);
           }
-#line 808 "Parser/Parser.cpp" // lalr1.cc:859
+#line 824 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 21:
-#line 209 "Parser/Parser.yy" // lalr1.cc:859
+  case 23:
+#line 219 "Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
             (
                 new ASTLogicalNOT(driver.context(), (yystack_[0].value.astElement_))
             );
           }
-#line 819 "Parser/Parser.cpp" // lalr1.cc:859
+#line 835 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 22:
-#line 216 "Parser/Parser.yy" // lalr1.cc:859
+  case 24:
+#line 226 "Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
           }
-#line 827 "Parser/Parser.cpp" // lalr1.cc:859
+#line 843 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 23:
-#line 221 "Parser/Parser.yy" // lalr1.cc:859
+  case 25:
+#line 231 "Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
             (
@@ -837,11 +853,11 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 841 "Parser/Parser.cpp" // lalr1.cc:859
+#line 857 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 24:
-#line 231 "Parser/Parser.yy" // lalr1.cc:859
+  case 26:
+#line 241 "Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
             (
@@ -851,11 +867,11 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 855 "Parser/Parser.cpp" // lalr1.cc:859
+#line 871 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 25:
-#line 241 "Parser/Parser.yy" // lalr1.cc:859
+  case 27:
+#line 251 "Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
             (
@@ -865,11 +881,11 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 869 "Parser/Parser.cpp" // lalr1.cc:859
+#line 885 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 26:
-#line 252 "Parser/Parser.yy" // lalr1.cc:859
+  case 28:
+#line 262 "Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
             (
@@ -879,11 +895,11 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 883 "Parser/Parser.cpp" // lalr1.cc:859
+#line 899 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 27:
-#line 263 "Parser/Parser.yy" // lalr1.cc:859
+  case 29:
+#line 273 "Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
             (
@@ -893,11 +909,11 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 897 "Parser/Parser.cpp" // lalr1.cc:859
+#line 913 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 28:
-#line 274 "Parser/Parser.yy" // lalr1.cc:859
+  case 30:
+#line 284 "Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
             (
@@ -907,27 +923,27 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 911 "Parser/Parser.cpp" // lalr1.cc:859
-    break;
-
-  case 29:
-#line 284 "Parser/Parser.yy" // lalr1.cc:859
-    { 
-             (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
-          }
-#line 919 "Parser/Parser.cpp" // lalr1.cc:859
-    break;
-
-  case 30:
-#line 288 "Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-          }
 #line 927 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 31:
-#line 292 "Parser/Parser.yy" // lalr1.cc:859
+#line 294 "Parser/Parser.yy" // lalr1.cc:859
+    { 
+             (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
+          }
+#line 935 "Parser/Parser.cpp" // lalr1.cc:859
+    break;
+
+  case 32:
+#line 298 "Parser/Parser.yy" // lalr1.cc:859
+    {
+            (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+          }
+#line 943 "Parser/Parser.cpp" // lalr1.cc:859
+    break;
+
+  case 33:
+#line 302 "Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
             (
@@ -937,11 +953,11 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 941 "Parser/Parser.cpp" // lalr1.cc:859
+#line 957 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 32:
-#line 303 "Parser/Parser.yy" // lalr1.cc:859
+  case 34:
+#line 313 "Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
             (
@@ -951,19 +967,19 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 955 "Parser/Parser.cpp" // lalr1.cc:859
+#line 971 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 33:
-#line 313 "Parser/Parser.yy" // lalr1.cc:859
+  case 35:
+#line 323 "Parser/Parser.yy" // lalr1.cc:859
     {
 	        (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
           }
-#line 963 "Parser/Parser.cpp" // lalr1.cc:859
+#line 979 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 34:
-#line 318 "Parser/Parser.yy" // lalr1.cc:859
+  case 36:
+#line 328 "Parser/Parser.yy" // lalr1.cc:859
     {
            (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
             (
@@ -973,11 +989,11 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
          }
-#line 977 "Parser/Parser.cpp" // lalr1.cc:859
+#line 993 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 35:
-#line 328 "Parser/Parser.yy" // lalr1.cc:859
+  case 37:
+#line 338 "Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
             (
@@ -987,144 +1003,144 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
          }
-#line 991 "Parser/Parser.cpp" // lalr1.cc:859
-    break;
-
-  case 36:
-#line 338 "Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-         }
-#line 999 "Parser/Parser.cpp" // lalr1.cc:859
-    break;
-
-  case 37:
-#line 345 "Parser/Parser.yy" // lalr1.cc:859
-    {
-   (yylhs.value.astElement_)=std::shared_ptr<ASTElement>( new ASTAssignment(driver.context(),(yystack_[2].value.astElement_), (yystack_[0].value.astElement_)) );
-}
 #line 1007 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 38:
-#line 350 "Parser/Parser.yy" // lalr1.cc:859
+#line 348 "Parser/Parser.yy" // lalr1.cc:859
+    {
+            (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+         }
+#line 1015 "Parser/Parser.cpp" // lalr1.cc:859
+    break;
+
+  case 39:
+#line 355 "Parser/Parser.yy" // lalr1.cc:859
+    {
+   (yylhs.value.astElement_)=std::shared_ptr<ASTElement>( new ASTAssignment(driver.context(),(yystack_[2].value.astElement_), (yystack_[0].value.astElement_)) );
+}
+#line 1023 "Parser/Parser.cpp" // lalr1.cc:859
+    break;
+
+  case 40:
+#line 360 "Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_)=std::shared_ptr<ASTElement>
             ( new ASTIf(driver.context(),(yystack_[2].value.astElement_), (yystack_[0].value.astElement_), ASTElement::ASTElementPtr()) );            
         }
-#line 1016 "Parser/Parser.cpp" // lalr1.cc:859
-    break;
-
-  case 39:
-#line 356 "Parser/Parser.yy" // lalr1.cc:859
-    {
-           (yylhs.value.astElement_)=std::shared_ptr<ASTElement>( new ASTIf(driver.context(),(yystack_[4].value.astElement_), (yystack_[2].value.astElement_), (yystack_[0].value.astElement_)) );            
-        }
-#line 1024 "Parser/Parser.cpp" // lalr1.cc:859
-    break;
-
-  case 40:
-#line 361 "Parser/Parser.yy" // lalr1.cc:859
-    {
-         (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-    }
 #line 1032 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 41:
 #line 366 "Parser/Parser.yy" // lalr1.cc:859
     {
-	      (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-    }
+           (yylhs.value.astElement_)=std::shared_ptr<ASTElement>( new ASTIf(driver.context(),(yystack_[4].value.astElement_), (yystack_[2].value.astElement_), (yystack_[0].value.astElement_)) );            
+        }
 #line 1040 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 42:
 #line 371 "Parser/Parser.yy" // lalr1.cc:859
     {
-      (yylhs.value.astElement_)=(yystack_[1].value.astElement_);
-   }
+         (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+    }
 #line 1048 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 43:
-#line 375 "Parser/Parser.yy" // lalr1.cc:859
+#line 376 "Parser/Parser.yy" // lalr1.cc:859
     {
-      (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-   }
+	      (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+    }
 #line 1056 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 44:
-#line 379 "Parser/Parser.yy" // lalr1.cc:859
+#line 381 "Parser/Parser.yy" // lalr1.cc:859
     {
-      (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
+      (yylhs.value.astElement_)=(yystack_[1].value.astElement_);
    }
 #line 1064 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 45:
-#line 383 "Parser/Parser.yy" // lalr1.cc:859
-    {(yylhs.value.astElement_) = std::shared_ptr<ASTElement> (new ASTBlock(driver.context()));}
-#line 1070 "Parser/Parser.cpp" // lalr1.cc:859
+#line 385 "Parser/Parser.yy" // lalr1.cc:859
+    {
+      (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+   }
+#line 1072 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 46:
-#line 386 "Parser/Parser.yy" // lalr1.cc:859
+#line 389 "Parser/Parser.yy" // lalr1.cc:859
     {
-                dynamic_cast<ASTBlock*>((yystack_[1].value.astElement_).get())->addElement((yystack_[0].value.astElement_));
-                (yylhs.value.astElement_)=(yystack_[1].value.astElement_);
-            }
-#line 1079 "Parser/Parser.cpp" // lalr1.cc:859
+      (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
+   }
+#line 1080 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 47:
 #line 393 "Parser/Parser.yy" // lalr1.cc:859
-    {
-          (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-        }
-#line 1087 "Parser/Parser.cpp" // lalr1.cc:859
+    {(yylhs.value.astElement_) = std::shared_ptr<ASTElement> (new ASTBlock(driver.context()));}
+#line 1086 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 48:
-#line 397 "Parser/Parser.yy" // lalr1.cc:859
+#line 396 "Parser/Parser.yy" // lalr1.cc:859
     {
-          (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
-        }
+                dynamic_cast<ASTBlock*>((yystack_[1].value.astElement_).get())->addElement((yystack_[0].value.astElement_));
+                (yylhs.value.astElement_)=(yystack_[1].value.astElement_);
+            }
 #line 1095 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 49:
-#line 402 "Parser/Parser.yy" // lalr1.cc:859
+#line 403 "Parser/Parser.yy" // lalr1.cc:859
     {
-            (yylhs.value.astRule_) = std::shared_ptr<ASTRule> (new ASTRule(driver.context(), (yystack_[4].value.stringVal_), (yystack_[2].value.astParameters_), (yystack_[0].value.astElement_))); 
-       }
+          (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+        }
 #line 1103 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 50:
-#line 406 "Parser/Parser.yy" // lalr1.cc:859
-    {}
-#line 1109 "Parser/Parser.cpp" // lalr1.cc:859
+#line 407 "Parser/Parser.yy" // lalr1.cc:859
+    {
+          (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
+        }
+#line 1111 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 51:
-#line 408 "Parser/Parser.yy" // lalr1.cc:859
+#line 412 "Parser/Parser.yy" // lalr1.cc:859
     {
-          driver.rules().addRule((yystack_[0].value.astRule_));
+            (yylhs.value.astRule_) = std::shared_ptr<ASTRule> (new ASTRule(driver.context(), (yystack_[4].value.stringVal_), (yystack_[2].value.astParameters_), (yystack_[0].value.astElement_))); 
        }
-#line 1117 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1119 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 52:
-#line 412 "Parser/Parser.yy" // lalr1.cc:859
+#line 416 "Parser/Parser.yy" // lalr1.cc:859
+    {}
+#line 1125 "Parser/Parser.cpp" // lalr1.cc:859
+    break;
+
+  case 53:
+#line 418 "Parser/Parser.yy" // lalr1.cc:859
+    {
+          driver.rules().addRule((yystack_[0].value.astRule_));
+       }
+#line 1133 "Parser/Parser.cpp" // lalr1.cc:859
+    break;
+
+  case 54:
+#line 422 "Parser/Parser.yy" // lalr1.cc:859
     {
        }
-#line 1124 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1140 "Parser/Parser.cpp" // lalr1.cc:859
     break;
 
 
-#line 1128 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1144 "Parser/Parser.cpp" // lalr1.cc:859
             default:
               break;
             }
@@ -1379,118 +1395,123 @@ namespace roe {
   }
 
 
-  const signed char Parser::yypact_ninf_ = -59;
+  const signed char Parser::yypact_ninf_ = -58;
 
   const signed char Parser::yytable_ninf_ = -1;
 
   const signed char
   Parser::yypact_[] =
   {
-     -59,    25,     8,     9,   -59,   -59,     7,    36,    37,   -59,
-     -11,    38,    42,   -59,    51,    35,   -59,   -59,   -59,    65,
-     -59,   -59,   -59,    64,   -59,     1,    29,   -59,    68,    70,
-     -59,   -59,    50,    67,    50,    24,    35,    35,    35,    35,
-      35,   -59,   -59,    50,    50,   -59,     2,    85,   -59,   -59,
-      69,   -59,    -4,    86,   -59,   -59,   -59,    29,    29,   -59,
-     -59,   -59,     3,    69,    50,    42,    50,    35,    35,    35,
-      35,    35,    35,    50,   -59,   -59,    85,    89,   -59,     1,
-       1,     1,     1,     1,     1,    86,    42,   -59
+     -58,    59,    18,    45,   -58,   -58,    24,    48,    47,   -58,
+      31,    64,    46,   -58,    54,    -6,   -58,   -58,   -58,    71,
+     -58,   -58,   -58,    29,   -58,    -5,    42,   -58,    73,    75,
+     -58,   -58,    55,    72,    55,     4,    -6,    -6,    -6,    -6,
+      -6,    -6,   -58,   -58,    55,    55,    68,     5,    91,   -58,
+     -58,    74,   -58,    36,    92,   -58,   -58,   -58,    32,    42,
+      42,   -58,   -58,   -58,    27,    74,    55,    46,    55,    -6,
+      -6,    -6,    -6,    -6,    -6,    55,   -58,   -58,    -6,   -58,
+      91,    95,   -58,    -5,    -5,    -5,    -5,    -5,    -5,    92,
+      76,    46,   -58,   -58
   };
 
   const unsigned char
   Parser::yydefact_[] =
   {
-      50,    52,     0,     0,    51,     1,     0,     0,     5,     7,
+      52,    54,     0,     0,    53,     1,     0,     0,     5,     7,
        0,     0,     0,     6,     0,     0,     2,     3,     4,    12,
-      45,    15,    14,    13,    36,    41,    33,    40,    43,     0,
-      47,    49,     0,     0,     8,     0,     0,     0,     0,     0,
-       0,    44,    42,     0,     0,    13,     0,    18,    20,    22,
-      30,    16,     0,    10,    48,    46,    37,    31,    32,    34,
-      35,    21,     0,    30,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,    11,    29,    17,    38,    19,    25,
-      26,    23,    24,    27,    28,     9,     0,    39
+      47,    17,    16,    13,    38,    43,    35,    42,    45,     0,
+      49,    51,     0,     0,     8,     0,     0,     0,     0,     0,
+       0,     0,    46,    44,     0,     0,    13,     0,    20,    22,
+      24,    32,    18,     0,    10,    50,    48,    39,     0,    33,
+      34,    36,    37,    23,     0,    32,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,    11,    14,     0,    31,
+      19,    40,    21,    27,    28,    25,    26,    29,    30,     9,
+       0,     0,    15,    41
   };
 
   const signed char
   Parser::yypgoto_[] =
   {
-     -59,   -59,   -59,   -59,   -59,   -12,   -19,   -29,    31,   -37,
-     -59,   -30,    18,   -59,   -59,   -14,    61,   -59,   -58,   -59,
-     -59,   -59
+     -58,   -58,   -58,   -58,   -58,   -12,   -32,   -28,    35,   -43,
+     -58,   -30,    28,   -58,   -58,    12,    67,   -58,   -57,   -58,
+     -58,   -58
   };
 
   const signed char
   Parser::yydefgoto_[] =
   {
-      -1,    21,    10,    52,    22,    45,    24,    46,    47,    48,
-      49,    25,    26,    27,    28,    29,    30,    35,    31,     4,
+      -1,    21,    10,    53,    22,    46,    24,    47,    48,    49,
+      50,    25,    26,    27,    28,    29,    30,    35,    31,     4,
        1,     2
   };
 
   const unsigned char
   Parser::yytable_[] =
   {
-      23,    33,    50,    23,    50,    53,    61,    77,     5,    11,
-      64,    64,    12,    50,    63,    62,    73,    37,    38,    74,
-      59,    60,    56,    23,    23,    65,    75,    14,    87,    78,
-      33,     3,    23,     6,    50,     7,    50,    79,    80,    81,
-      82,    83,    84,    50,    85,    14,    15,    39,    40,    16,
-      17,    18,    19,    23,    54,    57,    58,    15,     8,    43,
-      16,    17,    18,    19,    15,     9,    13,    16,    17,    18,
-      19,    20,    44,    32,    23,    16,    17,    18,    19,    67,
-      68,    69,    70,    71,    72,    37,    38,    34,    36,    41,
-      51,    42,    66,    86,    64,    76,    55
+      23,    63,    51,    23,    51,    58,    54,    14,    61,    62,
+      81,    38,    39,    66,    51,    65,    15,    64,     5,    16,
+      17,    18,    19,    23,    23,    82,    15,    33,    67,    16,
+      17,    18,    19,    23,    93,    66,    51,    55,    51,    83,
+      84,    85,    86,    87,    88,    51,    90,    89,    57,    14,
+      79,    11,     7,    36,    12,    23,    75,    33,    37,    76,
+      40,    41,    77,    78,    44,     3,    59,    60,    15,     6,
+       8,    16,    17,    18,    19,     9,    32,    45,    20,    23,
+      16,    17,    18,    19,    69,    70,    71,    72,    73,    74,
+      38,    39,    13,    34,    42,    52,    43,    37,    68,    91,
+      66,    80,    56,     0,     0,     0,    92
   };
 
-  const unsigned char
+  const signed char
   Parser::yycheck_[] =
   {
-      12,    15,    32,    15,    34,    34,    43,    65,     0,    20,
-       8,     8,    23,    43,    44,    44,    20,    16,    17,    23,
-      39,    40,    36,    35,    36,    23,    23,     3,    86,    66,
-      44,     6,    44,    24,    64,    28,    66,    67,    68,    69,
-      70,    71,    72,    73,    73,     3,    22,    18,    19,    25,
-      26,    27,    28,    65,    30,    37,    38,    22,    22,     9,
-      25,    26,    27,    28,    22,    28,    28,    25,    26,    27,
-      28,    29,    22,    22,    86,    25,    26,    27,    28,    10,
-      11,    12,    13,    14,    15,    16,    17,    22,    24,    21,
-      23,    21,     7,     4,     8,    64,    35
+      12,    44,    32,    15,    34,    37,    34,     3,    40,    41,
+      67,    16,    17,     8,    44,    45,    22,    45,     0,    25,
+      26,    27,    28,    35,    36,    68,    22,    15,    23,    25,
+      26,    27,    28,    45,    91,     8,    66,    33,    68,    69,
+      70,    71,    72,    73,    74,    75,    78,    75,    36,     3,
+      23,    20,    28,    24,    23,    67,    20,    45,    29,    23,
+      18,    19,    30,    31,     9,     6,    38,    39,    22,    24,
+      22,    25,    26,    27,    28,    28,    22,    22,    32,    91,
+      25,    26,    27,    28,    10,    11,    12,    13,    14,    15,
+      16,    17,    28,    22,    21,    23,    21,    29,     7,     4,
+       8,    66,    35,    -1,    -1,    -1,    30
   };
 
   const unsigned char
   Parser::yystos_[] =
   {
-       0,    51,    52,     6,    50,     0,    24,    28,    22,    28,
-      33,    20,    23,    28,     3,    22,    25,    26,    27,    28,
-      29,    32,    35,    36,    37,    42,    43,    44,    45,    46,
-      47,    49,    22,    46,    22,    48,    24,    16,    17,    18,
-      19,    21,    21,     9,    22,    36,    38,    39,    40,    41,
-      42,    23,    34,    38,    30,    47,    46,    43,    43,    37,
-      37,    40,    38,    42,     8,    23,     7,    10,    11,    12,
-      13,    14,    15,    20,    23,    23,    39,    49,    40,    42,
-      42,    42,    42,    42,    42,    38,     4,    49
+       0,    54,    55,     6,    53,     0,    24,    28,    22,    28,
+      36,    20,    23,    28,     3,    22,    25,    26,    27,    28,
+      32,    35,    38,    39,    40,    45,    46,    47,    48,    49,
+      50,    52,    22,    49,    22,    51,    24,    29,    16,    17,
+      18,    19,    21,    21,     9,    22,    39,    41,    42,    43,
+      44,    45,    23,    37,    41,    33,    50,    49,    40,    46,
+      46,    40,    40,    43,    41,    45,     8,    23,     7,    10,
+      11,    12,    13,    14,    15,    20,    23,    30,    31,    23,
+      42,    52,    43,    45,    45,    45,    45,    45,    45,    41,
+      40,     4,    30,    52
   };
 
   const unsigned char
   Parser::yyr1_[] =
   {
-       0,    31,    32,    32,    32,    33,    33,    33,    34,    34,
-      34,    35,    36,    37,    37,    37,    37,    38,    38,    39,
-      39,    40,    40,    41,    41,    41,    41,    41,    41,    41,
-      41,    42,    42,    42,    43,    43,    43,    44,    45,    45,
-      46,    46,    47,    47,    47,    48,    48,    49,    49,    50,
-      51,    51,    52
+       0,    34,    35,    35,    35,    36,    36,    36,    37,    37,
+      37,    38,    39,    40,    40,    40,    40,    40,    40,    41,
+      41,    42,    42,    43,    43,    44,    44,    44,    44,    44,
+      44,    44,    44,    45,    45,    45,    46,    46,    46,    47,
+      48,    48,    49,    49,    50,    50,    50,    51,    51,    52,
+      52,    53,    54,    54,    55
   };
 
   const unsigned char
   Parser::yyr2_[] =
   {
        0,     2,     1,     1,     1,     0,     3,     1,     0,     3,
-       1,     4,     1,     1,     1,     1,     3,     3,     1,     3,
-       1,     2,     1,     3,     3,     3,     3,     3,     3,     3,
-       1,     3,     3,     1,     3,     3,     1,     3,     5,     7,
-       1,     1,     2,     1,     2,     0,     2,     1,     3,     7,
-       0,     2,     1
+       1,     4,     1,     1,     4,     6,     1,     1,     3,     3,
+       1,     3,     1,     2,     1,     3,     3,     3,     3,     3,
+       3,     3,     1,     3,     3,     1,     3,     3,     1,     3,
+       5,     7,     1,     1,     2,     1,     2,     0,     2,     1,
+       3,     7,     0,     2,     1
   };
 
 
@@ -1504,11 +1525,11 @@ namespace roe {
   "\"else keyword\"", "\"end of line\"", "\"ruleid\"", "\"and\"", "\"or\"",
   "\"not\"", "\"!=\"", "\"==\"", "\">\"", "\"<\"", "\">=\"", "\"<=\"",
   "\"+\"", "\"-\"", "\"*\"", "\"/\"", "\",\"", "\";\"", "\"(\"", "\")\"",
-  "\"=\"", "\"integer\"", "\"double\"", "\"string\"", "\"name\"", "'{'",
-  "'}'", "$accept", "constant", "parameters", "arg_list", "func_call",
-  "variable", "atomexpr", "or_exp", "and_exp", "not_exp", "compare_exp",
-  "addexpr", "factor", "assignment", "if_expr", "expr", "statement",
-  "expr_list", "expr_block", "rule", "rules", "start", YY_NULLPTR
+  "\"=\"", "\"integer\"", "\"double\"", "\"string\"", "\"name\"", "'['",
+  "']'", "':'", "'{'", "'}'", "$accept", "constant", "parameters",
+  "arg_list", "func_call", "variable", "atomexpr", "or_exp", "and_exp",
+  "not_exp", "compare_exp", "addexpr", "factor", "assignment", "if_expr",
+  "expr", "statement", "expr_list", "expr_block", "rule", "rules", "start", YY_NULLPTR
   };
 
 #if YYDEBUG
@@ -1516,11 +1537,11 @@ namespace roe {
   Parser::yyrline_[] =
   {
        0,   109,   109,   113,   117,   123,   126,   131,   138,   141,
-     146,   152,   157,   162,   166,   170,   174,   178,   188,   192,
-     203,   208,   215,   220,   230,   240,   251,   262,   273,   283,
-     287,   291,   302,   312,   317,   327,   337,   344,   349,   355,
-     360,   365,   370,   374,   378,   383,   385,   392,   396,   401,
-     406,   407,   411
+     146,   152,   157,   162,   167,   172,   176,   180,   184,   188,
+     198,   202,   213,   218,   225,   230,   240,   250,   261,   272,
+     283,   293,   297,   301,   312,   322,   327,   337,   347,   354,
+     359,   365,   370,   375,   380,   384,   388,   393,   395,   402,
+     406,   411,   416,   417,   421
   };
 
   // Print the state stack on the debug stream.
@@ -1566,14 +1587,14 @@ namespace roe {
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,    31,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,    29,     2,    30,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,    29,     2,    30,     2,     2,     2,     2,
+       2,     2,     2,    32,     2,    33,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -1604,8 +1625,8 @@ namespace roe {
 
 
 } // roe
-#line 1608 "Parser/Parser.cpp" // lalr1.cc:1167
-#line 417 "Parser/Parser.yy" // lalr1.cc:1168
+#line 1629 "Parser/Parser.cpp" // lalr1.cc:1167
+#line 427 "Parser/Parser.yy" // lalr1.cc:1168
  /*** Additional Code ***/
 
 void roe::Parser::error(const Parser::location_type& l,
