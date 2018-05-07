@@ -33,10 +33,14 @@ namespace roe
             auto* argList = dynamic_cast<ASTArgList*> (args_.get());
             auto values = argList->values();
 
-            retValue = builder.CreateAlloca(Types::instance().stringType());
+            retValue = builder.CreateAlloca(context_.types().stringType());
             values.push_back(retValue);
 
-            FunctionRegistrar::instance().makeCall(context_, StringOps::INT_TO_STR, values);
+            if (values[0]->getType() == context_.types().longType())
+                FunctionRegistrar::instance().makeCall(context_, StringOps::INT_TO_STR, values);
+            else
+                FunctionRegistrar::instance().makeCall(context_, StringOps::DOUBLE_TO_STR, values);
+            
             return true;
         }
         else if (name_ == TO_INT_BUILTIN)
@@ -48,10 +52,20 @@ namespace roe
             auto* argList = dynamic_cast<ASTArgList*> (args_.get());
             auto values = argList->values();
 
-            if(values[0]->getType() == Types::instance().stringType())
-                FunctionRegistrar::instance().makeCall(context_, StringOps::TO_INT_STR, values);
+            llvm::Type* firstArg = values[0]->getType();
+            
+            if(firstArg == context_.types().stringPtrType())
+            {
+                retValue = FunctionRegistrar::instance().makeCall(context_, StringOps::TO_INT_STR, values);
+            }
+            else if (firstArg == context_.types().charPtrType())
+            {
+                retValue = FunctionRegistrar::instance().makeCall(context_, StringOps::TO_INT_CHPTR, values);
+            }
             else
-                FunctionRegistrar::instance().makeCall(context_, StringOps::TO_INT_CHPTR, values);
+            {
+                throw ASTException("Invalid str arguments");
+            }
             return true;
         }
         
@@ -86,6 +100,7 @@ namespace roe
         
         auto* argList = dynamic_cast<ASTArgList*> (args_.get());
         auto& values = argList->values();
+        
         
         retValue =  FunctionRegistrar::instance().makeCall(context_, name_, values);
         

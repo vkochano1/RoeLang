@@ -27,7 +27,7 @@ namespace roe
         
         ruleAST_->evaluate();
        
-        builder.CreateRet(llvm::ConstantInt::get(builder.getContext(), llvm::APInt(32, 0)));
+        builder.CreateRetVoid();
     }
     
     const std::string& ASTRule::name() const

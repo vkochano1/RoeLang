@@ -5,8 +5,8 @@ namespace roe
     llvm::Value* ASTElement::loadValueIfNeeded(llvm::Value* value)
     {
         if (value->getType()->isPointerTy() 
-            && value->getType() != Types::instance().stringPtrType()
-            && value->getType() != Types::instance().charPtrType()
+            && value->getType() != context_.types().stringPtrType()
+            && value->getType() != context_.types().charPtrType()
            )
         {
             return  context_.builder().CreateLoad(value);

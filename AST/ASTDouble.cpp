@@ -11,8 +11,7 @@ namespace roe
 
     llvm::Value*  ASTDouble::evaluate()
     {
-        auto& builder = context_.builder();
-        return  llvm::ConstantFP::get(builder.getFloatTy(), value_);
+        return  llvm::ConstantFP::get(context_.types().floatType(), value_);
     }
     
 }

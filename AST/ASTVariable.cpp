@@ -8,95 +8,100 @@ namespace roe
 
     const std::string ASTVariable::TAG_PREFIX   = "tag";
     const std::string ASTVariable::FIELD_PREFIX = "field";
-    
+
     ASTVariable::ASTVariable(Context& context, const std::string& var)
     : ASTElement(context)
     , tag_(-1)
     {
-        processContainerField(var);
         var_= var;
-    }
-    
-    bool ASTVariable::processContainerField(const std::string& fullVarName)
-    {
         std::vector<std::string> varComponents;
-        boost::split(varComponents, fullVarName, boost::is_any_of("."));
-        
+        boost::split(varComponents, var_, boost::is_any_of("."));
+
         if(2 != varComponents.size())
         {
-            return false;
+            return;
         }
-        
+
         baseName_ = varComponents[0];
-        const auto& fieldName = varComponents[1];
-        
+        fieldName_ = varComponents[1];
+
         isField_ = true;
-        
-        if (fieldName.find(TAG_PREFIX) == 0)
+    }
+
+    bool ASTVariable::processContainerField()
+    {
+        if (fieldName_.find(TAG_PREFIX) == 0)
         {
-            auto tagStr = fieldName.substr(TAG_PREFIX.length());
+            auto tagStr = fieldName_.substr(TAG_PREFIX.length());
             char* endp = nullptr;
             tag_ = std::strtol(tagStr.c_str(),&endp,10);
             return true;
         }
-        else if (fieldName.find(FIELD_PREFIX) == 0)
+        else if (fieldName_.find(FIELD_PREFIX) == 0)
         {
-            auto fieldStr = fieldName.substr(FIELD_PREFIX.length());
-            tag_ = context_.getTagFromFieldName(fieldStr);
+            auto fieldStr = fieldName_.substr(FIELD_PREFIX.length());
+
+            auto containerAccess = context_.rule().getContainerForParam(baseName_);
+            if (!containerAccess)
+            {
+              throw roe::ASTException("Couldn't resolve container for param");
+            }
+            tag_ = containerAccess->getTagFromFieldName(fieldStr);
             return true;
         }
-        
+
         return false;
-        
     }
-    
+
     size_t ASTVariable::tag() const
     {
         return tag_;
     }
-    
-    const std::string& ASTVariable::name () const 
-    { 
+
+    const std::string& ASTVariable::name () const
+    {
         return var_;
     }
-    
-    const std::string& ASTVariable::baseName () const 
-    { 
+
+    const std::string& ASTVariable::baseName () const
+    {
         return baseName_;
     }
 
-    bool ASTVariable::isField () const 
-    { 
+    bool ASTVariable::isField () const
+    {
         return isField_;
     }
-    
+
     llvm::Value* ASTVariable::evaluateField()
     {
+        processContainerField();
+
         auto& builder = context_.rule().builder();
-        
-        llvm::Value* result  = builder.CreateAlloca(Types::instance().stringType());
+
+        llvm::Value* result  = builder.CreateAlloca(context_.types().stringType());
         llvm::Value* container = context_.rule().getParamValue(baseName());
-        llvm::Value* tagVal = llvm::ConstantInt::get(Types::instance().longType(), tag());
-        
+        llvm::Value* tagVal = llvm::ConstantInt::get(context_.types().longType(), tag());
+
         FunctionRegistrar::instance().makeCall(context_,"getField", {container, tagVal, result} );
         return result;
     }
-    
+
     llvm::Value* ASTVariable::evaluateLocalVar()
     {
-        auto& info = context_.getVariable(var_);
+        auto& info = context_.rule().getVariable(var_);
         llvm::Value* result = info.value();
         return  result;
     }
-    
+
     llvm::Value* ASTVariable::evaluate()
     {
          if(isField())
          {
             return evaluateField();
          }
-         
-         return evaluateLocalVar();        
+
+         return evaluateLocalVar();
     }
 
 }

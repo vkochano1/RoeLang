@@ -12,6 +12,21 @@ namespace roe
     {        
     }
     
+    void ASTArithmetical::normalizeValues(llvm::Value*& v1, llvm::Value*& v2)
+    {
+        auto& builder = context_.builder();
+        
+        
+        if(v1->getType() == context_.types().floatType()
+            && v2->getType() != context_.types().floatType())
+        {
+            std::cerr << "STEP1" << std::endl;
+            v2 = builder.CreateSIToFP(v2, context_.types().floatType());
+        }
+        std::cerr << "STEP2" << std::endl;
+        llvm::errs() << *v1->getType() <<"  "<<*v2->getType();
+    }
+    
     bool ASTArithmetical::processStringConcat(llvm::Value* left
                                             , llvm::Value* right
                                             , llvm::Value*& out)
@@ -20,31 +35,31 @@ namespace roe
       
         out = nullptr;
         
-        if(    left->getType() == Types::instance().stringPtrType() 
-            && right->getType() == Types::instance().stringPtrType())
+        if(    left->getType() == context_.types().stringPtrType() 
+            && right->getType() == context_.types().stringPtrType())
         {
-            out = builder.CreateAlloca(Types::instance().stringType());
+            out = builder.CreateAlloca(context_.types().stringType());
             FunctionRegistrar::instance().makeCall(context_,StringOps::CONCAT_STR_AND_STR, { left, left, right} );
         }
-        else if (left->getType() == Types::instance().stringPtrType() 
-                 && right->getType() == Types::instance().charPtrType()
+        else if (left->getType() == context_.types().stringPtrType() 
+                 && right->getType() == context_.types().charPtrType()
                 )
         {
-            out = builder.CreateAlloca(Types::instance().stringType());
+            out = builder.CreateAlloca(context_.types().stringType());
             FunctionRegistrar::instance().makeCall(context_,StringOps::CONCAT_STR_AND_CHPTR, { left, right, out} );
         }
-        else if (left->getType() == Types::instance().charPtrType() 
-                 && right->getType() == Types::instance().stringPtrType()
+        else if (left->getType() == context_.types().charPtrType() 
+                 && right->getType() == context_.types().stringPtrType()
                 )
         {
-            out = builder.CreateAlloca(Types::instance().stringType());
+            out = builder.CreateAlloca(context_.types().stringType());
             FunctionRegistrar::instance().makeCall(context_,StringOps::CONCAT_CHPTR_AND_STR, { left, right, out} );
         }
-        else if (left->getType() == Types::instance().charPtrType() 
-                 && right->getType() == Types::instance().charPtrType()
+        else if (left->getType() == context_.types().charPtrType() 
+                 && right->getType() == context_.types().charPtrType()
                 )
         {
-            out = builder.CreateAlloca(Types::instance().stringType());
+            out = builder.CreateAlloca(context_.types().stringType());
             FunctionRegistrar::instance().makeCall(context_,StringOps::CONCAT_CHPTR_AND_CHPTR, { left, right, out} );
         }
         
@@ -61,6 +76,8 @@ namespace roe
       left = loadValueIfNeeded(left);
       right = loadValueIfNeeded(right);
       
+      normalizeValues(left,right);
+      
       llvm::Value* out = nullptr;
       switch(op_)
       {
@@ -71,8 +88,13 @@ namespace roe
             {
                 return out;
             }
+            
+            if(left->getType() == context_.types().floatType())
+                out = builder.CreateFAdd(left,right);
+            else
+                out = builder.CreateAdd(left,right);
+            
                 
-            out = builder.CreateAdd(left,right);
           }
           break;
           
