@@ -4,7 +4,14 @@
 
 namespace roe
 {
- 
+
+  int64_t IContainerAccess::getTagFromFieldName(const std::string& val)
+  {
+    return fieldNameToTagMapping_[val];
+  }
+
+
+
 void Bindings::registerBuiltins(Context& context)
 {
     FunctionRegistrar::instance().registerExternal
@@ -12,25 +19,25 @@ void Bindings::registerBuiltins(Context& context)
       context
     , "getField"
     ,&Bindings::getField
-    , Types::instance().longType()
-    , { 
-           Types::instance().voidPtrType()
-         , Types::instance().longType()
-         , Types::instance().stringPtrType()
-      }  
+    , context.types().voidType()
+    , {
+           context.types().voidPtrType()
+         , context.types().longType()
+         , context.types().stringPtrType()
+      }
     );
-    
+
     FunctionRegistrar::instance().registerExternal
     (
       context
     , "setField"
     ,&Bindings::setField
-    , Types::instance().longType()
-    , {  
-           Types::instance().voidPtrType()
-         , Types::instance().longType()
-         , Types::instance().stringPtrType()
-      }  
+    , context.types().voidType()
+    , {
+           context.types().voidPtrType()
+         , context.types().longType()
+         , context.types().stringPtrType()
+      }
     );
 
     FunctionRegistrar::instance().registerExternal
@@ -38,36 +45,32 @@ void Bindings::registerBuiltins(Context& context)
       context
     , "setFieldCharPtr"
     ,&Bindings::setFieldCharPtr
-    , Types::instance().longType()
-    , {  
-           Types::instance().voidPtrType()
-         , Types::instance().longType()
-         , Types::instance().charPtrType()
-      }  
+    , context.types().voidType()
+    , {
+           context.types().voidPtrType()
+         , context.types().longType()
+         , context.types().charPtrType()
+      }
     );
 }
 
-
-int Bindings::getField(void* data, int32_t tag, StringOps::String_t* s)
+void Bindings::getField(void* data, int64_t tag, StringOps::String_t* s)
 {
     IContainerAccess* access = reinterpret_cast<IContainerAccess*> (data);
     access->getField(tag, *s);
-    return 0;
 }
 
-int Bindings::setField(void* data, int32_t tag, StringOps::String_t* s)
+void Bindings::setField(void* data, int64_t tag, StringOps::String_t* s)
 {
     IContainerAccess* access = reinterpret_cast<IContainerAccess*> (data);
     access->setField(tag, *s);
-    return 0;
 }
 
-int Bindings::setFieldCharPtr(void* data, int32_t tag, const char* str)
+void Bindings::setFieldCharPtr(void* data, int64_t tag, const char* str)
 {
     IContainerAccess* access = reinterpret_cast<IContainerAccess*> (data);
     access->setField(tag, str, strlen(str));
-    return 0;
 }
 
-    
+
 }

@@ -4,29 +4,23 @@
 namespace roe 
 {
     
-Types& Types::instance()
-{
-    static Types instance_;
-    return instance_;
-}
-
 
 void Types::init(Context& context)
 {
     auto* arrayType = llvm::ArrayType::get(llvm::Type::getInt8Ty(context),String::size);
     auto* stringLenType = llvm::Type::getInt8Ty(context);
+    
     std::vector<llvm::Type*> structFieldTypes = { arrayType, stringLenType};
+    
     stringType_ = llvm::StructType::create(context, structFieldTypes, "string");
-
     stringPtrType_ = llvm::PointerType::get(stringType_,0);
-
     charPtrType_ = llvm::PointerType::get(llvm::Type::getInt8Ty(context),0);
-
-    longType_ = llvm::Type::getInt32Ty(context);
+    longType_ = llvm::Type::getInt64Ty(context);
     longPtrType_ = llvm::PointerType::get(longType_,0);
-
     boolType_ = llvm::Type::getInt1Ty(context);
     voidType_ = llvm::Type::getVoidTy(context);
+    floatType_ = llvm::Type::getDoubleTy(context);
+    floatPtrType_ = llvm::PointerType::get(floatType_,0);
 
     rvalueToVarType_ =   TypeMapping
     {
@@ -34,20 +28,23 @@ void Types::init(Context& context)
         ,{stringPtrType_ , stringType_}
         ,{longPtrType_   , longType_}
         ,{longType_   , longType_}
-
+        ,{floatType_   , floatType_}
     };
 
     valueTyToPointerTy_ =   TypeMapping
     {
-        {stringType_, stringPtrType_}
+         {stringType_, stringPtrType_}
         ,{longType_ , longPtrType_}
+        ,{floatType_, floatPtrType_}
     };
 
     pointerTyToValueTy_ = TypeMapping
     {
-        {stringPtrType_   , stringType_}
+         {stringPtrType_ , stringType_}
         ,{longPtrType_ , longType_}
+        ,{floatPtrType_ , floatType_}
     };
+        
 }
 
 
@@ -118,9 +115,20 @@ llvm::Type* Types::voidType ()
     return voidType_;
 };
 
-
-Types::Types()
+llvm::Type* Types::floatPtrType () 
 {
+    return floatPtrType_;
+};
+
+llvm::Type* Types::floatType () 
+{
+    return floatType_;
+};
+
+
+Types::Types(Context& context)
+{
+    init(context);
 }
 
 }

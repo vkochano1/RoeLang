@@ -21,7 +21,13 @@ const std::string StringOps::EQUALS_CHPTR_AND_CHPTR = "EqualsCharPtrAndCharPtr";
    
 const std::string StringOps::TO_INT_CHPTR = "CharPtrToInt";
 const std::string StringOps::TO_INT_STR = "StrToInt";
+
 const std::string StringOps::INT_TO_STR = "IntToStr";
+const std::string StringOps::DOUBLE_TO_STR = "DoubleToStr";  
+
+const std::string StringOps::GET_CHAR = "GetChar";
+const std::string StringOps::GET_SUBSTR = "GetSubstr";
+
     
 void StringOps::registerConcatBuiltins(Context& context)
 {
@@ -31,11 +37,11 @@ void StringOps::registerConcatBuiltins(Context& context)
       context
     , CONCAT_STR_AND_STR
     ,&StringOps::concatStrAndStr
-    , Types::instance().voidType()
+    , context.types().voidType()
     , {  
-           Types::instance().stringPtrType()
-          ,Types::instance().stringPtrType()
-          ,Types::instance().stringPtrType()
+           context.types().stringPtrType()
+          ,context.types().stringPtrType()
+          ,context.types().stringPtrType()
       }  
     );
 
@@ -44,37 +50,38 @@ void StringOps::registerConcatBuiltins(Context& context)
       context
     , CONCAT_STR_AND_CHPTR
     ,&StringOps::concatStrAndCharPtr
-    , Types::instance().voidType()
+    , context.types().voidType()
     , {  
-           Types::instance().stringPtrType()
-          ,Types::instance().charPtrType()
-          ,Types::instance().stringPtrType()
+           context.types().stringPtrType()
+          ,context.types().charPtrType()
+          ,context.types().stringPtrType()
       }  
     );
+
     
-   /* FunctionRegistrar::instance().registerExternal
+    FunctionRegistrar::instance().registerExternal
     (
       context
     , CONCAT_CHPTR_AND_CHPTR
-    ,&StringOps::concatCharPtrAndCharPtr
-    , Types::instance().voidType()
+    ,  &StringOps::concatCharPtrAndCharPtr
+    , context.types().voidType()
     , {  
-           Types::instance().charPtrType()
-          ,Types::instance().charPtrType()
-          ,Types::instance().stringPtrType()
+           context.types().charPtrType()
+          ,context.types().charPtrType()
+          ,context.types().stringPtrType()
       }  
-    );*/
+    );
     
         FunctionRegistrar::instance().registerExternal
     (
       context
     , CONCAT_CHPTR_AND_STR
     ,&StringOps::concatCharPtrAndStr
-    , Types::instance().voidType()
+    , context.types().voidType()
     , {  
-           Types::instance().charPtrType()
-          ,Types::instance().stringPtrType()
-          ,Types::instance().stringPtrType()
+           context.types().charPtrType()
+          ,context.types().stringPtrType()
+          ,context.types().stringPtrType()
       }  
     );
     
@@ -88,10 +95,10 @@ void StringOps::registerAssignBuiltins(Context& context)
       context
     , ASSIGN_STR
     ,&StringOps::assignStr
-    , Types::instance().voidType()
+    , context.types().voidType()
     , {  
-          Types::instance().stringPtrType()
-          ,Types::instance().stringPtrType()
+          context.types().stringPtrType()
+          ,context.types().stringPtrType()
       }  
     );
     
@@ -101,10 +108,10 @@ void StringOps::registerAssignBuiltins(Context& context)
       context
     , ASSIGN_CHPTR
     ,&StringOps::assignChPtr
-    , Types::instance().voidType()
+    , context.types().voidType()
     , {  
-           Types::instance().stringPtrType()
-         , Types::instance().charPtrType()
+           context.types().stringPtrType()
+         , context.types().charPtrType()
           
       }  
     );
@@ -114,51 +121,51 @@ void StringOps::registerAssignBuiltins(Context& context)
 
 void StringOps::registerEqualsBuiltins(Context& context)
 {
-        FunctionRegistrar::instance().registerExternal
+    FunctionRegistrar::instance().registerExternal
     (
       context
     , EQUALS_STR_AND_STR
-    ,&StringOps::equalsStrAndStr
-    , Types::instance().boolType()
+    , &StringOps::equalsStrAndStr
+    , context.types().boolType()
     , {  
-          Types::instance().stringPtrType()
-        , Types::instance().stringPtrType()
+          context.types().stringPtrType()
+        , context.types().stringPtrType()
       }  
     );
 
-            FunctionRegistrar::instance().registerExternal
+    FunctionRegistrar::instance().registerExternal
     (
       context
     , EQUALS_STR_AND_CHPTR
-    ,&StringOps::equalsStrAndCharPtr
-    , Types::instance().boolType()
+    , &StringOps::equalsStrAndCharPtr
+    , context.types().boolType()
     , {  
-          Types::instance().stringPtrType()
-        , Types::instance().charPtrType()
+          context.types().stringPtrType()
+        , context.types().charPtrType()
       }  
     );
     
-            FunctionRegistrar::instance().registerExternal
+    FunctionRegistrar::instance().registerExternal
     (
       context
     , EQUALS_CHPTR_AND_STR
-    ,&StringOps::equalsStrAndStr
-    , Types::instance().boolType()
+    , &StringOps::equalsCharPtrAndStr
+    , context.types().boolType()
     , {  
-          Types::instance().charPtrType()
-        , Types::instance().stringPtrType()
+          context.types().charPtrType()
+        , context.types().stringPtrType()
       }  
     );
     
-            FunctionRegistrar::instance().registerExternal
+    FunctionRegistrar::instance().registerExternal
     (
       context
     , EQUALS_CHPTR_AND_CHPTR
-    ,&StringOps::equalsStrAndStr
-    , Types::instance().boolType()
+    , &StringOps::equalsCharPtrAndCharPtr
+    , context.types().boolType()
     , {  
-          Types::instance().charPtrType()
-        , Types::instance().charPtrType()
+          context.types().charPtrType()
+        , context.types().charPtrType()
       }  
     );
     
@@ -173,20 +180,21 @@ void StringOps::registerConversionBuiltins(Context& context)
       context
     , StringOps::TO_INT_STR
     ,&StringOps::stringToInt
-    , Types::instance().longType()
+    , context.types().longType()
     , {  
-          Types::instance().stringPtrType()
+          context.types().stringPtrType()
       }  
     );
-
+    
+  
     FunctionRegistrar::instance().registerExternal
     (
       context
     , StringOps::TO_INT_CHPTR
     ,&StringOps::charPtrToInt
-    , Types::instance().longType()
+    , context.types().longType()
     , {  
-          Types::instance().charPtrType()
+          context.types().charPtrType()
       }  
     );
     
@@ -195,12 +203,53 @@ void StringOps::registerConversionBuiltins(Context& context)
       context
     , StringOps::INT_TO_STR
     ,&StringOps::intToString
-    , Types::instance().voidType()
+    , context.types().voidType()
     , {  
-        Types::instance().longType(),
-        Types::instance().stringPtrType()
+        context.types().longType(),
+        context.types().stringPtrType()
       }  
     );
+
+    FunctionRegistrar::instance().registerExternal
+    (
+      context
+    , StringOps::DOUBLE_TO_STR
+    ,&StringOps::doubleToString
+    , context.types().voidType()
+    , {  
+        context.types().floatType(),
+        context.types().stringPtrType()
+      }  
+    );
+  
+    
+    FunctionRegistrar::instance().registerExternal
+    (
+      context
+    , StringOps::GET_CHAR
+    ,&StringOps::getChar
+    , context.types().longType()
+    , { 
+        context.types().stringPtrType(),
+        context.types().longType()
+      }  
+    );
+    
+    
+    FunctionRegistrar::instance().registerExternal
+    (
+      context
+    , StringOps::GET_SUBSTR
+    , &StringOps::getSubstr
+    , context.types().voidType()
+    , { 
+         context.types().stringPtrType()
+        ,context.types().longType()
+        ,context.types().longType()
+        ,context.types().stringPtrType()
+      }  
+    );
+
 }
 
 
@@ -216,9 +265,9 @@ void StringOps::registerBuiltins(Context& context)
       context
     , "ps"
     ,&StringOps::printString
-    , Types::instance().voidType()
+    , context.types().voidType()
     , {  
-          Types::instance().stringPtrType()
+          context.types().stringPtrType()
       }  
     );
     
@@ -295,7 +344,7 @@ void  StringOps::concatCharPtrAndCharPtr(const char* s1, const char*s2, StringOp
         return equals(s1, std::strlen(s1), s2->c_str(), s2->length());
     }
     
-    bool StringOps::concatCharPtrAndCharPtr(const char* s1, const char*s2)
+    bool StringOps::equalsCharPtrAndCharPtr(const char* s1, const char*s2)
     {
         return equals(s1, std::strlen(s1), s2, std::strlen(s2));
     }
@@ -305,25 +354,44 @@ void  StringOps::concatCharPtrAndCharPtr(const char* s1, const char*s2, StringOp
         std::cout << std::string((char*)&s->data[0], s->len_) << std::endl;
     }
 
-    void StringOps::intToString(int32_t i, String_t* s)
+    void StringOps::intToString(int64_t i, String_t* s)
     {
         std::string tmp = std::to_string(i);
         s->len_= tmp.length();
         std::memcpy(s->data,tmp.c_str(), tmp.length()); 
     }
     
-    int32_t StringOps::stringToInt(const String_t* s)
+    void StringOps::doubleToString(double d, String_t* s)
+    {
+        std::string tmp = std::to_string(d);
+        s->len_= tmp.length();
+        std::memcpy(s->data,tmp.c_str(), tmp.length()); 
+    }
+    
+    int64_t StringOps::stringToInt(const String_t* s)
     {
         char* endp = nullptr;
         return std::strtol(s->data, &endp ,10);
     }
     
-    int32_t StringOps::charPtrToInt(const char* s)
+    int64_t StringOps::charPtrToInt(const char* s)
     {
         char* endp = nullptr;
         return std::strtol(s, &endp ,10);
     }
+    
+    int64_t StringOps::getChar (const String_t* s, int64_t i)
+    {
+        return s->data[i];
+    }
 
+    void StringOps::getSubstr(const String_t* s, int64_t from, int64_t len, String_t* out)
+    {
+         //std::cerr << "Called " << from << "  " << len << std::end;
+         std::memcpy(&out->data[0], s->c_str() + from , len);
+         out->data[len] = 0;
+         out->len_ = len;
+    }
 
 }
 
