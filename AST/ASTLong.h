@@ -8,10 +8,10 @@ namespace roe
 class ASTLong: public ASTElement
 {
 public:
-    ASTLong(Context& context, int32_t value);    
+    ASTLong(Context& context, int64_t value);    
     virtual llvm::Value* evaluate() override;
 private:
-   int32_t value_; 
+   int64_t value_; 
 };
 
 }

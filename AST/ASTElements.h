@@ -13,6 +13,6 @@
 #include <AST/ASTDouble.h>
 #include <AST/ASTVariable.h>
 #include <AST/ASTRule.h>
-
+#include <AST/ASTStrSlice.h>
 
 

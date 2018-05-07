@@ -11,28 +11,30 @@ protected:
     static const std::string TAG_PREFIX;
     static const std::string FIELD_PREFIX;
 public:
-    ASTVariable(Context& context, const std::string& var);    
-    
+    ASTVariable(Context& context, const std::string& var);
+
 public:
     virtual llvm::Value* evaluate() override;
-    
+
 public:
     const std::string& name () const;
     const std::string& baseName() const;
-    bool isField() const;    
+    bool isField() const;
     size_t tag() const;
-    
+
 private:
-    bool processContainerField(const std::string& fullVarName);
+    bool processContainerField();
     llvm::Value* evaluateField();
     llvm::Value* evaluateLocalVar();
-    
+
 private:
-   std::string var_; 
+   std::string var_;
    std::string baseName_;
+   std::string fieldName_;
    bool isField_;
-   int32_t tag_;
+   int64_t tag_;
 };
 
-}
+using ASTVariablePtr = std::shared_ptr<ASTVariable>;
 
+}
