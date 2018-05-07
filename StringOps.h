@@ -29,15 +29,19 @@ public:
     static const std::string TO_INT_CHPTR;
     static const std::string TO_INT_STR;
     static const std::string INT_TO_STR;
+    static const std::string DOUBLE_TO_STR;
+    static const std::string GET_CHAR;
+    static const std::string GET_SUBSTR;
  
     struct String_t
     {
-            static constexpr const int32_t size = 64;
+            static constexpr const int64_t size = 64;
             char data[size];
             int8_t len_;                                                                                                                               
             
             int8_t length() const  {return len_;}
             const char* c_str() const  {return &data[0];}
+            char* data_ptr() {return &data[0];}
  
     };
     
@@ -55,25 +59,25 @@ public:
     static bool equalsStrAndCharPtr(const String_t* s1, const char* s2);
     static bool equalsStrAndStr(const String_t* s1, const String_t* s2);
     static bool equalsCharPtrAndStr(const char* s1, const String_t* s2);
-    static bool concatCharPtrAndCharPtr(const char* s1, const char*s2);
+    static bool equalsCharPtrAndCharPtr(const char* s1, const char* s2);
+     
+    static void intToString(int64_t, String_t* s);
+    static void doubleToString(double, String_t* s);
     
-    static void intToString(int32_t, String_t* s);
-
     // Cnnversions
-    static int32_t charPtrToInt(const char* s);
-    static int32_t stringToInt(const String_t* s);
+    static int64_t charPtrToInt(const char* s);
+    static int64_t stringToInt(const String_t* s);
    
+    // Substr
+    static int64_t  getChar(const String_t* s, int64_t);
+    static void getSubstr(const String_t* s, int64_t from, int64_t len, String_t* out);
     static void  printString(const String_t* s);
 
 public:
     static void registerBuiltins(Context& ctx);
-  
     static void registerConcatBuiltins(Context& ctx);
     static void registerAssignBuiltins(Context& ctx);
     static void registerEqualsBuiltins(Context& ctx);
     static void registerConversionBuiltins(Context& ctx);
-    
-private:
-    
 };
 }

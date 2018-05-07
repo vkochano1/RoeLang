@@ -24,8 +24,8 @@
 namespace roe
 {
 
-class IContainerAccess;    
-class Module final 
+class IContainerAccess;
+class Module final
 {
 public:
     enum class RoeFunctionType : uint8_t
@@ -34,30 +34,30 @@ public:
       ,  Processor
       ,  Converter
     };
-    
+
     struct CompiledFunctionInfo
     {
-        using ProcessorFuncPtr = int32_t(*)(IContainerAccess*);
-        using ConverterFuncPtr = int32_t(*)(IContainerAccess*, IContainerAccess*);
-        
+        using ProcessorFuncPtr = void (*)(IContainerAccess*);
+        using ConverterFuncPtr = void (*)(IContainerAccess*, IContainerAccess*);
+
         CompiledFunctionInfo(const std::string& name, llvm::ExecutionEngine* executionEngine)
         {
-            
+
             fptr_ = reinterpret_cast<void*>(executionEngine->getFunctionAddress(name));
         }
-        
+
         void call(IContainerAccess* access)
         {
             ProcessorFuncPtr processorPtr = reinterpret_cast<ProcessorFuncPtr>(fptr_);
             processorPtr(access);
         }
-        
+
         void call(IContainerAccess* from, IContainerAccess* to)
         {
             ConverterFuncPtr converterPtr = reinterpret_cast<ConverterFuncPtr>(fptr_);
             converterPtr(from, to);
         }
-        
+
         CompiledFunctionInfo()
         {
             fptr_= nullptr;
@@ -67,15 +67,17 @@ public:
         void* fptr_ ;
         RoeFunctionType type_;
     };
-    
+
     CompiledFunctionInfo& getFunc(const std::string& funcName)
     {
         return compiledFunctions_[funcName];
     }
-    using CompiledFunctions = std::unordered_map<std::string, CompiledFunctionInfo>; 
-   
-    Module(const std::string& name);    
-    void compileToIR(const std::string& text);    
+
+    using CompiledFunctions = std::unordered_map<std::string, CompiledFunctionInfo>;
+
+    Module(const std::string& name);
+    void compileToIR();
+    bool constructAST(const std::string& text);
     void dumpIR();
     void buildNative();
     Context& context() {return context_;};
@@ -85,8 +87,8 @@ private:
     std::unique_ptr<llvm::EngineBuilder> engineBuilder_;
     llvm::Module* module_ = nullptr;
     CompiledFunctions compiledFunctions_;
+    std::unique_ptr<roe::Driver> driver_;
 };
-   
+
 
 }
-

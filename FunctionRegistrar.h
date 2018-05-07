@@ -50,7 +50,7 @@ public:
         auto& builder = context.builder();
         auto& res = externalFunctions_[name];        
         auto& fptr = std::get<0>(res);
-        /*llvm::errs() << "Provided params " << args.size() << "\n";
+        llvm::errs() << "Provided params " << args.size() << "\n";
         for (llvm::Value* value : args)
         {
                 llvm::errs() << *value->getType() << "\n";
@@ -61,7 +61,7 @@ public:
         for(auto& arg :  fptr->args())
         {
           llvm::errs() << *arg.getType() << "\n";
-        }*/
+        }
         
         return  builder.CreateCall(fptr,args);
     }

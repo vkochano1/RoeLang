@@ -8,60 +8,29 @@ namespace roe
 {
 class Context;
 
-
-
 class IContainerAccess
 {
-public: 
-    virtual void  setField(int32_t tag, const StringOps::String_t& value) = 0;
-    virtual void  setField(int32_t tag, const char* value, size_t len) = 0;
-    virtual void  getField(int32_t tag, StringOps::String_t& value) = 0;
+public:
+  using FieldNameToTagMapping = std::unordered_map<std::string, int64_t>;
+public:
+  int64_t getTagFromFieldName(const std::string& val);
+
+public:
+    virtual void  setField(int64_t tag, const StringOps::String_t& value) = 0;
+    virtual void  setField(int64_t tag, const char* value, size_t len) = 0;
+    virtual void  getField(int64_t tag, StringOps::String_t& value) = 0;
+
+protected:
+    FieldNameToTagMapping fieldNameToTagMapping_;
 };
 
-class ContainerAccess : public IContainerAccess
-{
-public:
-    virtual void  setField(int32_t tag, const StringOps::String_t& value)
-    {
-     data_ [tag] = std::string(value.data, value.len_);   
-    }
-    
-    virtual void  setField(int32_t tag, const char* value, size_t len)
-    {
-     data_ [tag] = std::string(value, len);   
-    }
-    
-    virtual void  getField(int32_t tag, StringOps::String_t& value)
-    {
-        std::string& val =  data_[tag];
-        if (val.length() == 0)
-        {
-            value.len_ = 0;
-            return;
-        }
-        std::strncpy(&value.data[0], &val[0], val.length());
-        value.len_ = val.length();
-    }
-    
-    void dump(std::ostream& ostrm) const 
-    {
-        for ( const auto& p : data_)
-        {
-            ostrm << p.first <<  " -> " << p.second << std::endl;
-        }
-    }
-    
-public:
-    std::unordered_map<int32_t, std::string>  data_; 
-};
 
 class Bindings
 {
-public:        
-    static int32_t getField(void*, int32_t tag, StringOps::String_t* s);
-    static int32_t setField(void*, int32_t tag, StringOps::String_t* s); 
-    static int32_t setFieldCharPtr(void*, int32_t tag, const char* s); 
+public:
+    static void getField(void*, int64_t tag, StringOps::String_t* s);
+    static void setField(void*, int64_t tag, StringOps::String_t* s);
+    static void setFieldCharPtr(void*, int64_t tag, const char* s);
     static void registerBuiltins(Context& ctx);
-};  
+};
 }
-
