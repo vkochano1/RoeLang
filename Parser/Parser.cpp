@@ -741,7 +741,7 @@ namespace roe {
   case 14:
 #line 168 "Parser/Parser.yy" // lalr1.cc:859
     {
-	       (yylhs.value.astElement_) = std::shared_ptr<ASTElement> ( new ASTStrSlice (driver.context(), (yystack_[3].value.astElement_), (yystack_[1].value.astElement_), ASTElement::ASTElementPtr()));
+	       (yylhs.value.astElement_) = std::shared_ptr<ASTElement> ( new ASTStrSlice (driver.context(), (yystack_[3].value.astElement_), (yystack_[1].value.astElement_), ASTElementPtr()));
 	   }
 #line 747 "Parser/Parser.cpp" // lalr1.cc:859
     break;
@@ -1026,7 +1026,7 @@ namespace roe {
 #line 360 "Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_)=std::shared_ptr<ASTElement>
-            ( new ASTIf(driver.context(),(yystack_[2].value.astElement_), (yystack_[0].value.astElement_), ASTElement::ASTElementPtr()) );
+            ( new ASTIf(driver.context(),(yystack_[2].value.astElement_), (yystack_[0].value.astElement_), ASTElementPtr()) );
         }
 #line 1032 "Parser/Parser.cpp" // lalr1.cc:859
     break;

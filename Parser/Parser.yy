@@ -166,7 +166,7 @@ atomexpr : variable
 	   |
 	   variable '[' atomexpr ']'
 	   {
-	       $$ = std::shared_ptr<ASTElement> ( new ASTStrSlice (driver.context(), $1, $3, ASTElement::ASTElementPtr()));
+	       $$ = std::shared_ptr<ASTElement> ( new ASTStrSlice (driver.context(), $1, $3, ASTElementPtr()));
 	   }
        |
 	   variable '[' atomexpr ':' atomexpr  ']'
@@ -359,7 +359,7 @@ assignment : variable ASSIGN expr
 if_expr : IF_KEYWORD LPAREN or_exp RPAREN expr_block
         {
             $$=std::shared_ptr<ASTElement>
-            ( new ASTIf(driver.context(),$3, $5, ASTElement::ASTElementPtr()) );
+            ( new ASTIf(driver.context(),$3, $5, ASTElementPtr()) );
         }
         |
         IF_KEYWORD LPAREN or_exp RPAREN expr_block ELSE_KEYWORD expr_block

@@ -22,7 +22,7 @@ struct YYSTYPE
     long  			longVal_;
     std::string     stringVal_;
     double          doubleVal_;
-    ASTElement::ASTElementPtr   astElement_;
+    ASTElementPtr   astElement_;
     ASTRulePtr      astRule_;
     ASTFunctionParametersPtr astParameters_;
 };

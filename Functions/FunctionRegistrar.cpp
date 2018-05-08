@@ -2,6 +2,7 @@
 #include <iostream>
 #include <llvm/Support/raw_ostream.h>
 #include <Module/Context.h>
+#include <AST/ASTException.h>
 
 
 namespace roe
@@ -30,18 +31,16 @@ namespace roe
       auto& builder = context_.builder();
       auto& res = externalFunctions_[name];
       auto& fptr = std::get<0>(res);
-      llvm::errs() << "Provided params " << args.size() << "\n";
-      for (llvm::Value* value : args)
-      {
-              llvm::errs() << *value->getType() << "\n";
-      }
 
-      llvm::errs() << "Needed params\n";
-
+      size_t idx = 0;
       for(auto& arg :  fptr->args())
       {
-        llvm::errs() << *arg.getType() << "\n";
+        if(args[idx++]->getType() != arg.getType())
+             throw ASTException("Parameter/Argument mismatch");
       }
+
+      if(idx < args.size())
+        throw ASTException("Invalid number of arguments");
 
       return  builder.CreateCall(fptr,args);
   }

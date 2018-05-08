@@ -13,13 +13,14 @@ void ASTRules::addRule(ASTRulePtr rule)
 
     void ASTRules::evaluate()
     {
-            size_t idx = 0;
+  /*          size_t idx = 0;
             // insert declarations
 
             for (auto& rule : rules_)
             {
                      auto& context = rule.second->context();
 
+                     auto& roeRule = context.rule(rule.name());
                      //VK
                      auto* proto = llvm::FunctionType::get
                      (
@@ -30,12 +31,11 @@ void ASTRules::addRule(ASTRulePtr rule)
 
                     llvm::Function *f = llvm::cast<llvm::Function>(context.module()->getOrInsertFunction(rule.first, proto));
             }
-
+*/
             for (auto& rule : rules_)
             {
                 rule.second->context().setCurrentRule(rule.first);
                 rule.second->evaluate();
-                ++idx;
             }
     }
 

@@ -12,20 +12,7 @@ namespace roe
     {
     }
 
-    void ASTArithmetical::normalizeValues(llvm::Value*& v1, llvm::Value*& v2)
-    {
-        auto& builder = context_.builder();
 
-
-        if(v1->getType() == context_.types().floatType()
-            && v2->getType() != context_.types().floatType())
-        {
-            std::cerr << "STEP1" << std::endl;
-            v2 = builder.CreateSIToFP(v2, context_.types().floatType());
-        }
-        std::cerr << "STEP2" << std::endl;
-        llvm::errs() << *v1->getType() <<"  "<<*v2->getType();
-    }
 
     bool ASTArithmetical::processStringConcat(llvm::Value* left
                                             , llvm::Value* right
