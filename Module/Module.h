@@ -1,6 +1,7 @@
 #pragma once
-#include <Context.h>
-#include <Driver.h>
+
+#include <Module/Context.h>
+#include <Parser/Driver.h>
 #include <memory>
 
 #include "llvm/IR/IRBuilder.h"
@@ -8,16 +9,13 @@
 #include "llvm/Support/TargetSelect.h"
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/ExecutionEngine/GenericValue.h"
-
-
 #include "llvm/Support/TargetSelect.h"
 #include <llvm/ExecutionEngine/ExecutionEngine.h>
-
 #include <llvm/ExecutionEngine/MCJIT.h>
-
 #include "llvm/Target/TargetMachine.h"
 #include "llvm/Target/TargetOptions.h"
-#include <FunctionRegistrar.h>
+
+#include <Functions/FunctionRegistrar.h>
 
 
 
@@ -42,7 +40,6 @@ public:
 
         CompiledFunctionInfo(const std::string& name, llvm::ExecutionEngine* executionEngine)
         {
-
             fptr_ = reinterpret_cast<void*>(executionEngine->getFunctionAddress(name));
         }
 
@@ -81,9 +78,13 @@ public:
     void dumpIR();
     void buildNative();
     Context& context() {return context_;};
+    llvm::ExecutionEngine& executionEngine()
+    {
+      return *executionEngine_;
+    }
 private:
-    Context context_;
     llvm::ExecutionEngine* executionEngine_ = nullptr;
+    Context context_;
     std::unique_ptr<llvm::EngineBuilder> engineBuilder_;
     llvm::Module* module_ = nullptr;
     CompiledFunctions compiledFunctions_;

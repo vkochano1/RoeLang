@@ -12,15 +12,16 @@
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/ExecutionEngine/ExecutionEngine.h>
 #include <tuple>
-#include <Types.h>
+#include <Types/Types.h>
 #include <iostream>
 #include <AST/ASTFunctionParameters.h>
 
-#include <Bindings.h>
+#include <Functions/Bindings.h>
 
 namespace roe
 {
 
+class FunctionRegistrar;
 class Context;
 
 class VariableInfo
@@ -102,6 +103,7 @@ public:
     using Module = llvm::Module;
     void init(Module* module) { module_ = module;}
     Module* module() {return module_;}
+
 public:
     void setCurrentRule(const std::string& name);
     RoeRule::Builder& builder () {return rule().builder();};
@@ -110,12 +112,14 @@ public:
     Types& types();
     RoeRule& rule(const std::string& name) {return *rules_[name];}
     void addNewRule(const std::string& newRuleName, const ASTFunctionParameters::Parameters& params);
+    FunctionRegistrar& externalFunctions();
 
 private:
     Rules rules_;
     std::shared_ptr<RoeRule> currentRule_;
     std::unique_ptr<Types> types_;
     llvm::Module* module_ = nullptr;
+    std::unique_ptr<FunctionRegistrar> functionRegistrar_;
 };
 
 }

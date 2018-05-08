@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 
-#include <Driver.h>
+#include <Parser/Driver.h>
 #include <fstream>
 #include <sstream>
 
@@ -32,10 +32,10 @@
 
 #include "llvm/Target/TargetMachine.h"
 #include "llvm/Target/TargetOptions.h"
-#include <Types.h>
-#include <Bindings.h>
-#include <FunctionRegistrar.h>
-#include <Module.h>
+#include <Types/Types.h>
+#include <Functions/Bindings.h>
+#include <Functions/FunctionRegistrar.h>
+#include <Module/Module.h>
 
 
 class ContainerAccess : public roe::IContainerAccess

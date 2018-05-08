@@ -45,7 +45,7 @@
 #line 95 "Parser/Parser.yy" // lalr1.cc:404
 
 
-#include <Driver.h>
+#include <Parser/Driver.h>
 #include <Parser/YYTYPE.h>
 #include <Lexer/Scanner.h>
 
@@ -664,8 +664,8 @@ namespace roe {
 
   case 5:
 #line 123 "Parser/Parser.yy" // lalr1.cc:859
-    { 
-                (yylhs.value.astParameters_) = ASTFunctionParametersPtr(new ASTFunctionParameters(driver.context())); 
+    {
+                (yylhs.value.astParameters_) = ASTFunctionParametersPtr(new ASTFunctionParameters(driver.context()));
             }
 #line 671 "Parser/Parser.cpp" // lalr1.cc:859
     break;
@@ -709,7 +709,7 @@ namespace roe {
 #line 147 "Parser/Parser.yy" // lalr1.cc:859
     {
                 (yylhs.value.astElement_) = std::shared_ptr<ASTElement> (new ASTArgList(driver.context()));
-                dynamic_cast<ASTArgList*>((yylhs.value.astElement_).get())->addArgument((yystack_[0].value.astElement_));  
+                dynamic_cast<ASTArgList*>((yylhs.value.astElement_).get())->addArgument((yystack_[0].value.astElement_));
             }
 #line 715 "Parser/Parser.cpp" // lalr1.cc:859
     break;
@@ -781,7 +781,7 @@ namespace roe {
   case 19:
 #line 189 "Parser/Parser.yy" // lalr1.cc:859
     {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
+            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
                 new ASTLogical(driver.context()
                               ,ASTLogical::Operator::OR
@@ -803,14 +803,14 @@ namespace roe {
   case 21:
 #line 203 "Parser/Parser.yy" // lalr1.cc:859
     {
-          (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
+          (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
                 new ASTLogical(driver.context()
                               ,ASTLogical::Operator::AND
                               , (yystack_[2].value.astElement_)
                               , (yystack_[0].value.astElement_))
             );
-            
+
           }
 #line 816 "Parser/Parser.cpp" // lalr1.cc:859
     break;
@@ -826,7 +826,7 @@ namespace roe {
   case 23:
 #line 219 "Parser/Parser.yy" // lalr1.cc:859
     {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
+            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
                 new ASTLogicalNOT(driver.context(), (yystack_[0].value.astElement_))
             );
@@ -845,7 +845,7 @@ namespace roe {
   case 25:
 #line 231 "Parser/Parser.yy" // lalr1.cc:859
     {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
+            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
                 new ASTCompare(driver.context()
                               ,ASTCompare::Operator::MORE
@@ -859,7 +859,7 @@ namespace roe {
   case 26:
 #line 241 "Parser/Parser.yy" // lalr1.cc:859
     {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
+            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
                 new ASTCompare(driver.context()
                               ,ASTCompare::Operator::LESS
@@ -873,7 +873,7 @@ namespace roe {
   case 27:
 #line 251 "Parser/Parser.yy" // lalr1.cc:859
     {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
+            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
                 new ASTCompare(driver.context()
                               ,ASTCompare::Operator::NOT_EQUAL
@@ -887,7 +887,7 @@ namespace roe {
   case 28:
 #line 262 "Parser/Parser.yy" // lalr1.cc:859
     {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
+            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
                 new ASTCompare(driver.context()
                               ,ASTCompare::Operator::EQUAL
@@ -901,7 +901,7 @@ namespace roe {
   case 29:
 #line 273 "Parser/Parser.yy" // lalr1.cc:859
     {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
+            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
                 new ASTCompare(driver.context()
                               ,ASTCompare::Operator::MORE_OR_EQUAL
@@ -915,7 +915,7 @@ namespace roe {
   case 30:
 #line 284 "Parser/Parser.yy" // lalr1.cc:859
     {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
+            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
                 new ASTCompare(driver.context()
                               ,ASTCompare::Operator::LESS_OR_EQUAL
@@ -928,7 +928,7 @@ namespace roe {
 
   case 31:
 #line 294 "Parser/Parser.yy" // lalr1.cc:859
-    { 
+    {
              (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
           }
 #line 935 "Parser/Parser.cpp" // lalr1.cc:859
@@ -945,7 +945,7 @@ namespace roe {
   case 33:
 #line 302 "Parser/Parser.yy" // lalr1.cc:859
     {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
+            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
                 new ASTArithmetical(driver.context()
                               ,ASTArithmetical::Operator::PLUS
@@ -959,7 +959,7 @@ namespace roe {
   case 34:
 #line 313 "Parser/Parser.yy" // lalr1.cc:859
     {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
+            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
                 new ASTArithmetical(driver.context()
                               ,ASTArithmetical::Operator::MINUS
@@ -981,7 +981,7 @@ namespace roe {
   case 36:
 #line 328 "Parser/Parser.yy" // lalr1.cc:859
     {
-           (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
+           (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
                 new ASTArithmetical(driver.context()
                               ,ASTArithmetical::Operator::MUL
@@ -995,7 +995,7 @@ namespace roe {
   case 37:
 #line 338 "Parser/Parser.yy" // lalr1.cc:859
     {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement> 
+            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
                 new ASTArithmetical(driver.context()
                               ,ASTArithmetical::Operator::DIV
@@ -1026,7 +1026,7 @@ namespace roe {
 #line 360 "Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_)=std::shared_ptr<ASTElement>
-            ( new ASTIf(driver.context(),(yystack_[2].value.astElement_), (yystack_[0].value.astElement_), ASTElement::ASTElementPtr()) );            
+            ( new ASTIf(driver.context(),(yystack_[2].value.astElement_), (yystack_[0].value.astElement_), ASTElement::ASTElementPtr()) );
         }
 #line 1032 "Parser/Parser.cpp" // lalr1.cc:859
     break;
@@ -1034,7 +1034,7 @@ namespace roe {
   case 41:
 #line 366 "Parser/Parser.yy" // lalr1.cc:859
     {
-           (yylhs.value.astElement_)=std::shared_ptr<ASTElement>( new ASTIf(driver.context(),(yystack_[4].value.astElement_), (yystack_[2].value.astElement_), (yystack_[0].value.astElement_)) );            
+           (yylhs.value.astElement_)=std::shared_ptr<ASTElement>( new ASTIf(driver.context(),(yystack_[4].value.astElement_), (yystack_[2].value.astElement_), (yystack_[0].value.astElement_)) );
         }
 #line 1040 "Parser/Parser.cpp" // lalr1.cc:859
     break;
@@ -1113,7 +1113,7 @@ namespace roe {
   case 51:
 #line 412 "Parser/Parser.yy" // lalr1.cc:859
     {
-            (yylhs.value.astRule_) = std::shared_ptr<ASTRule> (new ASTRule(driver.context(), (yystack_[4].value.stringVal_), (yystack_[2].value.astParameters_), (yystack_[0].value.astElement_))); 
+            (yylhs.value.astRule_) = std::shared_ptr<ASTRule> (new ASTRule(driver.context(), (yystack_[4].value.stringVal_), (yystack_[2].value.astParameters_), (yystack_[0].value.astElement_)));
        }
 #line 1119 "Parser/Parser.cpp" // lalr1.cc:859
     break;

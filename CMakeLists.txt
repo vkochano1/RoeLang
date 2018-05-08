@@ -15,21 +15,23 @@ include_directories(/usr/local/include ${Boost_INCLUDE_DIRS} ./ )
 set(CMAKE_CXX_FLAGS "-O0 -s ")
 #set(CMAKE_CXX_FLAGS "-O0 -g ")
 file(GLOB AST_CPP "AST/*.cpp")
+file(GLOB TYPES_CPP "Types/*.cpp")
+file(GLOB MODULE_CPP "Module/*.cpp")
+file(GLOB FUNCTIONS_CPP "Functions/*.cpp")
+file(GLOB LEXER_CPP "Lexer/*.cpp")
+file(GLOB PARSER_CPP "Parser/*.cpp")
 
-
-add_library(RoeLangLib STATIC
-StringOps.cpp
-Bindings.cpp
+add_library(RoeLang STATIC
 ${AST_CPP}
-Types.cpp
-Context.cpp
-Module.cpp
-Parser/Parser.cpp
-Lexer/Scanner.cpp
-Driver.cpp)
+${TYPES_CPP}
+${LEXER_CPP}
+${PARSER_CPP}
+${MODULE_CPP}
+${FUNCTIONS_CPP}
+)
 
 add_executable(Test1  Test/Test.cpp)
 
-target_link_libraries(Test1 RoeLangLib  pthread ${Boost_LIBRARIES}
+target_link_libraries(Test1 RoeLang  pthread ${Boost_LIBRARIES}
 LLVMX86Disassembler  LLVMX86AsmParser  LLVMX86CodeGen  LLVMGlobalISel  LLVMSelectionDAG  LLVMAsmPrinter  LLVMDebugInfoCodeView  LLVMDebugInfoMSF  LLVMCodeGen  LLVMScalarOpts  LLVMInstCombine  LLVMAggressiveInstCombine  LLVMTransformUtils  LLVMBitWriter  LLVMX86Desc  LLVMMCDisassembler  LLVMX86Info  LLVMX86AsmPrinter  LLVMX86Utils  LLVMMCJIT  LLVMExecutionEngine  LLVMTarget  LLVMAnalysis  LLVMProfileData  LLVMRuntimeDyld  LLVMObject  LLVMMCParser  LLVMBitReader  LLVMMC  LLVMCore  LLVMBinaryFormat  LLVMSupport  LLVMDemangle
 dl z)

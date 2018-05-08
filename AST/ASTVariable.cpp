@@ -1,5 +1,5 @@
 #include <AST/ASTVariable.h>
-#include <FunctionRegistrar.h>
+#include <Functions/FunctionRegistrar.h>
 #include <boost/algorithm/string.hpp>
 
 
@@ -76,14 +76,13 @@ namespace roe
     llvm::Value* ASTVariable::evaluateField()
     {
         processContainerField();
-
         auto& builder = context_.rule().builder();
 
         llvm::Value* result  = builder.CreateAlloca(context_.types().stringType());
         llvm::Value* container = context_.rule().getParamValue(baseName());
         llvm::Value* tagVal = llvm::ConstantInt::get(context_.types().longType(), tag());
 
-        FunctionRegistrar::instance().makeCall(context_,"getField", {container, tagVal, result} );
+        context_.externalFunctions().makeCall(Bindings::GET_FIELD_STRING, {container, tagVal, result} );
         return result;
     }
 

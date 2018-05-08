@@ -1,5 +1,5 @@
-#include <Module.h>
-#include <Bindings.h>
+#include <Module/Module.h>
+#include <Functions/Bindings.h>
 
 
 namespace roe
@@ -16,7 +16,6 @@ namespace roe
         context_.init(module_);
 
         roe::StringOps::registerBuiltins(context_);
-
         roe::Bindings::registerBuiltins(context_);
 
         driver_ = std::make_unique<roe::Driver> (context_);
@@ -44,7 +43,7 @@ namespace roe
 
     void Module::buildNative()
     {
-        roe::FunctionRegistrar::instance().addAllMappings(*executionEngine_);
+        context_.externalFunctions().addAllMappings(*executionEngine_);
 
         for( const auto& rule : context_.rules())
         {

@@ -2,10 +2,10 @@
 #include <fstream>
 #include <sstream>
 
-#include <Driver.h>
+#include <Parser/Driver.h>
 #include <Lexer/Scanner.h>
 
-namespace roe 
+namespace roe
 {
 
 Driver::Driver(Context& context)
@@ -45,4 +45,4 @@ void Driver::error(const std::string& m)
     std::cerr << m << std::endl;
 }
 
-} 
+}

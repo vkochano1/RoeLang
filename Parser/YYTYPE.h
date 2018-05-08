@@ -9,14 +9,14 @@
 #include <iostream>
 //#include <boost/variant.hpp>
 
-#include <Context.h>
+#include <Module/Context.h>
 #include <AST/ASTElements.h>
 #include <AST/ASTRule.h>
 
 
 namespace roe
 {
- 
+
 struct YYSTYPE
 {
     long  			longVal_;
@@ -28,6 +28,3 @@ struct YYSTYPE
 };
 
 }
-
-
-

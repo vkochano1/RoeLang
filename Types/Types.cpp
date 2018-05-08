@@ -1,17 +1,17 @@
-#include <Types.h>
-#include <Context.h>
+#include <Types/Types.h>
+#include <Module/Context.h>
 
-namespace roe 
+namespace roe
 {
-    
+
 
 void Types::init(Context& context)
 {
     auto* arrayType = llvm::ArrayType::get(llvm::Type::getInt8Ty(context),String::size);
     auto* stringLenType = llvm::Type::getInt8Ty(context);
-    
+
     std::vector<llvm::Type*> structFieldTypes = { arrayType, stringLenType};
-    
+
     stringType_ = llvm::StructType::create(context, structFieldTypes, "string");
     stringPtrType_ = llvm::PointerType::get(stringType_,0);
     charPtrType_ = llvm::PointerType::get(llvm::Type::getInt8Ty(context),0);
@@ -44,7 +44,7 @@ void Types::init(Context& context)
         ,{longPtrType_ , longType_}
         ,{floatPtrType_ , floatType_}
     };
-        
+
 }
 
 
@@ -99,28 +99,28 @@ llvm::Type* Types::stringPtrType() {
     return stringPtrType_;
 }
 
-llvm::Type* Types::voidPtrType () 
+llvm::Type* Types::voidPtrType ()
 {
     return charPtrType();
 };
 
-llvm::Type* Types::boolType () 
+llvm::Type* Types::boolType ()
 {
     return boolType_;
 };
 
 
-llvm::Type* Types::voidType () 
+llvm::Type* Types::voidType ()
 {
     return voidType_;
 };
 
-llvm::Type* Types::floatPtrType () 
+llvm::Type* Types::floatPtrType ()
 {
     return floatPtrType_;
 };
 
-llvm::Type* Types::floatType () 
+llvm::Type* Types::floatType ()
 {
     return floatType_;
 };
@@ -132,4 +132,3 @@ Types::Types(Context& context)
 }
 
 }
-

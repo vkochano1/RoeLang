@@ -2,8 +2,8 @@
 
 namespace roe
 {
-    
-    
+
+
 
 void ASTRules::addRule(ASTRulePtr rule)
 {
@@ -15,20 +15,22 @@ void ASTRules::addRule(ASTRulePtr rule)
     {
             size_t idx = 0;
             // insert declarations
-            
+
             for (auto& rule : rules_)
             {
                      auto& context = rule.second->context();
+
+                     //VK
                      auto* proto = llvm::FunctionType::get
                      (
                        context.types().voidType()
                      , {context.types().voidPtrType(), context.types().voidPtrType()}
                      , false
                     );
-       
+
                     llvm::Function *f = llvm::cast<llvm::Function>(context.module()->getOrInsertFunction(rule.first, proto));
             }
-            
+
             for (auto& rule : rules_)
             {
                 rule.second->context().setCurrentRule(rule.first);
@@ -38,6 +40,3 @@ void ASTRules::addRule(ASTRulePtr rule)
     }
 
 }
-
-
-

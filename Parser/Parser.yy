@@ -94,7 +94,7 @@
 
 %{
 
-#include <Driver.h>
+#include <Parser/Driver.h>
 #include <Parser/YYTYPE.h>
 #include <Lexer/Scanner.h>
 
@@ -119,9 +119,9 @@ constant :  INTEGER
               $$ =  std::shared_ptr<ASTCstr>( new ASTCstr(driver.context(),$1));
 	       }
 
-parameters : /*epsilon*/ 
-            { 
-                $$ = ASTFunctionParametersPtr(new ASTFunctionParameters(driver.context())); 
+parameters : /*epsilon*/
+            {
+                $$ = ASTFunctionParametersPtr(new ASTFunctionParameters(driver.context()));
             }
             | parameters COMMA NAME
             {
@@ -133,8 +133,8 @@ parameters : /*epsilon*/
                 $$ = ASTFunctionParametersPtr(new ASTFunctionParameters(driver.context()));
                 $$->addParameter($1);
             }
-    
-arg_list :  /*epsilon*/ 
+
+arg_list :  /*epsilon*/
             {
                 $$ = std::shared_ptr<ASTElement> (new ASTArgList(driver.context()));
             }
@@ -146,7 +146,7 @@ arg_list :  /*epsilon*/
             | or_exp
             {
                 $$ = std::shared_ptr<ASTElement> (new ASTArgList(driver.context()));
-                dynamic_cast<ASTArgList*>($$.get())->addArgument($1);  
+                dynamic_cast<ASTArgList*>($$.get())->addArgument($1);
             }
 
 func_call: NAME LPAREN arg_list RPAREN
@@ -158,7 +158,7 @@ variable : NAME
            {
 	         $$ =  std::shared_ptr<ASTElement>( new ASTVariable(driver.context(),$1) );
            }
-           
+
 atomexpr : variable
 	   {
 	       $$ = $1;
@@ -187,7 +187,7 @@ atomexpr : variable
 	   }
 or_exp   : or_exp OR_KEYWORD and_exp
           {
-            $$ = std::shared_ptr<ASTElement> 
+            $$ = std::shared_ptr<ASTElement>
             (
                 new ASTLogical(driver.context()
                               ,ASTLogical::Operator::OR
@@ -201,23 +201,23 @@ or_exp   : or_exp OR_KEYWORD and_exp
           }
 and_exp  : and_exp AND_KEYWORD not_exp
           {
-          $$ = std::shared_ptr<ASTElement> 
+          $$ = std::shared_ptr<ASTElement>
             (
                 new ASTLogical(driver.context()
                               ,ASTLogical::Operator::AND
                               , $1
                               , $3)
             );
-            
+
           }
           | not_exp
           {
              $$ =$1;
           }
-          
+
 not_exp : NOT_KEYWORD not_exp
           {
-            $$ = std::shared_ptr<ASTElement> 
+            $$ = std::shared_ptr<ASTElement>
             (
                 new ASTLogicalNOT(driver.context(), $2)
             );
@@ -226,10 +226,10 @@ not_exp : NOT_KEYWORD not_exp
           {
             $$ = $1;
           }
-          
+
 compare_exp : addexpr MORE addexpr
           {
-            $$ = std::shared_ptr<ASTElement> 
+            $$ = std::shared_ptr<ASTElement>
             (
                 new ASTCompare(driver.context()
                               ,ASTCompare::Operator::MORE
@@ -239,7 +239,7 @@ compare_exp : addexpr MORE addexpr
           }|
           addexpr LESS addexpr
           {
-            $$ = std::shared_ptr<ASTElement> 
+            $$ = std::shared_ptr<ASTElement>
             (
                 new ASTCompare(driver.context()
                               ,ASTCompare::Operator::LESS
@@ -249,7 +249,7 @@ compare_exp : addexpr MORE addexpr
           }|
           addexpr NOT_EQUAL addexpr
           {
-            $$ = std::shared_ptr<ASTElement> 
+            $$ = std::shared_ptr<ASTElement>
             (
                 new ASTCompare(driver.context()
                               ,ASTCompare::Operator::NOT_EQUAL
@@ -260,7 +260,7 @@ compare_exp : addexpr MORE addexpr
           |
           addexpr EQUAL addexpr
           {
-            $$ = std::shared_ptr<ASTElement> 
+            $$ = std::shared_ptr<ASTElement>
             (
                 new ASTCompare(driver.context()
                               ,ASTCompare::Operator::EQUAL
@@ -271,7 +271,7 @@ compare_exp : addexpr MORE addexpr
           |
           addexpr MORE_OR_EQUAL addexpr
           {
-            $$ = std::shared_ptr<ASTElement> 
+            $$ = std::shared_ptr<ASTElement>
             (
                 new ASTCompare(driver.context()
                               ,ASTCompare::Operator::MORE_OR_EQUAL
@@ -282,7 +282,7 @@ compare_exp : addexpr MORE addexpr
                     |
           addexpr LESS_OR_EQUAL addexpr
           {
-            $$ = std::shared_ptr<ASTElement> 
+            $$ = std::shared_ptr<ASTElement>
             (
                 new ASTCompare(driver.context()
                               ,ASTCompare::Operator::LESS_OR_EQUAL
@@ -291,7 +291,7 @@ compare_exp : addexpr MORE addexpr
             );
           }
           | LPAREN or_exp RPAREN
-          { 
+          {
              $$ = $2;
           }
           | addexpr
@@ -300,7 +300,7 @@ compare_exp : addexpr MORE addexpr
           }
 addexpr : addexpr PLUS factor
           {
-            $$ = std::shared_ptr<ASTElement> 
+            $$ = std::shared_ptr<ASTElement>
             (
                 new ASTArithmetical(driver.context()
                               ,ASTArithmetical::Operator::PLUS
@@ -311,7 +311,7 @@ addexpr : addexpr PLUS factor
           |
           addexpr MINUS factor
           {
-            $$ = std::shared_ptr<ASTElement> 
+            $$ = std::shared_ptr<ASTElement>
             (
                 new ASTArithmetical(driver.context()
                               ,ASTArithmetical::Operator::MINUS
@@ -323,10 +323,10 @@ addexpr : addexpr PLUS factor
           {
 	        $$ = $1;
           }
-          
+
 factor:  factor MULT atomexpr
          {
-           $$ = std::shared_ptr<ASTElement> 
+           $$ = std::shared_ptr<ASTElement>
             (
                 new ASTArithmetical(driver.context()
                               ,ASTArithmetical::Operator::MUL
@@ -336,7 +336,7 @@ factor:  factor MULT atomexpr
          }
          | factor DIV atomexpr
          {
-            $$ = std::shared_ptr<ASTElement> 
+            $$ = std::shared_ptr<ASTElement>
             (
                 new ASTArithmetical(driver.context()
                               ,ASTArithmetical::Operator::DIV
@@ -349,7 +349,7 @@ factor:  factor MULT atomexpr
             $$ = $1;
          }
 
-         
+
 
 assignment : variable ASSIGN expr
 {
@@ -359,14 +359,14 @@ assignment : variable ASSIGN expr
 if_expr : IF_KEYWORD LPAREN or_exp RPAREN expr_block
         {
             $$=std::shared_ptr<ASTElement>
-            ( new ASTIf(driver.context(),$3, $5, ASTElement::ASTElementPtr()) );            
+            ( new ASTIf(driver.context(),$3, $5, ASTElement::ASTElementPtr()) );
         }
-        | 
+        |
         IF_KEYWORD LPAREN or_exp RPAREN expr_block ELSE_KEYWORD expr_block
         {
-           $$=std::shared_ptr<ASTElement>( new ASTIf(driver.context(),$3, $5, $7) );            
+           $$=std::shared_ptr<ASTElement>( new ASTIf(driver.context(),$3, $5, $7) );
         }
-                    
+
 expr	: assignment
     {
          $$ = $1;
@@ -376,8 +376,8 @@ expr	: assignment
     {
 	      $$ = $1;
     }
-    
-statement : expr SEMI_COL 
+
+statement : expr SEMI_COL
    {
       $$=$1;
    }
@@ -397,7 +397,7 @@ expr_list : /*epsilon*/ {$$ = std::shared_ptr<ASTElement> (new ASTBlock(driver.c
                 dynamic_cast<ASTBlock*>($1.get())->addElement($2);
                 $$=$1;
             }
-           
+
 expr_block:
         statement
         {
@@ -407,22 +407,22 @@ expr_block:
         {
           $$ = $2;
         }
-       
+
 rule : RULE_KEYWORD ASSIGN NAME LPAREN parameters RPAREN expr_block
        {
-            $$ = std::shared_ptr<ASTRule> (new ASTRule(driver.context(), $3, $5, $7)); 
+            $$ = std::shared_ptr<ASTRule> (new ASTRule(driver.context(), $3, $5, $7));
        }
-       
+
 rules :/*epsilon*/    {}
        |  rules rule
        {
           driver.rules().addRule($2);
        }
-start	: rules 
+start	: rules
        {
        }
 
-        
+
 
 %% /*** Additional Code ***/
 

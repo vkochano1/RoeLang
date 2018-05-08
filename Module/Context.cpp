@@ -1,7 +1,7 @@
-#include <Context.h>
+#include <Module/Context.h>
 #include <assert.h>
 #include <iostream>
-#include <FunctionRegistrar.h>
+#include <Functions/FunctionRegistrar.h>
 
 namespace roe
 {
@@ -116,6 +116,12 @@ namespace roe
     Context::Context ()
     {
         types_ = std::make_unique<Types> (*this);
+        functionRegistrar_ = std::make_unique<FunctionRegistrar> (*this);
+    }
+
+    FunctionRegistrar& Context::externalFunctions()
+    {
+      return *functionRegistrar_;
     }
 
     void Context::addNewRule(const std::string& newRuleName

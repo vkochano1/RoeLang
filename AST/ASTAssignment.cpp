@@ -1,7 +1,7 @@
 #include <AST/ASTAssignment.h>
 #include <AST/ASTVariable.h>
 
-#include <FunctionRegistrar.h>
+#include <Functions/FunctionRegistrar.h>
 
 namespace roe
 {
@@ -18,11 +18,11 @@ namespace roe
     {
         if(from->getType() == context_.types().charPtrType())
         {
-            FunctionRegistrar::instance().makeCall(context_,StringOps::ASSIGN_CHPTR, {to, from} );
+            context_.externalFunctions().makeCall(StringOps::ASSIGN_CHPTR, {to, from} );
         }
         else
         {
-            FunctionRegistrar::instance().makeCall(context_,StringOps::ASSIGN_STR, {to, from} );
+            context_.externalFunctions().makeCall(StringOps::ASSIGN_STR, {to, from} );
         }
     }
 
@@ -40,11 +40,11 @@ namespace roe
 
         if(from->getType() == context_.types().charPtrType())
         {
-            FunctionRegistrar::instance().makeCall(context_,"setFieldCharPtr", {container, tagVal, from} );
+            context_.externalFunctions().makeCall(Bindings::SET_FIELD_CHPTR, {container, tagVal, from} );
         }
         else
         {
-            FunctionRegistrar::instance().makeCall(context_,"setField", {container, tagVal, from} );
+            context_.externalFunctions().makeCall(Bindings::SET_FIELD_STRING, {container, tagVal, from} );
         }
     }
 

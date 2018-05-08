@@ -1,5 +1,5 @@
 #include <AST/ASTLogical.h>
-#include <FunctionRegistrar.h>
+#include <Functions/FunctionRegistrar.h>
 
 namespace roe
 {
@@ -10,18 +10,18 @@ namespace roe
     , operand1_(op1)
     , operand2_(op2)
     {
-        
+
     }
     llvm::Value* ASTLogical::evaluate()
     {
       auto& builder = context_.builder();
-      
+
       auto v1 = operand1_->evaluate();
       auto v2 = operand2_->evaluate();
-      
+
       v1 = loadValueIfNeeded(v1);
       v2 = loadValueIfNeeded(v2);
-      
+
       llvm::Value* out = nullptr;
       switch(op_)
       {
@@ -32,43 +32,43 @@ namespace roe
               out = builder.CreateOr(v1, v2);
           break;
       };
-      
-      return out;      
+
+      return out;
     }
-  
+
     ASTLogicalNOT::ASTLogicalNOT(Context& context, ASTElementPtr op1)
     : ASTElement(context)
     , operand1_(op1)
     {
-        
+
     }
     llvm::Value* ASTLogicalNOT::evaluate()
     {
       auto& builder = context_.builder();
       auto* value = operand1_->evaluate();
       value = loadValueIfNeeded(value);
-      return  builder.CreateNot(value);   
+      return  builder.CreateNot(value);
     }
-    
-    
+
+
     ASTCompare::ASTCompare(Context& context, Operator op, ASTElementPtr op1, ASTElementPtr op2)
     :ASTElement(context)
     , op_(op)
     , operand1_(op1)
     , operand2_(op2)
     {
-        
+
     }
     llvm::Value* ASTCompare::evaluate()
     {
       auto& builder = context_.builder();
-      
+
       auto v1 = operand1_->evaluate();
       auto v2 = operand2_->evaluate();
-      
+
       v1 = loadValueIfNeeded(v1);
       v2 = loadValueIfNeeded(v2);
-      
+
       llvm::Value* out = nullptr;
       switch(op_)
       {
@@ -84,27 +84,27 @@ namespace roe
                   && v2->getType() == context_.types().stringPtrType()
                 )
               {
-                  out = FunctionRegistrar::instance().makeCall(context_,StringOps::EQUALS_STR_AND_STR, { v1, v2 } );
+                  out = context_.externalFunctions().makeCall(StringOps::EQUALS_STR_AND_STR, { v1, v2 } );
               }
               else  if( v1->getType() == context_.types().charPtrType()
                       && v2->getType() == context_.types().stringPtrType()
                       )
               {
-                    out = FunctionRegistrar::instance().makeCall(context_,StringOps::EQUALS_CHPTR_AND_STR, { v1, v2 } );
+                    out = context_.externalFunctions().makeCall(StringOps::EQUALS_CHPTR_AND_STR, { v1, v2 } );
               }
               else  if( v1->getType() == context_.types().stringPtrType()
                       && v2->getType() == context_.types().charPtrType()
                       )
               {
-                    out = FunctionRegistrar::instance().makeCall(context_,StringOps::EQUALS_STR_AND_CHPTR, { v1, v2 } );
+                    out = context_.externalFunctions().makeCall(StringOps::EQUALS_STR_AND_CHPTR, { v1, v2 } );
               }
               else  if( v1->getType() == context_.types().charPtrType()
                       && v2->getType() == context_.types().charPtrType()
                       )
               {
-                    out = FunctionRegistrar::instance().makeCall(context_,StringOps::EQUALS_CHPTR_AND_CHPTR, { v1, v2 } );
+                    out =context_.externalFunctions().makeCall(StringOps::EQUALS_CHPTR_AND_CHPTR, { v1, v2 } );
               }
-              
+
               else
               {
                   out = builder.CreateICmpEQ(v1,v2);
@@ -120,11 +120,11 @@ namespace roe
            case Operator::LESS_OR_EQUAL :
               out = builder.CreateICmpSLE(v1,v2);
           break;
-          
+
       };
-      
-      return out; 
-        
+
+      return out;
+
     }
 
 }
