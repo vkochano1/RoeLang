@@ -75,12 +75,15 @@ public:
 
     std::shared_ptr<IContainerAccess> getContainerForParam( const std::string& paramName);
     void bindParameter(const std::string& name, std::shared_ptr<IContainerAccess> container);
+    llvm::BasicBlock* entryBlock() {return entry_;}
+    void  entryBlock(llvm::BasicBlock* eb) {entry_ = eb;}
 
 public:
     mutable DeclaredVariables declaredVariables_;
     ASTFunctionParameters::Parameters params_;
     ParameterToValue paramToValue_;
     llvm::Function* function_;
+    llvm::BasicBlock* entry_;
     Context& context_;
     std::unique_ptr<Builder > builder_;
     ParameterToContainer paramToContainer_;

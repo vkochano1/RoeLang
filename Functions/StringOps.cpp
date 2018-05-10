@@ -261,7 +261,7 @@ void  StringOps::concatCharPtrAndCharPtr(const char* s1, const char*s2, StringOp
     }
 
     //Equals
-    static bool equals(const char* s1, size_t l1,  const char* s2, size_t l2)
+    static bool equals(const char* s1, size_t l1, const char* s2, size_t l2)
     {
         auto sx1 = std::string(s1, l1);
         auto sx2 = std::string(s2, l2);

@@ -20,7 +20,7 @@ namespace roe
     {
         auto& builder = context_.builder();
         auto*  entry = llvm::BasicBlock::Create(context_, "entrypoint", context_.rule().funcPtr());
-
+        context_.rule().entryBlock(entry);
         builder.SetInsertPoint(entry);
         ruleAST_->evaluate();
         builder.CreateRetVoid();

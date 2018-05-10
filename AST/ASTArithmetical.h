@@ -20,10 +20,11 @@ public:
 
 public:
     virtual llvm::Value* evaluate() override;
-
 private:
     bool processStringConcat(llvm::Value*, llvm::Value*, llvm::Value*& out);
-    
+    bool processFloat(llvm::Value*, llvm::Value*, llvm::Value*& out);
+    bool processLong(llvm::Value*, llvm::Value*, llvm::Value*& out);
+
 private:
    Operator op_;
    ASTElementPtr operand1_;

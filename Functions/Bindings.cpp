@@ -12,7 +12,8 @@ namespace roe
   const std::string Bindings::GET_FIELD_STRING= "getFieldString";;
   const std::string Bindings::SET_FIELD_STRING = "setFieldString";
   const std::string Bindings::SET_FIELD_CHPTR = "setFieldCharPtr";
-
+  const std::string Bindings::SET_FIELD_INT = "setFieldInt";
+  const std::string Bindings::SET_FIELD_DOUBLE = "setFieldDouble";
 
 int64_t IContainerAccess::getTagFromFieldName(const std::string& val)
 {
@@ -54,6 +55,29 @@ void Bindings::registerBuiltins(Context& context)
            context.types().voidPtrType()
          , context.types().longType()
          , context.types().charPtrType()
+      }
+    );
+
+    context.externalFunctions().registerExternal
+    (
+     SET_FIELD_INT
+    ,&Bindings::setFieldInt
+    , context.types().voidType()
+    , {
+           context.types().voidPtrType()
+         , context.types().longType()
+         , context.types().longType()
+      }
+    );
+    context.externalFunctions().registerExternal
+    (
+     SET_FIELD_DOUBLE
+    ,&Bindings::setFieldDouble
+    , context.types().voidType()
+    , {
+           context.types().voidPtrType()
+         , context.types().longType()
+         , context.types().floatType()
       }
     );
 
@@ -121,5 +145,20 @@ void Bindings::setFieldCharPtr(void* data, int64_t tag, const char* str)
     IContainerAccess* access = reinterpret_cast<IContainerAccess*> (data);
     access->setField(tag, str, strlen(str));
 }
+
+void Bindings::setFieldInt(void* data, int64_t tag, int64_t val)
+{
+    IContainerAccess* access = reinterpret_cast<IContainerAccess*> (data);
+    access->setField(tag, val);
+}
+
+
+void Bindings::setFieldDouble(void* data, int64_t tag, double val)
+{
+    IContainerAccess* access = reinterpret_cast<IContainerAccess*> (data);
+    access->setField(tag, val);
+}
+
+
 
 }

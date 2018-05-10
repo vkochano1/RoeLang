@@ -36,6 +36,7 @@
 #include <Functions/Bindings.h>
 #include <Functions/FunctionRegistrar.h>
 #include <Module/Module.h>
+#include <AST/ASTException.h>
 
 
 class ContainerAccess : public roe::IContainerAccess
@@ -51,6 +52,14 @@ public:
      data_ [tag] = std::string(value, len);
     }
 
+    virtual void  setField(int64_t tag, int64_t value)
+    {
+      data_[tag] = std::to_string(value);
+    }
+    virtual void  setField(int64_t tag, double value)
+    {
+      data_[tag] = std::to_string(value);
+    }
     virtual void  getField(int64_t tag, roe::StringOps::String_t& value)
     {
         std::string& val =  data_[tag];
@@ -121,6 +130,8 @@ int main(int argc, char *argv[])
     ContainerAccess* paccess2 = (ContainerAccess*)access2.get();
     paccess2->setTagFromFieldNameMapping(std::move(mapping2));
 
+
+try{
     m.constructAST(line);
     auto& r = m.context().rule("JOPA");
     r.bindParameter("A", access1);
@@ -129,6 +140,11 @@ int main(int argc, char *argv[])
     m.compileToIR();
     m.dumpIR();
     m.buildNative();
+  }
+  catch(roe::ASTException& exp)
+  {
+     std::cerr << exp.what() << std::endl;
+  }
 
     auto& f = m.getFunc("JOPA");
 

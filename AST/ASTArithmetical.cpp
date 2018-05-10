@@ -12,8 +12,6 @@ namespace roe
     {
     }
 
-
-
     bool ASTArithmetical::processStringConcat(llvm::Value* left
                                             , llvm::Value* right
                                             , llvm::Value*& out)
@@ -53,6 +51,40 @@ namespace roe
         return out != nullptr;
     }
 
+    bool  ASTArithmetical::processLong(llvm::Value* left
+                                            , llvm::Value* right
+                                            , llvm::Value*& out)
+    {
+        auto& builder = context_.builder();
+        if (left->getType() == context_.types().longType())
+        {
+          switch(op_)
+          {
+            case Operator::PLUS : out = builder.CreateAdd(left,right);break;
+            case Operator::MINUS : out = builder.CreateSub(left,right);break;
+            case Operator::MUL : out = builder.CreateMul(left,right); break;
+            case Operator::DIV : out = builder.CreateExactSDiv(left,right);break;
+          };
+        }
+    }
+
+    bool  ASTArithmetical::processFloat(llvm::Value* left
+                                            , llvm::Value* right
+                                            , llvm::Value*& out)
+    {
+        auto& builder = context_.builder();
+        if (left->getType() == context_.types().floatType())
+        {
+          switch(op_)
+          {
+            case Operator::PLUS : out = builder.CreateFAdd(left,right);break;
+            case Operator::MINUS : out = builder.CreateFSub(left,right);break;
+            case Operator::MUL : out = builder.CreateFMul(left,right); break;
+            case Operator::DIV : out = builder.CreateFDiv(left,right);break;
+          };
+        }
+    }
+
     llvm::Value* ASTArithmetical::evaluate()
     {
       auto& builder = context_.builder();
@@ -66,37 +98,16 @@ namespace roe
       normalizeValues(left,right);
 
       llvm::Value* out = nullptr;
-      switch(op_)
+
+      if( processStringConcat(left, right, out)
+        || processFloat(left, right, out)
+        || processLong(left, right, out)
+        )
       {
-          case Operator::PLUS :
-          {
-            bool processed = processStringConcat(left, right, out);
-            if (processed)
-            {
-                return out;
-            }
+        return out;
+      }
 
-            if(left->getType() == context_.types().floatType())
-                out = builder.CreateFAdd(left,right);
-            else
-                out = builder.CreateAdd(left,right);
-          }
-          break;
-
-           case Operator::MINUS :
-              out = builder.CreateSub(left,right);
-          break;
-
-           case Operator::MUL :
-              out = builder.CreateMul(left,right);
-          break;
-
-           case Operator::DIV :
-              out = builder.CreateExactSDiv(left,right);
-          break;
-      };
-
-      return out;
+      throw ASTException("Incompatible arguments");
     }
 
 }

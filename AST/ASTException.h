@@ -1,9 +1,10 @@
+#pragma once
 #include <exception>
-#include <string> 
+#include <string>
 
 namespace roe
 {
-    
+
     class ASTException : std::exception
     {
     public:
@@ -11,15 +12,15 @@ namespace roe
             : text_(text)
         {
         }
-        
+
         const char* what() const noexcept  override
         {
             return text_.c_str();
         }
-        
+
     private:
         std::string text_;
     };
-    
-    
+
+
 }

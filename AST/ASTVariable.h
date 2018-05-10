@@ -21,9 +21,9 @@ public:
     const std::string& baseName() const;
     bool isField() const;
     size_t tag() const;
+    bool processContainerField();
 
 private:
-    bool processContainerField();
     llvm::Value* evaluateField();
     llvm::Value* evaluateLocalVar();
 

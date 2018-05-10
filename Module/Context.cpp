@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <iostream>
 #include <Functions/FunctionRegistrar.h>
+#include <AST/ASTException.h>
 
 namespace roe
 {
@@ -10,7 +11,10 @@ namespace roe
      VariableInfo::VariableInfo(const std::string& name, Context& context, const llvm::Type* type)
      : name_(name)
      {
+        auto* cur = context.builder().GetInsertBlock();
+        context.builder().SetInsertPoint(context.rule().entryBlock() );
         value_ = context.builder().CreateAlloca(const_cast<llvm::Type*>(type));
+        context.builder().SetInsertPoint(cur );
      }
 
     VariableInfo::VariableInfo()
@@ -104,7 +108,9 @@ namespace roe
 
     VariableInfo& RoeRule::getVariable(const std::string& name) const
     {
-       assert(hasVariable(name));
+       if(!hasVariable(name))
+          throw ASTException("Unknown variable");
+
        return declaredVariables_[name];
     }
 

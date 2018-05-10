@@ -29,7 +29,14 @@ namespace roe
   llvm::CallInst* FunctionRegistrar::makeCall(const std::string& name,  const Arguments& args )
   {
       auto& builder = context_.builder();
-      auto& res = externalFunctions_[name];
+
+      auto fit = externalFunctions_.find(name);
+      if (fit == externalFunctions_.end())
+      {
+         throw ASTException("Call for unknown function");
+      }
+
+      auto& res = fit->second;
       auto& fptr = std::get<0>(res);
 
       size_t idx = 0;

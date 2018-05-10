@@ -118,7 +118,12 @@ namespace roe
             std::vector<llvm::Value*> args;
             for (auto& arg : rule.funcPtr()->args())
             {
-                args.push_back(&arg);
+                //auto* v = builder.CreateAlloca(context_.types().voidPtrType());
+                //auto *l2 = builder.CreateLoad(v);
+                //auto *l1= builder.CreateLoad(&arg);
+                //builder.CreateStore(&arg, l2);
+                llvm::Value* container = context_.rule().getParamValue("A");
+                args.push_back(container);
             }
 
             retValue = builder.CreateCall(rule.funcPtr(), args);
@@ -133,7 +138,6 @@ namespace roe
         auto* argList = dynamic_cast<ASTArgList*> (args_.get());
         auto& values = argList->values();
         retValue =  context_.externalFunctions().makeCall(name_, values);
-
         return true;
     }
 
