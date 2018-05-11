@@ -114,15 +114,22 @@ namespace roe
         if(fit != context_.rules().end())
         {
             auto& rule = *fit->second;
-
             std::vector<llvm::Value*> args;
-            for (auto& arg : rule.funcPtr()->args())
+            auto* argList = dynamic_cast<ASTArgList*> (args_.get());
+
+            if (argList->variableArguments().size() != rule.funcPtr()->arg_size())
             {
-                //auto* v = builder.CreateAlloca(context_.types().voidPtrType());
-                //auto *l2 = builder.CreateLoad(v);
-                //auto *l1= builder.CreateLoad(&arg);
-                //builder.CreateStore(&arg, l2);
-                llvm::Value* container = context_.rule().getParamValue("A");
+              throw ASTException("Invalid number of arguments");
+            }
+
+            for (const auto& argName : argList->variableArguments())
+            {
+                if (argName.empty())
+                {
+                      throw ASTException("Invalid non-var argument");
+                }
+
+                llvm::Value* container = context_.rule().getParamValue(argName);
                 args.push_back(container);
             }
 

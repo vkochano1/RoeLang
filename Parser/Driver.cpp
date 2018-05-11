@@ -15,7 +15,7 @@ Driver::Driver(Context& context)
 {
 }
 
-bool Driver::parse_stream(std::istream& in, const std::string& sname)
+bool Driver::parse_stream(const std::istream& in, const std::string& sname)
 {
     streamname = sname;
 

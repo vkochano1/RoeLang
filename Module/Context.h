@@ -73,10 +73,11 @@ public:
     VariableInfo& getOrCreateVariable(const std::string& name, const llvm::Type* type);
     VariableInfo& getVariable(const std::string& name) const;
 
-    std::shared_ptr<IContainerAccess> getContainerForParam( const std::string& paramName);
+    std::shared_ptr<IContainerAccess> getContainerForParam(const std::string& paramName);
     void bindParameter(const std::string& name, std::shared_ptr<IContainerAccess> container);
     llvm::BasicBlock* entryBlock() {return entry_;}
     void  entryBlock(llvm::BasicBlock* eb) {entry_ = eb;}
+    const ASTFunctionParameters::Parameters& params() const {return params_;}
 
 public:
     mutable DeclaredVariables declaredVariables_;

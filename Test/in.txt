@@ -2,10 +2,10 @@
 
 
 ruleid = TST (A,B)
-{ 
+{
 
-  jok = "dfgfg";
-  
+  B.tag777 = "dfgfg";
+
 }
 
 ruleid = JOPA(A,B)
@@ -18,7 +18,7 @@ utr="fff";
 A.fieldTest = utr;
 
 
-ps(A.fieldTest);
+//ps(A.fieldTest);
 vt = "a";
 vt = str(3);
 ps(vt);
@@ -28,7 +28,7 @@ vg = int(vt);
 //vg=98;
     if(vg > 2)
     {
-      
+
       kk="HHH";
       kk = kk + hop;
       //ps(kk);
@@ -36,9 +36,9 @@ vg = int(vt);
       ut = "UTQQ";
       o = "IsasI";
       o = o + ut + "yyyyy";
-      
+
       o = o + tag12;
-      
+
       ps(o);
     }else if (hop == rob)
     {
@@ -48,7 +48,7 @@ vg = int(vt);
     {
       y=3;
     };
-    
 
-   
+
+
 }

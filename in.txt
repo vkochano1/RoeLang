@@ -1,21 +1,34 @@
 
+
+ruleid = GHZ(Z)
+{
+
+Z.tag55="TTT";
+}
+
+
 ruleid = UNK(A,B)
 {
 x="Sell";
 B.tag55="sddfd";
 A.tag43="aaasss";
+B.tag678=1234;
+A.tag678=1234;
 print(B.tag55);
+GHZ(A);
 }
 
 
-ruleid = JOPA(A,B)
+
+
+ruleid = JOPA(A,B,C)
 {
 
 /* silly initialization */
 A.fieldSymbol = "IBM";
 A.fieldSuffix = 100;
 x = "100" + "dfdf";
-
+C.tag999=3434;
 UNK(A,B);
 
 t="ddf";
@@ -26,6 +39,5 @@ if (A.fieldSymbol== "IBM" and "1001" == x)
 {
    print (x);
 }
-
 
 }

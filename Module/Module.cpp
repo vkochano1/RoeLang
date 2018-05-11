@@ -22,9 +22,31 @@ namespace roe
 
     }
 
+    void  Module::bindFunctionParameterConstrains(const std::string& functionName
+                                        ,std::initializer_list<std::shared_ptr<IContainerAccess> > accessList)
+    {
+      auto& roeRule = context().rule(functionName);
+      auto argIt = accessList.begin();
+
+      for (const auto& param : roeRule.params())
+      {
+        if (argIt == accessList.end())
+        {
+          throw std::logic_error("Invalid number of arguments");
+        }
+        roeRule.bindParameter(param, *argIt);
+        ++argIt;
+      }
+    }
+
     bool Module::constructAST(const std::string& text)
     {
         return driver_->parse_string(text);
+    }
+
+    bool Module::constructAST(const std::istream& in)
+    {
+        return driver_->parse_stream(in);
     }
 
     void Module::compileToIR()
@@ -47,7 +69,8 @@ namespace roe
 
         for( const auto& rule : context_.rules())
         {
-                CompiledFunctionInfo info(rule.first, executionEngine_);
+                size_t nParams = rule.second->params().size();
+                CompiledFunctionInfo info(rule.first, nParams, executionEngine_);
                 compiledFunctions_[rule.first] = info;
         }
 

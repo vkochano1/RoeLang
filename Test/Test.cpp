@@ -97,14 +97,7 @@ int main(int argc, char *argv[])
     llvm::InitializeNativeTargetAsmPrinter();
 
    std::ifstream in ("in.txt");
-   std::string line;
-   std::string tmp;
-   while (!std::getline(in, tmp).eof())
-   {
-     line += tmp + '\n';
-   }
-
-    roe::Module m("newMod");
+  roe::Module m("newMod");
 
     roe::IContainerAccess::FieldNameToTagMapping mapping =
     {
@@ -132,11 +125,9 @@ int main(int argc, char *argv[])
 
 
 try{
-    m.constructAST(line);
-    auto& r = m.context().rule("JOPA");
-    r.bindParameter("A", access1);
-    r.bindParameter("B", access2);
-
+    m.constructAST(in);
+    std::initializer_list<std::shared_ptr<roe::IContainerAccess> > accessList = {access1, access2, access1};
+    m.bindFunctionParameterConstrains("JOPA", accessList);
     m.compileToIR();
     m.dumpIR();
     m.buildNative();
@@ -148,10 +139,9 @@ try{
 
     auto& f = m.getFunc("JOPA");
 
-
     try
     {
-      f.call(access1.get(), access2.get());
+      f.call(access1.get(), access2.get(), access1.get());
     }
     catch(std::exception& ex)
     {

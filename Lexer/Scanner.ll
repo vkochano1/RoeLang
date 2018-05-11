@@ -27,7 +27,7 @@ typedef roe::Parser::token_type token_type;
 %option prefix="Roe"
 %option batch
 %option debug
-%option yywrap nounput 
+%option yywrap nounput
 %option stack
 
 %{
@@ -162,7 +162,7 @@ typedef roe::Parser::token_type token_type;
 
 
  /* gobble up white-spaces */
-[ \t\r\n]+ {
+[ \t\r]+ {
     yylloc->step();
 }
 
@@ -171,9 +171,9 @@ typedef roe::Parser::token_type token_type;
 [/][*][^*]*[*]+([^*/][^*]*[*]+)*[/]       { /* DO NOTHING */ }
 
  /* gobble up end-of-lines */
-'\n' {
+[\n]+ {
     yylloc->lines(yyleng); yylloc->step();
-    return token::EOL;
+    //return token::EOL;
 }
 
  /* pass all other characters up to bison */
@@ -184,12 +184,12 @@ typedef roe::Parser::token_type token_type;
 
 %% /*** Additional Code ***/
 
-namespace roe 
+namespace roe
 {
 
-Scanner::Scanner(std::istream* in,
+Scanner::Scanner(const std::istream* in,
 		 std::ostream* out)
-    : RoeFlexLexer(in, out)
+    : RoeFlexLexer(const_cast<std::istream*> (in), out)
 {
 }
 

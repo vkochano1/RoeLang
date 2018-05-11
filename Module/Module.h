@@ -26,43 +26,39 @@ class IContainerAccess;
 class Module final
 {
 public:
-    enum class RoeFunctionType : uint8_t
-    {
-         Unk
-      ,  Processor
-      ,  Converter
-    };
-
     struct CompiledFunctionInfo
     {
-        using ProcessorFuncPtr = void (*)(IContainerAccess*);
-        using ConverterFuncPtr = void (*)(IContainerAccess*, IContainerAccess*);
 
-        CompiledFunctionInfo(const std::string& name, llvm::ExecutionEngine* executionEngine)
+        CompiledFunctionInfo(const std::string& name
+                            , size_t nParams
+                            , llvm::ExecutionEngine* executionEngine)
         {
+            nParams_ = nParams;
             fptr_ = reinterpret_cast<void*>(executionEngine->getFunctionAddress(name));
         }
 
-        void call(IContainerAccess* access)
+        template <typename... T>
+        void call(T*... args)
         {
-            ProcessorFuncPtr processorPtr = reinterpret_cast<ProcessorFuncPtr>(fptr_);
-            processorPtr(access);
-        }
+            using FptrT = void (*) (T*...);
+            FptrT f = reinterpret_cast<FptrT> (fptr_);
 
-        void call(IContainerAccess* from, IContainerAccess* to)
-        {
-            ConverterFuncPtr converterPtr = reinterpret_cast<ConverterFuncPtr>(fptr_);
-            converterPtr(from, to);
+            if(sizeof...(args)!= nParams_)
+            {
+               throw std::logic_error("Number of arguments mismatch");
+            }
+
+            f(args...);
         }
 
         CompiledFunctionInfo()
         {
             fptr_= nullptr;
-            type_ = RoeFunctionType::Unk;
+            nParams_ = 0;
         }
     private:
         void* fptr_ ;
-        RoeFunctionType type_;
+        size_t nParams_;
     };
 
     CompiledFunctionInfo& getFunc(const std::string& funcName)
@@ -73,15 +69,17 @@ public:
     using CompiledFunctions = std::unordered_map<std::string, CompiledFunctionInfo>;
 
     Module(const std::string& name);
+
     void compileToIR();
     bool constructAST(const std::string& text);
+    bool constructAST(const std::istream& text);
+    void bindFunctionParameterConstrains(const std::string& functionName
+                                        ,std::initializer_list<std::shared_ptr<IContainerAccess> > accessList);
+
     void dumpIR();
     void buildNative();
     Context& context() {return context_;};
-    llvm::ExecutionEngine& executionEngine()
-    {
-      return *executionEngine_;
-    }
+
 private:
     llvm::ExecutionEngine* executionEngine_ = nullptr;
     Context context_;

@@ -16,18 +16,16 @@
 #include <Parser/Parser.h>
 #include <Parser/YYTYPE.h>
 
-namespace roe 
+namespace roe
 {
 
 class Scanner : public RoeFlexLexer
 {
 public:
-    Scanner(std::istream* arg_yyin = 0, std::ostream* arg_yyout = 0);
+    Scanner(const std::istream* arg_yyin = 0, std::ostream* arg_yyout = 0);
     virtual ~Scanner();
     virtual Parser::token_type lex(Parser::semantic_type* yylval, Parser::location_type* yylloc);
     void set_debug(bool b);
 };
 
-} 
-
-
+}
