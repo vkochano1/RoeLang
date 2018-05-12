@@ -1,155 +1,157 @@
+#include <AST/ASTException.h>
+#include <Functions/FunctionRegistrar.h>
 #include <Module/Context.h>
 #include <assert.h>
 #include <iostream>
-#include <Functions/FunctionRegistrar.h>
-#include <AST/ASTException.h>
 
 namespace roe
 {
 
+  VariableInfo::VariableInfo(const std::string& name, Context& context,
+                             const llvm::Type* type)
+    : name_(name)
+  {
+    auto* cur = context.builder().GetInsertBlock();
+    context.builder().SetInsertPoint(context.rule().localsBlock());
+    value_ = context.builder().CreateAlloca(const_cast<llvm::Type*>(type));
+    context.builder().SetInsertPoint(cur);
+  }
 
-     VariableInfo::VariableInfo(const std::string& name, Context& context, const llvm::Type* type)
-     : name_(name)
-     {
-        auto* cur = context.builder().GetInsertBlock();
-        context.builder().SetInsertPoint(context.rule().entryBlock() );
-        value_ = context.builder().CreateAlloca(const_cast<llvm::Type*>(type));
-        context.builder().SetInsertPoint(cur );
-     }
+  VariableInfo::VariableInfo() {}
 
-    VariableInfo::VariableInfo()
+  RoeRule::RoeRule(Context& context, const std::string& ruleName,
+                   const ASTFunctionParameters::Parameters& params)
+    : context_(context)
+    , ruleName_(ruleName)
+  {
+    params_ = params;
+    init(ruleName_, params);
+  }
+
+  void RoeRule::init(const std::string&                       ruleID,
+                     const ASTFunctionParameters::Parameters& params)
+  {
+    builder_.reset(new Builder(context_));
+
+    std::vector<llvm::Type*> funcParams(params.size(),
+                                        context_.types().voidPtrType());
+
+    llvm::FunctionType* funcType =
+      llvm::FunctionType::get(context_.types().voidType(), funcParams, false);
+
+    function_ = llvm::Function::Create(
+      funcType, llvm::Function::ExternalLinkage, ruleID, context_.module());
+
+    auto paramsIt = params.begin();
+    for (auto& arg : function_->args())
     {
+      paramToValue_[*paramsIt] = &arg;
+      std::cerr << *paramsIt << std::endl;
+      ++paramsIt;
+    }
+  }
 
+  llvm::Value* RoeRule::getParamValue(const std::string& name)
+  {
+    return paramToValue_[name];
+  }
+  void RoeRule::bindParameter(const std::string&                name,
+                              std::shared_ptr<IContainerAccess> container)
+  {
+    paramToContainer_[name] = container;
+  }
+
+  std::shared_ptr<IContainerAccess>
+  RoeRule::getContainerForParam(const std::string& paramName)
+  {
+    auto fit = paramToContainer_.find(paramName);
+    if (fit == paramToContainer_.end())
+      return std::shared_ptr<IContainerAccess>();
+    return fit->second;
+  }
+
+  VariableInfo&
+  RoeRule::getOrCreateVariable(const std::string& name, const llvm::Type* type)
+  {
+    if (!hasVariable(name))
+    {
+      VariableInfo info(name, context_, type);
+
+      return this->addVariable(info);
     }
 
-    RoeRule::RoeRule(Context& context, const std::string& ruleName, const ASTFunctionParameters::Parameters& params)
-        : context_  (context)
-        , ruleName_ (ruleName)
-    {
-        params_ = params;
-        init(ruleName_, params);
-    }
+    return this->getVariable(name);
+  }
 
-    void RoeRule::init(const std::string& ruleID, const ASTFunctionParameters::Parameters& params)
-    {
-        builder_.reset(new Builder(context_));
+  const std::string& VariableInfo::name() const { return name_; }
 
-        std::vector<llvm::Type*> funcParams (params.size(), context_.types().voidPtrType());
+  VariableInfo& RoeRule::addVariable(const VariableInfo& info)
+  {
+    assert(!hasVariable(info.name()));
+    declaredVariables_[info.name()] = info;
+    return declaredVariables_[info.name()];
+  }
 
-        llvm::FunctionType* funcType = llvm::FunctionType::get(context_.types().voidType(), funcParams, false);
+  RoeRule::Builder& RoeRule::builder() { return *builder_; }
 
+  llvm::Function* RoeRule::funcPtr() { return function_; }
 
-        function_ = llvm::Function::Create(funcType
-                                       , llvm::Function::ExternalLinkage
-                                       , ruleID
-                                       , context_.module());
+  VariableInfo& RoeRule::getVariable(const std::string& name) const
+  {
+    if (!hasVariable(name))
+      throw ASTException("Unknown variable");
 
-        auto paramsIt = params.begin();
-        for (auto& arg : function_->args())
-        {
-            paramToValue_[*paramsIt] = &arg;
-            std::cerr << *paramsIt << std::endl;
-            ++paramsIt;
-        }
-    }
+    return declaredVariables_[name];
+  }
 
-   llvm::Value* RoeRule::getParamValue(const std::string& name)
-   {
-     return paramToValue_[name];
-   }
-    void RoeRule::bindParameter(const std::string& name, std::shared_ptr<IContainerAccess> container)
-    {
-      paramToContainer_[name] = container;
-    }
+  bool RoeRule::hasVariable(const std::string& name) const
+  {
+    return declaredVariables_.find(name) != declaredVariables_.end();
+  }
+  ////////////////////////
+  Context::Context()
+  {
+    types_             = std::make_unique<Types>(*this);
+    functionRegistrar_ = std::make_unique<FunctionRegistrar>(*this);
+  }
 
-    std::shared_ptr<IContainerAccess> RoeRule::getContainerForParam(const std::string& paramName)
-    {
-       auto fit = paramToContainer_.find(paramName);
-       if (fit == paramToContainer_.end())
-          return std::shared_ptr<IContainerAccess>();
-       return fit->second;
-    }
+  FunctionRegistrar& Context::externalFunctions()
+  {
+    return *functionRegistrar_;
+  }
 
-    VariableInfo& RoeRule::getOrCreateVariable(const std::string& name, const llvm::Type* type)
-    {
-        if(!hasVariable(name))
-        {
-            VariableInfo info(name,context_, type);
+  void Context::addNewRule(const std::string&                       newRuleName,
+                           const ASTFunctionParameters::Parameters& params)
+  {
+    rules_[newRuleName] = std::make_shared<RoeRule>(*this, newRuleName, params);
+  }
 
-            return this->addVariable(info);
-        }
+  void Context::init(Module* module) { module_ = module; }
 
-        return this->getVariable(name);
-    }
+  RoeRule& Context::rule(const std::string& name) { return *rules_[name]; }
 
-    const std::string& VariableInfo::name() const
-    {
-        return name_;
-    }
+  Context::~Context() {}
 
+  Types& Context::types() { return *types_; }
 
-    VariableInfo& RoeRule::addVariable(const VariableInfo& info)
-    {
-       assert(!hasVariable(info.name()));
-       declaredVariables_[info.name()] = info;
-       return declaredVariables_[info.name()];
-    }
+  llvm::BasicBlock* RoeRule::entryBlock() { return entry_; }
 
-    RoeRule::Builder& RoeRule::builder()
-    {
-        return *builder_;
-    }
+  void RoeRule::entryBlock(llvm::BasicBlock* eb) { entry_ = eb; }
 
-    llvm::Function* RoeRule::funcPtr()
+  llvm::BasicBlock* RoeRule::localsBlock() { return locals_; }
 
-    {
-        return function_;
-    }
+  void RoeRule::localsBlock(llvm::BasicBlock* lb) { locals_ = lb; }
 
-    VariableInfo& RoeRule::getVariable(const std::string& name) const
-    {
-       if(!hasVariable(name))
-          throw ASTException("Unknown variable");
-
-       return declaredVariables_[name];
-    }
-
-    bool RoeRule::hasVariable(const std::string& name) const
-    {
-       return declaredVariables_.find(name) != declaredVariables_.end();
-    }
-////////////////////////
-    Context::Context ()
-    {
-        types_ = std::make_unique<Types> (*this);
-        functionRegistrar_ = std::make_unique<FunctionRegistrar> (*this);
-    }
-
-    FunctionRegistrar& Context::externalFunctions()
-    {
-      return *functionRegistrar_;
-    }
-
-    void Context::addNewRule(const std::string& newRuleName
-                           , const ASTFunctionParameters::Parameters& params)
-    {
-        rules_[newRuleName] =  std::make_shared<RoeRule>(*this, newRuleName, params);
-    }
-
-
-    Context::~Context()
-    {
-    }
-
-
-    Types& Context::types()
-    {
-        return *types_;
-    }
-
-void Context::setCurrentRule(const std::string& name)
-{
+  void Context::setCurrentRule(const std::string& name)
+  {
     currentRule_ = rules_[name];
-}
+  }
 
+  Context::Module* Context::module() { return module_; }
+
+  RoeRule& Context::rule() { return *currentRule_; }
+
+  Context::Rules& Context::rules() { return rules_; }
+
+  RoeRule::Builder& Context::builder() { return rule().builder(); };
 }

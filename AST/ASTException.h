@@ -5,22 +5,17 @@
 namespace roe
 {
 
-    class ASTException : std::exception
+  class ASTException : std::exception
+  {
+  public:
+    ASTException(const std::string& text)
+      : text_(text)
     {
-    public:
-        ASTException(const std::string& text)
-            : text_(text)
-        {
-        }
+    }
 
-        const char* what() const noexcept  override
-        {
-            return text_.c_str();
-        }
+    const char* what() const noexcept override { return text_.c_str(); }
 
-    private:
-        std::string text_;
-    };
-
-
+  private:
+    std::string text_;
+  };
 }

@@ -5,19 +5,17 @@
 namespace roe
 {
 
-class ASTIf : public ASTElement
-{
-public:
-    ASTIf(Context& context,
-          ASTElementPtr condition
-        , ASTElementPtr mainBlock
-        , ASTElementPtr elseBlock);
-    
+  class ASTIf : public ASTElement
+  {
+  public:
+    ASTIf(Context& context, ASTElementPtr condition, ASTElementPtr mainBlock,
+          ASTElementPtr elseBlock);
+
     virtual llvm::Value* evaluate() override;
-public:
+
+  public:
     ASTElementPtr condition_;
     ASTElementPtr mainBlock_;
     ASTElementPtr elseBlock_;
-};
-
+  };
 }

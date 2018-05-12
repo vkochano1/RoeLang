@@ -7,23 +7,24 @@
 namespace roe
 {
 
-class Context;
+  class Context;
 
-class ASTFunctionParameters
-{
-public:
+  class ASTFunctionParameters
+  {
+  public:
     using Parameters = std::vector<std::string>;
-public:
+
+  public:
     ASTFunctionParameters(Context& context);
-    
-public:
+
+  public:
     void addParameter(const std::string& name);
     const Parameters& parameters() const;
-private:
-   Parameters parameters_;
-   Context& context_;
-};
 
-using ASTFunctionParametersPtr = std::shared_ptr<ASTFunctionParameters>;
+  private:
+    Parameters parameters_;
+    Context&   context_;
+  };
 
+  using ASTFunctionParametersPtr = std::shared_ptr<ASTFunctionParameters>;
 }

@@ -5,15 +5,13 @@
 namespace roe
 {
 
-class ASTLong: public ASTElement
-{
-public:
-    ASTLong(Context& context, int64_t value);    
+  class ASTLong : public ASTElement
+  {
+  public:
+    ASTLong(Context& context, int64_t value);
     virtual llvm::Value* evaluate() override;
-private:
-   int64_t value_; 
-};
 
+  private:
+    int64_t value_;
+  };
 }
-
-

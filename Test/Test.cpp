@@ -112,8 +112,6 @@ int main(int argc, char *argv[])
 
     auto mapping2 = mapping;
 
-
-
     std::shared_ptr<roe::IContainerAccess> access1 (new ContainerAccess());
 
     ContainerAccess* paccess1 = (ContainerAccess*)access1.get();

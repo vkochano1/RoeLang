@@ -4,14 +4,14 @@
 
 namespace roe
 {
-    class ASTBlock : public ASTElement
-    {
-    public:  
-        ASTBlock(Context& context);
-        virtual llvm::Value* evaluate () override; 
-        void addElement(ASTElementPtr element);
-    private:
-        ASTElementCollection elements_;
-    };
-}
+  class ASTBlock : public ASTElement
+  {
+  public:
+    ASTBlock(Context& context);
+    virtual llvm::Value* evaluate() override;
+    void addElement(ASTElementPtr element);
 
+  private:
+    ASTElementCollection elements_;
+  };
+}
