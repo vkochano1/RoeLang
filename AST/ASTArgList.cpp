@@ -35,9 +35,7 @@ namespace roe
     for (auto& arg : args_)
     {
       auto* val = arg->evaluate();
-
-      val = loadValueIfNeeded(val);
-
+      val       = loadValueIfNeeded(val);
       values_.push_back(val);
     }
 

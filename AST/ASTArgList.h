@@ -4,7 +4,6 @@
 
 namespace roe
 {
-
   class ASTArgList : public ASTElement
   {
   public:

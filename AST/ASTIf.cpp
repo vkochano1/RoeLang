@@ -14,12 +14,11 @@ namespace roe
 
   llvm::Value* ASTIf::evaluate()
   {
-    auto cond = condition_->evaluate();
-
-    llvm::Value* condExpResult = cond;
-
-    auto& builder = context_.builder();
-    auto* func    = context_.rule().funcPtr();
+    auto* condExpResult = condition_->evaluate();
+    condExpResult       = loadValueIfNeeded(condExpResult);
+    condExpResult       = convertToBool(condExpResult);
+    auto& builder       = context_.builder();
+    auto* func          = context_.rule().funcPtr();
 
     llvm::BasicBlock* ifMain =
       llvm::BasicBlock::Create(builder.getContext(), "ifMain", func);

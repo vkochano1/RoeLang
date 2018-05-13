@@ -8,6 +8,8 @@ namespace roe
   {
   public:
     ASTBlock(Context& context);
+
+  public:
     virtual llvm::Value* evaluate() override;
     void addElement(ASTElementPtr element);
 

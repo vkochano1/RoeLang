@@ -6,7 +6,6 @@
 
 namespace roe
 {
-
   class Context;
 
   class ASTRule
@@ -14,9 +13,11 @@ namespace roe
   public:
     ASTRule(Context& context, const std::string& ruleID,
             ASTFunctionParametersPtr params, ASTElementPtr ruleAST);
+
+  public:
     void               evaluate();
     const std::string& name() const;
-    Context&           context() { return context_; };
+    Context&           context();
 
   private:
     std::string              ruleID_;

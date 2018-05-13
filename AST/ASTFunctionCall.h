@@ -4,7 +4,6 @@
 
 namespace roe
 {
-
   class ASTFunctionCall : public ASTElement
   {
   public:
@@ -19,6 +18,7 @@ namespace roe
     ~ASTFunctionCall();
 
   protected:
+    bool isBuiltInFunction() const;
     bool processBuiltins(llvm::Value*& retValue);
     bool processModuleFunction(llvm::Value*& retValue);
     bool processRegularFunction(llvm::Value*& retValue);

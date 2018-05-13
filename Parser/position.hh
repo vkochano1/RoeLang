@@ -31,12 +31,12 @@
 // version 2.2 of Bison.
 
 /**
- ** \file Parser/position.hh
+ ** \file /home/vkochano/RoeLang/RoeLang/Parser/position.hh
  ** Define the roe::position class.
  */
 
-#ifndef YY_ROE_PARSER_POSITION_HH_INCLUDED
-# define YY_ROE_PARSER_POSITION_HH_INCLUDED
+#ifndef YY_ROE_HOME_VKOCHANO_ROELANG_ROELANG_PARSER_POSITION_HH_INCLUDED
+# define YY_ROE_HOME_VKOCHANO_ROELANG_ROELANG_PARSER_POSITION_HH_INCLUDED
 
 # include <algorithm> // std::max
 # include <iostream>
@@ -52,7 +52,7 @@
 
 
 namespace roe {
-#line 56 "Parser/position.hh" // location.cc:296
+#line 56 "/home/vkochano/RoeLang/RoeLang/Parser/position.hh" // location.cc:296
   /// Abstract a position.
   class position
   {
@@ -176,5 +176,5 @@ namespace roe {
 
 
 } // roe
-#line 180 "Parser/position.hh" // location.cc:296
-#endif // !YY_ROE_PARSER_POSITION_HH_INCLUDED
+#line 180 "/home/vkochano/RoeLang/RoeLang/Parser/position.hh" // location.cc:296
+#endif // !YY_ROE_HOME_VKOCHANO_ROELANG_ROELANG_PARSER_POSITION_HH_INCLUDED

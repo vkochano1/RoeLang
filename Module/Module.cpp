@@ -43,8 +43,9 @@ namespace roe
   }
 
   void Module::bindFunctionParameterConstrains(
-    const std::string&                                       functionName,
-    std::initializer_list<std::shared_ptr<IContainerAccess>> accessList)
+    const std::string& functionName,
+    std::initializer_list<std::shared_ptr<IContainerAccess>>
+      accessList)
   {
     auto& roeRule = context().rule(functionName);
     auto  argIt   = accessList.begin();

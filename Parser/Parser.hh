@@ -31,14 +31,14 @@
 // version 2.2 of Bison.
 
 /**
- ** \file Parser/Parser.hh
+ ** \file /home/vkochano/RoeLang/RoeLang/Parser/Parser.hh
  ** Define the roe::parser class.
  */
 
 // C++ LALR(1) parser skeleton written by Akim Demaille.
 
-#ifndef YY_ROE_PARSER_PARSER_HH_INCLUDED
-# define YY_ROE_PARSER_PARSER_HH_INCLUDED
+#ifndef YY_ROE_HOME_VKOCHANO_ROELANG_ROELANG_PARSER_PARSER_HH_INCLUDED
+# define YY_ROE_HOME_VKOCHANO_ROELANG_ROELANG_PARSER_PARSER_HH_INCLUDED
 
 
 # include <cstdlib> // std::abort
@@ -110,7 +110,7 @@
 
 
 namespace roe {
-#line 114 "Parser/Parser.hh" // lalr1.cc:377
+#line 114 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.hh" // lalr1.cc:377
 
 
 
@@ -491,9 +491,9 @@ namespace roe {
 
 
 } // roe
-#line 495 "Parser/Parser.hh" // lalr1.cc:377
+#line 495 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.hh" // lalr1.cc:377
 
 
 
 
-#endif // !YY_ROE_PARSER_PARSER_HH_INCLUDED
+#endif // !YY_ROE_HOME_VKOCHANO_ROELANG_ROELANG_PARSER_PARSER_HH_INCLUDED

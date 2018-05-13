@@ -12,6 +12,7 @@ namespace roe
     ASTStrSlice(Context& context, ASTElementPtr base, ASTElementPtr from,
                 ASTElementPtr len);
 
+  public:
     virtual llvm::Value* evaluate() override;
 
   private:

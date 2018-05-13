@@ -1,24 +1,26 @@
 #pragma once
 
 #include <AST/ASTElement.h>
-
+#include <AST/ASTException.h>
 namespace roe
 {
 
   class ASTLogicalNOT : public ASTElement
   {
   public:
-    ASTLogicalNOT(Context& context, ASTElementPtr op1);
+    ASTLogicalNOT(Context& context, ASTElementPtr operand);
+
+  public:
     virtual llvm::Value* evaluate() override;
 
   private:
-    ASTElementPtr operand1_;
+    ASTElementPtr operand_;
   };
 
   class ASTCompare : public ASTElement
   {
   public:
-    enum class Operator
+    enum class Operator : uint8_t
     {
       MORE,
       LESS,
@@ -31,7 +33,11 @@ namespace roe
   public:
     ASTCompare(Context& context, Operator op, ASTElementPtr operand1,
                ASTElementPtr operand2);
+
+  public:
     virtual llvm::Value* evaluate() override;
+    bool
+    handleStringEquals(llvm::Value* v1, llvm::Value* v2, llvm::Value*& out);
 
   private:
     Operator      op_;
@@ -42,7 +48,7 @@ namespace roe
   class ASTLogical : public ASTElement
   {
   public:
-    enum class Operator
+    enum class Operator : uint8_t
     {
       AND,
       OR
@@ -51,7 +57,12 @@ namespace roe
   public:
     ASTLogical(Context& context, Operator op, ASTElementPtr operand1,
                ASTElementPtr operand2);
+
+  public:
     virtual llvm::Value* evaluate();
+
+  private:
+    void normalizeValues(llvm::Value*& v1, llvm::Value*& v2);
 
   private:
     Operator      op_;

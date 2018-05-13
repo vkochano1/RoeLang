@@ -31,18 +31,18 @@
 // version 2.2 of Bison.
 
 /**
- ** \file Parser/location.hh
+ ** \file /home/vkochano/RoeLang/RoeLang/Parser/location.hh
  ** Define the roe::location class.
  */
 
-#ifndef YY_ROE_PARSER_LOCATION_HH_INCLUDED
-# define YY_ROE_PARSER_LOCATION_HH_INCLUDED
+#ifndef YY_ROE_HOME_VKOCHANO_ROELANG_ROELANG_PARSER_LOCATION_HH_INCLUDED
+# define YY_ROE_HOME_VKOCHANO_ROELANG_ROELANG_PARSER_LOCATION_HH_INCLUDED
 
 # include "position.hh"
 
 
 namespace roe {
-#line 46 "Parser/location.hh" // location.cc:296
+#line 46 "/home/vkochano/RoeLang/RoeLang/Parser/location.hh" // location.cc:296
   /// Abstract a location.
   class location
   {
@@ -188,5 +188,5 @@ namespace roe {
 
 
 } // roe
-#line 192 "Parser/location.hh" // location.cc:296
-#endif // !YY_ROE_PARSER_LOCATION_HH_INCLUDED
+#line 192 "/home/vkochano/RoeLang/RoeLang/Parser/location.hh" // location.cc:296
+#endif // !YY_ROE_HOME_VKOCHANO_ROELANG_ROELANG_PARSER_LOCATION_HH_INCLUDED

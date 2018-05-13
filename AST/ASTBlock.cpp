@@ -13,7 +13,6 @@ namespace roe
     {
       blockElement->evaluate();
     }
-
     return nullptr;
   }
 

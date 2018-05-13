@@ -36,6 +36,22 @@ namespace roe
     }
   }
 
+  llvm::Value* ASTElement::convertToBool(llvm::Value* v)
+  {
+    auto& builder = context_.builder();
+    if (v->getType() == context_.types().floatType())
+    {
+      return builder.CreateFPToSI(v, context_.types().boolType());
+    }
+    else if (v->getType() == context_.types().longType())
+    {
+      auto* zero = llvm::ConstantInt::get(context_.types().longType(), 0);
+      return builder.CreateICmpNE(v, zero);
+    }
+
+    return v;
+  }
+
   llvm::Value* ASTElement::loadValueIfNeeded(llvm::Value* value)
   {
     if (value->getType()->isPointerTy() &&
@@ -51,4 +67,8 @@ namespace roe
     : context_(context)
   {
   }
+
+  ASTElement::~ASTElement(){
+
+  };
 }

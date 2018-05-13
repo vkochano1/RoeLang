@@ -20,44 +20,67 @@ namespace roe
 
   ASTFunctionCall::~ASTFunctionCall() {}
 
+  bool ASTFunctionCall::isBuiltInFunction() const
+  {
+    return name_ == TO_STRING_BUILTIN || name_ == TO_INT_BUILTIN ||
+           name_ == PRINT_BUILTIN;
+  }
+
   bool ASTFunctionCall::processBuiltins(llvm::Value*& retValue)
   {
+    if (!isBuiltInFunction())
+    {
+      return false;
+    }
+
+    auto& builder = context_.builder();
+    args_->evaluate();
+
+    auto argList = std::dynamic_pointer_cast<ASTArgList>(args_);
+    if (!argList)
+    {
+      throw ASTException("Invalid ASTElement, expected arg list");
+    }
+    auto values = argList->values();
+    if (values.size() < 1)
+    {
+      throw ASTException("Invalid number of arguments");
+    }
+
+    llvm::Type* firstArgType = values[0]->getType();
+
     if (name_ == TO_STRING_BUILTIN)
     {
-      auto& builder = context_.builder();
-
-      args_->evaluate();
-
-      auto* argList = dynamic_cast<ASTArgList*>(args_.get());
-      auto  values  = argList->values();
-
+      if (firstArgType == context_.types().stringPtrType())
+      {
+        retValue = values[0];
+        return true;
+      }
       retValue = builder.CreateAlloca(context_.types().stringType());
       values.push_back(retValue);
 
-      if (values[0]->getType() == context_.types().longType())
+      if (firstArgType == context_.types().longType())
+      {
         context_.externalFunctions().makeCall(StringOps::INT_TO_STR, values);
-      else
+      }
+      else if (firstArgType == context_.types().floatType())
+      {
         context_.externalFunctions().makeCall(StringOps::DOUBLE_TO_STR, values);
-
+      }
+      else
+      {
+        throw ASTException("Invalid argument for str function");
+      }
       return true;
     }
     else if (name_ == TO_INT_BUILTIN)
     {
-      auto& builder = context_.builder();
-
-      args_->evaluate();
-
-      auto* argList = dynamic_cast<ASTArgList*>(args_.get());
-      auto  values  = argList->values();
-
-      llvm::Type* firstArg = values[0]->getType();
-
-      if (firstArg == context_.types().stringPtrType())
+      if (firstArgType == context_.types().stringPtrType())
       {
         retValue =
           context_.externalFunctions().makeCall(StringOps::TO_INT_STR, values);
       }
-      else if (firstArg == context_.types().charPtrType())
+      else if (firstArgType == context_.types().charPtrType())
       {
         retValue = context_.externalFunctions().makeCall(
           StringOps::TO_INT_CHPTR, values);
@@ -70,24 +93,15 @@ namespace roe
     }
     else if (name_ == PRINT_BUILTIN)
     {
-      auto& builder = context_.builder();
-
-      args_->evaluate();
-
-      auto* argList = dynamic_cast<ASTArgList*>(args_.get());
-      auto  values  = argList->values();
-
-      llvm::Type* firstArg = values[0]->getType();
-
-      if (firstArg == context_.types().stringPtrType())
+      if (firstArgType == context_.types().stringPtrType())
       {
         context_.externalFunctions().makeCall(Bindings::PRINT_STR, values);
       }
-      else if (firstArg == context_.types().longType())
+      else if (firstArgType == context_.types().longType())
       {
         context_.externalFunctions().makeCall(Bindings::PRINT_INT, values);
       }
-      else if (firstArg == context_.types().floatType())
+      else if (firstArgType == context_.types().floatType())
       {
         context_.externalFunctions().makeCall(Bindings::PRINT_DOUBLE, values);
       }
@@ -104,43 +118,51 @@ namespace roe
   bool ASTFunctionCall::processModuleFunction(llvm::Value*& retValue)
   {
     auto& builder = context_.builder();
+    auto  fit     = context_.rules().find(name_);
 
-    auto fit = context_.rules().find(name_);
+    if (fit == context_.rules().end())
+      return false;
 
-    if (fit != context_.rules().end())
+    auto& rule = *fit->second;
+
+    auto argList = std::dynamic_pointer_cast<ASTArgList>(args_);
+
+    if (!argList)
     {
-      auto&                     rule = *fit->second;
-      std::vector<llvm::Value*> args;
-      auto* argList = dynamic_cast<ASTArgList*>(args_.get());
-
-      if (argList->variableArguments().size() != rule.funcPtr()->arg_size())
-      {
-        throw ASTException("Invalid number of arguments");
-      }
-
-      for (const auto& argName : argList->variableArguments())
-      {
-        if (argName.empty())
-        {
-          throw ASTException("Invalid non-var argument");
-        }
-
-        llvm::Value* container = context_.rule().getParamValue(argName);
-        args.push_back(container);
-      }
-
-      retValue = builder.CreateCall(rule.funcPtr(), args);
-      return true;
+      throw ASTException("Exepected ASTArgList");
     }
-    return false;
+
+    if (argList->variableArguments().size() != rule.funcPtr()->arg_size())
+    {
+      throw ASTException("Invalid number of arguments");
+    }
+
+    std::vector<llvm::Value*> args;
+    for (const auto& argName : argList->variableArguments())
+    {
+      if (argName.empty())
+      {
+        throw ASTException("Invalid non-var argument");
+      }
+
+      llvm::Value* container = context_.rule().getParamValue(argName);
+      args.push_back(container);
+    }
+
+    retValue = builder.CreateCall(rule.funcPtr(), args);
+    return true;
   }
 
   bool ASTFunctionCall::processRegularFunction(llvm::Value*& retValue)
   {
     args_->evaluate();
-    auto* argList = dynamic_cast<ASTArgList*>(args_.get());
-    auto& values  = argList->values();
-    retValue      = context_.externalFunctions().makeCall(name_, values);
+    auto argList = std::dynamic_pointer_cast<ASTArgList>(args_);
+    if (!argList)
+    {
+      throw ASTException("Expected ASTArgList");
+    }
+    auto& values = argList->values();
+    retValue     = context_.externalFunctions().makeCall(name_, values);
     return true;
   }
 
@@ -149,7 +171,6 @@ namespace roe
     llvm::Value* value = nullptr;
 
     bool processed = processModuleFunction(value);
-
     if (!processed)
     {
       processed = processBuiltins(value);

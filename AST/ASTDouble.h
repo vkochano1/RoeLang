@@ -9,6 +9,8 @@ namespace roe
   {
   public:
     ASTDouble(Context& context, double value);
+
+  public:
     virtual llvm::Value* evaluate() override;
 
   private:

@@ -9,6 +9,8 @@ namespace roe
   {
   public:
     ASTLong(Context& context, int64_t value);
+
+  public:
     virtual llvm::Value* evaluate() override;
 
   private:

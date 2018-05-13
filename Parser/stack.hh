@@ -31,18 +31,18 @@
 // version 2.2 of Bison.
 
 /**
- ** \file Parser/stack.hh
+ ** \file /home/vkochano/RoeLang/RoeLang/Parser/stack.hh
  ** Define the roe::stack class.
  */
 
-#ifndef YY_ROE_PARSER_STACK_HH_INCLUDED
-# define YY_ROE_PARSER_STACK_HH_INCLUDED
+#ifndef YY_ROE_HOME_VKOCHANO_ROELANG_ROELANG_PARSER_STACK_HH_INCLUDED
+# define YY_ROE_HOME_VKOCHANO_ROELANG_ROELANG_PARSER_STACK_HH_INCLUDED
 
 # include <vector>
 
 
 namespace roe {
-#line 46 "Parser/stack.hh" // stack.hh:132
+#line 46 "/home/vkochano/RoeLang/RoeLang/Parser/stack.hh" // stack.hh:132
   template <class T, class S = std::vector<T> >
   class stack
   {
@@ -152,6 +152,6 @@ namespace roe {
 
 
 } // roe
-#line 156 "Parser/stack.hh" // stack.hh:132
+#line 156 "/home/vkochano/RoeLang/RoeLang/Parser/stack.hh" // stack.hh:132
 
-#endif // !YY_ROE_PARSER_STACK_HH_INCLUDED
+#endif // !YY_ROE_HOME_VKOCHANO_ROELANG_ROELANG_PARSER_STACK_HH_INCLUDED

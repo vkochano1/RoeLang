@@ -10,14 +10,19 @@ namespace roe
   {
   public:
     ASTElement(Context& context);
+    virtual ~ASTElement();
+
+  public:
+    ASTElement& operator=(const ASTElement&);
+    ASTElement(const ASTElement&);
 
   public:
     virtual llvm::Value* evaluate() = 0;
-    virtual ~ASTElement(){};
 
   protected:
     void normalizeValues(llvm::Value*& v1, llvm::Value*& v2);
     llvm::Value* loadValueIfNeeded(llvm::Value* value);
+    llvm::Value* convertToBool(llvm::Value* v);
 
   protected:
     Context& context_;

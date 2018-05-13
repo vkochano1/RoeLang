@@ -6,7 +6,6 @@
 
 namespace roe
 {
-
   class Context;
 
   class ASTFunctionParameters

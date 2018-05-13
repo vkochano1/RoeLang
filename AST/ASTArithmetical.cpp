@@ -57,6 +57,8 @@ namespace roe
                                     llvm::Value*& out)
   {
     auto& builder = context_.builder();
+    out           = nullptr;
+
     if (left->getType() == context_.types().longType())
     {
       switch (op_)
@@ -73,14 +75,20 @@ namespace roe
         case Operator::DIV:
           out = builder.CreateExactSDiv(left, right);
           break;
+        defualt:
+          throw ASTException("Opearand is not supported");
+          break;
       };
     }
+    return out != nullptr;
   }
 
   bool ASTArithmetical::processFloat(llvm::Value* left, llvm::Value* right,
                                      llvm::Value*& out)
   {
     auto& builder = context_.builder();
+    out           = nullptr;
+
     if (left->getType() == context_.types().floatType())
     {
       switch (op_)
@@ -97,16 +105,19 @@ namespace roe
         case Operator::DIV:
           out = builder.CreateFDiv(left, right);
           break;
+        default:
+          throw ASTException("Opearand is not supported");
+          break;
       };
     }
+    return out != nullptr;
   }
 
   llvm::Value* ASTArithmetical::evaluate()
   {
     auto& builder = context_.builder();
-
-    auto left  = operand1_->evaluate();
-    auto right = operand2_->evaluate();
+    auto  left    = operand1_->evaluate();
+    auto  right   = operand2_->evaluate();
 
     left  = loadValueIfNeeded(left);
     right = loadValueIfNeeded(right);
@@ -114,7 +125,6 @@ namespace roe
     normalizeValues(left, right);
 
     llvm::Value* out = nullptr;
-
     if (processStringConcat(left, right, out) ||
         processFloat(left, right, out) || processLong(left, right, out))
     {

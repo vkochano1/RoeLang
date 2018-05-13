@@ -34,7 +34,7 @@
 #define yylex   roelex
 
 // First part of user declarations.
-#line 4 "Parser/Parser.yy" // lalr1.cc:404
+#line 4 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:404
  /*** C/C++ Declarations ***/
 
 #include <stdio.h>
@@ -42,7 +42,7 @@
 #include <vector>
 #include <Parser/YYTYPE.h>
 
-#line 95 "Parser/Parser.yy" // lalr1.cc:404
+#line 95 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:404
 
 
 #include <Parser/Driver.h>
@@ -52,7 +52,7 @@
 #undef yylex
 #define yylex driver.lexer->lex
 
-#line 56 "Parser/Parser.cpp" // lalr1.cc:404
+#line 56 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:404
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -66,7 +66,7 @@
 
 // User implementation prologue.
 
-#line 70 "Parser/Parser.cpp" // lalr1.cc:412
+#line 70 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:412
 
 
 #ifndef YY_
@@ -152,7 +152,7 @@
 
 
 namespace roe {
-#line 156 "Parser/Parser.cpp" // lalr1.cc:479
+#line 156 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:479
 
   /* Return YYSTR after stripping away unnecessary quotes and
      backslashes, so that it's suitable for yyerror.  The heuristic is
@@ -525,13 +525,13 @@ namespace roe {
 
 
     // User initialization code.
-    #line 40 "Parser/Parser.yy" // lalr1.cc:741
+    #line 40 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:741
 {
     // initialize the initial location object
     yyla.location.begin.filename = yyla.location.end.filename = &driver.streamname;
 }
 
-#line 535 "Parser/Parser.cpp" // lalr1.cc:741
+#line 535 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:741
 
     /* Initialize the stack.  The initial state will be set in
        yynewstate, since the latter expects the semantical and the
@@ -639,147 +639,147 @@ namespace roe {
           switch (yyn)
             {
   case 2:
-#line 110 "Parser/Parser.yy" // lalr1.cc:859
+#line 110 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
 	         (yylhs.value.astElement_) =  std::shared_ptr<ASTElement>( new ASTLong(driver.context(),(yystack_[0].value.longVal_)) );
 	       }
-#line 647 "Parser/Parser.cpp" // lalr1.cc:859
+#line 647 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 3:
-#line 114 "Parser/Parser.yy" // lalr1.cc:859
+#line 114 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
 	         (yylhs.value.astElement_) =  std::shared_ptr<ASTElement>( new ASTDouble(driver.context(),(yystack_[0].value.doubleVal_)) );
 	       }
-#line 655 "Parser/Parser.cpp" // lalr1.cc:859
+#line 655 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 4:
-#line 118 "Parser/Parser.yy" // lalr1.cc:859
+#line 118 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
               (yylhs.value.astElement_) =  std::shared_ptr<ASTCstr>( new ASTCstr(driver.context(),(yystack_[0].value.stringVal_)));
 	       }
-#line 663 "Parser/Parser.cpp" // lalr1.cc:859
+#line 663 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 5:
-#line 123 "Parser/Parser.yy" // lalr1.cc:859
+#line 123 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
                 (yylhs.value.astParameters_) = ASTFunctionParametersPtr(new ASTFunctionParameters(driver.context()));
             }
-#line 671 "Parser/Parser.cpp" // lalr1.cc:859
+#line 671 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 6:
-#line 127 "Parser/Parser.yy" // lalr1.cc:859
+#line 127 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
                (yystack_[2].value.astParameters_)->addParameter((yystack_[0].value.stringVal_));
                (yylhs.value.astParameters_) = (yystack_[2].value.astParameters_);
             }
-#line 680 "Parser/Parser.cpp" // lalr1.cc:859
+#line 680 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 7:
-#line 132 "Parser/Parser.yy" // lalr1.cc:859
+#line 132 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
                 (yylhs.value.astParameters_) = ASTFunctionParametersPtr(new ASTFunctionParameters(driver.context()));
                 (yylhs.value.astParameters_)->addParameter((yystack_[0].value.stringVal_));
             }
-#line 689 "Parser/Parser.cpp" // lalr1.cc:859
+#line 689 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 8:
-#line 138 "Parser/Parser.yy" // lalr1.cc:859
+#line 138 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
                 (yylhs.value.astElement_) = std::shared_ptr<ASTElement> (new ASTArgList(driver.context()));
             }
-#line 697 "Parser/Parser.cpp" // lalr1.cc:859
+#line 697 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 9:
-#line 142 "Parser/Parser.yy" // lalr1.cc:859
+#line 142 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
                 dynamic_cast<ASTArgList*>((yystack_[2].value.astElement_).get())->addArgument((yystack_[0].value.astElement_));
                 (yylhs.value.astElement_)=(yystack_[2].value.astElement_);
             }
-#line 706 "Parser/Parser.cpp" // lalr1.cc:859
+#line 706 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 10:
-#line 147 "Parser/Parser.yy" // lalr1.cc:859
+#line 147 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
                 (yylhs.value.astElement_) = std::shared_ptr<ASTElement> (new ASTArgList(driver.context()));
                 dynamic_cast<ASTArgList*>((yylhs.value.astElement_).get())->addArgument((yystack_[0].value.astElement_));
             }
-#line 715 "Parser/Parser.cpp" // lalr1.cc:859
+#line 715 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 11:
-#line 153 "Parser/Parser.yy" // lalr1.cc:859
+#line 153 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
               (yylhs.value.astElement_) =  std::shared_ptr<ASTElement>( new ASTFunctionCall(driver.context(), (yystack_[3].value.stringVal_), (yystack_[1].value.astElement_) ) );
            }
-#line 723 "Parser/Parser.cpp" // lalr1.cc:859
+#line 723 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 12:
-#line 158 "Parser/Parser.yy" // lalr1.cc:859
+#line 158 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
 	         (yylhs.value.astElement_) =  std::shared_ptr<ASTElement>( new ASTVariable(driver.context(),(yystack_[0].value.stringVal_)) );
            }
-#line 731 "Parser/Parser.cpp" // lalr1.cc:859
+#line 731 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 13:
-#line 163 "Parser/Parser.yy" // lalr1.cc:859
+#line 163 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
 	       (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
 	   }
-#line 739 "Parser/Parser.cpp" // lalr1.cc:859
+#line 739 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 14:
-#line 168 "Parser/Parser.yy" // lalr1.cc:859
+#line 168 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
 	       (yylhs.value.astElement_) = std::shared_ptr<ASTElement> ( new ASTStrSlice (driver.context(), (yystack_[3].value.astElement_), (yystack_[1].value.astElement_), ASTElementPtr()));
 	   }
-#line 747 "Parser/Parser.cpp" // lalr1.cc:859
+#line 747 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 15:
-#line 173 "Parser/Parser.yy" // lalr1.cc:859
+#line 173 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
 	       (yylhs.value.astElement_) = std::shared_ptr<ASTElement> ( new ASTStrSlice (driver.context(), (yystack_[5].value.astElement_), (yystack_[3].value.astElement_), (yystack_[1].value.astElement_)));
 	   }
-#line 755 "Parser/Parser.cpp" // lalr1.cc:859
+#line 755 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 16:
-#line 177 "Parser/Parser.yy" // lalr1.cc:859
+#line 177 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
            (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
 	   }
-#line 763 "Parser/Parser.cpp" // lalr1.cc:859
+#line 763 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 17:
-#line 181 "Parser/Parser.yy" // lalr1.cc:859
+#line 181 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
 	       (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
 	   }
-#line 771 "Parser/Parser.cpp" // lalr1.cc:859
+#line 771 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 18:
-#line 185 "Parser/Parser.yy" // lalr1.cc:859
+#line 185 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
 	   }
-#line 779 "Parser/Parser.cpp" // lalr1.cc:859
+#line 779 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 19:
-#line 189 "Parser/Parser.yy" // lalr1.cc:859
+#line 189 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -789,19 +789,19 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 793 "Parser/Parser.cpp" // lalr1.cc:859
+#line 793 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 20:
-#line 199 "Parser/Parser.yy" // lalr1.cc:859
+#line 199 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
           }
-#line 801 "Parser/Parser.cpp" // lalr1.cc:859
+#line 801 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 21:
-#line 203 "Parser/Parser.yy" // lalr1.cc:859
+#line 203 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
           (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -812,38 +812,38 @@ namespace roe {
             );
 
           }
-#line 816 "Parser/Parser.cpp" // lalr1.cc:859
+#line 816 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 22:
-#line 214 "Parser/Parser.yy" // lalr1.cc:859
+#line 214 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
              (yylhs.value.astElement_) =(yystack_[0].value.astElement_);
           }
-#line 824 "Parser/Parser.cpp" // lalr1.cc:859
+#line 824 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 23:
-#line 219 "Parser/Parser.yy" // lalr1.cc:859
+#line 219 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
                 new ASTLogicalNOT(driver.context(), (yystack_[0].value.astElement_))
             );
           }
-#line 835 "Parser/Parser.cpp" // lalr1.cc:859
+#line 835 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 24:
-#line 226 "Parser/Parser.yy" // lalr1.cc:859
+#line 226 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
           }
-#line 843 "Parser/Parser.cpp" // lalr1.cc:859
+#line 843 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 25:
-#line 231 "Parser/Parser.yy" // lalr1.cc:859
+#line 231 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -853,11 +853,11 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 857 "Parser/Parser.cpp" // lalr1.cc:859
+#line 857 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 26:
-#line 241 "Parser/Parser.yy" // lalr1.cc:859
+#line 241 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -867,11 +867,11 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 871 "Parser/Parser.cpp" // lalr1.cc:859
+#line 871 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 27:
-#line 251 "Parser/Parser.yy" // lalr1.cc:859
+#line 251 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -881,11 +881,11 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 885 "Parser/Parser.cpp" // lalr1.cc:859
+#line 885 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 28:
-#line 262 "Parser/Parser.yy" // lalr1.cc:859
+#line 262 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -895,11 +895,11 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 899 "Parser/Parser.cpp" // lalr1.cc:859
+#line 899 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 29:
-#line 273 "Parser/Parser.yy" // lalr1.cc:859
+#line 273 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -909,11 +909,11 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 913 "Parser/Parser.cpp" // lalr1.cc:859
+#line 913 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 30:
-#line 284 "Parser/Parser.yy" // lalr1.cc:859
+#line 284 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -923,27 +923,27 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 927 "Parser/Parser.cpp" // lalr1.cc:859
+#line 927 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 31:
-#line 294 "Parser/Parser.yy" // lalr1.cc:859
+#line 294 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
              (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
           }
-#line 935 "Parser/Parser.cpp" // lalr1.cc:859
+#line 935 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 32:
-#line 298 "Parser/Parser.yy" // lalr1.cc:859
+#line 298 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
           }
-#line 943 "Parser/Parser.cpp" // lalr1.cc:859
+#line 943 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 33:
-#line 302 "Parser/Parser.yy" // lalr1.cc:859
+#line 302 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -953,11 +953,11 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 957 "Parser/Parser.cpp" // lalr1.cc:859
+#line 957 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 34:
-#line 313 "Parser/Parser.yy" // lalr1.cc:859
+#line 313 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -967,19 +967,19 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 971 "Parser/Parser.cpp" // lalr1.cc:859
+#line 971 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 35:
-#line 323 "Parser/Parser.yy" // lalr1.cc:859
+#line 323 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
 	        (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
           }
-#line 979 "Parser/Parser.cpp" // lalr1.cc:859
+#line 979 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 36:
-#line 328 "Parser/Parser.yy" // lalr1.cc:859
+#line 328 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -989,11 +989,11 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
          }
-#line 993 "Parser/Parser.cpp" // lalr1.cc:859
+#line 993 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 37:
-#line 338 "Parser/Parser.yy" // lalr1.cc:859
+#line 338 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -1003,144 +1003,144 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
          }
-#line 1007 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1007 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 38:
-#line 348 "Parser/Parser.yy" // lalr1.cc:859
+#line 348 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
          }
-#line 1015 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1015 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 39:
-#line 355 "Parser/Parser.yy" // lalr1.cc:859
+#line 355 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
    (yylhs.value.astElement_)=std::shared_ptr<ASTElement>( new ASTAssignment(driver.context(),(yystack_[2].value.astElement_), (yystack_[0].value.astElement_)) );
 }
-#line 1023 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1023 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 40:
-#line 360 "Parser/Parser.yy" // lalr1.cc:859
+#line 360 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_)=std::shared_ptr<ASTElement>
             ( new ASTIf(driver.context(),(yystack_[2].value.astElement_), (yystack_[0].value.astElement_), ASTElementPtr()) );
         }
-#line 1032 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1032 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 41:
-#line 366 "Parser/Parser.yy" // lalr1.cc:859
+#line 366 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
            (yylhs.value.astElement_)=std::shared_ptr<ASTElement>( new ASTIf(driver.context(),(yystack_[4].value.astElement_), (yystack_[2].value.astElement_), (yystack_[0].value.astElement_)) );
         }
-#line 1040 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1040 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 42:
-#line 371 "Parser/Parser.yy" // lalr1.cc:859
+#line 371 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
          (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
     }
-#line 1048 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1048 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 43:
-#line 376 "Parser/Parser.yy" // lalr1.cc:859
+#line 376 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
 	      (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
     }
-#line 1056 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1056 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 44:
-#line 381 "Parser/Parser.yy" // lalr1.cc:859
+#line 381 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
       (yylhs.value.astElement_)=(yystack_[1].value.astElement_);
    }
-#line 1064 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1064 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 45:
-#line 385 "Parser/Parser.yy" // lalr1.cc:859
+#line 385 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
       (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
    }
-#line 1072 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1072 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 46:
-#line 389 "Parser/Parser.yy" // lalr1.cc:859
+#line 389 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
       (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
    }
-#line 1080 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1080 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 47:
-#line 393 "Parser/Parser.yy" // lalr1.cc:859
+#line 393 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {(yylhs.value.astElement_) = std::shared_ptr<ASTElement> (new ASTBlock(driver.context()));}
-#line 1086 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1086 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 48:
-#line 396 "Parser/Parser.yy" // lalr1.cc:859
+#line 396 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
                 dynamic_cast<ASTBlock*>((yystack_[1].value.astElement_).get())->addElement((yystack_[0].value.astElement_));
                 (yylhs.value.astElement_)=(yystack_[1].value.astElement_);
             }
-#line 1095 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1095 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 49:
-#line 403 "Parser/Parser.yy" // lalr1.cc:859
+#line 403 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
           (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
         }
-#line 1103 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1103 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 50:
-#line 407 "Parser/Parser.yy" // lalr1.cc:859
+#line 407 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
           (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
         }
-#line 1111 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1111 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 51:
-#line 412 "Parser/Parser.yy" // lalr1.cc:859
+#line 412 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astRule_) = std::shared_ptr<ASTRule> (new ASTRule(driver.context(), (yystack_[4].value.stringVal_), (yystack_[2].value.astParameters_), (yystack_[0].value.astElement_)));
        }
-#line 1119 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1119 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 52:
-#line 416 "Parser/Parser.yy" // lalr1.cc:859
+#line 416 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {}
-#line 1125 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1125 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 53:
-#line 418 "Parser/Parser.yy" // lalr1.cc:859
+#line 418 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
           driver.rules().addRule((yystack_[0].value.astRule_));
        }
-#line 1133 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1133 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 54:
-#line 422 "Parser/Parser.yy" // lalr1.cc:859
+#line 422 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
        }
-#line 1140 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1140 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
 
-#line 1144 "Parser/Parser.cpp" // lalr1.cc:859
+#line 1144 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
             default:
               break;
             }
@@ -1625,8 +1625,8 @@ namespace roe {
 
 
 } // roe
-#line 1629 "Parser/Parser.cpp" // lalr1.cc:1167
-#line 427 "Parser/Parser.yy" // lalr1.cc:1168
+#line 1629 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:1167
+#line 427 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:1168
  /*** Additional Code ***/
 
 void roe::Parser::error(const Parser::location_type& l,

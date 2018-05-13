@@ -11,6 +11,7 @@ namespace roe
     ASTIf(Context& context, ASTElementPtr condition, ASTElementPtr mainBlock,
           ASTElementPtr elseBlock);
 
+  public:
     virtual llvm::Value* evaluate() override;
 
   public:

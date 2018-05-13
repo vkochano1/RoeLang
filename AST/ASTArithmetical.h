@@ -8,7 +8,7 @@ namespace roe
   class ASTArithmetical : public ASTElement
   {
   public:
-    enum class Operator
+    enum class Operator : uint8_t
     {
       PLUS,
       MINUS,
@@ -17,8 +17,8 @@ namespace roe
     };
 
   public:
-    ASTArithmetical(Context& context, Operator op, ASTElementPtr op1,
-                    ASTElementPtr op2);
+    ASTArithmetical(Context& context, Operator op, ASTElementPtr operand1,
+                    ASTElementPtr operand2);
 
   public:
     virtual llvm::Value* evaluate() override;

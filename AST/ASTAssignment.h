@@ -4,7 +4,6 @@
 
 namespace roe
 {
-
   class ASTVariable;
 
   class ASTAssignment : public ASTElement

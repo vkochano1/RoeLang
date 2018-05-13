@@ -21,8 +21,8 @@ namespace roe
     llvm::Value* out = nullptr;
     if (!len_)
     {
-      context_.externalFunctions().makeCall(StringOps::GET_CHAR,
-                                            {varValue, idx});
+      out = context_.externalFunctions().makeCall(StringOps::GET_CHAR,
+                                                  {varValue, idx});
     }
     else
     {

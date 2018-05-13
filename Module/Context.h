@@ -68,8 +68,8 @@ namespace roe
     // parameters
   public:
     llvm::Value* getParamValue(const std::string& name);
-    void bindParameter(const std::string&                name,
-                       std::shared_ptr<IContainerAccess> container);
+    void bindParameter(
+      const std::string& name, std::shared_ptr<IContainerAccess> container);
     std::shared_ptr<IContainerAccess>
     getContainerForParam(const std::string& paramName);
     const ASTFunctionParameters::Parameters& params() const { return params_; }

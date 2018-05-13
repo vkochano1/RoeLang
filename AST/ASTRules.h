@@ -5,12 +5,12 @@
 
 namespace roe
 {
-
   class ASTRules
   {
   public:
     using RuleContainer = std::unordered_map<std::string, ASTRulePtr>;
 
+  public:
     void addRule(ASTRulePtr rule);
     void evaluate();
 

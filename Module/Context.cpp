@@ -46,19 +46,28 @@ namespace roe
     for (auto& arg : function_->args())
     {
       paramToValue_[*paramsIt] = &arg;
-      std::cerr << *paramsIt << std::endl;
       ++paramsIt;
     }
   }
 
   llvm::Value* RoeRule::getParamValue(const std::string& name)
   {
-    return paramToValue_[name];
+    auto fit = paramToValue_.find(name);
+    if (fit == paramToValue_.end())
+    {
+      throw ASTException("Unknown function parameter");
+    }
+    return fit->second;
   }
-  void RoeRule::bindParameter(const std::string&                name,
-                              std::shared_ptr<IContainerAccess> container)
+
+  void RoeRule::bindParameter(
+    const std::string& name, std::shared_ptr<IContainerAccess> container)
   {
-    paramToContainer_[name] = container;
+    auto insertRes = paramToContainer_.insert(std::make_pair(name, container));
+    if (insertRes.second == false)
+    {
+      throw ASTException("Duplicate parameter bindings");
+    }
   }
 
   std::shared_ptr<IContainerAccess>
@@ -123,7 +132,12 @@ namespace roe
   void Context::addNewRule(const std::string&                       newRuleName,
                            const ASTFunctionParameters::Parameters& params)
   {
-    rules_[newRuleName] = std::make_shared<RoeRule>(*this, newRuleName, params);
+    auto rule = std::make_shared<RoeRule>(*this, newRuleName, params);
+    auto rit  = rules_.insert(std::make_pair(newRuleName, rule));
+    if (rit.second == false)
+    {
+      throw ASTException("Duplicate rule");
+    }
   }
 
   void Context::init(Module* module) { module_ = module; }
@@ -144,7 +158,12 @@ namespace roe
 
   void Context::setCurrentRule(const std::string& name)
   {
-    currentRule_ = rules_[name];
+    auto fit = rules_.find(name);
+    if (fit == rules_.end())
+    {
+      throw ASTException("Unknonw rule");
+    }
+    currentRule_ = fit->second;
   }
 
   Context::Module* Context::module() { return module_; }

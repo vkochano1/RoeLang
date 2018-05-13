@@ -62,8 +62,9 @@ namespace roe
     bool constructAST(const std::string& text);
     bool constructAST(const std::istream& text);
     void bindFunctionParameterConstrains(
-      const std::string&                                       functionName,
-      std::initializer_list<std::shared_ptr<IContainerAccess>> accessList);
+      const std::string& functionName,
+      std::initializer_list<std::shared_ptr<IContainerAccess>>
+        accessList);
 
     void     dumpIR();
     void     buildNative();

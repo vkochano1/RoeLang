@@ -125,12 +125,12 @@ typedef roe::Parser::token_type token_type;
         return token::ASSIGN;
 }
 
-[0-9]+ {
+-?[0-9]+ {
     yylval->longVal_ = atoi(yytext);
     return token::INTEGER;
 }
 
-[0-9]+"."[0-9]* {
+-?[0-9]+"."[0-9]* {
     yylval->doubleVal_ = atof(yytext);
     return token::DOUBLE;
 }
@@ -166,9 +166,9 @@ typedef roe::Parser::token_type token_type;
     yylloc->step();
 }
 
-[/][/][^'\n']*['\n']  { }
+[/][/][^'\n']*['\n']  { yylloc->step(); }
 
-[/][*][^*]*[*]+([^*/][^*]*[*]+)*[/]       { /* DO NOTHING */ }
+[/][*][^*]*[*]+([^*/][^*]*[*]+)*[/]       { yylloc->step(); }
 
  /* gobble up end-of-lines */
 [\n]+ {
