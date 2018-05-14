@@ -47,23 +47,23 @@ namespace roe
       throw ASTException("Invalid number of arguments");
     }
 
-    llvm::Type* firstArgType = values[0]->getType();
+    auto* firstArg = values[0];
 
     if (name_ == TO_STRING_BUILTIN)
     {
-      if (firstArgType == context_.types().stringPtrType())
+      if (isString(firstArg))
       {
         retValue = values[0];
         return true;
       }
-      retValue = builder.CreateAlloca(context_.types().stringType());
+      retValue = allocString();
       values.push_back(retValue);
 
-      if (firstArgType == context_.types().longType())
+      if (isLong(firstArg))
       {
         context_.externalFunctions().makeCall(StringOps::INT_TO_STR, values);
       }
-      else if (firstArgType == context_.types().floatType())
+      else if (isFloat(firstArg))
       {
         context_.externalFunctions().makeCall(StringOps::DOUBLE_TO_STR, values);
       }
@@ -75,12 +75,12 @@ namespace roe
     }
     else if (name_ == TO_INT_BUILTIN)
     {
-      if (firstArgType == context_.types().stringPtrType())
+      if (isString(firstArg))
       {
         retValue =
           context_.externalFunctions().makeCall(StringOps::TO_INT_STR, values);
       }
-      else if (firstArgType == context_.types().charPtrType())
+      else if (isCStr(firstArg))
       {
         retValue = context_.externalFunctions().makeCall(
           StringOps::TO_INT_CHPTR, values);
@@ -93,15 +93,15 @@ namespace roe
     }
     else if (name_ == PRINT_BUILTIN)
     {
-      if (firstArgType == context_.types().stringPtrType())
+      if (isString(firstArg))
       {
         context_.externalFunctions().makeCall(Bindings::PRINT_STR, values);
       }
-      else if (firstArgType == context_.types().longType())
+      else if (isLong(firstArg))
       {
         context_.externalFunctions().makeCall(Bindings::PRINT_INT, values);
       }
-      else if (firstArgType == context_.types().floatType())
+      else if (isFloat(firstArg))
       {
         context_.externalFunctions().makeCall(Bindings::PRINT_DOUBLE, values);
       }

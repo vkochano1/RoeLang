@@ -15,8 +15,20 @@ namespace roe
   llvm::Value* ASTIf::evaluate()
   {
     auto* condExpResult = condition_->evaluate();
+
+    if (!condExpResult)
+    {
+      throw ASTException("Expected boolean type and got NULL");
+    }
+
     condExpResult       = loadValueIfNeeded(condExpResult);
     condExpResult       = convertToBool(condExpResult);
+
+    if(!isBool(condExpResult))
+    {
+      throw ASTException("Expected boolean type");
+    }
+
     auto& builder       = context_.builder();
     auto* func          = context_.rule().funcPtr();
 

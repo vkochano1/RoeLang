@@ -1,62 +1,29 @@
-// $Id$
 
 #include <fstream>
 #include <iostream>
-
-#include <Parser/Driver.h>
-#include <fstream>
-#include <sstream>
-
-#include "llvm/ExecutionEngine/GenericValue.h"
-#include "llvm/IR/Argument.h"
-#include "llvm/IR/BasicBlock.h"
-#include "llvm/IR/Constants.h"
-#include "llvm/IR/DerivedTypes.h"
-#include "llvm/IR/Function.h"
-#include "llvm/IR/IRBuilder.h"
-#include "llvm/IR/InstrTypes.h"
-#include "llvm/IR/Instructions.h"
-#include "llvm/IR/LLVMContext.h"
-#include "llvm/IR/Module.h"
-#include "llvm/IR/Type.h"
-#include "llvm/IR/Verifier.h"
-#include "llvm/Support/Casting.h"
-#include "llvm/Support/TargetSelect.h"
-#include "llvm/Support/raw_ostream.h"
-
-#include "llvm/Support/TargetSelect.h"
-#include <llvm/ExecutionEngine/ExecutionEngine.h>
-
-#include <llvm/ExecutionEngine/MCJIT.h>
-
-#include "llvm/Target/TargetMachine.h"
-#include "llvm/Target/TargetOptions.h"
-#include <AST/ASTException.h>
-#include <Functions/Bindings.h>
-#include <Functions/FunctionRegistrar.h>
-#include <Module/Module.h>
-#include <Types/Types.h>
+#include <Loader.h>
+#include <chrono>
 
 class ContainerAccess : public roe::IContainerAccess
 {
 public:
   virtual void setField(int64_t tag, const roe::StringOps::String_t& value)
   {
-    data_[tag] = std::string(value.data, value.len_);
+    //data_[tag] = std::string(value.data, value.len_);
   }
 
   virtual void setField(int64_t tag, const char* value, size_t len)
   {
-    data_[tag] = std::string(value, len);
+    //data_[tag] = std::string(value, len);
   }
 
   virtual void setField(int64_t tag, int64_t value)
   {
-    data_[tag] = std::to_string(value);
+    //data_[tag] = std::to_string(value);
   }
   virtual void setField(int64_t tag, double value)
   {
-    data_[tag] = std::to_string(value);
+    //data_[tag] = std::to_string(value);
   }
   virtual void getField(int64_t tag, roe::StringOps::String_t& value)
   {
@@ -88,15 +55,30 @@ public:
   std::unordered_map<int64_t, std::string> data_;
 };
 
+void test ()
+{
+
+  int local = 23;
+  double d = 1.0 + 10/2;
+  std::string s = std::string("123") + "XXX";
+  std::string sub = s.substr(2,2);
+  double d2 = 0 -  2/32.01 * (-1);
+  if (1)
+  {
+    std::string sR = "dfdfdfdf";
+  }
+}
+
 int main(int argc, char* argv[])
 {
 
-  if (argc != 3)
+  if (argc != 4)
     std::exit(0);
 
   std::string   moduleFile     = argv[1];
   std::string   functionToCall = argv[2];
-  std::ifstream in(moduleFile);
+  char* ptrEnd = nullptr;
+  size_t N    = strtol(argv[3], &ptrEnd, 10);
 
   llvm::InitializeNativeTarget();
   llvm::InitializeNativeTargetAsmParser();
@@ -119,20 +101,37 @@ int main(int argc, char* argv[])
 
   try
   {
-    roe::Module m("newMod");
-    m.constructAST(in);
-    std::initializer_list<std::shared_ptr<roe::IContainerAccess>> accessList = {
-      access1, access2, access1};
-    m.bindFunctionParameterConstrains(functionToCall, accessList);
-    m.compileToIR();
-    m.dumpIR();
-    m.buildNative();
-    auto& f = m.getFunc(functionToCall);
-    f.call(access1.get(), access2.get(), access1.get());
+    roe::Loader loader;
+    loader.tryLoadModuleFromFile(moduleFile, moduleFile);
+    auto  f = loader.getCompiledFunction(moduleFile, functionToCall);
+
+    auto start = std::chrono::high_resolution_clock::now();
+    for(size_t i = 0 ; i < N; ++i)
+    {
+      f.call(access1.get(), access2.get(), access1.get());
+    }
+
+    auto end =  std::chrono::high_resolution_clock::now();
+
+    auto res = std::chrono::duration_cast<std::chrono::nanoseconds> (end - start).count();
+    std::cout << res / N  << std::endl;
+
     paccess1->dump(std::cout);
     paccess2->dump(std::cout);
+
+
+    {
+      auto start = std::chrono::high_resolution_clock::now();
+
+      for(size_t i = 0 ; i < N; ++i)
+        test();
+      auto end =  std::chrono::high_resolution_clock::now();
+
+      auto res = std::chrono::duration_cast<std::chrono::nanoseconds> (end - start).count();
+      std::cout << res / N  << std::endl;
+    }
   }
-  catch (roe::ASTException& exp)
+  catch (std::exception& exp)
   {
     std::cerr << exp.what() << std::endl;
   }

@@ -61,6 +61,11 @@ namespace roe
     }
   }
 
+  std::string Module::errorText() const
+  {
+    return driver_->errorText();
+  }
+
   bool Module::constructAST(const std::string& text)
   {
     return driver_->parse_string(text);

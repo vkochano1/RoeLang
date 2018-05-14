@@ -18,12 +18,12 @@ namespace roe
                                                      llvm::Value*       to,
                                                      llvm::Value*       from)
   {
-    if (from->getType() == context_.types().charPtrType())
+    if (isCStr(from))
     {
       context_.externalFunctions().makeCall(StringOps::ASSIGN_CHPTR,
                                             {to, from});
     }
-    else if (from->getType() == context_.types().stringPtrType())
+    else if (isString(from))
     {
       context_.externalFunctions().makeCall(StringOps::ASSIGN_STR, {to, from});
     }
@@ -48,22 +48,22 @@ namespace roe
     llvm::Value* tagVal =
       llvm::ConstantInt::get(context_.types().longType(), astVar.tag());
 
-    if (from->getType() == context_.types().charPtrType())
+    if (isCStr(from))
     {
       context_.externalFunctions().makeCall(Bindings::SET_FIELD_CHPTR,
                                             {container, tagVal, from});
     }
-    else if (from->getType() == context_.types().stringPtrType())
+    else if (isString(from))
     {
       context_.externalFunctions().makeCall(Bindings::SET_FIELD_STRING,
                                             {container, tagVal, from});
     }
-    else if (from->getType() == context_.types().longType())
+    else if (isLong(from))
     {
       context_.externalFunctions().makeCall(Bindings::SET_FIELD_INT,
                                             {container, tagVal, from});
     }
-    else if (from->getType() == context_.types().floatType())
+    else if (isFloat(from))
     {
       context_.externalFunctions().makeCall(Bindings::SET_FIELD_DOUBLE,
                                             {container, tagVal, from});
@@ -85,7 +85,12 @@ namespace roe
   {
     auto from    = right_->evaluate();
     from         = loadValueIfNeeded(from);
-    auto* astVar = dynamic_cast<ASTVariable*>(left_.get());
+    auto astVar = std::dynamic_pointer_cast<ASTVariable>(left_);
+
+    if(!astVar)
+    {
+      throw ASTException("Expected variable");
+    }
 
     if (astVar->isField())
     {
@@ -96,16 +101,18 @@ namespace roe
     {
       llvm::Type* varType = context_.types().varTypeFromRVal(from->getType());
       context_.rule().getOrCreateVariable(astVar->name(), varType);
+
       auto* to = left_->evaluate();
-      if (to->getType() == context_.types().stringPtrType())
+
+      if (isString(to))
       {
         processAssignmentToLocalStrVar(*astVar, to, from);
       }
-      else if (to->getType() == context_.types().longPtrType())
+      else if (isLongPtr(to))
       {
         processAssignmentToLocalIntVar(*astVar, to, from);
       }
-      else if (to->getType() == context_.types().floatPtrType())
+      else if (isFloatPtr(to))
       {
         processAssignmentToLocalFloatVar(*astVar, to, from);
       }

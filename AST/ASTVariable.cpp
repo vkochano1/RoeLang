@@ -52,23 +52,34 @@ namespace roe
     return false;
   }
 
-  size_t ASTVariable::tag() const { return tag_; }
+  size_t ASTVariable::tag() const
+  {
+    return tag_;
+  }
 
-  const std::string& ASTVariable::name() const { return var_; }
+  const std::string& ASTVariable::name() const
+  {
+    return var_;
+  }
 
-  const std::string& ASTVariable::baseName() const { return baseName_; }
+  const std::string& ASTVariable::baseName() const
+  {
+    return baseName_;
+  }
 
-  bool ASTVariable::isField() const { return isField_; }
+  bool ASTVariable::isField() const
+  {
+    return isField_;
+  }
 
   llvm::Value* ASTVariable::evaluateField()
   {
     processContainerField();
     auto& builder = context_.rule().builder();
 
-    llvm::Value* result = builder.CreateAlloca(context_.types().stringType());
+    llvm::Value* result = allocString();
     llvm::Value* container = context_.rule().getParamValue(baseName());
-    llvm::Value* tagVal =
-      llvm::ConstantInt::get(context_.types().longType(), tag());
+    llvm::Value* tagVal = llvm::ConstantInt::get(context_.types().longType(), tag());
 
     context_.externalFunctions().makeCall(Bindings::GET_FIELD_STRING,
                                           {container, tagVal, result});

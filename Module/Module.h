@@ -26,7 +26,6 @@ namespace roe
   public:
     struct CompiledFunctionInfo
     {
-
       CompiledFunctionInfo(const std::string& name, size_t nParams,
                            llvm::ExecutionEngine* executionEngine);
 
@@ -52,30 +51,37 @@ namespace roe
     };
 
   public:
-    using CompiledFunctions =
-      std::unordered_map<std::string, CompiledFunctionInfo>;
-    Module::CompiledFunctionInfo& getFunc(const std::string& funcName);
+    using CompiledFunctions = std::unordered_map<std::string, CompiledFunctionInfo>;
 
+  public:
     Module(const std::string& name);
+    Context& context();
+
+    Module::CompiledFunctionInfo& getFunc(const std::string& funcName);
 
     void compileToIR();
     bool constructAST(const std::string& text);
     bool constructAST(const std::istream& text);
-    void bindFunctionParameterConstrains(
+
+    void bindFunctionParameterConstrains
+    (
       const std::string& functionName,
-      std::initializer_list<std::shared_ptr<IContainerAccess>>
-        accessList);
+      std::initializer_list<std::shared_ptr<IContainerAccess>>accessList
+    );
 
     void     dumpIR();
     void     buildNative();
-    Context& context();
+    std::string errorText() const;
 
   private:
-    llvm::ExecutionEngine*               executionEngine_ = nullptr;
+    llvm::ExecutionEngine*               executionEngine_;
     Context                              context_;
     std::unique_ptr<llvm::EngineBuilder> engineBuilder_;
-    llvm::Module*                        module_ = nullptr;
+    llvm::Module*                        module_;
     CompiledFunctions                    compiledFunctions_;
     std::unique_ptr<roe::Driver>         driver_;
+    std::string compilationError_;
   };
+
+  using ModulePtr = std::shared_ptr<Module>;
 }

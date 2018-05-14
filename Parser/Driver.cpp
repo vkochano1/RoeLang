@@ -34,10 +34,18 @@ namespace roe
     return parse_stream(iss, sname);
   }
 
-  void Driver::error(const class location& l, const std::string& m)
+  void Driver::error(const class location& loc, const std::string& message)
   {
-    std::cerr << l << ": " << m << std::endl;
+    error_ << loc << ": " << message << std::endl;
   }
 
-  void Driver::error(const std::string& m) { std::cerr << m << std::endl; }
+  std::string Driver::errorText() const
+  {
+    return error_.str();
+  }
+
+  void Driver::error(const std::string& m)
+  {
+    error_ << m << std::endl;
+  }
 }

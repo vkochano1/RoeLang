@@ -3,30 +3,73 @@
 namespace roe
 {
 
+  llvm::Value* ASTElement::allocBool()
+  {
+    return context_.builder().CreateAlloca(context_.types().boolType());
+  }
+
+  llvm::Value* ASTElement::allocFloat()
+  {
+    return context_.builder().CreateAlloca(context_.types().floatType());
+  }
+
+  llvm::Value* ASTElement::allocLong()
+  {
+    return context_.builder().CreateAlloca(context_.types().longType());
+  }
+
+  llvm::Value* ASTElement::allocString()
+  {
+    return context_.builder().CreateAlloca(context_.types().stringType());
+  }
+
+  bool ASTElement::isBool(const llvm::Value* value)
+  {
+    return value->getType() == context_.types().boolType();
+  }
+
+  bool ASTElement::isFloat(const llvm::Value* value)
+  {
+    return value->getType() == context_.types().floatType();
+  }
+
+  bool ASTElement::isLong(const llvm::Value* value)
+  {
+    return value->getType() == context_.types().longType();
+  }
+
+  bool ASTElement::isFloatPtr(const llvm::Value* value)
+  {
+    return value->getType() == context_.types().floatPtrType();
+  }
+
+  bool ASTElement::isLongPtr(const llvm::Value* value)
+  {
+    return value->getType() == context_.types().longPtrType();
+  }
+
+  bool ASTElement::isString(const llvm::Value* value)
+  {
+    return value->getType() == context_.types().stringPtrType();
+  }
+
+  bool ASTElement::isCStr(const llvm::Value* value)
+  {
+    return value->getType() == context_.types().charPtrType();
+  }
+
   void ASTElement::normalizeValues(llvm::Value*& v1, llvm::Value*& v2)
   {
     auto& builder = context_.builder();
 
-    bool isV1Float = v1->getType() == context_.types().floatType();
-    bool isV2Float = v2->getType() == context_.types().floatType();
+    bool isV1Number = isLong(v1) || isFloat(v1);
+    bool isV2Number = isLong(v2) || isFloat(v2);
 
-    bool isV1String = v1->getType() == context_.types().stringPtrType();
-    bool isV2String = v2->getType() == context_.types().stringPtrType();
-
-    bool isV1CharPtr = v1->getType() == context_.types().charPtrType();
-    bool isV2CharPtr = v2->getType() == context_.types().charPtrType();
-
-    bool isV1Long = v1->getType() == context_.types().longType();
-    bool isV2Long = v2->getType() == context_.types().longType();
-
-    bool isV1Number = isV1Long || isV1Float;
-    bool isV2Number = isV2Long || isV2Float;
-
-    if (isV1Float && isV2Long)
+    if (isFloat(v1) && isLong(v2))
     {
       v2 = builder.CreateSIToFP(v2, context_.types().floatType());
     }
-    else if (isV1Long && isV2Float)
+    else if (isFloat(v2) && isLong(v1))
     {
       v1 = builder.CreateSIToFP(v1, context_.types().floatType());
     }
@@ -39,11 +82,11 @@ namespace roe
   llvm::Value* ASTElement::convertToBool(llvm::Value* v)
   {
     auto& builder = context_.builder();
-    if (v->getType() == context_.types().floatType())
+    if (isFloat(v))
     {
       return builder.CreateFPToSI(v, context_.types().boolType());
     }
-    else if (v->getType() == context_.types().longType())
+    else if (isLong(v))
     {
       auto* zero = llvm::ConstantInt::get(context_.types().longType(), 0);
       return builder.CreateICmpNE(v, zero);

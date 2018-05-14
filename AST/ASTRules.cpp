@@ -10,12 +10,10 @@ namespace roe
       throw ASTException("Invalid ruleID");
     }
 
-    if (rules_.find(rule->name()) != rules_.end())
+    if(!rules_.insert(std::make_pair(rule->name(), rule)).second)
     {
       throw ASTException("Duplicate rule");
     }
-
-    rules_[rule->name()] = rule;
   }
 
   void ASTRules::evaluate()

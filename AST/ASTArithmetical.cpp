@@ -21,31 +21,27 @@ namespace roe
 
     out = nullptr;
 
-    if (left->getType() == context_.types().stringPtrType() &&
-        right->getType() == context_.types().stringPtrType())
+    if (isString(left) && isString(right))
     {
-      out = builder.CreateAlloca(context_.types().stringType());
+      out = allocString();
       context_.externalFunctions().makeCall(StringOps::CONCAT_STR_AND_STR,
                                             {left, left, right});
     }
-    else if (left->getType() == context_.types().stringPtrType() &&
-             right->getType() == context_.types().charPtrType())
+    else if (isString(left) && isCStr(right))
     {
-      out = builder.CreateAlloca(context_.types().stringType());
+      out = allocString();
       context_.externalFunctions().makeCall(StringOps::CONCAT_STR_AND_CHPTR,
                                             {left, right, out});
     }
-    else if (left->getType() == context_.types().charPtrType() &&
-             right->getType() == context_.types().stringPtrType())
+    else if (isCStr(left) && isString(right))
     {
-      out = builder.CreateAlloca(context_.types().stringType());
+      out = allocString();
       context_.externalFunctions().makeCall(StringOps::CONCAT_CHPTR_AND_STR,
                                             {left, right, out});
     }
-    else if (left->getType() == context_.types().charPtrType() &&
-             right->getType() == context_.types().charPtrType())
+    else if (isCStr(left) && isCStr(right))
     {
-      out = builder.CreateAlloca(context_.types().stringType());
+      out = allocString();
       context_.externalFunctions().makeCall(StringOps::CONCAT_CHPTR_AND_CHPTR,
                                             {left, right, out});
     }
@@ -59,7 +55,7 @@ namespace roe
     auto& builder = context_.builder();
     out           = nullptr;
 
-    if (left->getType() == context_.types().longType())
+    if (isLong(left))
     {
       switch (op_)
       {
@@ -89,7 +85,7 @@ namespace roe
     auto& builder = context_.builder();
     out           = nullptr;
 
-    if (left->getType() == context_.types().floatType())
+    if (isFloat(left))
     {
       switch (op_)
       {

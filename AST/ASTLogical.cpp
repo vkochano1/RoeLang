@@ -49,8 +49,7 @@ namespace roe
     v1 = convertToBool(v1);
     v2 = convertToBool(v2);
 
-    if (v2->getType() != context_.types().boolType() ||
-        v1->getType() != context_.types().boolType())
+    if (!isBool(v2) || !isBool(v2))
     {
       throw ASTException("Failed to convert to bool");
     }
@@ -69,7 +68,7 @@ namespace roe
     value         = loadValueIfNeeded(value);
     value         = convertToBool(value);
 
-    if (value->getType() != context_.types().boolType())
+    if (!isBool(value))
     {
       throw ASTException("Failed to convert to bool");
     }

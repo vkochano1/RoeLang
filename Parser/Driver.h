@@ -5,6 +5,7 @@
 #include <Module/Context.h>
 #include <string>
 #include <vector>
+#include <sstream>
 
 namespace roe
 {
@@ -29,8 +30,10 @@ namespace roe
     Context&       context() { return context_; }
     ASTRules&      rules() { return astRules_; }
 
+    std::string errorText() const;
   public:
     Context&      context_;
     roe::ASTRules astRules_;
+    std::ostringstream   error_;
   };
 }

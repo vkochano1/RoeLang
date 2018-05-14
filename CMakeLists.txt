@@ -36,6 +36,7 @@ ${LEXER_CPP}
 ${PARSER_CPP}
 ${MODULE_CPP}
 ${FUNCTIONS_CPP}
+Loader.cpp
 )
 
 add_executable(Test1  Test/Test.cpp)

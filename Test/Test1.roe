@@ -1,0 +1,42 @@
+
+
+ruleid = TEST(C1, C2, C3)
+{
+  local    = 23;
+  i        = 1.0 + 10 / 2;
+  loc1 = "BF";
+  /*C1.tag38="ABC";*/
+  loc = "ABC" + loc1;
+  C1.tag55= loc;
+  C1.tag151 = local;
+  /*C1.tag151 = int(C1.tag38) / 2;*/
+  /*C2.tag38  = 100 * (1 + 44 / 2);*/
+  s         = "123" + "XXX";
+  s2        = s [2:2];
+  s3 = 0 - (2 / 32.01 * (-1));
+  if (1)
+  {
+    sR = "DDDD123";
+  }
+/*
+  if (int(C1.tag38) > 99 and int(C2.tag38) > 0)
+  {
+    C2.fieldSymbol = "Symbol" + str(local + 2);
+  }
+
+  yyy = "455";
+  ttt = 1 + int(C1.tag38) + 0.222;
+  sN  = "dfd";
+  print(ttt);
+  if (-1 + 1 == 1 )
+  {
+    sN = "DDDD123";
+    print(sN);
+  }
+
+  yu= "www";
+  if(yu == "www" and 555.4 )
+  {
+     print(yu);
+  }*/
+}

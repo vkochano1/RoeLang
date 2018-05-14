@@ -25,6 +25,22 @@ namespace roe
     llvm::Value* convertToBool(llvm::Value* v);
 
   protected:
+      bool isBool( const llvm::Value*);
+      bool isFloat(const llvm::Value*);
+      bool isLong(const llvm::Value*) ;
+      bool isString(const llvm::Value*);
+      bool isCStr(const llvm::Value*);
+
+      bool isFloatPtr(const llvm::Value*);
+      bool isLongPtr(const llvm::Value*) ;
+      
+  protected:
+      llvm::Value* allocBool();
+      llvm::Value* allocFloat();
+      llvm::Value* allocLong();
+      llvm::Value* allocString();
+
+  protected:
     Context& context_;
   };
 

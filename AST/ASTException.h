@@ -6,7 +6,7 @@
 namespace roe
 {
 
-  class ASTException : std::exception
+  class ASTException : public std::exception
   {
   public:
     ASTException(const std::string& text)

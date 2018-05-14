@@ -27,8 +27,7 @@ namespace roe
     else
     {
       auto* l = len_->evaluate();
-      out =
-        context_.rule().builder().CreateAlloca(context_.types().stringType());
+      out = allocString();
       context_.externalFunctions().makeCall(StringOps::GET_SUBSTR,
                                             {varValue, idx, l, out});
     }
