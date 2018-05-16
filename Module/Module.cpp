@@ -1,5 +1,8 @@
 #include <Functions/Bindings.h>
 #include <Module/Module.h>
+#include <llvm/Transforms/IPO/PassManagerBuilder.h>
+#include <llvm/Transforms/IPO.h>
+#include  <llvm/IR/LegacyPassManager.h>
 
 namespace roe
 {
@@ -90,6 +93,23 @@ namespace roe
   void Module::buildNative()
   {
     context_.externalFunctions().addAllMappings(*executionEngine_);
+
+    llvm::PassManagerBuilder builder;
+    llvm::legacy::FunctionPassManager passManager(module_);
+    // -O3,  no size opt, aggressive inlining
+    builder.OptLevel = 3;
+    builder.SizeLevel = 0;
+    builder.Inliner = llvm::createFunctionInliningPass();
+    builder.populateFunctionPassManager(passManager);
+    passManager.doInitialization();
+    for (const auto& rule : context_.rules())
+    {
+      auto* fptr = rule.second->funcPtr();
+      if (fptr)
+      {
+        passManager.run(*fptr);
+      }
+    }
 
     for (const auto& rule : context_.rules())
     {

@@ -41,6 +41,6 @@ Loader.cpp
 
 add_executable(Test1  Test/Test.cpp)
 
-target_link_libraries(Test1 RoeLang  pthread ${Boost_LIBRARIES}
+target_link_libraries(Test1 RoeLang  pthread ${Boost_LIBRARIES} LLVMPasses LLVMipo LLVMInstrumentation LLVMVectorize LLVMLinker
 LLVMX86Disassembler  LLVMX86AsmParser  LLVMX86CodeGen  LLVMGlobalISel  LLVMSelectionDAG  LLVMAsmPrinter  LLVMDebugInfoCodeView  LLVMDebugInfoMSF  LLVMCodeGen  LLVMScalarOpts  LLVMInstCombine  LLVMAggressiveInstCombine  LLVMTransformUtils  LLVMBitWriter  LLVMX86Desc  LLVMMCDisassembler  LLVMX86Info  LLVMX86AsmPrinter  LLVMX86Utils  LLVMMCJIT  LLVMExecutionEngine  LLVMTarget  LLVMAnalysis  LLVMProfileData  LLVMRuntimeDyld  LLVMObject  LLVMMCParser  LLVMBitReader  LLVMMC  LLVMCore  LLVMBinaryFormat  LLVMSupport  LLVMDemangle
 dl z)

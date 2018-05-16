@@ -4,11 +4,16 @@
 
 namespace roe
 {
-
   std::shared_ptr<Module> Loader::tryLoadModule(const std::string& name, const std::string& text)
   {
+     std::istringstream in(text);
+     return tryLoadModule_(name, in);
+  }
+
+  ModulePtr Loader::tryLoadModule_(const std::string& name, const std::istream& in)
+  {
       auto module = std::make_shared<roe::Module> (name);
-      if(!module->constructAST(text))
+      if(!module->constructAST(in))
       {
         std::ostringstream ostrm;
         ostrm << "Failed to build AST from source" << module->errorText();
@@ -41,16 +46,7 @@ namespace roe
 ModulePtr Loader::tryLoadModuleFromFile(const std::string& name, const std::string& path)
 {
    std::ifstream in(path.c_str());
-
-   std::istream_iterator<char> begin(in);
-   std::istream_iterator<char> end;
-
-   std::string text;
-   text.reserve(4096);
-
-   std::copy(begin, end, std::back_inserter(text));
-
-   return tryLoadModule(name, text);
+   return tryLoadModule_(name, in);
 }
 
   Module::CompiledFunctionInfo Loader::getCompiledFunction(const std::string& moduleName, std::string& functionName)

@@ -43,7 +43,7 @@ namespace roe
     context.externalFunctions().registerExternal(
       SET_FIELD_CHPTR, &Bindings::setFieldCharPtr, context.types().voidType(),
       {context.types().voidPtrType(), context.types().longType(),
-       context.types().charPtrType()});
+       context.types().charPtrType(), context.types().longType()});
 
     context.externalFunctions().registerExternal(
       SET_FIELD_INT, &Bindings::setFieldInt, context.types().voidType(),
@@ -88,10 +88,10 @@ namespace roe
     access->setField(tag, *s);
   }
 
-  void Bindings::setFieldCharPtr(void* data, int64_t tag, const char* str)
+  void Bindings::setFieldCharPtr(void* data, int64_t tag, const char* str, int64_t len)
   {
     IContainerAccess* access = reinterpret_cast<IContainerAccess*>(data);
-    access->setField(tag, str, strlen(str));
+    access->setField(tag, str, len);
   }
 
   void Bindings::setFieldInt(void* data, int64_t tag, int64_t val)

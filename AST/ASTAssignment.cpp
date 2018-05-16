@@ -1,6 +1,6 @@
 #include <AST/ASTAssignment.h>
 #include <AST/ASTVariable.h>
-
+#include <AST/ASTCStr.h>
 #include <Functions/FunctionRegistrar.h>
 
 namespace roe
@@ -20,8 +20,9 @@ namespace roe
   {
     if (isCStr(from))
     {
+      auto astCStr =  std::dynamic_pointer_cast<ASTCstr> (right_);
       context_.externalFunctions().makeCall(StringOps::ASSIGN_CHPTR,
-                                            {to, from});
+                                            {to, from, astCStr->length()});
     }
     else if (isString(from))
     {
@@ -50,8 +51,9 @@ namespace roe
 
     if (isCStr(from))
     {
+      auto astCStr =  std::dynamic_pointer_cast<ASTCstr> (right_);
       context_.externalFunctions().makeCall(Bindings::SET_FIELD_CHPTR,
-                                            {container, tagVal, from});
+                                            {container, tagVal, from, astCStr->length() });
     }
     else if (isString(from))
     {

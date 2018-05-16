@@ -9,6 +9,11 @@ namespace roe
   {
   }
 
+  llvm::Value* ASTCstr::length() const
+  {
+    return llvm::ConstantInt::get(context_.types().longType(), value_.length());
+  }
+
   llvm::Value* ASTCstr::evaluate()
   {
     auto& builder = context_.builder();

@@ -1,6 +1,7 @@
 #include <AST/ASTArithmetical.h>
 #include <Functions/FunctionRegistrar.h>
 #include <Functions/StringOps.h>
+#include <AST/ASTCStr.h>
 
 namespace roe
 {
@@ -30,20 +31,25 @@ namespace roe
     else if (isString(left) && isCStr(right))
     {
       out = allocString();
+      auto astCStr =  std::dynamic_pointer_cast<ASTCstr> (operand2_);
       context_.externalFunctions().makeCall(StringOps::CONCAT_STR_AND_CHPTR,
-                                            {left, right, out});
+                                            {left, right, astCStr->length(), out});
     }
     else if (isCStr(left) && isString(right))
     {
       out = allocString();
+      auto astCStr =  std::dynamic_pointer_cast<ASTCstr> (operand1_);
       context_.externalFunctions().makeCall(StringOps::CONCAT_CHPTR_AND_STR,
-                                            {left, right, out});
+                                            {left,astCStr->length(), right, out});
     }
     else if (isCStr(left) && isCStr(right))
     {
       out = allocString();
+      auto astCStrLeft =  std::dynamic_pointer_cast<ASTCstr> (operand1_);
+      auto astCStrRight =  std::dynamic_pointer_cast<ASTCstr> (operand2_);
       context_.externalFunctions().makeCall(StringOps::CONCAT_CHPTR_AND_CHPTR,
-                                            {left, right, out});
+                                            {left,astCStrLeft->length()
+                                              ,right, astCStrRight->length(), out});
     }
 
     return out != nullptr;

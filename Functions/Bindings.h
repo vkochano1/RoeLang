@@ -43,7 +43,7 @@ namespace roe
   public:
     static void getFieldString(void*, int64_t tag, StringOps::String_t* s);
     static void setFieldString(void*, int64_t tag, StringOps::String_t* s);
-    static void setFieldCharPtr(void*, int64_t tag, const char* s);
+    static void setFieldCharPtr(void*, int64_t tag, const char* s, int64_t len);
     static void setFieldInt(void*, int64_t tag, int64_t val);
     static void setFieldDouble(void*, int64_t tag, double val);
 

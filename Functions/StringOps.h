@@ -29,6 +29,7 @@ namespace roe
     static const std::string INT_TO_STR;
     static const std::string DOUBLE_TO_STR;
     static const std::string GET_CHAR;
+    static const std::string GET_LENGTH;
     static const std::string GET_SUBSTR;
 
     struct String_t
@@ -44,23 +45,23 @@ namespace roe
 
     // Concat
     static void
-    concatStrAndCharPtr(const String_t* s1, const char* s2, String_t* out);
+    concatStrAndCharPtr(const String_t* s1, const char* s2, int64_t len2,  String_t* out);
     static void
     concatStrAndStr(const String_t* s1, const String_t* s2, String_t* out);
     static void
-    concatCharPtrAndStr(const char* s1, const String_t* s2, String_t* out);
+    concatCharPtrAndStr(const char* s1, int64_t len1, const String_t* s2, String_t* out);
     static void
-    concatCharPtrAndCharPtr(const char* s1, const char* s2, String_t* out);
+    concatCharPtrAndCharPtr(const char* s1, int64_t len1, const char* s2, int64_t len2, String_t* out);
 
     // Assign
     static void assignStr(String_t* s1, const String_t* s2);
-    static void assignChPtr(String_t* s1, const char* s2);
+    static void assignChPtr(String_t* s1, const char* s2, int64_t len2);
 
     // Equals
-    static bool equalsStrAndCharPtr(const String_t* s1, const char* s2);
+    static bool equalsStrAndCharPtr(const String_t* s1, const char* s2, int64_t len2);
     static bool equalsStrAndStr(const String_t* s1, const String_t* s2);
-    static bool equalsCharPtrAndStr(const char* s1, const String_t* s2);
-    static bool equalsCharPtrAndCharPtr(const char* s1, const char* s2);
+    static bool equalsCharPtrAndStr(const char* s1, int64_t len2, const String_t* s2);
+    static bool equalsCharPtrAndCharPtr(const char* s1, int64_t len1, const char* s2, int64_t len2);
 
     static void intToString(int64_t, String_t* s);
     static void doubleToString(double, String_t* s);
@@ -73,6 +74,7 @@ namespace roe
     static int64_t getChar(const String_t* s, int64_t);
     static void
     getSubstr(const String_t* s, int64_t from, int64_t len, String_t* out);
+    static int64_t getLength(const String_t* s);
 
   public:
     static void registerBuiltins(Context& ctx);

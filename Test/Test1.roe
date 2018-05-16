@@ -4,17 +4,18 @@ ruleid = TEST(C1, C2, C3)
 {
   local    = 23;
   i        = 1.0 + 10 / 2;
-  loc1 = "BF";
-  /*C1.tag38="ABC";*/
-  loc = "ABC" + loc1;
+  C1.tag38="ABC";
+  loc1 = "BF" ;
+
+  loc = 10 + len(loc1);
   C1.tag55= loc;
   C1.tag151 = local;
-  /*C1.tag151 = int(C1.tag38) / 2;*/
-  /*C2.tag38  = 100 * (1 + 44 / 2);*/
+  C1.tag151 = int(C1.tag38) / 2;
+  C2.tag38  = 100 * (1 + 44 / 2);
   s         = "123" + "XXX";
   s2        = s [2:2];
   s3 = 0 - (2 / 32.01 * (-1));
-  if (1)
+  if (1 and i < 1000 or local == 24)
   {
     sR = "DDDD123";
   }

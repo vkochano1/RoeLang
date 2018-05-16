@@ -1,5 +1,6 @@
 #include <AST/ASTLogical.h>
 #include <Functions/FunctionRegistrar.h>
+#include <AST/ASTCStr.h>
 
 namespace roe
 {
@@ -103,22 +104,27 @@ namespace roe
     else if (v1->getType() == context_.types().charPtrType() &&
              v2->getType() == context_.types().stringPtrType())
     {
+      auto astCStrLeft =  std::dynamic_pointer_cast<ASTCstr> (operand1_);
       out = context_.externalFunctions().makeCall(
-        StringOps::EQUALS_CHPTR_AND_STR, {v1, v2});
+        StringOps::EQUALS_CHPTR_AND_STR, {v1, astCStrLeft->length(), v2});
       return true;
     }
     else if (v1->getType() == context_.types().stringPtrType() &&
              v2->getType() == context_.types().charPtrType())
     {
+      auto astCStr =  std::dynamic_pointer_cast<ASTCstr> (operand2_);
       out = context_.externalFunctions().makeCall(
-        StringOps::EQUALS_STR_AND_CHPTR, {v1, v2});
+        StringOps::EQUALS_STR_AND_CHPTR, {v1, v2, astCStr->length() });
       return true;
     }
     else if (v1->getType() == context_.types().charPtrType() &&
              v2->getType() == context_.types().charPtrType())
     {
+      auto astCStrLeft =  std::dynamic_pointer_cast<ASTCstr> (operand1_);
+      auto astCStrRight =  std::dynamic_pointer_cast<ASTCstr> (operand2_);
+
       out = context_.externalFunctions().makeCall(
-        StringOps::EQUALS_CHPTR_AND_CHPTR, {v1, v2});
+        StringOps::EQUALS_CHPTR_AND_CHPTR, {v1,astCStrLeft->length(), v2, astCStrRight->length()});
       return true;
     }
 

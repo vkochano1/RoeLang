@@ -13,6 +13,9 @@ namespace roe
     ModulePtr tryLoadModuleFromFile(const std::string& name, const std::string& path);
     Module::CompiledFunctionInfo getCompiledFunction(const std::string& moduleName, std::string& functionName);
   private:
+    ModulePtr tryLoadModule_(const std::string& name, const std::istream& in);
+
+  private:
     Modules modules_;
   };
 

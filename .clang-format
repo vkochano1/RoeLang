@@ -1,19 +1,12 @@
 ﻿---
 BasedOnStyle: Mozilla
-AlignAfterOpenBracket: Align
-AlignConsecutiveAssignments: 'true'
-AlignConsecutiveDeclarations: 'true'
 AllowAllParametersOfDeclarationOnNextLine: 'true'
 AllowShortBlocksOnASingleLine: 'true'
-AlwaysBreakAfterDefinitionReturnType: None
-AlwaysBreakAfterReturnType: None
-AlwaysBreakTemplateDeclarations: 'true'
 BinPackArguments: 'true'
 BinPackParameters: 'true'
-BreakBeforeBraces: Allman
 Cpp11BracedListStyle: 'true'
 ExperimentalAutoDetectBinPacking: 'true'
-NamespaceIndentation: All
+NamespaceIndentation: Inner
 PenaltyReturnTypeOnItsOwnLine: '0'
 PointerAlignment: Left
 SortIncludes: 'true'

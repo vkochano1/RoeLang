@@ -27,6 +27,7 @@ namespace roe
 
   const std::string StringOps::GET_CHAR   = "GetChar";
   const std::string StringOps::GET_SUBSTR = "GetSubstr";
+  const std::string StringOps::GET_LENGTH = "GetLength";
 
   void StringOps::registerConcatBuiltins(Context& context)
   {
@@ -39,19 +40,20 @@ namespace roe
     context.externalFunctions().registerExternal(
       CONCAT_STR_AND_CHPTR, &StringOps::concatStrAndCharPtr,
       context.types().voidType(),
-      {context.types().stringPtrType(), context.types().charPtrType(),
+      {context.types().stringPtrType(), context.types().charPtrType(), context.types().longType(),
        context.types().stringPtrType()});
 
     context.externalFunctions().registerExternal(
       CONCAT_CHPTR_AND_CHPTR, &StringOps::concatCharPtrAndCharPtr,
       context.types().voidType(),
-      {context.types().charPtrType(), context.types().charPtrType(),
+      {context.types().charPtrType(), context.types().longType(), context.types().charPtrType()
+      , context.types().longType(),
        context.types().stringPtrType()});
 
     context.externalFunctions().registerExternal(
       CONCAT_CHPTR_AND_STR, &StringOps::concatCharPtrAndStr,
       context.types().voidType(),
-      {context.types().charPtrType(), context.types().stringPtrType(),
+      {context.types().charPtrType(), context.types().longType(), context.types().stringPtrType(),
        context.types().stringPtrType()});
   }
 
@@ -63,7 +65,7 @@ namespace roe
 
     context.externalFunctions().registerExternal(
       ASSIGN_CHPTR, &StringOps::assignChPtr, context.types().voidType(),
-      {context.types().stringPtrType(), context.types().charPtrType()});
+      {context.types().stringPtrType(), context.types().charPtrType(), context.types().longType()});
   }
 
   void StringOps::registerEqualsBuiltins(Context& context)
@@ -76,17 +78,18 @@ namespace roe
     context.externalFunctions().registerExternal(
       EQUALS_STR_AND_CHPTR, &StringOps::equalsStrAndCharPtr,
       context.types().boolType(),
-      {context.types().stringPtrType(), context.types().charPtrType()});
+      {context.types().stringPtrType(), context.types().charPtrType(), context.types().longType()});
 
     context.externalFunctions().registerExternal(
       EQUALS_CHPTR_AND_STR, &StringOps::equalsCharPtrAndStr,
       context.types().boolType(),
-      {context.types().charPtrType(), context.types().stringPtrType()});
+      {context.types().charPtrType(), context.types().longType(), context.types().stringPtrType()});
 
     context.externalFunctions().registerExternal(
       EQUALS_CHPTR_AND_CHPTR, &StringOps::equalsCharPtrAndCharPtr,
       context.types().boolType(),
-      {context.types().charPtrType(), context.types().charPtrType()});
+      {context.types().charPtrType(), context.types().longType()
+        , context.types().charPtrType(), context.types().longType()});
   }
 
   void StringOps::registerConversionBuiltins(Context& context)
@@ -118,6 +121,10 @@ namespace roe
       StringOps::GET_SUBSTR, &StringOps::getSubstr, context.types().voidType(),
       {context.types().stringPtrType(), context.types().longType(),
        context.types().longType(), context.types().stringPtrType()});
+
+       context.externalFunctions().registerExternal(
+         StringOps::GET_LENGTH, &StringOps::getLength, context.types().longType(),
+         {context.types().stringPtrType()});
   }
 
   void StringOps::registerBuiltins(Context& context)
@@ -138,9 +145,9 @@ namespace roe
   }
 
   void StringOps::concatStrAndCharPtr(const StringOps::String_t* s1,
-                                      const char* s2, StringOps::String_t* out)
+                                      const char* s2, int64_t len2, StringOps::String_t* out)
   {
-    concatImpl(out, &s1->data[0], s1->len_, s2, std::strlen(s2));
+    concatImpl(out, &s1->data[0], s1->len_, s2, len2);
   }
 
   void StringOps::concatStrAndStr(const StringOps::String_t* s1,
@@ -151,16 +158,16 @@ namespace roe
   }
 
   void
-  StringOps::concatCharPtrAndStr(const char* s1, const StringOps::String_t* s2,
+  StringOps::concatCharPtrAndStr(const char* s1, int64_t len1, const StringOps::String_t* s2,
                                  StringOps::String_t* out)
   {
-    concatImpl(out, s1, std::strlen(s1), &s2->data[0], s2->len_);
+    concatImpl(out, s1, len1, &s2->data[0], s2->len_);
   }
 
-  void StringOps::concatCharPtrAndCharPtr(const char* s1, const char* s2,
+  void StringOps::concatCharPtrAndCharPtr(const char* s1, int64_t len1, const char* s2, int64_t len2,
                                           StringOps::String_t* out)
   {
-    concatImpl(out, s1, std::strlen(s1), s2, std::strlen(s2));
+    concatImpl(out, s1, len1, s2, len2);
   }
 
   //////////////////////////////////////////////////////////////////////////////////////
@@ -175,11 +182,10 @@ namespace roe
       s1->len_ = s2->len_;
     }
   }
-  void StringOps::assignChPtr(String_t* s1, const char* s2)
+  void StringOps::assignChPtr(String_t* s1, const char* s2 , int64_t len2)
   {
-    size_t len = std::strlen(s2);
-    std::strncpy(&s1->data[0], s2, len);
-    s1->len_ = len;
+    std::strncpy(&s1->data[0], s2, len2);
+    s1->len_ = len2;
   }
 
   // Equals
@@ -190,9 +196,9 @@ namespace roe
     return sx1 == sx2;
   }
 
-  bool StringOps::equalsStrAndCharPtr(const String_t* s1, const char* s2)
+  bool StringOps::equalsStrAndCharPtr(const String_t* s1, const char* s2, int64_t len2)
   {
-    return equals(s1->c_str(), s1->length(), s2, std::strlen(s2));
+    return equals(s1->c_str(), s1->length(), s2, len2);
   }
 
   bool StringOps::equalsStrAndStr(const String_t* s1, const String_t* s2)
@@ -200,14 +206,14 @@ namespace roe
     return equals(s1->c_str(), s1->length(), s2->c_str(), s2->length());
   }
 
-  bool StringOps::equalsCharPtrAndStr(const char* s1, const String_t* s2)
+  bool StringOps::equalsCharPtrAndStr(const char* s1, int64_t len1, const String_t* s2)
   {
-    return equals(s1, std::strlen(s1), s2->c_str(), s2->length());
+    return equals(s1, len1, s2->c_str(), s2->length());
   }
 
-  bool StringOps::equalsCharPtrAndCharPtr(const char* s1, const char* s2)
+  bool StringOps::equalsCharPtrAndCharPtr(const char* s1, int64_t len1, const char* s2, int64_t len2)
   {
-    return equals(s1, std::strlen(s1), s2, std::strlen(s2));
+    return equals(s1, len1, s2, len2);
   }
 
   void StringOps::intToString(int64_t i, String_t* s)
@@ -239,6 +245,11 @@ namespace roe
   int64_t StringOps::getChar(const String_t* s, int64_t i)
   {
     return s->data[i];
+  }
+
+  int64_t StringOps::getLength(const String_t* s)
+  {
+    return s->len_;
   }
 
   void StringOps::getSubstr(const String_t* s, int64_t from, int64_t len,

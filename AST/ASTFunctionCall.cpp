@@ -9,6 +9,7 @@ namespace roe
   const std::string ASTFunctionCall::TO_STRING_BUILTIN = "str";
   const std::string ASTFunctionCall::TO_INT_BUILTIN    = "int";
   const std::string ASTFunctionCall::PRINT_BUILTIN     = "print";
+  const std::string ASTFunctionCall::LENGTH_BUILTIN     = "len";
 
   ASTFunctionCall::ASTFunctionCall(Context& context, const std::string& name,
                                    ASTElementPtr args)
@@ -23,7 +24,7 @@ namespace roe
   bool ASTFunctionCall::isBuiltInFunction() const
   {
     return name_ == TO_STRING_BUILTIN || name_ == TO_INT_BUILTIN ||
-           name_ == PRINT_BUILTIN;
+           name_ == PRINT_BUILTIN || name_ == LENGTH_BUILTIN;
   }
 
   bool ASTFunctionCall::processBuiltins(llvm::Value*& retValue)
@@ -108,6 +109,18 @@ namespace roe
       else
       {
         throw ASTException("Invalid print arguments");
+      }
+      return true;
+    }
+    else if (name_ == LENGTH_BUILTIN)
+    {
+      if (isString(firstArg))
+      {
+        retValue = context_.externalFunctions().makeCall(StringOps::GET_LENGTH, values);
+      }
+      else
+      {
+        throw ASTException("Invalid length argument");
       }
       return true;
     }
