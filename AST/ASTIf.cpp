@@ -18,7 +18,7 @@ namespace roe
 
     if (!condExpResult)
     {
-      throw ASTException("Expected boolean type and got NULL");
+      throw ASTException() << "Expected boolean type and got NULL";
     }
 
     condExpResult       = loadValueIfNeeded(condExpResult);
@@ -26,7 +26,7 @@ namespace roe
 
     if(!isBool(condExpResult))
     {
-      throw ASTException("Expected boolean type");
+      throw ASTException() << "Expected boolean type";
     }
 
     auto& builder       = context_.builder();

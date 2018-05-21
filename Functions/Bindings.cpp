@@ -1,7 +1,7 @@
 #include <Functions/Bindings.h>
 #include <Functions/FunctionRegistrar.h>
 #include <Module/Context.h>
-#include <AST/ASTException.h>
+#include <Exceptions/ASTException.h>
 
 namespace roe
 {
@@ -17,12 +17,12 @@ namespace roe
   const std::string Bindings::SET_FIELD_INT    = "setFieldInt";
   const std::string Bindings::SET_FIELD_DOUBLE = "setFieldDouble";
 
-  int64_t IContainerAccess::getTagFromFieldName(const std::string& val)
+  int64_t IConstraints::getTagFromFieldName(const std::string& val)
   {
     auto fit = fieldNameToTagMapping_.find(val);
     if (fit == fieldNameToTagMapping_.end())
     {
-      throw ASTException("Invalid fieldName");
+      throw ASTException() << "Invalid fieldName";
     }
 
     return fit->second;

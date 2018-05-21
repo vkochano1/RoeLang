@@ -1,4 +1,4 @@
-#include <AST/ASTException.h>
+#include <Exceptions/ASTException.h>
 #include <Functions/FunctionRegistrar.h>
 #include <Module/Context.h>
 #include <iostream>
@@ -38,7 +38,7 @@ namespace roe
     auto fit = externalFunctions_.find(name);
     if (fit == externalFunctions_.end())
     {
-      throw ASTException("Call for unknown function");
+      throw ASTException() << "Call for unknown function";
     }
 
     auto& res  = fit->second;
@@ -48,11 +48,11 @@ namespace roe
     for (auto& arg : fptr->args())
     {
       if (args[idx++]->getType() != arg.getType())
-        throw ASTException("Parameter/Argument mismatch");
+        throw ASTException() <<  "Parameter/Argument mismatch";
     }
 
     if (idx < args.size())
-      throw ASTException("Invalid number of arguments");
+      throw ASTException() << "Invalid number of arguments";
 
     return builder.CreateCall(fptr, args);
   }

@@ -49,8 +49,8 @@ namespace roe
   public:
     using Builder          = llvm::IRBuilder<>;
     using ParameterToValue = std::unordered_map<std::string, llvm::Value*>;
-    using ParameterToContainer =
-      std::unordered_map<std::string, std::shared_ptr<IContainerAccess>>;
+    using ParameterToConstraints =
+      std::unordered_map<std::string, std::shared_ptr<IConstraints>>;
     using DeclaredVariables = std::unordered_map<std::string, VariableInfo>;
 
   public:
@@ -69,8 +69,8 @@ namespace roe
   public:
     llvm::Value* getParamValue(const std::string& name);
     void bindParameter(
-      const std::string& name, std::shared_ptr<IContainerAccess> container);
-    std::shared_ptr<IContainerAccess>
+      const std::string& name, std::shared_ptr<IConstraints> constraints);
+    std::shared_ptr<IConstraints>
     getContainerForParam(const std::string& paramName);
     const ASTFunctionParameters::Parameters& params() const { return params_; }
 
@@ -99,7 +99,7 @@ namespace roe
     llvm::BasicBlock*                 locals_;
     Context&                          context_;
     std::unique_ptr<Builder>          builder_;
-    ParameterToContainer              paramToContainer_;
+    ParameterToConstraints            paramToConstraints_;
     std::string                       ruleName_;
   };
 

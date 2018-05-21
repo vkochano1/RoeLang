@@ -1,9 +1,22 @@
 #include <Loader.h>
 #include <iterator>
 #include <fstream>
+#include <thread>
 
 namespace roe
 {
+  std::once_flag initFlag;
+
+  Loader::Loader()
+  {
+    std::call_once(initFlag, [] ()
+       {
+         llvm::InitializeNativeTarget();
+         llvm::InitializeNativeTargetAsmParser();
+         llvm::InitializeNativeTargetAsmPrinter();
+       }
+     );
+  }
   std::shared_ptr<Module> Loader::tryLoadModule(const std::string& name, const std::string& text)
   {
      std::istringstream in(text);
@@ -20,28 +33,31 @@ namespace roe
         throw std::runtime_error(ostrm.str());
       }
 
-      /*std::initializer_list<std::shared_ptr<roe::IContainerAccess>> accessList = {
-        access1, access2, access1};
-      //m.bindFunctionParameterConstrains(functionToCall, accessList);
-      */
-
-      try
-      {
-        module->compileToIR();
-      }
-      catch(std::exception& ex)
-      {
-        std::ostringstream ostrm;
-        ostrm << "Failed to generate IR code from AST" << ex.what();
-        throw std::runtime_error(ostrm.str());
-      }
-
-      module->dumpIR();
-      module->buildNative();
-
       modules_ [name] = module;
       return module;
   }
+
+void Loader::buildAll()
+{
+
+  for (const auto& moduleMapping : modules_)
+  {
+      moduleMapping.second->buildNative();
+  }
+}
+
+void Loader::dumpAll(std::ostream& ostrm)
+{
+  for (const auto& moduleMapping : modules_)
+  {
+    ostrm << "Module : " << moduleMapping.first << std::endl;
+
+    moduleMapping.second->dumpIR(ostrm);
+
+    ostrm << std::endl;
+
+  }
+}
 
 ModulePtr Loader::tryLoadModuleFromFile(const std::string& name, const std::string& path)
 {

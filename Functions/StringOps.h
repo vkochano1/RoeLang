@@ -38,7 +38,8 @@ namespace roe
       char                           data[size];
       int8_t                         len_;
 
-      int8_t      length() const { return len_; }
+      const int8_t&      length() const { return len_; }
+      int8_t&      length() { return len_; }
       const char* c_str() const { return &data[0]; }
       char*       data_ptr() { return &data[0]; }
     };

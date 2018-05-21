@@ -40,12 +40,12 @@ namespace roe
     auto argList = std::dynamic_pointer_cast<ASTArgList>(args_);
     if (!argList)
     {
-      throw ASTException("Invalid ASTElement, expected arg list");
+      throw ASTException() << "Invalid ASTElement, expected arg list";
     }
     auto values = argList->values();
     if (values.size() < 1)
     {
-      throw ASTException("Invalid number of arguments");
+      throw ASTException() << "Invalid number of arguments";
     }
 
     auto* firstArg = values[0];
@@ -70,7 +70,7 @@ namespace roe
       }
       else
       {
-        throw ASTException("Invalid argument for str function");
+        throw ASTException() << "Invalid argument for str function";
       }
       return true;
     }
@@ -88,7 +88,7 @@ namespace roe
       }
       else
       {
-        throw ASTException("Invalid str arguments");
+        throw ASTException() << "Invalid str arguments";
       }
       return true;
     }
@@ -108,7 +108,7 @@ namespace roe
       }
       else
       {
-        throw ASTException("Invalid print arguments");
+        throw ASTException() << "Invalid print arguments";
       }
       return true;
     }
@@ -120,7 +120,7 @@ namespace roe
       }
       else
       {
-        throw ASTException("Invalid length argument");
+        throw ASTException() << "Invalid length argument";
       }
       return true;
     }
@@ -142,12 +142,12 @@ namespace roe
 
     if (!argList)
     {
-      throw ASTException("Exepected ASTArgList");
+      throw ASTException() << "Exepected ASTArgList";
     }
 
     if (argList->variableArguments().size() != rule.funcPtr()->arg_size())
     {
-      throw ASTException("Invalid number of arguments");
+      throw ASTException() << "Invalid number of arguments";
     }
 
     std::vector<llvm::Value*> args;
@@ -155,7 +155,7 @@ namespace roe
     {
       if (argName.empty())
       {
-        throw ASTException("Invalid non-var argument");
+        throw ASTException() << "Invalid non-var argument";
       }
 
       llvm::Value* container = context_.rule().getParamValue(argName);
@@ -172,7 +172,7 @@ namespace roe
     auto argList = std::dynamic_pointer_cast<ASTArgList>(args_);
     if (!argList)
     {
-      throw ASTException("Expected ASTArgList");
+      throw ASTException() << "Expected ASTArgList";
     }
     auto& values = argList->values();
     retValue     = context_.externalFunctions().makeCall(name_, values);
@@ -196,7 +196,7 @@ namespace roe
 
     if (!processed)
     {
-      throw ASTException("Not a function call");
+      throw ASTException() << "Not a function call";
     }
 
     return value;

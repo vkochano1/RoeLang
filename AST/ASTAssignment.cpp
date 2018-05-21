@@ -30,7 +30,7 @@ namespace roe
     }
     else
     {
-      throw ASTException("Failed to produce assignment");
+      throw ASTException() << "Failed to produce assignment";
     }
   }
 
@@ -72,7 +72,7 @@ namespace roe
     }
     else
     {
-      throw ASTException("Failed to produce assignment(field)");
+      throw ASTException() << "Failed to produce assignment(field)";
     }
   }
 
@@ -91,7 +91,7 @@ namespace roe
 
     if(!astVar)
     {
-      throw ASTException("Expected variable");
+      throw ASTException() << "Expected variable";
     }
 
     if (astVar->isField())
@@ -120,7 +120,7 @@ namespace roe
       }
       else
       {
-        throw ASTException("Invalid assignment");
+        throw ASTException() << "Invalid assignment";
       }
     }
 

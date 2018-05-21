@@ -63,13 +63,13 @@ namespace roe
     bool constructAST(const std::string& text);
     bool constructAST(const std::istream& text);
 
-    void bindFunctionParameterConstrains
+    void bindFunctionParameterConstraints
     (
       const std::string& functionName,
-      std::initializer_list<std::shared_ptr<IContainerAccess>>accessList
+      std::initializer_list<std::shared_ptr<IConstraints>> constraints
     );
 
-    void     dumpIR();
+    void     dumpIR(std::ostream& ostrm);
     void     buildNative();
     std::string errorText() const;
 
@@ -81,6 +81,7 @@ namespace roe
     CompiledFunctions                    compiledFunctions_;
     std::unique_ptr<roe::Driver>         driver_;
     std::string compilationError_;
+    bool compiled_;
   };
 
   using ModulePtr = std::shared_ptr<Module>;

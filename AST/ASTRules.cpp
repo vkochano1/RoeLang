@@ -7,12 +7,12 @@ namespace roe
   {
     if (rule->name().empty())
     {
-      throw ASTException("Invalid ruleID");
+      throw ASTException() << "Invalid ruleID";
     }
 
     if(!rules_.insert(std::make_pair(rule->name(), rule)).second)
     {
-      throw ASTException("Duplicate rule");
+      throw ASTException() << "Duplicate rule";
     }
   }
 

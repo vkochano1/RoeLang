@@ -10,8 +10,8 @@ namespace roe
   const std::string StringOps::CONCAT_CHPTR_AND_STR   = "concatChPtrAndStr";
   const std::string StringOps::CONCAT_CHPTR_AND_CHPTR = "concatChPtrAndChPtr";
 
-  const std::string StringOps::ASSIGN_CHPTR = "AssingFromCharPtr";
-  const std::string StringOps::ASSIGN_STR   = "AssingFromStr";
+  const std::string StringOps::ASSIGN_CHPTR = "AssignFromCharPtr";
+  const std::string StringOps::ASSIGN_STR   = "AssignFromStr";
 
   const std::string StringOps::EQUALS_STR_AND_STR   = "EqualsStrAndStr";
   const std::string StringOps::EQUALS_STR_AND_CHPTR = "EqualsStrAndCharPtr";
@@ -138,30 +138,30 @@ namespace roe
   static void concatImpl(StringOps::String_t* dest, const char* s1, size_t l1,
                          const char* s2, size_t l2)
   {
-    std::memmove(&dest->data[0], s1, l1);
-    std::memmove(&dest->data[l1], s2, l2);
-    dest->len_             = l1 + l2;
-    dest->data[dest->len_] = 0;
+    std::memmove(dest->data_ptr(), s1, l1);
+    std::memmove(dest->data_ptr() + l1, s2, l2);
+    dest->length() = l1 + l2;
+    *(dest->data_ptr() + dest->length()) = 0;
   }
 
   void StringOps::concatStrAndCharPtr(const StringOps::String_t* s1,
                                       const char* s2, int64_t len2, StringOps::String_t* out)
   {
-    concatImpl(out, &s1->data[0], s1->len_, s2, len2);
+    concatImpl(out, s1->c_str(), s1->length(), s2, len2);
   }
 
   void StringOps::concatStrAndStr(const StringOps::String_t* s1,
                                   const StringOps::String_t* s2,
                                   StringOps::String_t*       out)
   {
-    concatImpl(out, &s1->data[0], s1->len_, &s2->data[0], s2->len_);
+    concatImpl(out, s1->c_str(), s1->length(), s2->c_str(), s2->length());
   }
 
   void
   StringOps::concatCharPtrAndStr(const char* s1, int64_t len1, const StringOps::String_t* s2,
                                  StringOps::String_t* out)
   {
-    concatImpl(out, s1, len1, &s2->data[0], s2->len_);
+    concatImpl(out, s1, len1, s2->c_str(), s2->length());
   }
 
   void StringOps::concatCharPtrAndCharPtr(const char* s1, int64_t len1, const char* s2, int64_t len2,
@@ -178,22 +178,23 @@ namespace roe
   {
     if (s1 != s2)
     {
-      std::strncpy(&s1->data[0], &s2->data[0], s2->len_);
-      s1->len_ = s2->len_;
+      std::strncpy(s1->data_ptr(), s2->c_str(), s2->length());
+      s1->length() = s2->length();
     }
   }
   void StringOps::assignChPtr(String_t* s1, const char* s2 , int64_t len2)
   {
-    std::strncpy(&s1->data[0], s2, len2);
-    s1->len_ = len2;
+    std::strncpy(s1->data_ptr(), s2, len2);
+    s1->length() = len2;
   }
 
   // Equals
   static bool equals(const char* s1, size_t l1, const char* s2, size_t l2)
   {
-    auto sx1 = std::string(s1, l1);
-    auto sx2 = std::string(s2, l2);
-    return sx1 == sx2;
+    if (l1 != l2)
+      return false;
+
+    return 0 == std::strncmp(s1,s2,l1);
   }
 
   bool StringOps::equalsStrAndCharPtr(const String_t* s1, const char* s2, int64_t len2)
@@ -219,21 +220,21 @@ namespace roe
   void StringOps::intToString(int64_t i, String_t* s)
   {
     std::string tmp = std::to_string(i);
-    s->len_         = tmp.length();
-    std::memcpy(s->data, tmp.c_str(), tmp.length());
+    s->length()         = tmp.length();
+    std::memcpy(s->data_ptr(), tmp.c_str(), tmp.length());
   }
 
   void StringOps::doubleToString(double d, String_t* s)
   {
     std::string tmp = std::to_string(d);
-    s->len_         = tmp.length();
-    std::memcpy(s->data, tmp.c_str(), tmp.length());
+    s->length()        = tmp.length();
+    std::memcpy(s->data_ptr(), tmp.c_str(), tmp.length());
   }
 
   int64_t StringOps::stringToInt(const String_t* s)
   {
     char* endp = nullptr;
-    return std::strtol(s->data, &endp, 10);
+    return std::strtol(s->c_str(), &endp, 10);
   }
 
   int64_t StringOps::charPtrToInt(const char* s)
@@ -244,20 +245,25 @@ namespace roe
 
   int64_t StringOps::getChar(const String_t* s, int64_t i)
   {
-    return s->data[i];
+    if( i >= s->length())
+    {
+        return 0;
+    }
+
+    return *(s->c_str() + i);
   }
 
   int64_t StringOps::getLength(const String_t* s)
   {
-    return s->len_;
+    return s->length();
   }
 
   void StringOps::getSubstr(const String_t* s, int64_t from, int64_t len,
                             String_t* out)
   {
-    // std::cerr << "Called " << from << "  " << len << std::end;
-    std::memcpy(&out->data[0], s->c_str() + from, len);
-    out->data[len] = 0;
-    out->len_      = len;
+    int64_t effectiveLen = (from + len) > s->length() ? s->length() - from : len;
+    std::memmove(out->data_ptr(), s->c_str() + from, effectiveLen);
+    *(out->data_ptr() + effectiveLen) = 0;
+    out->length()      = effectiveLen;
   }
 }

@@ -40,12 +40,12 @@ namespace roe
     {
       auto fieldStr = fieldName_.substr(FIELD_PREFIX.length());
 
-      auto containerAccess = context_.rule().getContainerForParam(baseName_);
-      if (!containerAccess)
+      auto containerConstraints = context_.rule().getContainerForParam(baseName_);
+      if (!containerConstraints)
       {
-        throw roe::ASTException("Couldn't resolve container for param");
+        throw roe::ASTException() << "Couldn't resolve container for param";
       }
-      tag_ = containerAccess->getTagFromFieldName(fieldStr);
+      tag_ = containerConstraints->getTagFromFieldName(fieldStr);
       return true;
     }
 

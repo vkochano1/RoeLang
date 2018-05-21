@@ -75,7 +75,7 @@ namespace roe
     }
     else if (isV1Number ^ isV2Number)
     {
-      throw ASTException("Can't normalize values");
+      throw ASTException() << "Can't normalize values";
     }
   }
 

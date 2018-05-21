@@ -30,6 +30,8 @@ namespace roe
 
   Module::Module(const std::string& name)
   {
+    compiled_ = false;
+
     {
       auto module    = std::make_unique<llvm::Module>(name, context_);
       module_        = module.get();
@@ -45,17 +47,17 @@ namespace roe
     driver_ = std::make_unique<roe::Driver>(context_);
   }
 
-  void Module::bindFunctionParameterConstrains(
+  void Module::bindFunctionParameterConstraints(
     const std::string& functionName,
-    std::initializer_list<std::shared_ptr<IContainerAccess>>
-      accessList)
+    std::initializer_list<std::shared_ptr<IConstraints>>
+      constraintsList)
   {
     auto& roeRule = context().rule(functionName);
-    auto  argIt   = accessList.begin();
+    auto  argIt   = constraintsList.begin();
 
     for (const auto& param : roeRule.params())
     {
-      if (argIt == accessList.end())
+      if (argIt == constraintsList.end())
       {
         throw std::logic_error("Invalid number of arguments");
       }
@@ -79,19 +81,46 @@ namespace roe
     return driver_->parse_stream(in);
   }
 
-  void Module::compileToIR() { driver_->rules().evaluate(); }
-
-  void Module::dumpIR()
+  void Module::compileToIR()
   {
-    using namespace llvm;
-    std::string        std_file_stream;
-    raw_string_ostream file_stream(std_file_stream);
-    module_->print(file_stream, nullptr);
-    std::cout << std_file_stream << std::endl;
+    if (compiled_)
+    {
+        throw std::logic_error("Module is already compiled");
+    }
+
+    try
+    {
+      driver_->rules().evaluate();
+
+      compiled_ = true;
+    }
+    catch(ASTException& ex)
+    {
+      std::ostringstream ostrm;
+      ostrm << "Failed to generate IR code from AST due to:" << ex.what();
+      throw std::runtime_error(ostrm.str());
+    }
+  }
+
+  void Module::dumpIR(std::ostream& ostrm)
+  {
+    if (!compiled_)
+    {
+      std::logic_error("Module is not compiled to IR yet");
+    }
+
+    /*std::string       out;
+    module_->print(out, nullptr);
+    ostrm << out << std::endl;*/
   }
 
   void Module::buildNative()
   {
+    if (!compiled_)
+    {
+      std::logic_error("Module is not compiled to IR yet");
+    }
+
     context_.externalFunctions().addAllMappings(*executionEngine_);
 
     llvm::PassManagerBuilder builder;

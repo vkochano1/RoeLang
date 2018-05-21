@@ -38,7 +38,7 @@ namespace roe
         out = builder.CreateOr(v1, v2);
         break;
       defualt:
-        throw ASTException("Invalid arguments for logical expression");
+        throw ASTException() << "Invalid arguments for logical expression";
         break;
     };
 
@@ -52,7 +52,7 @@ namespace roe
 
     if (!isBool(v2) || !isBool(v2))
     {
-      throw ASTException("Failed to convert to bool");
+      throw ASTException() << "Failed to convert to bool";
     }
   }
 
@@ -71,7 +71,7 @@ namespace roe
 
     if (!isBool(value))
     {
-      throw ASTException("Failed to convert to bool");
+      throw ASTException() << "Failed to convert to bool";
     }
 
     return builder.CreateNot(value);
@@ -140,7 +140,7 @@ namespace roe
 
     if (!(v1 && v2))
     {
-      throw ASTException("Invalid value(s) for comaparison");
+      throw ASTException() << "Invalid value(s) for comaparison";
     }
 
     v1 = loadValueIfNeeded(v1);
@@ -153,24 +153,53 @@ namespace roe
     {
       case Operator::LESS:
       {
-        if (v1->getType() == context_.types().floatType())
+        if (isFloat(v1)&& isFloat(v2))
         {
           out = builder.CreateFCmpOLT(v1, v2);
         }
-        else
+        else if (isLong(v1) && isLong(v2))
         {
           out = builder.CreateICmpSLT(v1, v2);
+        }
+        else
+        {
+          throw ASTException() << "Invalid argumnents for <";
         }
       }
       break;
       case Operator::MORE:
-        out = builder.CreateICmpSGT(v1, v2);
+      {
+        if (isFloat(v1)&& isFloat(v2))
+        {
+          out = builder.CreateFCmpOGT(v1, v2);
+        }
+        else if (isLong(v1) && isLong(v2))
+        {
+          out = builder.CreateICmpSGT(v1, v2);
+        }
+        else
+        {
+          throw ASTException() << "Invalid argumnents for >";
+        }
+      }
         break;
       case Operator::EQUAL:
       {
-        if (!handleStringEquals(v1, v2, /*in-out*/ out))
+        if (handleStringEquals(v1, v2, /*in-out*/ out))
+        {
+          // out is populated
+        }
+        else if (isFloat(v1)&& isFloat(v2))
+        {
+          out = builder.CreateFCmpOEQ(v1, v2);
+        }
+        else if (isLong(v1) && isLong(v2))
         {
           out = builder.CreateICmpEQ(v1, v2);
+        }
+        else
+        {
+          throw ASTException() << "Invalid argumnents for ==";
         }
       }
       break;
@@ -180,17 +209,51 @@ namespace roe
         {
           out = builder.CreateNot(out);
         }
-        else
+        else if (isFloat(v1)&& isFloat(v2))
+        {
+          out = builder.CreateFCmpONE(v1, v2);
+        }
+        else if (isLong(v1) && isLong(v2))
         {
           out = builder.CreateICmpNE(v1, v2);
+        }
+        else
+        {
+          throw ASTException() << "Invalid argumnents for !=";
         }
       }
       break;
       case Operator::MORE_OR_EQUAL:
-        out = builder.CreateICmpSGE(v1, v2);
+      {
+        if (isFloat(v1)&& isFloat(v2))
+        {
+          out = builder.CreateFCmpOGE(v1, v2);
+        }
+        else if (isLong(v1) && isLong(v2))
+        {
+          out = builder.CreateICmpSGE(v1, v2);
+        }
+        else
+        {
+          throw ASTException() << "Invalid argumnents for >=";
+        }
+      }
         break;
       case Operator::LESS_OR_EQUAL:
-        out = builder.CreateICmpSLE(v1, v2);
+      {
+        if (isFloat(v1)&& isFloat(v2))
+        {
+          out = builder.CreateFCmpOLE(v1, v2);
+        }
+        else if (isLong(v1) && isLong(v2))
+        {
+          out = builder.CreateICmpSLE(v1, v2);
+        }
+        else
+        {
+          throw ASTException() << "Invalid argumnents for <=";
+        }
+      }
         break;
     };
 

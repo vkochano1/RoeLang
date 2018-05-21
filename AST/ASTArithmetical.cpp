@@ -26,7 +26,7 @@ namespace roe
     {
       out = allocString();
       context_.externalFunctions().makeCall(StringOps::CONCAT_STR_AND_STR,
-                                            {left, left, right});
+                                            {left, right, out});
     }
     else if (isString(left) && isCStr(right))
     {
@@ -78,7 +78,7 @@ namespace roe
           out = builder.CreateExactSDiv(left, right);
           break;
         defualt:
-          throw ASTException("Opearand is not supported");
+          throw ((ASTException()) << "Opearand is not supported");
           break;
       };
     }
@@ -108,7 +108,7 @@ namespace roe
           out = builder.CreateFDiv(left, right);
           break;
         default:
-          throw ASTException("Opearand is not supported");
+          throw ASTException() << "Opearand is not supported";
           break;
       };
     }
@@ -133,6 +133,6 @@ namespace roe
       return out;
     }
 
-    throw ASTException("Incompatible arguments");
+    throw ASTException() << "Incompatible arguments";
   }
 }

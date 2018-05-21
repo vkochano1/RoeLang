@@ -1,4 +1,4 @@
-#include <AST/ASTException.h>
+#include <Exceptions/ASTException.h>
 #include <Functions/FunctionRegistrar.h>
 #include <Module/Context.h>
 #include <assert.h>
@@ -55,27 +55,27 @@ namespace roe
     auto fit = paramToValue_.find(name);
     if (fit == paramToValue_.end())
     {
-      throw ASTException("Unknown function parameter");
+      throw ASTException() << "Unknown function parameter";
     }
     return fit->second;
   }
 
   void RoeRule::bindParameter(
-    const std::string& name, std::shared_ptr<IContainerAccess> container)
+    const std::string& name, std::shared_ptr<IConstraints> constraints)
   {
-    auto insertRes = paramToContainer_.insert(std::make_pair(name, container));
+    auto insertRes = paramToConstraints_.insert(std::make_pair(name, constraints));
     if (insertRes.second == false)
     {
-      throw ASTException("Duplicate parameter bindings");
+      throw ASTException() << "Duplicate parameter bindings";
     }
   }
 
-  std::shared_ptr<IContainerAccess>
+  std::shared_ptr<IConstraints>
   RoeRule::getContainerForParam(const std::string& paramName)
   {
-    auto fit = paramToContainer_.find(paramName);
-    if (fit == paramToContainer_.end())
-      return std::shared_ptr<IContainerAccess>();
+    auto fit = paramToConstraints_.find(paramName);
+    if (fit == paramToConstraints_.end())
+      return std::shared_ptr<IConstraints>();
     return fit->second;
   }
 
@@ -108,7 +108,7 @@ namespace roe
   VariableInfo& RoeRule::getVariable(const std::string& name) const
   {
     if (!hasVariable(name))
-      throw ASTException("Unknown variable");
+      throw ASTException() << "Unknown variable";
 
     return declaredVariables_[name];
   }
@@ -136,7 +136,7 @@ namespace roe
     auto rit  = rules_.insert(std::make_pair(newRuleName, rule));
     if (rit.second == false)
     {
-      throw ASTException("Duplicate rule");
+      throw ASTException() << "Duplicate rule";
     }
   }
 
@@ -161,7 +161,7 @@ namespace roe
     auto fit = rules_.find(name);
     if (fit == rules_.end())
     {
-      throw ASTException("Unknonw rule");
+      throw ASTException() << "Unknonw rule";
     }
     currentRule_ = fit->second;
   }

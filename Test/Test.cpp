@@ -45,94 +45,60 @@ public:
     }
   }
 
-  void setTagFromFieldNameMapping(
-    roe::IContainerAccess::FieldNameToTagMapping&& mapping)
-  {
-    fieldNameToTagMapping_.swap(mapping);
-  }
-
 public:
   std::unordered_map<int64_t, std::string> data_;
 };
 
-void test ()
-{
-
-  int local = 23;
-  double d = 1.0 + 10/2;
-  std::string s = std::string("123") + "XXX";
-  std::string sub = s.substr(2,2);
-  double d2 = 0 -  2/32.01 * (-1);
-  if (1)
-  {
-    std::string sR = "dfdfdfdf";
-  }
-}
 
 int main(int argc, char* argv[])
 {
 
-  if (argc != 4)
+  if (argc != 3)
     std::exit(0);
 
   std::string   moduleFile     = argv[1];
   std::string   functionToCall = argv[2];
-  char* ptrEnd = nullptr;
-  size_t N    = strtol(argv[3], &ptrEnd, 10);
 
   llvm::InitializeNativeTarget();
   llvm::InitializeNativeTargetAsmParser();
   llvm::InitializeNativeTargetAsmPrinter();
 
-  roe::IContainerAccess::FieldNameToTagMapping mapping = {
+  /*roe::IContainerAccess::FieldNameToTagMapping mapping = {
     {"Symbol", 55}, {"Suffix", 65}, {"Side", 54},      {"OrdType", 40},
     {"OrdQty", 38}, {"Account", 1}, {"LimitPrice", 44}};
 
   auto mapping2 = mapping;
 
-  std::shared_ptr<roe::IContainerAccess> access1(new ContainerAccess());
+  //std::shared_ptr<roe::IContainerAccess> access1(new ContainerAccess());
 
-  ContainerAccess* paccess1 = (ContainerAccess*)access1.get();
-  paccess1->setTagFromFieldNameMapping(std::move(mapping));
+  //ContainerAccess* paccess1 = (ContainerAccess*)access1.get();
+  //paccess1->setTagFromFieldNameMapping(std::move(mapping));
 
-  std::shared_ptr<roe::IContainerAccess> access2(new ContainerAccess());
-  ContainerAccess* paccess2 = (ContainerAccess*)access2.get();
-  paccess2->setTagFromFieldNameMapping(std::move(mapping2));
+  //std::shared_ptr<roe::IContainerAccess> access2(new ContainerAccess());
+  //ContainerAccess* paccess2 = (ContainerAccess*)access2.get();
+  //paccess2->setTagFromFieldNameMapping(std::move(mapping2));
+
+  //std::initializer_list<std::shared_ptr<roe::IContainerAccess>> accessList = {
+  //  access1, access2, access1};
+  //m.bindFunctionParameterConstrains(functionToCall, accessList);
+  */
 
   try
   {
+    ContainerAccess container1, container2, container3;
     roe::Loader loader;
-    loader.tryLoadModuleFromFile(moduleFile, moduleFile);
-    auto  f = loader.getCompiledFunction(moduleFile, functionToCall);
-
-    auto start = std::chrono::high_resolution_clock::now();
-    for(size_t i = 0 ; i < N; ++i)
-    {
-      f.call(access1.get(), access2.get(), access1.get());
-    }
-
-    auto end =  std::chrono::high_resolution_clock::now();
-
-    auto res = std::chrono::duration_cast<std::chrono::nanoseconds> (end - start).count();
-    std::cout << res / N  << std::endl;
-
-    paccess1->dump(std::cout);
-    paccess2->dump(std::cout);
-
-
-    {
-      auto start = std::chrono::high_resolution_clock::now();
-
-      for(size_t i = 0 ; i < N; ++i)
-        test();
-      auto end =  std::chrono::high_resolution_clock::now();
-
-      auto res = std::chrono::duration_cast<std::chrono::nanoseconds> (end - start).count();
-      std::cout << res / N  << std::endl;
-    }
+    auto modulePtr = loader.tryLoadModuleFromFile(moduleFile, moduleFile);
+    ///modulePtr->bindFunctionParameterConstrains(functionToCall, accessList);
+    modulePtr->compileToIR();
+    loader.buildAll();
+    auto  f  = loader.getCompiledFunction(moduleFile, functionToCall);
+    f.call(&container1, &container2, &container3);
   }
   catch (std::exception& exp)
   {
     std::cerr << exp.what() << std::endl;
+    return -1;
   }
+
+  return 0;
 }

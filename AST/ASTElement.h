@@ -1,6 +1,6 @@
 #pragma once
 
-#include <AST/ASTException.h>
+#include <Exceptions/ASTException.h>
 #include <Module/Context.h>
 #include <llvm/IR/DerivedTypes.h>
 
@@ -33,7 +33,7 @@ namespace roe
 
       bool isFloatPtr(const llvm::Value*);
       bool isLongPtr(const llvm::Value*) ;
-      
+
   protected:
       llvm::Value* allocBool();
       llvm::Value* allocFloat();

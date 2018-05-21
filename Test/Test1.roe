@@ -1,43 +1,87 @@
 
 
-ruleid = TEST(C1, C2, C3)
+ruleid = TEST1 (C1, C2, C3)
 {
-  local    = 23;
-  i        = 1.0 + 10 / 2;
-  C1.tag38="ABC";
-  loc1 = "BF" ;
+  local    = 21 + 2 * 2;
+  local2   = "text";
+  local3   =  1234.000 - 1234.000;
+  local4   = local2 + "_text";
+  passed = "Passed";
+  failed = "Failed";
 
-  loc = 10 + len(loc1);
-  C1.tag55= loc;
-  C1.tag151 = local;
-  C1.tag151 = int(C1.tag38) / 2;
-  C2.tag38  = 100 * (1 + 44 / 2);
-  s         = "123" + "XXX";
-  s2        = s [2:2];
-  s3 = 0 - (2 / 32.01 * (-1));
-  if (1 and i < 1000 or local == 24)
+  if (local == 25 and local4 == "text_text" and local3 == 0)
   {
-    sR = "DDDD123";
+    print (passed);
   }
-/*
-  if (int(C1.tag38) > 99 and int(C2.tag38) > 0)
+  else
   {
-    C2.fieldSymbol = "Symbol" + str(local + 2);
+    print (failed);
+  }
+}
+
+ruleid = TEST2 (C1, C2, C3)
+{
+  local1   =  1234.000 - 1234.000;
+  local2   = ( local1 + 3 ) * 4;
+  local3  = local2 / 5;
+  passed = "passed";
+  failed = "failed";
+
+  if (local1 == 0.0 and local2 == 12.000)
+  {
+    print (passed);
+  }
+  else
+  {
+    print (failed);
   }
 
-  yyy = "455";
-  ttt = 1 + int(C1.tag38) + 0.222;
-  sN  = "dfd";
-  print(ttt);
-  if (-1 + 1 == 1 )
+  if (1 or (local2 > 18 and 2.00 < 300) )
   {
-    sN = "DDDD123";
-    print(sN);
+    print (passed);
+  }
+  else
+  {
+    print (failed);
   }
 
-  yu= "www";
-  if(yu == "www" and 555.4 )
+  if(local3 <= 2.5 and local3 >= 2.4 and local3 != (2.40 + 0.1))
   {
-     print(yu);
-  }*/
+    print(passed);
+  }
+  else
+  {
+    print (failed);
+  }
+}
+
+ruleid = TEST3(C1,C2,C3)
+{
+  passed = "passed";
+  failed = "failed";
+  str1 = "ABC";
+  str2 = str(4.55);
+  str3 = str(6);
+
+  local1 = int(str3) + int(str2);
+
+  if (local1 == 10)
+  {
+    print(passed);
+  }
+  else
+  {
+    print (failed);
+  }
+
+  res1 = str1[0:1] + str1[1:20000];
+  if (str1 == res1 and len(res1) == 3 and res1[1] == 'B' and res1[444] == 0)
+  {
+    print(passed);
+  }
+  else
+  {
+    print(failed);
+  }
+
 }

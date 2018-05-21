@@ -1,7 +1,7 @@
 #pragma once
 
 #include <AST/ASTElement.h>
-#include <AST/ASTException.h>
+#include <Exceptions/ASTException.h>
 namespace roe
 {
 
