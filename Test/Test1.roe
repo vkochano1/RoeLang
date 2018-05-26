@@ -1,64 +1,58 @@
 
 
-ruleid = TEST1 (C1, C2, C3)
+ruleid = TEST1(C1, C2, C3)
 {
-  local    = 21 + 2 * 2;
-  local2   = "text";
-  local3   =  1234.000 - 1234.000;
-  local4   = local2 + "_text";
-  passed = "Passed";
-  failed = "Failed";
+  local  = 21 + 2 * 2;
+  local2 = "text";
+  local3 = 1234.000 - 1234.000;
+  local4 = local2 + "_text";
 
   if (local == 25 and local4 == "text_text" and local3 == 0)
   {
-    print (passed);
+    print("passed");
   }
   else
   {
-    print (failed);
+    print("failed");
   }
 }
 
-ruleid = TEST2 (C1, C2, C3)
+ruleid = TEST2(C1, C2, C3)
 {
-  local1   =  1234.000 - 1234.000;
-  local2   = ( local1 + 3 ) * 4;
-  local3  = local2 / 5;
-  passed = "passed";
-  failed = "failed";
+  local1 = 1234.000 - 1234.000;
+  local2 = (local1 + 3) * 4;
+  local3 = local2 / 5;
 
   if (local1 == 0.0 and local2 == 12.000)
   {
-    print (passed);
+    print("passed");
   }
   else
   {
-    print (failed);
+    print("failed");
   }
 
-  if (1 or (local2 > 18 and 2.00 < 300) )
+  if (1 or (local2 > 18 and 2.00 < 300))
   {
-    print (passed);
+    print("passed");
   }
   else
   {
-    print (failed);
+    print("failed");
   }
 
-  if(local3 <= 2.5 and local3 >= 2.4 and local3 != (2.40 + 0.1))
+  if (local3 <= 2.5 and local3 >= 2.4 and local3 != (2.40 + 0.1))
   {
-    print(passed);
+    print("passed");
   }
   else
   {
-    print (failed);
+    print("failed");
   }
 }
 
-ruleid = TEST3(C1,C2,C3)
+ruleid = TEST3(C1, C2, C3)
 {
-  passed = "passed";
-  failed = "failed";
   str1 = "ABC";
   str2 = str(4.55);
   str3 = str(6);
@@ -67,21 +61,22 @@ ruleid = TEST3(C1,C2,C3)
 
   if (local1 == 10)
   {
-    print(passed);
+    print("passed");
   }
   else
   {
-    print (failed);
+    print("failed");
   }
 
-  res1 = str1[0:1] + str1[1:20000];
+  res1 = str1 [0:1] + str1 [1:20000];
   if (str1 == res1 and len(res1) == 3 and res1[1] == 'B' and res1[444] == 0)
   {
-    print(passed);
+    print("passed");
   }
   else
   {
-    print(failed);
+    print("failed");
   }
 
+  print("Done " + " with " + " test");
 }

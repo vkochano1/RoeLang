@@ -1,12 +1,11 @@
 #include <AST/ASTArithmetical.h>
+#include <AST/ASTCStr.h>
 #include <Functions/FunctionRegistrar.h>
 #include <Functions/StringOps.h>
-#include <AST/ASTCStr.h>
 
 namespace roe
 {
-  ASTArithmetical::ASTArithmetical(Context& context, Operator op,
-                                   ASTElementPtr op1, ASTElementPtr op2)
+  ASTArithmetical::ASTArithmetical(Context& context, Operator op, ASTElementPtr op1, ASTElementPtr op2)
     : ASTElement(context)
     , op_(op)
     , operand1_(op1)
@@ -14,9 +13,7 @@ namespace roe
   {
   }
 
-  bool
-  ASTArithmetical::processStringConcat(llvm::Value* left, llvm::Value* right,
-                                       llvm::Value*& out)
+  bool ASTArithmetical::processStringConcat(llvm::Value* left, llvm::Value* right, llvm::Value*& out)
   {
     auto& builder = context_.builder();
 
@@ -25,38 +22,33 @@ namespace roe
     if (isString(left) && isString(right))
     {
       out = allocString();
-      context_.externalFunctions().makeCall(StringOps::CONCAT_STR_AND_STR,
-                                            {left, right, out});
+      context_.externalFunctions().makeCall(StringOps::CONCAT_STR_AND_STR, {left, right, out});
     }
     else if (isString(left) && isCStr(right))
     {
-      out = allocString();
-      auto astCStr =  std::dynamic_pointer_cast<ASTCstr> (operand2_);
-      context_.externalFunctions().makeCall(StringOps::CONCAT_STR_AND_CHPTR,
-                                            {left, right, astCStr->length(), out});
+      out          = allocString();
+      auto astCStr = std::dynamic_pointer_cast<ASTCstr>(operand2_);
+      context_.externalFunctions().makeCall(StringOps::CONCAT_STR_AND_CHPTR, {left, right, astCStr->length(), out});
     }
     else if (isCStr(left) && isString(right))
     {
-      out = allocString();
-      auto astCStr =  std::dynamic_pointer_cast<ASTCstr> (operand1_);
-      context_.externalFunctions().makeCall(StringOps::CONCAT_CHPTR_AND_STR,
-                                            {left,astCStr->length(), right, out});
+      out          = allocString();
+      auto astCStr = std::dynamic_pointer_cast<ASTCstr>(operand1_);
+      context_.externalFunctions().makeCall(StringOps::CONCAT_CHPTR_AND_STR, {left, astCStr->length(), right, out});
     }
     else if (isCStr(left) && isCStr(right))
     {
-      out = allocString();
-      auto astCStrLeft =  std::dynamic_pointer_cast<ASTCstr> (operand1_);
-      auto astCStrRight =  std::dynamic_pointer_cast<ASTCstr> (operand2_);
-      context_.externalFunctions().makeCall(StringOps::CONCAT_CHPTR_AND_CHPTR,
-                                            {left,astCStrLeft->length()
-                                              ,right, astCStrRight->length(), out});
+      out               = allocString();
+      auto astCStrLeft  = std::dynamic_pointer_cast<ASTCstr>(operand1_);
+      auto astCStrRight = std::dynamic_pointer_cast<ASTCstr>(operand2_);
+      context_.externalFunctions().makeCall(
+        StringOps::CONCAT_CHPTR_AND_CHPTR, {left, astCStrLeft->length(), right, astCStrRight->length(), out});
     }
 
     return out != nullptr;
   }
 
-  bool ASTArithmetical::processLong(llvm::Value* left, llvm::Value* right,
-                                    llvm::Value*& out)
+  bool ASTArithmetical::processLong(llvm::Value* left, llvm::Value* right, llvm::Value*& out)
   {
     auto& builder = context_.builder();
     out           = nullptr;
@@ -78,15 +70,14 @@ namespace roe
           out = builder.CreateExactSDiv(left, right);
           break;
         defualt:
-          throw ((ASTException()) << "Opearand is not supported");
+          throw((ASTException()) << "Opearand is not supported");
           break;
       };
     }
     return out != nullptr;
   }
 
-  bool ASTArithmetical::processFloat(llvm::Value* left, llvm::Value* right,
-                                     llvm::Value*& out)
+  bool ASTArithmetical::processFloat(llvm::Value* left, llvm::Value* right, llvm::Value*& out)
   {
     auto& builder = context_.builder();
     out           = nullptr;
@@ -127,8 +118,7 @@ namespace roe
     normalizeValues(left, right);
 
     llvm::Value* out = nullptr;
-    if (processStringConcat(left, right, out) ||
-        processFloat(left, right, out) || processLong(left, right, out))
+    if (processStringConcat(left, right, out) || processFloat(left, right, out) || processLong(left, right, out))
     {
       return out;
     }

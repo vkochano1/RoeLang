@@ -7,7 +7,6 @@
 
 namespace roe
 {
-
   Driver::Driver(Context& context)
     : trace_scanning(false)
     , trace_parsing(false)

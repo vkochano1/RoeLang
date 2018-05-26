@@ -11,8 +11,7 @@ namespace roe
   class ASTRule
   {
   public:
-    ASTRule(Context& context, const std::string& ruleID,
-            ASTFunctionParametersPtr params, ASTElementPtr ruleAST);
+    ASTRule(Context& context, const std::string& ruleID, ASTFunctionParametersPtr params, ASTElementPtr ruleAST);
 
   public:
     void               evaluate();

@@ -3,12 +3,10 @@
 
 namespace roe
 {
-
   static const std::string LOCALS_LABEL = "locals";
   static const std::string ENTRY_LABEL  = "entrypoint";
 
-  ASTRule::ASTRule(Context& context, const std::string& ruleID,
-                   ASTFunctionParametersPtr params, ASTElementPtr ruleAST)
+  ASTRule::ASTRule(Context& context, const std::string& ruleID, ASTFunctionParametersPtr params, ASTElementPtr ruleAST)
     : ruleID_(ruleID)
     , context_(context)
     , params_(params)
@@ -20,10 +18,8 @@ namespace roe
   void ASTRule::evaluate()
   {
     auto& builder = context_.builder();
-    auto* locals  = llvm::BasicBlock::Create(context_, LOCALS_LABEL,
-                                            context_.rule().funcPtr());
-    auto* entry = llvm::BasicBlock::Create(context_, ENTRY_LABEL,
-                                           context_.rule().funcPtr());
+    auto* locals  = llvm::BasicBlock::Create(context_, LOCALS_LABEL, context_.rule().funcPtr());
+    auto* entry   = llvm::BasicBlock::Create(context_, ENTRY_LABEL, context_.rule().funcPtr());
     context_.rule().entryBlock(entry);
     context_.rule().localsBlock(locals);
 
@@ -35,7 +31,13 @@ namespace roe
     builder.CreateBr(entry);
   }
 
-  Context& ASTRule::context() { return context_; };
+  Context& ASTRule::context()
+  {
+    return context_;
+  };
 
-  const std::string& ASTRule::name() const { return ruleID_; }
+  const std::string& ASTRule::name() const
+  {
+    return ruleID_;
+  }
 }

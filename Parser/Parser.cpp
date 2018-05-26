@@ -31,36 +31,35 @@
 // version 2.2 of Bison.
 
 // Take the name prefix into account.
-#define yylex   roelex
+#define yylex roelex
 
 // First part of user declarations.
 #line 4 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:404
- /*** C/C++ Declarations ***/
+                                                          /*** C/C++ Declarations ***/
 
+#include <Parser/YYTYPE.h>
 #include <stdio.h>
 #include <string>
 #include <vector>
-#include <Parser/YYTYPE.h>
 
 #line 95 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:404
 
-
+#include <Lexer/Scanner.h>
 #include <Parser/Driver.h>
 #include <Parser/YYTYPE.h>
-#include <Lexer/Scanner.h>
 
 #undef yylex
 #define yylex driver.lexer->lex
 
 #line 56 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:404
 
-# ifndef YY_NULLPTR
-#  if defined __cplusplus && 201103L <= __cplusplus
-#   define YY_NULLPTR nullptr
-#  else
-#   define YY_NULLPTR 0
-#  endif
-# endif
+#ifndef YY_NULLPTR
+#if defined __cplusplus && 201103L <= __cplusplus
+#define YY_NULLPTR nullptr
+#else
+#define YY_NULLPTR 0
+#endif
+#endif
 
 #include "Parser.hh"
 
@@ -68,17 +67,16 @@
 
 #line 70 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:412
 
-
 #ifndef YY_
-# if defined YYENABLE_NLS && YYENABLE_NLS
-#  if ENABLE_NLS
-#   include <libintl.h> // FIXME: INFRINGES ON USER NAME SPACE.
-#   define YY_(msgid) dgettext ("bison-runtime", msgid)
-#  endif
-# endif
-# ifndef YY_
-#  define YY_(msgid) msgid
-# endif
+#if defined YYENABLE_NLS && YYENABLE_NLS
+#if ENABLE_NLS
+#include <libintl.h> // FIXME: INFRINGES ON USER NAME SPACE.
+#define YY_(msgid) dgettext("bison-runtime", msgid)
+#endif
+#endif
+#ifndef YY_
+#define YY_(msgid) msgid
+#endif
 #endif
 
 #define YYRHSLOC(Rhs, K) ((Rhs)[K].location)
@@ -86,72 +84,78 @@
    If N is 0, then set CURRENT to the empty location which ends
    the previous symbol: RHS[0] (always defined).  */
 
-# ifndef YYLLOC_DEFAULT
-#  define YYLLOC_DEFAULT(Current, Rhs, N)                               \
-    do                                                                  \
-      if (N)                                                            \
-        {                                                               \
-          (Current).begin  = YYRHSLOC (Rhs, 1).begin;                   \
-          (Current).end    = YYRHSLOC (Rhs, N).end;                     \
-        }                                                               \
-      else                                                              \
-        {                                                               \
-          (Current).begin = (Current).end = YYRHSLOC (Rhs, 0).end;      \
-        }                                                               \
-    while (/*CONSTCOND*/ false)
-# endif
-
+#ifndef YYLLOC_DEFAULT
+#define YYLLOC_DEFAULT(Current, Rhs, N)                       \
+  do                                                          \
+    if (N)                                                    \
+    {                                                         \
+      (Current).begin = YYRHSLOC(Rhs, 1).begin;               \
+      (Current).end   = YYRHSLOC(Rhs, N).end;                 \
+    }                                                         \
+    else                                                      \
+    {                                                         \
+      (Current).begin = (Current).end = YYRHSLOC(Rhs, 0).end; \
+    }                                                         \
+  while (/*CONSTCOND*/ false)
+#endif
 
 // Suppress unused-variable warnings by "using" E.
-#define YYUSE(E) ((void) (E))
+#define YYUSE(E) (( void ) (E))
 
 // Enable debugging if requested.
 #if YYDEBUG
 
 // A pseudo ostream that takes yydebug_ into account.
-# define YYCDEBUG if (yydebug_) (*yycdebug_)
+#define YYCDEBUG \
+  if (yydebug_)  \
+  (*yycdebug_)
 
-# define YY_SYMBOL_PRINT(Title, Symbol)         \
-  do {                                          \
-    if (yydebug_)                               \
-    {                                           \
-      *yycdebug_ << Title << ' ';               \
-      yy_print_ (*yycdebug_, Symbol);           \
-      *yycdebug_ << std::endl;                  \
-    }                                           \
+#define YY_SYMBOL_PRINT(Title, Symbol) \
+  do                                   \
+  {                                    \
+    if (yydebug_)                      \
+    {                                  \
+      *yycdebug_ << Title << ' ';      \
+      yy_print_(*yycdebug_, Symbol);   \
+      *yycdebug_ << std::endl;         \
+    }                                  \
   } while (false)
 
-# define YY_REDUCE_PRINT(Rule)          \
-  do {                                  \
-    if (yydebug_)                       \
-      yy_reduce_print_ (Rule);          \
+#define YY_REDUCE_PRINT(Rule) \
+  do                          \
+  {                           \
+    if (yydebug_)             \
+      yy_reduce_print_(Rule); \
   } while (false)
 
-# define YY_STACK_PRINT()               \
-  do {                                  \
-    if (yydebug_)                       \
-      yystack_print_ ();                \
+#define YY_STACK_PRINT() \
+  do                     \
+  {                      \
+    if (yydebug_)        \
+      yystack_print_();  \
   } while (false)
 
 #else // !YYDEBUG
 
-# define YYCDEBUG if (false) std::cerr
-# define YY_SYMBOL_PRINT(Title, Symbol)  YYUSE(Symbol)
-# define YY_REDUCE_PRINT(Rule)           static_cast<void>(0)
-# define YY_STACK_PRINT()                static_cast<void>(0)
+#define YYCDEBUG \
+  if (false)     \
+  std::cerr
+#define YY_SYMBOL_PRINT(Title, Symbol) YYUSE(Symbol)
+#define YY_REDUCE_PRINT(Rule) static_cast<void>(0)
+#define YY_STACK_PRINT() static_cast<void>(0)
 
 #endif // !YYDEBUG
 
-#define yyerrok         (yyerrstatus_ = 0)
-#define yyclearin       (yyla.clear ())
+#define yyerrok (yyerrstatus_ = 0)
+#define yyclearin (yyla.clear())
 
-#define YYACCEPT        goto yyacceptlab
-#define YYABORT         goto yyabortlab
-#define YYERROR         goto yyerrorlab
-#define YYRECOVERING()  (!!yyerrstatus_)
+#define YYACCEPT goto yyacceptlab
+#define YYABORT goto yyabortlab
+#define YYERROR goto yyerrorlab
+#define YYRECOVERING() (!!yyerrstatus_)
 
-
-namespace roe {
+namespace roe
+{
 #line 156 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:479
 
   /* Return YYSTR after stripping away unnecessary quotes and
@@ -159,205 +163,183 @@ namespace roe {
      that double-quoting is unnecessary unless the string contains an
      apostrophe, a comma, or backslash (other than backslash-backslash).
      YYSTR is taken from yytname.  */
-  std::string
-  Parser::yytnamerr_ (const char *yystr)
+  std::string Parser::yytnamerr_(const char* yystr)
   {
     if (*yystr == '"')
-      {
-        std::string yyr = "";
-        char const *yyp = yystr;
+    {
+      std::string yyr = "";
+      char const* yyp = yystr;
 
-        for (;;)
-          switch (*++yyp)
-            {
-            case '\'':
-            case ',':
+      for (;;)
+        switch (*++yyp)
+        {
+          case '\'':
+          case ',':
+            goto do_not_strip_quotes;
+
+          case '\\':
+            if (*++yyp != '\\')
               goto do_not_strip_quotes;
+          // Fall through.
+          default:
+            yyr += *yyp;
+            break;
 
-            case '\\':
-              if (*++yyp != '\\')
-                goto do_not_strip_quotes;
-              // Fall through.
-            default:
-              yyr += *yyp;
-              break;
-
-            case '"':
-              return yyr;
-            }
-      do_not_strip_quotes: ;
-      }
+          case '"':
+            return yyr;
+        }
+    do_not_strip_quotes:;
+    }
 
     return yystr;
   }
 
-
   /// Build a parser object.
-  Parser::Parser (class Driver& driver_yyarg)
+  Parser::Parser(class Driver& driver_yyarg)
     :
 #if YYDEBUG
-      yydebug_ (false),
-      yycdebug_ (&std::cerr),
+    yydebug_(false)
+    , yycdebug_(&std::cerr)
+    ,
 #endif
-      driver (driver_yyarg)
-  {}
+    driver(driver_yyarg)
+  {
+  }
 
-  Parser::~Parser ()
-  {}
-
+  Parser::~Parser()
+  {
+  }
 
   /*---------------.
   | Symbol types.  |
   `---------------*/
 
-  inline
-  Parser::syntax_error::syntax_error (const location_type& l, const std::string& m)
-    : std::runtime_error (m)
-    , location (l)
-  {}
+  inline Parser::syntax_error::syntax_error(const location_type& l, const std::string& m)
+    : std::runtime_error(m)
+    , location(l)
+  {
+  }
 
   // basic_symbol.
-  template <typename Base>
-  inline
-  Parser::basic_symbol<Base>::basic_symbol ()
-    : value ()
-  {}
+  template<typename Base>
+  inline Parser::basic_symbol<Base>::basic_symbol()
+    : value()
+  {
+  }
 
-  template <typename Base>
-  inline
-  Parser::basic_symbol<Base>::basic_symbol (const basic_symbol& other)
-    : Base (other)
-    , value ()
-    , location (other.location)
+  template<typename Base>
+  inline Parser::basic_symbol<Base>::basic_symbol(const basic_symbol& other)
+    : Base(other)
+    , value()
+    , location(other.location)
   {
     value = other.value;
   }
 
-
-  template <typename Base>
-  inline
-  Parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const semantic_type& v, const location_type& l)
-    : Base (t)
-    , value (v)
-    , location (l)
-  {}
-
+  template<typename Base>
+  inline Parser::basic_symbol<Base>::basic_symbol(
+    typename Base::kind_type t, const semantic_type& v, const location_type& l)
+    : Base(t)
+    , value(v)
+    , location(l)
+  {
+  }
 
   /// Constructor for valueless symbols.
-  template <typename Base>
-  inline
-  Parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const location_type& l)
-    : Base (t)
-    , value ()
-    , location (l)
-  {}
-
-  template <typename Base>
-  inline
-  Parser::basic_symbol<Base>::~basic_symbol ()
+  template<typename Base>
+  inline Parser::basic_symbol<Base>::basic_symbol(typename Base::kind_type t, const location_type& l)
+    : Base(t)
+    , value()
+    , location(l)
   {
-    clear ();
   }
 
-  template <typename Base>
-  inline
-  void
-  Parser::basic_symbol<Base>::clear ()
+  template<typename Base>
+  inline Parser::basic_symbol<Base>::~basic_symbol()
   {
-    Base::clear ();
+    clear();
   }
 
-  template <typename Base>
-  inline
-  bool
-  Parser::basic_symbol<Base>::empty () const
+  template<typename Base>
+  inline void Parser::basic_symbol<Base>::clear()
   {
-    return Base::type_get () == empty_symbol;
+    Base::clear();
   }
 
-  template <typename Base>
-  inline
-  void
-  Parser::basic_symbol<Base>::move (basic_symbol& s)
+  template<typename Base>
+  inline bool Parser::basic_symbol<Base>::empty() const
+  {
+    return Base::type_get() == empty_symbol;
+  }
+
+  template<typename Base>
+  inline void Parser::basic_symbol<Base>::move(basic_symbol& s)
   {
     super_type::move(s);
-    value = s.value;
+    value    = s.value;
     location = s.location;
   }
 
   // by_type.
-  inline
-  Parser::by_type::by_type ()
-    : type (empty_symbol)
-  {}
+  inline Parser::by_type::by_type()
+    : type(empty_symbol)
+  {
+  }
 
-  inline
-  Parser::by_type::by_type (const by_type& other)
-    : type (other.type)
-  {}
+  inline Parser::by_type::by_type(const by_type& other)
+    : type(other.type)
+  {
+  }
 
-  inline
-  Parser::by_type::by_type (token_type t)
-    : type (yytranslate_ (t))
-  {}
+  inline Parser::by_type::by_type(token_type t)
+    : type(yytranslate_(t))
+  {
+  }
 
-  inline
-  void
-  Parser::by_type::clear ()
+  inline void Parser::by_type::clear()
   {
     type = empty_symbol;
   }
 
-  inline
-  void
-  Parser::by_type::move (by_type& that)
+  inline void Parser::by_type::move(by_type& that)
   {
     type = that.type;
-    that.clear ();
+    that.clear();
   }
 
-  inline
-  int
-  Parser::by_type::type_get () const
+  inline int Parser::by_type::type_get() const
   {
     return type;
   }
 
-
   // by_state.
-  inline
-  Parser::by_state::by_state ()
-    : state (empty_state)
-  {}
+  inline Parser::by_state::by_state()
+    : state(empty_state)
+  {
+  }
 
-  inline
-  Parser::by_state::by_state (const by_state& other)
-    : state (other.state)
-  {}
+  inline Parser::by_state::by_state(const by_state& other)
+    : state(other.state)
+  {
+  }
 
-  inline
-  void
-  Parser::by_state::clear ()
+  inline void Parser::by_state::clear()
   {
     state = empty_state;
   }
 
-  inline
-  void
-  Parser::by_state::move (by_state& that)
+  inline void Parser::by_state::move(by_state& that)
   {
     state = that.state;
-    that.clear ();
+    that.clear();
   }
 
-  inline
-  Parser::by_state::by_state (state_type s)
-    : state (s)
-  {}
+  inline Parser::by_state::by_state(state_type s)
+    : state(s)
+  {
+  }
 
-  inline
-  Parser::symbol_number_type
-  Parser::by_state::type_get () const
+  inline Parser::symbol_number_type Parser::by_state::type_get() const
   {
     if (state == empty_state)
       return empty_symbol;
@@ -365,117 +347,94 @@ namespace roe {
       return yystos_[state];
   }
 
-  inline
-  Parser::stack_symbol_type::stack_symbol_type ()
-  {}
+  inline Parser::stack_symbol_type::stack_symbol_type()
+  {
+  }
 
-
-  inline
-  Parser::stack_symbol_type::stack_symbol_type (state_type s, symbol_type& that)
-    : super_type (s, that.location)
+  inline Parser::stack_symbol_type::stack_symbol_type(state_type s, symbol_type& that)
+    : super_type(s, that.location)
   {
     value = that.value;
     // that is emptied.
     that.type = empty_symbol;
   }
 
-  inline
-  Parser::stack_symbol_type&
-  Parser::stack_symbol_type::operator= (const stack_symbol_type& that)
+  inline Parser::stack_symbol_type& Parser::stack_symbol_type::operator=(const stack_symbol_type& that)
   {
-    state = that.state;
-    value = that.value;
+    state    = that.state;
+    value    = that.value;
     location = that.location;
     return *this;
   }
 
-
-  template <typename Base>
-  inline
-  void
-  Parser::yy_destroy_ (const char* yymsg, basic_symbol<Base>& yysym) const
+  template<typename Base>
+  inline void Parser::yy_destroy_(const char* yymsg, basic_symbol<Base>& yysym) const
   {
     if (yymsg)
-      YY_SYMBOL_PRINT (yymsg, yysym);
+      YY_SYMBOL_PRINT(yymsg, yysym);
 
     // User destructor.
-    YYUSE (yysym.type_get ());
+    YYUSE(yysym.type_get());
   }
 
 #if YYDEBUG
-  template <typename Base>
-  void
-  Parser::yy_print_ (std::ostream& yyo,
-                                     const basic_symbol<Base>& yysym) const
+  template<typename Base>
+  void Parser::yy_print_(std::ostream& yyo, const basic_symbol<Base>& yysym) const
   {
     std::ostream& yyoutput = yyo;
-    YYUSE (yyoutput);
-    symbol_number_type yytype = yysym.type_get ();
+    YYUSE(yyoutput);
+    symbol_number_type yytype = yysym.type_get();
     // Avoid a (spurious) G++ 4.8 warning about "array subscript is
     // below array bounds".
-    if (yysym.empty ())
-      std::abort ();
-    yyo << (yytype < yyntokens_ ? "token" : "nterm")
-        << ' ' << yytname_[yytype] << " ("
-        << yysym.location << ": ";
-    YYUSE (yytype);
+    if (yysym.empty())
+      std::abort();
+    yyo << (yytype < yyntokens_ ? "token" : "nterm") << ' ' << yytname_[yytype] << " (" << yysym.location << ": ";
+    YYUSE(yytype);
     yyo << ')';
   }
 #endif
 
-  inline
-  void
-  Parser::yypush_ (const char* m, state_type s, symbol_type& sym)
+  inline void Parser::yypush_(const char* m, state_type s, symbol_type& sym)
   {
-    stack_symbol_type t (s, sym);
-    yypush_ (m, t);
+    stack_symbol_type t(s, sym);
+    yypush_(m, t);
   }
 
-  inline
-  void
-  Parser::yypush_ (const char* m, stack_symbol_type& s)
+  inline void Parser::yypush_(const char* m, stack_symbol_type& s)
   {
     if (m)
-      YY_SYMBOL_PRINT (m, s);
-    yystack_.push (s);
+      YY_SYMBOL_PRINT(m, s);
+    yystack_.push(s);
   }
 
-  inline
-  void
-  Parser::yypop_ (unsigned int n)
+  inline void Parser::yypop_(unsigned int n)
   {
-    yystack_.pop (n);
+    yystack_.pop(n);
   }
 
 #if YYDEBUG
-  std::ostream&
-  Parser::debug_stream () const
+  std::ostream& Parser::debug_stream() const
   {
     return *yycdebug_;
   }
 
-  void
-  Parser::set_debug_stream (std::ostream& o)
+  void Parser::set_debug_stream(std::ostream& o)
   {
     yycdebug_ = &o;
   }
 
-
-  Parser::debug_level_type
-  Parser::debug_level () const
+  Parser::debug_level_type Parser::debug_level() const
   {
     return yydebug_;
   }
 
-  void
-  Parser::set_debug_level (debug_level_type l)
+  void Parser::set_debug_level(debug_level_type l)
   {
     yydebug_ = l;
   }
 #endif // YYDEBUG
 
-  inline Parser::state_type
-  Parser::yy_lr_goto_state_ (state_type yystate, int yysym)
+  inline Parser::state_type Parser::yy_lr_goto_state_(state_type yystate, int yysym)
   {
     int yyr = yypgoto_[yysym - yyntokens_] + yystate;
     if (0 <= yyr && yyr <= yylast_ && yycheck_[yyr] == yystate)
@@ -484,20 +443,17 @@ namespace roe {
       return yydefgoto_[yysym - yyntokens_];
   }
 
-  inline bool
-  Parser::yy_pact_value_is_default_ (int yyvalue)
+  inline bool Parser::yy_pact_value_is_default_(int yyvalue)
   {
     return yyvalue == yypact_ninf_;
   }
 
-  inline bool
-  Parser::yy_table_value_is_error_ (int yyvalue)
+  inline bool Parser::yy_table_value_is_error_(int yyvalue)
   {
     return yyvalue == yytable_ninf_;
   }
 
-  int
-  Parser::parse ()
+  int Parser::parse()
   {
     // State.
     int yyn;
@@ -505,7 +461,7 @@ namespace roe {
     int yylen = 0;
 
     // Error handling.
-    int yynerrs_ = 0;
+    int yynerrs_     = 0;
     int yyerrstatus_ = 0;
 
     /// The lookahead symbol.
@@ -520,795 +476,758 @@ namespace roe {
     // FIXME: This shoud be completely indented.  It is not yet to
     // avoid gratuitous conflicts when merging into the master branch.
     try
+    {
+      YYCDEBUG << "Starting parse" << std::endl;
+
+// User initialization code.
+#line 40 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:741
       {
-    YYCDEBUG << "Starting parse" << std::endl;
-
-
-    // User initialization code.
-    #line 40 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:741
-{
-    // initialize the initial location object
-    yyla.location.begin.filename = yyla.location.end.filename = &driver.streamname;
-}
+        // initialize the initial location object
+        yyla.location.begin.filename = yyla.location.end.filename = &driver.streamname;
+      }
 
 #line 535 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:741
 
-    /* Initialize the stack.  The initial state will be set in
-       yynewstate, since the latter expects the semantical and the
-       location values to have been already stored, initialize these
-       stacks with a primary value.  */
-    yystack_.clear ();
-    yypush_ (YY_NULLPTR, 0, yyla);
+      /* Initialize the stack.  The initial state will be set in
+         yynewstate, since the latter expects the semantical and the
+         location values to have been already stored, initialize these
+         stacks with a primary value.  */
+      yystack_.clear();
+      yypush_(YY_NULLPTR, 0, yyla);
 
     // A new symbol was pushed on the stack.
-  yynewstate:
-    YYCDEBUG << "Entering state " << yystack_[0].state << std::endl;
+    yynewstate:
+      YYCDEBUG << "Entering state " << yystack_[0].state << std::endl;
 
-    // Accept?
-    if (yystack_[0].state == yyfinal_)
-      goto yyacceptlab;
+      // Accept?
+      if (yystack_[0].state == yyfinal_)
+        goto yyacceptlab;
 
-    goto yybackup;
+      goto yybackup;
 
     // Backup.
-  yybackup:
+    yybackup:
 
-    // Try to take a decision without lookahead.
-    yyn = yypact_[yystack_[0].state];
-    if (yy_pact_value_is_default_ (yyn))
-      goto yydefault;
+      // Try to take a decision without lookahead.
+      yyn = yypact_[yystack_[0].state];
+      if (yy_pact_value_is_default_(yyn))
+        goto yydefault;
 
-    // Read a lookahead token.
-    if (yyla.empty ())
+      // Read a lookahead token.
+      if (yyla.empty())
       {
         YYCDEBUG << "Reading a token: ";
         try
-          {
-            yyla.type = yytranslate_ (yylex (&yyla.value, &yyla.location));
-          }
+        {
+          yyla.type = yytranslate_(yylex(&yyla.value, &yyla.location));
+        }
         catch (const syntax_error& yyexc)
-          {
-            error (yyexc);
-            goto yyerrlab1;
-          }
+        {
+          error(yyexc);
+          goto yyerrlab1;
+        }
       }
-    YY_SYMBOL_PRINT ("Next token is", yyla);
+      YY_SYMBOL_PRINT("Next token is", yyla);
 
-    /* If the proper action on seeing token YYLA.TYPE is to reduce or
-       to detect an error, take that action.  */
-    yyn += yyla.type_get ();
-    if (yyn < 0 || yylast_ < yyn || yycheck_[yyn] != yyla.type_get ())
-      goto yydefault;
+      /* If the proper action on seeing token YYLA.TYPE is to reduce or
+         to detect an error, take that action.  */
+      yyn += yyla.type_get();
+      if (yyn < 0 || yylast_ < yyn || yycheck_[yyn] != yyla.type_get())
+        goto yydefault;
 
-    // Reduce or error.
-    yyn = yytable_[yyn];
-    if (yyn <= 0)
+      // Reduce or error.
+      yyn = yytable_[yyn];
+      if (yyn <= 0)
       {
-        if (yy_table_value_is_error_ (yyn))
+        if (yy_table_value_is_error_(yyn))
           goto yyerrlab;
         yyn = -yyn;
         goto yyreduce;
       }
 
-    // Count tokens shifted since error; after three, turn off error status.
-    if (yyerrstatus_)
-      --yyerrstatus_;
+      // Count tokens shifted since error; after three, turn off error status.
+      if (yyerrstatus_)
+        --yyerrstatus_;
 
-    // Shift the lookahead token.
-    yypush_ ("Shifting", yyn, yyla);
-    goto yynewstate;
+      // Shift the lookahead token.
+      yypush_("Shifting", yyn, yyla);
+      goto yynewstate;
 
-  /*-----------------------------------------------------------.
-  | yydefault -- do the default action for the current state.  |
-  `-----------------------------------------------------------*/
-  yydefault:
-    yyn = yydefact_[yystack_[0].state];
-    if (yyn == 0)
-      goto yyerrlab;
-    goto yyreduce;
+    /*-----------------------------------------------------------.
+    | yydefault -- do the default action for the current state.  |
+    `-----------------------------------------------------------*/
+    yydefault:
+      yyn = yydefact_[yystack_[0].state];
+      if (yyn == 0)
+        goto yyerrlab;
+      goto yyreduce;
 
-  /*-----------------------------.
-  | yyreduce -- Do a reduction.  |
-  `-----------------------------*/
-  yyreduce:
-    yylen = yyr2_[yyn];
-    {
-      stack_symbol_type yylhs;
-      yylhs.state = yy_lr_goto_state_(yystack_[yylen].state, yyr1_[yyn]);
-      /* If YYLEN is nonzero, implement the default value of the
-         action: '$$ = $1'.  Otherwise, use the top of the stack.
-
-         Otherwise, the following line sets YYLHS.VALUE to garbage.
-         This behavior is undocumented and Bison users should not rely
-         upon it.  */
-      if (yylen)
-        yylhs.value = yystack_[yylen - 1].value;
-      else
-        yylhs.value = yystack_[0].value;
-
-      // Compute the default @$.
+    /*-----------------------------.
+    | yyreduce -- Do a reduction.  |
+    `-----------------------------*/
+    yyreduce:
+      yylen = yyr2_[yyn];
       {
-        slice<stack_symbol_type, stack_type> slice (yystack_, yylen);
-        YYLLOC_DEFAULT (yylhs.location, slice, yylen);
-      }
+        stack_symbol_type yylhs;
+        yylhs.state = yy_lr_goto_state_(yystack_[yylen].state, yyr1_[yyn]);
+        /* If YYLEN is nonzero, implement the default value of the
+           action: '$$ = $1'.  Otherwise, use the top of the stack.
 
-      // Perform the reduction.
-      YY_REDUCE_PRINT (yyn);
-      try
+           Otherwise, the following line sets YYLHS.VALUE to garbage.
+           This behavior is undocumented and Bison users should not rely
+           upon it.  */
+        if (yylen)
+          yylhs.value = yystack_[yylen - 1].value;
+        else
+          yylhs.value = yystack_[0].value;
+
+        // Compute the default @$.
+        {
+          slice<stack_symbol_type, stack_type> slice(yystack_, yylen);
+          YYLLOC_DEFAULT(yylhs.location, slice, yylen);
+        }
+
+        // Perform the reduction.
+        YY_REDUCE_PRINT(yyn);
+        try
         {
           switch (yyn)
-            {
-  case 2:
+          {
+            case 2:
 #line 110 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-	         (yylhs.value.astElement_) =  std::shared_ptr<ASTElement>( new ASTLong(driver.context(),(yystack_[0].value.longVal_)) );
-	       }
+            {
+              (yylhs.value.astElement_) =
+                std::shared_ptr<ASTElement>(new ASTLong(driver.context(), (yystack_[0].value.longVal_)));
+            }
 #line 647 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 3:
+            case 3:
 #line 114 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-	         (yylhs.value.astElement_) =  std::shared_ptr<ASTElement>( new ASTDouble(driver.context(),(yystack_[0].value.doubleVal_)) );
-	       }
+            {
+              (yylhs.value.astElement_) =
+                std::shared_ptr<ASTElement>(new ASTDouble(driver.context(), (yystack_[0].value.doubleVal_)));
+            }
 #line 655 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 4:
+            case 4:
 #line 118 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-              (yylhs.value.astElement_) =  std::shared_ptr<ASTCstr>( new ASTCstr(driver.context(),(yystack_[0].value.stringVal_)));
-	       }
+            {
+              (yylhs.value.astElement_) =
+                std::shared_ptr<ASTCstr>(new ASTCstr(driver.context(), (yystack_[0].value.stringVal_)));
+            }
 #line 663 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 5:
+            case 5:
 #line 123 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-                (yylhs.value.astParameters_) = ASTFunctionParametersPtr(new ASTFunctionParameters(driver.context()));
+            {
+              (yylhs.value.astParameters_) = ASTFunctionParametersPtr(new ASTFunctionParameters(driver.context()));
             }
 #line 671 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 6:
+            case 6:
 #line 127 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-               (yystack_[2].value.astParameters_)->addParameter((yystack_[0].value.stringVal_));
-               (yylhs.value.astParameters_) = (yystack_[2].value.astParameters_);
+            {
+              (yystack_[2].value.astParameters_)->addParameter((yystack_[0].value.stringVal_));
+              (yylhs.value.astParameters_) = (yystack_[2].value.astParameters_);
             }
 #line 680 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 7:
+            case 7:
 #line 132 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-                (yylhs.value.astParameters_) = ASTFunctionParametersPtr(new ASTFunctionParameters(driver.context()));
-                (yylhs.value.astParameters_)->addParameter((yystack_[0].value.stringVal_));
+            {
+              (yylhs.value.astParameters_) = ASTFunctionParametersPtr(new ASTFunctionParameters(driver.context()));
+              (yylhs.value.astParameters_)->addParameter((yystack_[0].value.stringVal_));
             }
 #line 689 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 8:
+            case 8:
 #line 138 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-                (yylhs.value.astElement_) = std::shared_ptr<ASTElement> (new ASTArgList(driver.context()));
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTArgList(driver.context()));
             }
 #line 697 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 9:
+            case 9:
 #line 142 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-                dynamic_cast<ASTArgList*>((yystack_[2].value.astElement_).get())->addArgument((yystack_[0].value.astElement_));
-                (yylhs.value.astElement_)=(yystack_[2].value.astElement_);
+            {
+              dynamic_cast<ASTArgList*>((yystack_[2].value.astElement_).get())
+                ->addArgument((yystack_[0].value.astElement_));
+              (yylhs.value.astElement_) = (yystack_[2].value.astElement_);
             }
 #line 706 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 10:
+            case 10:
 #line 147 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-                (yylhs.value.astElement_) = std::shared_ptr<ASTElement> (new ASTArgList(driver.context()));
-                dynamic_cast<ASTArgList*>((yylhs.value.astElement_).get())->addArgument((yystack_[0].value.astElement_));
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTArgList(driver.context()));
+              dynamic_cast<ASTArgList*>((yylhs.value.astElement_).get())->addArgument((yystack_[0].value.astElement_));
             }
 #line 715 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 11:
+            case 11:
 #line 153 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-              (yylhs.value.astElement_) =  std::shared_ptr<ASTElement>( new ASTFunctionCall(driver.context(), (yystack_[3].value.stringVal_), (yystack_[1].value.astElement_) ) );
-           }
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(
+                new ASTFunctionCall(driver.context(), (yystack_[3].value.stringVal_), (yystack_[1].value.astElement_)));
+            }
 #line 723 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 12:
+            case 12:
 #line 158 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-	         (yylhs.value.astElement_) =  std::shared_ptr<ASTElement>( new ASTVariable(driver.context(),(yystack_[0].value.stringVal_)) );
-           }
+            {
+              (yylhs.value.astElement_) =
+                std::shared_ptr<ASTElement>(new ASTVariable(driver.context(), (yystack_[0].value.stringVal_)));
+            }
 #line 731 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 13:
+            case 13:
 #line 163 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-	       (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-	   }
+            {
+              (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+            }
 #line 739 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 14:
+            case 14:
 #line 168 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-	       (yylhs.value.astElement_) = std::shared_ptr<ASTElement> ( new ASTStrSlice (driver.context(), (yystack_[3].value.astElement_), (yystack_[1].value.astElement_), ASTElementPtr()));
-	   }
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTStrSlice(
+                driver.context(), (yystack_[3].value.astElement_), (yystack_[1].value.astElement_), ASTElementPtr()));
+            }
 #line 747 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 15:
+            case 15:
 #line 173 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-	       (yylhs.value.astElement_) = std::shared_ptr<ASTElement> ( new ASTStrSlice (driver.context(), (yystack_[5].value.astElement_), (yystack_[3].value.astElement_), (yystack_[1].value.astElement_)));
-	   }
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTStrSlice(
+                driver.context(), (yystack_[5].value.astElement_), (yystack_[3].value.astElement_),
+                (yystack_[1].value.astElement_)));
+            }
 #line 755 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 16:
+            case 16:
 #line 177 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-           (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-	   }
+            {
+              (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+            }
 #line 763 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 17:
+            case 17:
 #line 181 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-	       (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-	   }
+            {
+              (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+            }
 #line 771 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 18:
+            case 18:
 #line 185 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
-	   }
+            {
+              (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
+            }
 #line 779 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 19:
+            case 19:
 #line 189 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
-            (
-                new ASTLogical(driver.context()
-                              ,ASTLogical::Operator::OR
-                              , (yystack_[2].value.astElement_)
-                              , (yystack_[0].value.astElement_))
-            );
-          }
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTLogical(
+                driver.context(), ASTLogical::Operator::OR, (yystack_[2].value.astElement_),
+                (yystack_[0].value.astElement_)));
+            }
 #line 793 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 20:
+            case 20:
 #line 199 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-          }
+            {
+              (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+            }
 #line 801 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 21:
+            case 21:
 #line 203 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-          (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
-            (
-                new ASTLogical(driver.context()
-                              ,ASTLogical::Operator::AND
-                              , (yystack_[2].value.astElement_)
-                              , (yystack_[0].value.astElement_))
-            );
-
-          }
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTLogical(
+                driver.context(), ASTLogical::Operator::AND, (yystack_[2].value.astElement_),
+                (yystack_[0].value.astElement_)));
+            }
 #line 816 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 22:
+            case 22:
 #line 214 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-             (yylhs.value.astElement_) =(yystack_[0].value.astElement_);
-          }
+            {
+              (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+            }
 #line 824 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 23:
+            case 23:
 #line 219 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
-            (
-                new ASTLogicalNOT(driver.context(), (yystack_[0].value.astElement_))
-            );
-          }
+            {
+              (yylhs.value.astElement_) =
+                std::shared_ptr<ASTElement>(new ASTLogicalNOT(driver.context(), (yystack_[0].value.astElement_)));
+            }
 #line 835 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 24:
+            case 24:
 #line 226 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-          }
+            {
+              (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+            }
 #line 843 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 25:
+            case 25:
 #line 231 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
-            (
-                new ASTCompare(driver.context()
-                              ,ASTCompare::Operator::MORE
-                              , (yystack_[2].value.astElement_)
-                              , (yystack_[0].value.astElement_))
-            );
-          }
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTCompare(
+                driver.context(), ASTCompare::Operator::MORE, (yystack_[2].value.astElement_),
+                (yystack_[0].value.astElement_)));
+            }
 #line 857 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 26:
+            case 26:
 #line 241 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
-            (
-                new ASTCompare(driver.context()
-                              ,ASTCompare::Operator::LESS
-                              , (yystack_[2].value.astElement_)
-                              , (yystack_[0].value.astElement_))
-            );
-          }
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTCompare(
+                driver.context(), ASTCompare::Operator::LESS, (yystack_[2].value.astElement_),
+                (yystack_[0].value.astElement_)));
+            }
 #line 871 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 27:
+            case 27:
 #line 251 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
-            (
-                new ASTCompare(driver.context()
-                              ,ASTCompare::Operator::NOT_EQUAL
-                              , (yystack_[2].value.astElement_)
-                              , (yystack_[0].value.astElement_))
-            );
-          }
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTCompare(
+                driver.context(), ASTCompare::Operator::NOT_EQUAL, (yystack_[2].value.astElement_),
+                (yystack_[0].value.astElement_)));
+            }
 #line 885 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 28:
+            case 28:
 #line 262 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
-            (
-                new ASTCompare(driver.context()
-                              ,ASTCompare::Operator::EQUAL
-                              , (yystack_[2].value.astElement_)
-                              , (yystack_[0].value.astElement_))
-            );
-          }
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTCompare(
+                driver.context(), ASTCompare::Operator::EQUAL, (yystack_[2].value.astElement_),
+                (yystack_[0].value.astElement_)));
+            }
 #line 899 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 29:
+            case 29:
 #line 273 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
-            (
-                new ASTCompare(driver.context()
-                              ,ASTCompare::Operator::MORE_OR_EQUAL
-                              , (yystack_[2].value.astElement_)
-                              , (yystack_[0].value.astElement_))
-            );
-          }
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTCompare(
+                driver.context(), ASTCompare::Operator::MORE_OR_EQUAL, (yystack_[2].value.astElement_),
+                (yystack_[0].value.astElement_)));
+            }
 #line 913 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 30:
+            case 30:
 #line 284 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
-            (
-                new ASTCompare(driver.context()
-                              ,ASTCompare::Operator::LESS_OR_EQUAL
-                              , (yystack_[2].value.astElement_)
-                              , (yystack_[0].value.astElement_))
-            );
-          }
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTCompare(
+                driver.context(), ASTCompare::Operator::LESS_OR_EQUAL, (yystack_[2].value.astElement_),
+                (yystack_[0].value.astElement_)));
+            }
 #line 927 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 31:
+            case 31:
 #line 294 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-             (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
-          }
+            {
+              (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
+            }
 #line 935 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 32:
+            case 32:
 #line 298 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-          }
+            {
+              (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+            }
 #line 943 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 33:
+            case 33:
 #line 302 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
-            (
-                new ASTArithmetical(driver.context()
-                              ,ASTArithmetical::Operator::PLUS
-                              , (yystack_[2].value.astElement_)
-                              , (yystack_[0].value.astElement_))
-            );
-          }
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTArithmetical(
+                driver.context(), ASTArithmetical::Operator::PLUS, (yystack_[2].value.astElement_),
+                (yystack_[0].value.astElement_)));
+            }
 #line 957 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 34:
+            case 34:
 #line 313 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
-            (
-                new ASTArithmetical(driver.context()
-                              ,ASTArithmetical::Operator::MINUS
-                              , (yystack_[2].value.astElement_)
-                              , (yystack_[0].value.astElement_))
-            );
-          }
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTArithmetical(
+                driver.context(), ASTArithmetical::Operator::MINUS, (yystack_[2].value.astElement_),
+                (yystack_[0].value.astElement_)));
+            }
 #line 971 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 35:
+            case 35:
 #line 323 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-	        (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-          }
+            {
+              (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+            }
 #line 979 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 36:
+            case 36:
 #line 328 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-           (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
-            (
-                new ASTArithmetical(driver.context()
-                              ,ASTArithmetical::Operator::MUL
-                              , (yystack_[2].value.astElement_)
-                              , (yystack_[0].value.astElement_))
-            );
-         }
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTArithmetical(
+                driver.context(), ASTArithmetical::Operator::MUL, (yystack_[2].value.astElement_),
+                (yystack_[0].value.astElement_)));
+            }
 #line 993 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 37:
+            case 37:
 #line 338 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
-            (
-                new ASTArithmetical(driver.context()
-                              ,ASTArithmetical::Operator::DIV
-                              , (yystack_[2].value.astElement_)
-                              , (yystack_[0].value.astElement_))
-            );
-         }
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTArithmetical(
+                driver.context(), ASTArithmetical::Operator::DIV, (yystack_[2].value.astElement_),
+                (yystack_[0].value.astElement_)));
+            }
 #line 1007 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 38:
+            case 38:
 #line 348 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-         }
+            {
+              (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+            }
 #line 1015 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 39:
+            case 39:
 #line 355 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-   (yylhs.value.astElement_)=std::shared_ptr<ASTElement>( new ASTAssignment(driver.context(),(yystack_[2].value.astElement_), (yystack_[0].value.astElement_)) );
-}
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(
+                new ASTAssignment(driver.context(), (yystack_[2].value.astElement_), (yystack_[0].value.astElement_)));
+            }
 #line 1023 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 40:
+            case 40:
 #line 360 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_)=std::shared_ptr<ASTElement>
-            ( new ASTIf(driver.context(),(yystack_[2].value.astElement_), (yystack_[0].value.astElement_), ASTElementPtr()) );
-        }
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTIf(
+                driver.context(), (yystack_[2].value.astElement_), (yystack_[0].value.astElement_), ASTElementPtr()));
+            }
 #line 1032 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 41:
+            case 41:
 #line 366 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-           (yylhs.value.astElement_)=std::shared_ptr<ASTElement>( new ASTIf(driver.context(),(yystack_[4].value.astElement_), (yystack_[2].value.astElement_), (yystack_[0].value.astElement_)) );
-        }
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTIf(
+                driver.context(), (yystack_[4].value.astElement_), (yystack_[2].value.astElement_),
+                (yystack_[0].value.astElement_)));
+            }
 #line 1040 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 42:
+            case 42:
 #line 371 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-         (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-    }
+            {
+              (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+            }
 #line 1048 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 43:
+            case 43:
 #line 376 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-	      (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-    }
+            {
+              (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+            }
 #line 1056 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 44:
+            case 44:
 #line 381 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-      (yylhs.value.astElement_)=(yystack_[1].value.astElement_);
-   }
+            {
+              (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
+            }
 #line 1064 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 45:
+            case 45:
 #line 385 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-      (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-   }
+            {
+              (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+            }
 #line 1072 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 46:
+            case 46:
 #line 389 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-      (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
-   }
+            {
+              (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
+            }
 #line 1080 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 47:
+            case 47:
 #line 393 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {(yylhs.value.astElement_) = std::shared_ptr<ASTElement> (new ASTBlock(driver.context()));}
+            {
+              (yylhs.value.astElement_) = std::shared_ptr<ASTElement>(new ASTBlock(driver.context()));
+            }
 #line 1086 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 48:
+            case 48:
 #line 396 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-                dynamic_cast<ASTBlock*>((yystack_[1].value.astElement_).get())->addElement((yystack_[0].value.astElement_));
-                (yylhs.value.astElement_)=(yystack_[1].value.astElement_);
+            {
+              dynamic_cast<ASTBlock*>((yystack_[1].value.astElement_).get())
+                ->addElement((yystack_[0].value.astElement_));
+              (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
             }
 #line 1095 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 49:
+            case 49:
 #line 403 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-          (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-        }
+            {
+              (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+            }
 #line 1103 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 50:
+            case 50:
 #line 407 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-          (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
-        }
+            {
+              (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
+            }
 #line 1111 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 51:
+            case 51:
 #line 412 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astRule_) = std::shared_ptr<ASTRule> (new ASTRule(driver.context(), (yystack_[4].value.stringVal_), (yystack_[2].value.astParameters_), (yystack_[0].value.astElement_)));
-       }
+            {
+              (yylhs.value.astRule_) = std::shared_ptr<ASTRule>(new ASTRule(
+                driver.context(), (yystack_[4].value.stringVal_), (yystack_[2].value.astParameters_),
+                (yystack_[0].value.astElement_)));
+            }
 #line 1119 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 52:
+            case 52:
 #line 416 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {}
+            {
+            }
 #line 1125 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 53:
+            case 53:
 #line 418 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-          driver.rules().addRule((yystack_[0].value.astRule_));
-       }
+            {
+              driver.rules().addRule((yystack_[0].value.astRule_));
+            }
 #line 1133 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
+            break;
 
-  case 54:
+            case 54:
 #line 422 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-       }
+            {
+            }
 #line 1140 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
-
+            break;
 
 #line 1144 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
             default:
               break;
-            }
+          }
         }
-      catch (const syntax_error& yyexc)
+        catch (const syntax_error& yyexc)
         {
-          error (yyexc);
+          error(yyexc);
           YYERROR;
         }
-      YY_SYMBOL_PRINT ("-> $$ =", yylhs);
-      yypop_ (yylen);
-      yylen = 0;
-      YY_STACK_PRINT ();
+        YY_SYMBOL_PRINT("-> $$ =", yylhs);
+        yypop_(yylen);
+        yylen = 0;
+        YY_STACK_PRINT();
 
-      // Shift the result of the reduction.
-      yypush_ (YY_NULLPTR, yylhs);
-    }
-    goto yynewstate;
+        // Shift the result of the reduction.
+        yypush_(YY_NULLPTR, yylhs);
+      }
+      goto yynewstate;
 
-  /*--------------------------------------.
-  | yyerrlab -- here on detecting error.  |
-  `--------------------------------------*/
-  yyerrlab:
-    // If not already recovering from an error, report this error.
-    if (!yyerrstatus_)
+    /*--------------------------------------.
+    | yyerrlab -- here on detecting error.  |
+    `--------------------------------------*/
+    yyerrlab:
+      // If not already recovering from an error, report this error.
+      if (!yyerrstatus_)
       {
         ++yynerrs_;
-        error (yyla.location, yysyntax_error_ (yystack_[0].state, yyla));
+        error(yyla.location, yysyntax_error_(yystack_[0].state, yyla));
       }
 
-
-    yyerror_range[1].location = yyla.location;
-    if (yyerrstatus_ == 3)
+      yyerror_range[1].location = yyla.location;
+      if (yyerrstatus_ == 3)
       {
         /* If just tried and failed to reuse lookahead token after an
            error, discard it.  */
 
         // Return failure if at end of input.
-        if (yyla.type_get () == yyeof_)
+        if (yyla.type_get() == yyeof_)
           YYABORT;
-        else if (!yyla.empty ())
-          {
-            yy_destroy_ ("Error: discarding", yyla);
-            yyla.clear ();
-          }
+        else if (!yyla.empty())
+        {
+          yy_destroy_("Error: discarding", yyla);
+          yyla.clear();
+        }
       }
 
-    // Else will try to reuse lookahead token after shifting the error token.
-    goto yyerrlab1;
+      // Else will try to reuse lookahead token after shifting the error token.
+      goto yyerrlab1;
 
+    /*---------------------------------------------------.
+    | yyerrorlab -- error raised explicitly by YYERROR.  |
+    `---------------------------------------------------*/
+    yyerrorlab:
 
-  /*---------------------------------------------------.
-  | yyerrorlab -- error raised explicitly by YYERROR.  |
-  `---------------------------------------------------*/
-  yyerrorlab:
+      /* Pacify compilers like GCC when the user code never invokes
+         YYERROR and the label yyerrorlab therefore never appears in user
+         code.  */
+      if (false)
+        goto yyerrorlab;
+      yyerror_range[1].location = yystack_[yylen - 1].location;
+      /* Do not reclaim the symbols of the rule whose action triggered
+         this YYERROR.  */
+      yypop_(yylen);
+      yylen = 0;
+      goto yyerrlab1;
 
-    /* Pacify compilers like GCC when the user code never invokes
-       YYERROR and the label yyerrorlab therefore never appears in user
-       code.  */
-    if (false)
-      goto yyerrorlab;
-    yyerror_range[1].location = yystack_[yylen - 1].location;
-    /* Do not reclaim the symbols of the rule whose action triggered
-       this YYERROR.  */
-    yypop_ (yylen);
-    yylen = 0;
-    goto yyerrlab1;
-
-  /*-------------------------------------------------------------.
-  | yyerrlab1 -- common code for both syntax error and YYERROR.  |
-  `-------------------------------------------------------------*/
-  yyerrlab1:
-    yyerrstatus_ = 3;   // Each real token shifted decrements this.
-    {
-      stack_symbol_type error_token;
-      for (;;)
+    /*-------------------------------------------------------------.
+    | yyerrlab1 -- common code for both syntax error and YYERROR.  |
+    `-------------------------------------------------------------*/
+    yyerrlab1:
+      yyerrstatus_ = 3; // Each real token shifted decrements this.
+      {
+        stack_symbol_type error_token;
+        for (;;)
         {
           yyn = yypact_[yystack_[0].state];
-          if (!yy_pact_value_is_default_ (yyn))
+          if (!yy_pact_value_is_default_(yyn))
+          {
+            yyn += yyterror_;
+            if (0 <= yyn && yyn <= yylast_ && yycheck_[yyn] == yyterror_)
             {
-              yyn += yyterror_;
-              if (0 <= yyn && yyn <= yylast_ && yycheck_[yyn] == yyterror_)
-                {
-                  yyn = yytable_[yyn];
-                  if (0 < yyn)
-                    break;
-                }
+              yyn = yytable_[yyn];
+              if (0 < yyn)
+                break;
             }
+          }
 
           // Pop the current state because it cannot handle the error token.
-          if (yystack_.size () == 1)
+          if (yystack_.size() == 1)
             YYABORT;
 
           yyerror_range[1].location = yystack_[0].location;
-          yy_destroy_ ("Error: popping", yystack_[0]);
-          yypop_ ();
-          YY_STACK_PRINT ();
+          yy_destroy_("Error: popping", yystack_[0]);
+          yypop_();
+          YY_STACK_PRINT();
         }
 
-      yyerror_range[2].location = yyla.location;
-      YYLLOC_DEFAULT (error_token.location, yyerror_range, 2);
+        yyerror_range[2].location = yyla.location;
+        YYLLOC_DEFAULT(error_token.location, yyerror_range, 2);
 
-      // Shift the error token.
-      error_token.state = yyn;
-      yypush_ ("Shifting", error_token);
-    }
-    goto yynewstate;
+        // Shift the error token.
+        error_token.state = yyn;
+        yypush_("Shifting", error_token);
+      }
+      goto yynewstate;
 
     // Accept.
-  yyacceptlab:
-    yyresult = 0;
-    goto yyreturn;
+    yyacceptlab:
+      yyresult = 0;
+      goto yyreturn;
 
     // Abort.
-  yyabortlab:
-    yyresult = 1;
-    goto yyreturn;
+    yyabortlab:
+      yyresult = 1;
+      goto yyreturn;
 
-  yyreturn:
-    if (!yyla.empty ())
-      yy_destroy_ ("Cleanup: discarding lookahead", yyla);
+    yyreturn:
+      if (!yyla.empty())
+        yy_destroy_("Cleanup: discarding lookahead", yyla);
 
-    /* Do not reclaim the symbols of the rule whose action triggered
-       this YYABORT or YYACCEPT.  */
-    yypop_ (yylen);
-    while (1 < yystack_.size ())
+      /* Do not reclaim the symbols of the rule whose action triggered
+         this YYABORT or YYACCEPT.  */
+      yypop_(yylen);
+      while (1 < yystack_.size())
       {
-        yy_destroy_ ("Cleanup: popping", yystack_[0]);
-        yypop_ ();
+        yy_destroy_("Cleanup: popping", yystack_[0]);
+        yypop_();
       }
 
-    return yyresult;
-  }
+      return yyresult;
+    }
     catch (...)
-      {
-        YYCDEBUG << "Exception caught: cleaning lookahead and stack"
-                 << std::endl;
-        // Do not try to display the values of the reclaimed symbols,
-        // as their printer might throw an exception.
-        if (!yyla.empty ())
-          yy_destroy_ (YY_NULLPTR, yyla);
+    {
+      YYCDEBUG << "Exception caught: cleaning lookahead and stack" << std::endl;
+      // Do not try to display the values of the reclaimed symbols,
+      // as their printer might throw an exception.
+      if (!yyla.empty())
+        yy_destroy_(YY_NULLPTR, yyla);
 
-        while (1 < yystack_.size ())
-          {
-            yy_destroy_ (YY_NULLPTR, yystack_[0]);
-            yypop_ ();
-          }
-        throw;
+      while (1 < yystack_.size())
+      {
+        yy_destroy_(YY_NULLPTR, yystack_[0]);
+        yypop_();
       }
+      throw;
+    }
   }
 
-  void
-  Parser::error (const syntax_error& yyexc)
+  void Parser::error(const syntax_error& yyexc)
   {
-    error (yyexc.location, yyexc.what());
+    error(yyexc.location, yyexc.what());
   }
 
   // Generate an error message.
-  std::string
-  Parser::yysyntax_error_ (state_type yystate, const symbol_type& yyla) const
+  std::string Parser::yysyntax_error_(state_type yystate, const symbol_type& yyla) const
   {
     // Number of reported tokens (one for the "unexpected", one per
     // "expected").
     size_t yycount = 0;
     // Its maximum.
-    enum { YYERROR_VERBOSE_ARGS_MAXIMUM = 5 };
+    enum
+    {
+      YYERROR_VERBOSE_ARGS_MAXIMUM = 5
+    };
     // Arguments of yyformat.
-    char const *yyarg[YYERROR_VERBOSE_ARGS_MAXIMUM];
+    char const* yyarg[YYERROR_VERBOSE_ARGS_MAXIMUM];
 
     /* There are many possibilities here to consider:
        - If this state is a consistent state with a default action, then
@@ -1335,302 +1254,231 @@ namespace roe {
          token that will not be accepted due to an error action in a
          later state.
     */
-    if (!yyla.empty ())
+    if (!yyla.empty())
+    {
+      int yytoken      = yyla.type_get();
+      yyarg[yycount++] = yytname_[yytoken];
+      int yyn          = yypact_[yystate];
+      if (!yy_pact_value_is_default_(yyn))
       {
-        int yytoken = yyla.type_get ();
-        yyarg[yycount++] = yytname_[yytoken];
-        int yyn = yypact_[yystate];
-        if (!yy_pact_value_is_default_ (yyn))
+        /* Start YYX at -YYN if negative to avoid negative indexes in
+           YYCHECK.  In other words, skip the first -YYN actions for
+           this state because they are default actions.  */
+        int yyxbegin = yyn < 0 ? -yyn : 0;
+        // Stay within bounds of both yycheck and yytname.
+        int yychecklim = yylast_ - yyn + 1;
+        int yyxend     = yychecklim < yyntokens_ ? yychecklim : yyntokens_;
+        for (int yyx = yyxbegin; yyx < yyxend; ++yyx)
+          if (yycheck_[yyx + yyn] == yyx && yyx != yyterror_ && !yy_table_value_is_error_(yytable_[yyx + yyn]))
           {
-            /* Start YYX at -YYN if negative to avoid negative indexes in
-               YYCHECK.  In other words, skip the first -YYN actions for
-               this state because they are default actions.  */
-            int yyxbegin = yyn < 0 ? -yyn : 0;
-            // Stay within bounds of both yycheck and yytname.
-            int yychecklim = yylast_ - yyn + 1;
-            int yyxend = yychecklim < yyntokens_ ? yychecklim : yyntokens_;
-            for (int yyx = yyxbegin; yyx < yyxend; ++yyx)
-              if (yycheck_[yyx + yyn] == yyx && yyx != yyterror_
-                  && !yy_table_value_is_error_ (yytable_[yyx + yyn]))
-                {
-                  if (yycount == YYERROR_VERBOSE_ARGS_MAXIMUM)
-                    {
-                      yycount = 1;
-                      break;
-                    }
-                  else
-                    yyarg[yycount++] = yytname_[yyx];
-                }
+            if (yycount == YYERROR_VERBOSE_ARGS_MAXIMUM)
+            {
+              yycount = 1;
+              break;
+            }
+            else
+              yyarg[yycount++] = yytname_[yyx];
           }
       }
+    }
 
     char const* yyformat = YY_NULLPTR;
     switch (yycount)
-      {
-#define YYCASE_(N, S)                         \
-        case N:                               \
-          yyformat = S;                       \
-        break
-        YYCASE_(0, YY_("syntax error"));
-        YYCASE_(1, YY_("syntax error, unexpected %s"));
-        YYCASE_(2, YY_("syntax error, unexpected %s, expecting %s"));
-        YYCASE_(3, YY_("syntax error, unexpected %s, expecting %s or %s"));
-        YYCASE_(4, YY_("syntax error, unexpected %s, expecting %s or %s or %s"));
-        YYCASE_(5, YY_("syntax error, unexpected %s, expecting %s or %s or %s or %s"));
+    {
+#define YYCASE_(N, S) \
+  case N:             \
+    yyformat = S;     \
+    break
+      YYCASE_(0, YY_("syntax error"));
+      YYCASE_(1, YY_("syntax error, unexpected %s"));
+      YYCASE_(2, YY_("syntax error, unexpected %s, expecting %s"));
+      YYCASE_(3, YY_("syntax error, unexpected %s, expecting %s or %s"));
+      YYCASE_(4, YY_("syntax error, unexpected %s, expecting %s or %s or %s"));
+      YYCASE_(5, YY_("syntax error, unexpected %s, expecting %s or %s or %s or %s"));
 #undef YYCASE_
-      }
+    }
 
     std::string yyres;
     // Argument number.
     size_t yyi = 0;
     for (char const* yyp = yyformat; *yyp; ++yyp)
       if (yyp[0] == '%' && yyp[1] == 's' && yyi < yycount)
-        {
-          yyres += yytnamerr_ (yyarg[yyi++]);
-          ++yyp;
-        }
+      {
+        yyres += yytnamerr_(yyarg[yyi++]);
+        ++yyp;
+      }
       else
         yyres += *yyp;
     return yyres;
   }
 
-
   const signed char Parser::yypact_ninf_ = -58;
 
   const signed char Parser::yytable_ninf_ = -1;
 
-  const signed char
-  Parser::yypact_[] =
-  {
-     -58,    59,    18,    45,   -58,   -58,    24,    48,    47,   -58,
-      31,    64,    46,   -58,    54,    -6,   -58,   -58,   -58,    71,
-     -58,   -58,   -58,    29,   -58,    -5,    42,   -58,    73,    75,
-     -58,   -58,    55,    72,    55,     4,    -6,    -6,    -6,    -6,
-      -6,    -6,   -58,   -58,    55,    55,    68,     5,    91,   -58,
-     -58,    74,   -58,    36,    92,   -58,   -58,   -58,    32,    42,
-      42,   -58,   -58,   -58,    27,    74,    55,    46,    55,    -6,
-      -6,    -6,    -6,    -6,    -6,    55,   -58,   -58,    -6,   -58,
-      91,    95,   -58,    -5,    -5,    -5,    -5,    -5,    -5,    92,
-      76,    46,   -58,   -58
-  };
+  const signed char Parser::yypact_[] = {
+    -58, 59,  18,  45,  -58, -58, 24,  48,  47,  -58, 31,  64, 46, -58, 54,  -6,  -58, -58, -58, 71,  -58, -58, -58, 29,
+    -58, -5,  42,  -58, 73,  75,  -58, -58, 55,  72,  55,  4,  -6, -6,  -6,  -6,  -6,  -6,  -58, -58, 55,  55,  68,  5,
+    91,  -58, -58, 74,  -58, 36,  92,  -58, -58, -58, 32,  42, 42, -58, -58, -58, 27,  74,  55,  46,  55,  -6,  -6,  -6,
+    -6,  -6,  -6,  55,  -58, -58, -6,  -58, 91,  95,  -58, -5, -5, -5,  -5,  -5,  -5,  92,  76,  46,  -58, -58};
 
-  const unsigned char
-  Parser::yydefact_[] =
-  {
-      52,    54,     0,     0,    53,     1,     0,     0,     5,     7,
-       0,     0,     0,     6,     0,     0,     2,     3,     4,    12,
-      47,    17,    16,    13,    38,    43,    35,    42,    45,     0,
-      49,    51,     0,     0,     8,     0,     0,     0,     0,     0,
-       0,     0,    46,    44,     0,     0,    13,     0,    20,    22,
-      24,    32,    18,     0,    10,    50,    48,    39,     0,    33,
-      34,    36,    37,    23,     0,    32,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,    11,    14,     0,    31,
-      19,    40,    21,    27,    28,    25,    26,    29,    30,     9,
-       0,     0,    15,    41
-  };
+  const unsigned char Parser::yydefact_[] = {52, 54, 0,  0,  53, 1,  0,  0,  5,  7,  0,  0,  0,  6,  0,  0, 2,  3,  4,
+                                             12, 47, 17, 16, 13, 38, 43, 35, 42, 45, 0,  49, 51, 0,  0,  8, 0,  0,  0,
+                                             0,  0,  0,  0,  46, 44, 0,  0,  13, 0,  20, 22, 24, 32, 18, 0, 10, 50, 48,
+                                             39, 0,  33, 34, 36, 37, 23, 0,  32, 0,  0,  0,  0,  0,  0,  0, 0,  0,  0,
+                                             11, 14, 0,  31, 19, 40, 21, 27, 28, 25, 26, 29, 30, 9,  0,  0, 15, 41};
 
-  const signed char
-  Parser::yypgoto_[] =
-  {
-     -58,   -58,   -58,   -58,   -58,   -12,   -32,   -28,    35,   -43,
-     -58,   -30,    28,   -58,   -58,    12,    67,   -58,   -57,   -58,
-     -58,   -58
-  };
+  const signed char Parser::yypgoto_[] = {-58, -58, -58, -58, -58, -12, -32, -28, 35,  -43, -58,
+                                          -30, 28,  -58, -58, 12,  67,  -58, -57, -58, -58, -58};
 
-  const signed char
-  Parser::yydefgoto_[] =
-  {
-      -1,    21,    10,    53,    22,    46,    24,    47,    48,    49,
-      50,    25,    26,    27,    28,    29,    30,    35,    31,     4,
-       1,     2
-  };
+  const signed char Parser::yydefgoto_[] = {-1, 21, 10, 53, 22, 46, 24, 47, 48, 49, 50,
+                                            25, 26, 27, 28, 29, 30, 35, 31, 4,  1,  2};
 
-  const unsigned char
-  Parser::yytable_[] =
-  {
-      23,    63,    51,    23,    51,    58,    54,    14,    61,    62,
-      81,    38,    39,    66,    51,    65,    15,    64,     5,    16,
-      17,    18,    19,    23,    23,    82,    15,    33,    67,    16,
-      17,    18,    19,    23,    93,    66,    51,    55,    51,    83,
-      84,    85,    86,    87,    88,    51,    90,    89,    57,    14,
-      79,    11,     7,    36,    12,    23,    75,    33,    37,    76,
-      40,    41,    77,    78,    44,     3,    59,    60,    15,     6,
-       8,    16,    17,    18,    19,     9,    32,    45,    20,    23,
-      16,    17,    18,    19,    69,    70,    71,    72,    73,    74,
-      38,    39,    13,    34,    42,    52,    43,    37,    68,    91,
-      66,    80,    56,     0,     0,     0,    92
-  };
+  const unsigned char Parser::yytable_[] = {
+    23, 63, 51, 23, 51, 58, 54, 14, 61, 62, 81, 38, 39, 66, 51, 65, 15, 64, 5,  16, 17, 18, 19, 23, 23, 82, 15,
+    33, 67, 16, 17, 18, 19, 23, 93, 66, 51, 55, 51, 83, 84, 85, 86, 87, 88, 51, 90, 89, 57, 14, 79, 11, 7,  36,
+    12, 23, 75, 33, 37, 76, 40, 41, 77, 78, 44, 3,  59, 60, 15, 6,  8,  16, 17, 18, 19, 9,  32, 45, 20, 23, 16,
+    17, 18, 19, 69, 70, 71, 72, 73, 74, 38, 39, 13, 34, 42, 52, 43, 37, 68, 91, 66, 80, 56, 0,  0,  0,  92};
 
-  const signed char
-  Parser::yycheck_[] =
-  {
-      12,    44,    32,    15,    34,    37,    34,     3,    40,    41,
-      67,    16,    17,     8,    44,    45,    22,    45,     0,    25,
-      26,    27,    28,    35,    36,    68,    22,    15,    23,    25,
-      26,    27,    28,    45,    91,     8,    66,    33,    68,    69,
-      70,    71,    72,    73,    74,    75,    78,    75,    36,     3,
-      23,    20,    28,    24,    23,    67,    20,    45,    29,    23,
-      18,    19,    30,    31,     9,     6,    38,    39,    22,    24,
-      22,    25,    26,    27,    28,    28,    22,    22,    32,    91,
-      25,    26,    27,    28,    10,    11,    12,    13,    14,    15,
-      16,    17,    28,    22,    21,    23,    21,    29,     7,     4,
-       8,    66,    35,    -1,    -1,    -1,    30
-  };
+  const signed char Parser::yycheck_[] = {
+    12, 44, 32, 15, 34, 37, 34, 3,  40, 41, 67, 16, 17, 8,  44, 45, 22, 45, 0,  25, 26, 27, 28, 35, 36, 68, 22,
+    15, 23, 25, 26, 27, 28, 45, 91, 8,  66, 33, 68, 69, 70, 71, 72, 73, 74, 75, 78, 75, 36, 3,  23, 20, 28, 24,
+    23, 67, 20, 45, 29, 23, 18, 19, 30, 31, 9,  6,  38, 39, 22, 24, 22, 25, 26, 27, 28, 28, 22, 22, 32, 91, 25,
+    26, 27, 28, 10, 11, 12, 13, 14, 15, 16, 17, 28, 22, 21, 23, 21, 29, 7,  4,  8,  66, 35, -1, -1, -1, 30};
 
-  const unsigned char
-  Parser::yystos_[] =
-  {
-       0,    54,    55,     6,    53,     0,    24,    28,    22,    28,
-      36,    20,    23,    28,     3,    22,    25,    26,    27,    28,
-      32,    35,    38,    39,    40,    45,    46,    47,    48,    49,
-      50,    52,    22,    49,    22,    51,    24,    29,    16,    17,
-      18,    19,    21,    21,     9,    22,    39,    41,    42,    43,
-      44,    45,    23,    37,    41,    33,    50,    49,    40,    46,
-      46,    40,    40,    43,    41,    45,     8,    23,     7,    10,
-      11,    12,    13,    14,    15,    20,    23,    30,    31,    23,
-      42,    52,    43,    45,    45,    45,    45,    45,    45,    41,
-      40,     4,    30,    52
-  };
+  const unsigned char Parser::yystos_[] = {0,  54, 55, 6,  53, 0,  24, 28, 22, 28, 36, 20, 23, 28, 3,  22, 25, 26, 27,
+                                           28, 32, 35, 38, 39, 40, 45, 46, 47, 48, 49, 50, 52, 22, 49, 22, 51, 24, 29,
+                                           16, 17, 18, 19, 21, 21, 9,  22, 39, 41, 42, 43, 44, 45, 23, 37, 41, 33, 50,
+                                           49, 40, 46, 46, 40, 40, 43, 41, 45, 8,  23, 7,  10, 11, 12, 13, 14, 15, 20,
+                                           23, 30, 31, 23, 42, 52, 43, 45, 45, 45, 45, 45, 45, 41, 40, 4,  30, 52};
 
-  const unsigned char
-  Parser::yyr1_[] =
-  {
-       0,    34,    35,    35,    35,    36,    36,    36,    37,    37,
-      37,    38,    39,    40,    40,    40,    40,    40,    40,    41,
-      41,    42,    42,    43,    43,    44,    44,    44,    44,    44,
-      44,    44,    44,    45,    45,    45,    46,    46,    46,    47,
-      48,    48,    49,    49,    50,    50,    50,    51,    51,    52,
-      52,    53,    54,    54,    55
-  };
+  const unsigned char Parser::yyr1_[] = {0,  34, 35, 35, 35, 36, 36, 36, 37, 37, 37, 38, 39, 40, 40, 40, 40, 40, 40,
+                                         41, 41, 42, 42, 43, 43, 44, 44, 44, 44, 44, 44, 44, 44, 45, 45, 45, 46, 46,
+                                         46, 47, 48, 48, 49, 49, 50, 50, 50, 51, 51, 52, 52, 53, 54, 54, 55};
 
-  const unsigned char
-  Parser::yyr2_[] =
-  {
-       0,     2,     1,     1,     1,     0,     3,     1,     0,     3,
-       1,     4,     1,     1,     4,     6,     1,     1,     3,     3,
-       1,     3,     1,     2,     1,     3,     3,     3,     3,     3,
-       3,     3,     1,     3,     3,     1,     3,     3,     1,     3,
-       5,     7,     1,     1,     2,     1,     2,     0,     2,     1,
-       3,     7,     0,     2,     1
-  };
-
-
+  const unsigned char Parser::yyr2_[] = {0, 2, 1, 1, 1, 0, 3, 1, 0, 3, 1, 4, 1, 1, 4, 6, 1, 1, 3,
+                                         3, 1, 3, 1, 2, 1, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 1, 3, 3,
+                                         1, 3, 5, 7, 1, 1, 2, 1, 2, 0, 2, 1, 3, 7, 0, 2, 1};
 
   // YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
   // First, the terminals, then, starting at \a yyntokens_, nonterminals.
-  const char*
-  const Parser::yytname_[] =
-  {
-  "\"end of file\"", "error", "$undefined", "\"if keyword\"",
-  "\"else keyword\"", "\"end of line\"", "\"ruleid\"", "\"and\"", "\"or\"",
-  "\"not\"", "\"!=\"", "\"==\"", "\">\"", "\"<\"", "\">=\"", "\"<=\"",
-  "\"+\"", "\"-\"", "\"*\"", "\"/\"", "\",\"", "\";\"", "\"(\"", "\")\"",
-  "\"=\"", "\"integer\"", "\"double\"", "\"string\"", "\"name\"", "'['",
-  "']'", "':'", "'{'", "'}'", "$accept", "constant", "parameters",
-  "arg_list", "func_call", "variable", "atomexpr", "or_exp", "and_exp",
-  "not_exp", "compare_exp", "addexpr", "factor", "assignment", "if_expr",
-  "expr", "statement", "expr_list", "expr_block", "rule", "rules", "start", YY_NULLPTR
-  };
+  const char* const Parser::yytname_[] = {"\"end of file\"",
+                                          "error",
+                                          "$undefined",
+                                          "\"if keyword\"",
+                                          "\"else keyword\"",
+                                          "\"end of line\"",
+                                          "\"ruleid\"",
+                                          "\"and\"",
+                                          "\"or\"",
+                                          "\"not\"",
+                                          "\"!=\"",
+                                          "\"==\"",
+                                          "\">\"",
+                                          "\"<\"",
+                                          "\">=\"",
+                                          "\"<=\"",
+                                          "\"+\"",
+                                          "\"-\"",
+                                          "\"*\"",
+                                          "\"/\"",
+                                          "\",\"",
+                                          "\";\"",
+                                          "\"(\"",
+                                          "\")\"",
+                                          "\"=\"",
+                                          "\"integer\"",
+                                          "\"double\"",
+                                          "\"string\"",
+                                          "\"name\"",
+                                          "'['",
+                                          "']'",
+                                          "':'",
+                                          "'{'",
+                                          "'}'",
+                                          "$accept",
+                                          "constant",
+                                          "parameters",
+                                          "arg_list",
+                                          "func_call",
+                                          "variable",
+                                          "atomexpr",
+                                          "or_exp",
+                                          "and_exp",
+                                          "not_exp",
+                                          "compare_exp",
+                                          "addexpr",
+                                          "factor",
+                                          "assignment",
+                                          "if_expr",
+                                          "expr",
+                                          "statement",
+                                          "expr_list",
+                                          "expr_block",
+                                          "rule",
+                                          "rules",
+                                          "start",
+                                          YY_NULLPTR};
 
 #if YYDEBUG
-  const unsigned short int
-  Parser::yyrline_[] =
-  {
-       0,   109,   109,   113,   117,   123,   126,   131,   138,   141,
-     146,   152,   157,   162,   167,   172,   176,   180,   184,   188,
-     198,   202,   213,   218,   225,   230,   240,   250,   261,   272,
-     283,   293,   297,   301,   312,   322,   327,   337,   347,   354,
-     359,   365,   370,   375,   380,   384,   388,   393,   395,   402,
-     406,   411,   416,   417,   421
-  };
+  const unsigned short int Parser::yyrline_[] = {0,   109, 109, 113, 117, 123, 126, 131, 138, 141, 146, 152, 157, 162,
+                                                 167, 172, 176, 180, 184, 188, 198, 202, 213, 218, 225, 230, 240, 250,
+                                                 261, 272, 283, 293, 297, 301, 312, 322, 327, 337, 347, 354, 359, 365,
+                                                 370, 375, 380, 384, 388, 393, 395, 402, 406, 411, 416, 417, 421};
 
   // Print the state stack on the debug stream.
-  void
-  Parser::yystack_print_ ()
+  void Parser::yystack_print_()
   {
     *yycdebug_ << "Stack now";
-    for (stack_type::const_iterator
-           i = yystack_.begin (),
-           i_end = yystack_.end ();
-         i != i_end; ++i)
+    for (stack_type::const_iterator i = yystack_.begin(), i_end = yystack_.end(); i != i_end; ++i)
       *yycdebug_ << ' ' << i->state;
     *yycdebug_ << std::endl;
   }
 
   // Report on the debug stream that the rule \a yyrule is going to be reduced.
-  void
-  Parser::yy_reduce_print_ (int yyrule)
+  void Parser::yy_reduce_print_(int yyrule)
   {
-    unsigned int yylno = yyrline_[yyrule];
-    int yynrhs = yyr2_[yyrule];
+    unsigned int yylno  = yyrline_[yyrule];
+    int          yynrhs = yyr2_[yyrule];
     // Print the symbols being reduced, and their result.
-    *yycdebug_ << "Reducing stack by rule " << yyrule - 1
-               << " (line " << yylno << "):" << std::endl;
+    *yycdebug_ << "Reducing stack by rule " << yyrule - 1 << " (line " << yylno << "):" << std::endl;
     // The symbols being reduced.
     for (int yyi = 0; yyi < yynrhs; yyi++)
-      YY_SYMBOL_PRINT ("   $" << yyi + 1 << " =",
-                       yystack_[(yynrhs) - (yyi + 1)]);
+      YY_SYMBOL_PRINT("   $" << yyi + 1 << " =", yystack_[(yynrhs) - (yyi + 1)]);
   }
 #endif // YYDEBUG
 
   // Symbol number corresponding to token number t.
-  inline
-  Parser::token_number_type
-  Parser::yytranslate_ (int t)
+  inline Parser::token_number_type Parser::yytranslate_(int t)
   {
-    static
-    const token_number_type
-    translate_table[] =
-    {
-     0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,    31,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,    29,     2,    30,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,    32,     2,    33,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25,    26,    27,    28
-    };
-    const unsigned int user_token_number_max_ = 283;
-    const token_number_type undef_token_ = 2;
+    static const token_number_type translate_table[] = {
+      0,  2, 2, 2, 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2, 2, 2, 2, 2, 2,
+      2,  2, 2, 2, 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2, 2, 2, 2, 2, 2,
+      31, 2, 2, 2, 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2, 2, 2, 2, 2, 2,
+      2,  2, 2, 2, 29, 2,  30, 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2, 2, 2, 2, 2, 2,
+      2,  2, 2, 2, 2,  2,  2,  32, 2,  33, 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2, 2, 2, 2, 2, 2,
+      2,  2, 2, 2, 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2, 2, 2, 2, 2, 2,
+      2,  2, 2, 2, 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2, 2, 2, 2, 2, 2,
+      2,  2, 2, 2, 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2, 2, 2, 2, 2, 2,
+      2,  2, 2, 2, 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2, 1, 2, 3, 4, 5,
+      6,  7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28};
+    const unsigned int      user_token_number_max_ = 283;
+    const token_number_type undef_token_           = 2;
 
     if (static_cast<int>(t) <= yyeof_)
       return yyeof_;
-    else if (static_cast<unsigned int> (t) <= user_token_number_max_)
+    else if (static_cast<unsigned int>(t) <= user_token_number_max_)
       return translate_table[t];
     else
       return undef_token_;
   }
 
-
 } // roe
 #line 1629 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:1167
-#line 427 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:1168
- /*** Additional Code ***/
+#line 427 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy"   // lalr1.cc:1168
+                                                              /*** Additional Code ***/
 
-void roe::Parser::error(const Parser::location_type& l,
-			    const std::string& m)
+void roe::Parser::error(const Parser::location_type& l, const std::string& m)
 {
-    driver.error(l, m);
+  driver.error(l, m);
 }

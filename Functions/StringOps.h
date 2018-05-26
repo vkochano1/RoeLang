@@ -5,7 +5,6 @@
 
 namespace roe
 {
-
   class Context;
 
   class StringOps
@@ -26,6 +25,10 @@ namespace roe
 
     static const std::string TO_INT_CHPTR;
     static const std::string TO_INT_STR;
+
+    static const std::string TO_DOUBLE_CHPTR;
+    static const std::string TO_DOUBLE_STR;
+
     static const std::string INT_TO_STR;
     static const std::string DOUBLE_TO_STR;
     static const std::string GET_CHAR;
@@ -38,21 +41,29 @@ namespace roe
       char                           data[size];
       int8_t                         len_;
 
-      const int8_t&      length() const { return len_; }
-      int8_t&      length() { return len_; }
-      const char* c_str() const { return &data[0]; }
-      char*       data_ptr() { return &data[0]; }
+      const int8_t& length() const
+      {
+        return len_;
+      }
+      int8_t& length()
+      {
+        return len_;
+      }
+      const char* c_str() const
+      {
+        return &data[0];
+      }
+      char* data_ptr()
+      {
+        return &data[0];
+      }
     };
 
     // Concat
-    static void
-    concatStrAndCharPtr(const String_t* s1, const char* s2, int64_t len2,  String_t* out);
-    static void
-    concatStrAndStr(const String_t* s1, const String_t* s2, String_t* out);
-    static void
-    concatCharPtrAndStr(const char* s1, int64_t len1, const String_t* s2, String_t* out);
-    static void
-    concatCharPtrAndCharPtr(const char* s1, int64_t len1, const char* s2, int64_t len2, String_t* out);
+    static void concatStrAndCharPtr(const String_t* s1, const char* s2, int64_t len2, String_t* out);
+    static void concatStrAndStr(const String_t* s1, const String_t* s2, String_t* out);
+    static void concatCharPtrAndStr(const char* s1, int64_t len1, const String_t* s2, String_t* out);
+    static void concatCharPtrAndCharPtr(const char* s1, int64_t len1, const char* s2, int64_t len2, String_t* out);
 
     // Assign
     static void assignStr(String_t* s1, const String_t* s2);
@@ -70,11 +81,12 @@ namespace roe
     // Cnnversions
     static int64_t charPtrToInt(const char* s);
     static int64_t stringToInt(const String_t* s);
+    static double charPtrToDouble(const char* s);
+    static double stringToDouble(const String_t* s);
 
     // Substr
     static int64_t getChar(const String_t* s, int64_t);
-    static void
-    getSubstr(const String_t* s, int64_t from, int64_t len, String_t* out);
+    static void getSubstr(const String_t* s, int64_t from, int64_t len, String_t* out);
     static int64_t getLength(const String_t* s);
 
   public:

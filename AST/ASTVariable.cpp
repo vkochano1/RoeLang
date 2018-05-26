@@ -4,7 +4,6 @@
 
 namespace roe
 {
-
   const std::string ASTVariable::TAG_PREFIX   = "tag";
   const std::string ASTVariable::FIELD_PREFIX = "field";
 
@@ -77,12 +76,11 @@ namespace roe
     processContainerField();
     auto& builder = context_.rule().builder();
 
-    llvm::Value* result = allocString();
+    llvm::Value* result    = allocString();
     llvm::Value* container = context_.rule().getParamValue(baseName());
-    llvm::Value* tagVal = llvm::ConstantInt::get(context_.types().longType(), tag());
+    llvm::Value* tagVal    = llvm::ConstantInt::get(context_.types().longType(), tag());
 
-    context_.externalFunctions().makeCall(Bindings::GET_FIELD_STRING,
-                                          {container, tagVal, result});
+    context_.externalFunctions().makeCall(Bindings::GET_FIELD_STRING, {container, tagVal, result});
     return result;
   }
 

@@ -10,7 +10,6 @@ namespace roe
 
   class IContainerAccess
   {
-
   public:
     virtual void setField(int64_t tag, const StringOps::String_t& value) = 0;
     virtual void setField(int64_t tag, int64_t value)                    = 0;
@@ -18,14 +17,33 @@ namespace roe
     virtual void setField(int64_t tag, const char* value, size_t len) = 0;
     virtual void getField(int64_t tag, StringOps::String_t& value) = 0;
 
+  public:
+    virtual ~IContainerAccess(){};
+  };
+
+  class IPrinter
+  {
+  public:
+    virtual void print(const StringOps::String_t* s) = 0;
+    virtual void print(int64_t)                      = 0;
+    virtual void print(double)                       = 0;
+    virtual void print(const char*)                  = 0;
+
+  public:
+    virtual ~IPrinter(){};
   };
 
   class IConstraints
   {
   public:
     using FieldNameToTagMapping = std::unordered_map<std::string, int64_t>;
+
   public:
     virtual int64_t getTagFromFieldName(const std::string& fieldName);
+
+    virtual ~IConstraints()
+    {
+    }
 
   protected:
     FieldNameToTagMapping fieldNameToTagMapping_;
@@ -35,6 +53,7 @@ namespace roe
   {
   public:
     static const std::string PRINT_STR;
+    static const std::string PRINT_CSTR;
     static const std::string PRINT_INT;
     static const std::string PRINT_DOUBLE;
 
@@ -52,9 +71,10 @@ namespace roe
     static void setFieldDouble(void*, int64_t tag, double val);
 
     // Print
-    static void printString(const StringOps::String_t* s);
-    static void printInt(int64_t);
-    static void printDouble(double);
+    static void printString(void*, const StringOps::String_t* s);
+    static void printInt(void*, int64_t);
+    static void printDouble(void*, double);
+    static void printCStr(void*, const char*);
 
     static void registerBuiltins(Context& ctx);
   };

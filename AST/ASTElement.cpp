@@ -2,7 +2,6 @@
 
 namespace roe
 {
-
   llvm::Value* ASTElement::allocBool()
   {
     return context_.builder().CreateAlloca(context_.types().boolType());
@@ -97,9 +96,9 @@ namespace roe
 
   llvm::Value* ASTElement::loadValueIfNeeded(llvm::Value* value)
   {
-    if (value->getType()->isPointerTy() &&
-        value->getType() != context_.types().stringPtrType() &&
-        value->getType() != context_.types().charPtrType())
+    if (
+      value->getType()->isPointerTy() && value->getType() != context_.types().stringPtrType() &&
+      value->getType() != context_.types().charPtrType())
     {
       return context_.builder().CreateLoad(value);
     }

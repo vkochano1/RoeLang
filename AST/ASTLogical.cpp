@@ -1,14 +1,10 @@
+#include <AST/ASTCStr.h>
 #include <AST/ASTLogical.h>
 #include <Functions/FunctionRegistrar.h>
-#include <AST/ASTCStr.h>
 
 namespace roe
 {
-
-  ASTLogical::ASTLogical(Context&      context,
-                         Operator      op,
-                         ASTElementPtr op1,
-                         ASTElementPtr op2)
+  ASTLogical::ASTLogical(Context& context, Operator op, ASTElementPtr op1, ASTElementPtr op2)
     : ASTElement(context)
     , op_(op)
     , operand1_(op1)
@@ -77,10 +73,7 @@ namespace roe
     return builder.CreateNot(value);
   }
 
-  ASTCompare::ASTCompare(Context&      context,
-                         Operator      op,
-                         ASTElementPtr op1,
-                         ASTElementPtr op2)
+  ASTCompare::ASTCompare(Context& context, Operator op, ASTElementPtr op1, ASTElementPtr op2)
     : ASTElement(context)
     , op_(op)
     , operand1_(op1)
@@ -88,43 +81,34 @@ namespace roe
   {
   }
 
-  bool ASTCompare::handleStringEquals(llvm::Value*  v1,
-                                      llvm::Value*  v2,
-                                      llvm::Value*& out)
+  bool ASTCompare::handleStringEquals(llvm::Value* v1, llvm::Value* v2, llvm::Value*& out)
   {
     out = nullptr;
 
-    if (v1->getType() == context_.types().stringPtrType() &&
-        v2->getType() == context_.types().stringPtrType())
+    if (isString(v1) && isString(v2))
     {
-      out = context_.externalFunctions().makeCall(StringOps::EQUALS_STR_AND_STR,
-                                                  {v1, v2});
+      out = context_.externalFunctions().makeCall(StringOps::EQUALS_STR_AND_STR, {v1, v2});
       return true;
     }
-    else if (v1->getType() == context_.types().charPtrType() &&
-             v2->getType() == context_.types().stringPtrType())
+    else if (isCStr(v1) && isString(v2))
     {
-      auto astCStrLeft =  std::dynamic_pointer_cast<ASTCstr> (operand1_);
-      out = context_.externalFunctions().makeCall(
-        StringOps::EQUALS_CHPTR_AND_STR, {v1, astCStrLeft->length(), v2});
+      auto astCStrLeft = std::dynamic_pointer_cast<ASTCstr>(operand1_);
+      out = context_.externalFunctions().makeCall(StringOps::EQUALS_CHPTR_AND_STR, {v1, astCStrLeft->length(), v2});
       return true;
     }
-    else if (v1->getType() == context_.types().stringPtrType() &&
-             v2->getType() == context_.types().charPtrType())
+    else if (isString(v1) && isCStr(v2))
     {
-      auto astCStr =  std::dynamic_pointer_cast<ASTCstr> (operand2_);
-      out = context_.externalFunctions().makeCall(
-        StringOps::EQUALS_STR_AND_CHPTR, {v1, v2, astCStr->length() });
+      auto astCStr = std::dynamic_pointer_cast<ASTCstr>(operand2_);
+      out = context_.externalFunctions().makeCall(StringOps::EQUALS_STR_AND_CHPTR, {v1, v2, astCStr->length()});
       return true;
     }
-    else if (v1->getType() == context_.types().charPtrType() &&
-             v2->getType() == context_.types().charPtrType())
+    else if (isCStr(v1) && isCStr(v2))
     {
-      auto astCStrLeft =  std::dynamic_pointer_cast<ASTCstr> (operand1_);
-      auto astCStrRight =  std::dynamic_pointer_cast<ASTCstr> (operand2_);
+      auto astCStrLeft  = std::dynamic_pointer_cast<ASTCstr>(operand1_);
+      auto astCStrRight = std::dynamic_pointer_cast<ASTCstr>(operand2_);
 
       out = context_.externalFunctions().makeCall(
-        StringOps::EQUALS_CHPTR_AND_CHPTR, {v1,astCStrLeft->length(), v2, astCStrRight->length()});
+        StringOps::EQUALS_CHPTR_AND_CHPTR, {v1, astCStrLeft->length(), v2, astCStrRight->length()});
       return true;
     }
 
@@ -153,7 +137,7 @@ namespace roe
     {
       case Operator::LESS:
       {
-        if (isFloat(v1)&& isFloat(v2))
+        if (isFloat(v1) && isFloat(v2))
         {
           out = builder.CreateFCmpOLT(v1, v2);
         }
@@ -169,7 +153,7 @@ namespace roe
       break;
       case Operator::MORE:
       {
-        if (isFloat(v1)&& isFloat(v2))
+        if (isFloat(v1) && isFloat(v2))
         {
           out = builder.CreateFCmpOGT(v1, v2);
         }
@@ -182,14 +166,14 @@ namespace roe
           throw ASTException() << "Invalid argumnents for >";
         }
       }
-        break;
+      break;
       case Operator::EQUAL:
       {
         if (handleStringEquals(v1, v2, /*in-out*/ out))
         {
           // out is populated
         }
-        else if (isFloat(v1)&& isFloat(v2))
+        else if (isFloat(v1) && isFloat(v2))
         {
           out = builder.CreateFCmpOEQ(v1, v2);
         }
@@ -209,7 +193,7 @@ namespace roe
         {
           out = builder.CreateNot(out);
         }
-        else if (isFloat(v1)&& isFloat(v2))
+        else if (isFloat(v1) && isFloat(v2))
         {
           out = builder.CreateFCmpONE(v1, v2);
         }
@@ -225,7 +209,7 @@ namespace roe
       break;
       case Operator::MORE_OR_EQUAL:
       {
-        if (isFloat(v1)&& isFloat(v2))
+        if (isFloat(v1) && isFloat(v2))
         {
           out = builder.CreateFCmpOGE(v1, v2);
         }
@@ -238,10 +222,10 @@ namespace roe
           throw ASTException() << "Invalid argumnents for >=";
         }
       }
-        break;
+      break;
       case Operator::LESS_OR_EQUAL:
       {
-        if (isFloat(v1)&& isFloat(v2))
+        if (isFloat(v1) && isFloat(v2))
         {
           out = builder.CreateFCmpOLE(v1, v2);
         }
@@ -254,7 +238,7 @@ namespace roe
           throw ASTException() << "Invalid argumnents for <=";
         }
       }
-        break;
+      break;
     };
 
     return out;

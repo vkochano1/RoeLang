@@ -28,7 +28,10 @@ namespace roe
     return variableArguments_;
   }
 
-  size_t ASTArgList::size() const { return args_.size(); }
+  size_t ASTArgList::size() const
+  {
+    return args_.size();
+  }
 
   llvm::Value* ASTArgList::evaluate()
   {

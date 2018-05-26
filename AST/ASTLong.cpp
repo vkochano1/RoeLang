@@ -10,7 +10,6 @@ namespace roe
 
   llvm::Value* ASTLong::evaluate()
   {
-    auto& builder = context_.builder();
     return llvm::ConstantInt::get(context_.types().longType(), value_);
   }
 }

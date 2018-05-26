@@ -135,17 +135,17 @@ typedef roe::Parser::token_type token_type;
     return token::DOUBLE;
 }
 
-\'[A-Za-z0-9_,.-]\' {
+\'[A-Za-z0-9_,.\-]\' {
     yylval->longVal_ = static_cast<int>(yytext[1]);
     return token::INTEGER;
 }
 
-\"[A-Za-z0-9_,.-]*\" {
+\"[A-Za-z0-9_,.\- ]*\" {
     yylval->stringVal_ = std::string(&yytext[1], yyleng - 2);
     return token::STRING;
 }
 
-[A-Za-z][A-Za-z0-9^\.]*[\.]field[A-Za-z][A-Za-z0-9]* {
+[A-Za-z][A-Za-z0-9_^\.]*[\.]field[A-Za-z][A-Za-z0-9_]* {
     yylval->stringVal_ = std::string(yytext, yyleng);
     return token::NAME;
 }

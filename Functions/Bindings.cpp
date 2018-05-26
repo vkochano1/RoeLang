@@ -1,17 +1,15 @@
+#include <Exceptions/ASTException.h>
 #include <Functions/Bindings.h>
 #include <Functions/FunctionRegistrar.h>
 #include <Module/Context.h>
-#include <Exceptions/ASTException.h>
 
 namespace roe
 {
-
-  const std::string Bindings::PRINT_STR    = "printString";
-  const std::string Bindings::PRINT_INT    = "printLong";
-  const std::string Bindings::PRINT_DOUBLE = "printDouble";
-
+  const std::string Bindings::PRINT_STR        = "printString";
+  const std::string Bindings::PRINT_CSTR       = "printCStr";
+  const std::string Bindings::PRINT_INT        = "printLong";
+  const std::string Bindings::PRINT_DOUBLE     = "printDouble";
   const std::string Bindings::GET_FIELD_STRING = "getFieldString";
-  ;
   const std::string Bindings::SET_FIELD_STRING = "setFieldString";
   const std::string Bindings::SET_FIELD_CHPTR  = "setFieldCharPtr";
   const std::string Bindings::SET_FIELD_INT    = "setFieldInt";
@@ -32,49 +30,65 @@ namespace roe
   {
     context.externalFunctions().registerExternal(
       GET_FIELD_STRING, &Bindings::getFieldString, context.types().voidType(),
-      {context.types().voidPtrType(), context.types().longType(),
-       context.types().stringPtrType()});
+      {context.types().voidPtrType(), context.types().longType(), context.types().stringPtrType()});
 
     context.externalFunctions().registerExternal(
       SET_FIELD_STRING, &Bindings::setFieldString, context.types().voidType(),
-      {context.types().voidPtrType(), context.types().longType(),
-       context.types().stringPtrType()});
+      {context.types().voidPtrType(), context.types().longType(), context.types().stringPtrType()});
 
     context.externalFunctions().registerExternal(
       SET_FIELD_CHPTR, &Bindings::setFieldCharPtr, context.types().voidType(),
-      {context.types().voidPtrType(), context.types().longType(),
-       context.types().charPtrType(), context.types().longType()});
+      {context.types().voidPtrType(), context.types().longType(), context.types().charPtrType(),
+       context.types().longType()});
 
     context.externalFunctions().registerExternal(
       SET_FIELD_INT, &Bindings::setFieldInt, context.types().voidType(),
-      {context.types().voidPtrType(), context.types().longType(),
-       context.types().longType()});
+      {context.types().voidPtrType(), context.types().longType(), context.types().longType()});
+
     context.externalFunctions().registerExternal(
       SET_FIELD_DOUBLE, &Bindings::setFieldDouble, context.types().voidType(),
-      {context.types().voidPtrType(), context.types().longType(),
-       context.types().floatType()});
+      {context.types().voidPtrType(), context.types().longType(), context.types().floatType()});
 
     context.externalFunctions().registerExternal(
       PRINT_STR, &Bindings::printString, context.types().voidType(),
-      {context.types().stringPtrType()});
+      {context.types().longType(), context.types().stringPtrType()});
 
-    context.externalFunctions().registerExternal(PRINT_INT, &Bindings::printInt,
-                                                 context.types().voidType(),
-                                                 {context.types().longType()});
+    context.externalFunctions().registerExternal(
+      PRINT_CSTR, &Bindings::printCStr, context.types().voidType(),
+      {context.types().longType(), context.types().charPtrType()});
+
+    context.externalFunctions().registerExternal(
+      PRINT_INT, &Bindings::printInt, context.types().voidType(),
+      {context.types().longType(), context.types().longType()});
 
     context.externalFunctions().registerExternal(
       PRINT_DOUBLE, &Bindings::printDouble, context.types().voidType(),
-      {context.types().floatType()});
+      {context.types().longType(), context.types().floatType()});
   }
 
-  void Bindings::printString(const StringOps::String_t* s)
+  void Bindings::printString(void* data, const StringOps::String_t* str)
   {
-    std::cout << std::string((char*)&s->data[0], s->len_) << std::endl;
+    IPrinter* printer = reinterpret_cast<IPrinter*>(data);
+    printer->print(str);
   }
 
-  void Bindings::printInt(int64_t i) { std::cout << i << std::endl; }
+  void Bindings::printInt(void* data, int64_t iVal)
+  {
+    IPrinter* printer = reinterpret_cast<IPrinter*>(data);
+    printer->print(iVal);
+  }
 
-  void Bindings::printDouble(double d) { std::cout << d << std::endl; }
+  void Bindings::printCStr(void* data, const char* str)
+  {
+    IPrinter* printer = reinterpret_cast<IPrinter*>(data);
+    printer->print(str);
+  }
+
+  void Bindings::printDouble(void* data, double dVal)
+  {
+    IPrinter* printer = reinterpret_cast<IPrinter*>(data);
+    printer->print(dVal);
+  }
 
   void Bindings::getFieldString(void* data, int64_t tag, StringOps::String_t* s)
   {

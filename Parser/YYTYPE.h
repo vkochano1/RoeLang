@@ -15,7 +15,6 @@
 
 namespace roe
 {
-
   struct YYSTYPE
   {
     long                     longVal_;

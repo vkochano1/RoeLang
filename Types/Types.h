@@ -7,7 +7,6 @@
 
 namespace roe
 {
-
   class Types
   {
   public:

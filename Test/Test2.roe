@@ -1,0 +1,15 @@
+ruleid = TEST1(C1, C2, C3)
+{
+  C1.fieldOrderQty = 24;
+
+  C1.fieldOrderQty = int(C1.fieldOrderQty) + 10.2;
+
+  if (double(C1.fieldOrderQty) == 34.2)
+  {
+    print("passed");
+  }
+  else
+  {
+    print("failed");
+  }
+}

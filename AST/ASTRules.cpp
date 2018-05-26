@@ -2,7 +2,6 @@
 
 namespace roe
 {
-
   void ASTRules::addRule(ASTRulePtr rule)
   {
     if (rule->name().empty())
@@ -10,7 +9,7 @@ namespace roe
       throw ASTException() << "Invalid ruleID";
     }
 
-    if(!rules_.insert(std::make_pair(rule->name(), rule)).second)
+    if (!rules_.insert(std::make_pair(rule->name(), rule)).second)
     {
       throw ASTException() << "Duplicate rule";
     }

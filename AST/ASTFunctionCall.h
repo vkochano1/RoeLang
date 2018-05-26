@@ -9,12 +9,12 @@ namespace roe
   public:
     static const std::string TO_STRING_BUILTIN;
     static const std::string TO_INT_BUILTIN;
+    static const std::string TO_DOUBLE_BUILTIN;
     static const std::string PRINT_BUILTIN;
     static const std::string LENGTH_BUILTIN;
-    
+
   public:
-    ASTFunctionCall(Context& context, const std::string& name,
-                    ASTElementPtr args);
+    ASTFunctionCall(Context& context, const std::string& name, ASTElementPtr args);
     virtual llvm::Value* evaluate() override;
     ~ASTFunctionCall();
 

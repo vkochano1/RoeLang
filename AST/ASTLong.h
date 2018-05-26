@@ -4,7 +4,6 @@
 
 namespace roe
 {
-
   class ASTLong : public ASTElement
   {
   public:

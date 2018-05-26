@@ -4,7 +4,6 @@
 
 namespace roe
 {
-
   class ASTDouble : public ASTElement
   {
   public:

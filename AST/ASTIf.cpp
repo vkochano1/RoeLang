@@ -2,9 +2,7 @@
 
 namespace roe
 {
-
-  ASTIf::ASTIf(Context& context, ASTElementPtr condition,
-               ASTElementPtr mainBlock, ASTElementPtr elseBlock)
+  ASTIf::ASTIf(Context& context, ASTElementPtr condition, ASTElementPtr mainBlock, ASTElementPtr elseBlock)
     : ASTElement(context)
     , condition_(condition)
     , mainBlock_(mainBlock)
@@ -21,22 +19,20 @@ namespace roe
       throw ASTException() << "Expected boolean type and got NULL";
     }
 
-    condExpResult       = loadValueIfNeeded(condExpResult);
-    condExpResult       = convertToBool(condExpResult);
+    condExpResult = loadValueIfNeeded(condExpResult);
+    condExpResult = convertToBool(condExpResult);
 
-    if(!isBool(condExpResult))
+    if (!isBool(condExpResult))
     {
       throw ASTException() << "Expected boolean type";
     }
 
-    auto& builder       = context_.builder();
-    auto* func          = context_.rule().funcPtr();
+    auto& builder = context_.builder();
+    auto* func    = context_.rule().funcPtr();
 
-    llvm::BasicBlock* ifMain =
-      llvm::BasicBlock::Create(builder.getContext(), "ifMain", func);
+    llvm::BasicBlock* ifMain = llvm::BasicBlock::Create(builder.getContext(), "ifMain", func);
     llvm::BasicBlock* ifElse = nullptr;
-    llvm::BasicBlock* ifEnd =
-      llvm::BasicBlock::Create(builder.getContext(), "IfEnd", func);
+    llvm::BasicBlock* ifEnd  = llvm::BasicBlock::Create(builder.getContext(), "IfEnd", func);
 
     if (elseBlock_)
     {

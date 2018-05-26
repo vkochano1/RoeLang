@@ -16,8 +16,8 @@ namespace roe
   public:
     ModulePtr tryLoadModule(const std::string& name, const std::string& text);
     ModulePtr tryLoadModuleFromFile(const std::string& name, const std::string& path);
-    void buildAll();
-    void dumpAll(std::ostream&);
+    void                         buildAll();
+    void                         dumpAll(std::ostream&);
     Module::CompiledFunctionInfo getCompiledFunction(const std::string& moduleName, std::string& functionName);
 
   private:
@@ -26,5 +26,4 @@ namespace roe
   private:
     Modules modules_;
   };
-
 }

@@ -4,7 +4,6 @@
 #include <Exceptions/ASTException.h>
 namespace roe
 {
-
   class ASTLogicalNOT : public ASTElement
   {
   public:
@@ -31,13 +30,11 @@ namespace roe
     };
 
   public:
-    ASTCompare(Context& context, Operator op, ASTElementPtr operand1,
-               ASTElementPtr operand2);
+    ASTCompare(Context& context, Operator op, ASTElementPtr operand1, ASTElementPtr operand2);
 
   public:
     virtual llvm::Value* evaluate() override;
-    bool
-    handleStringEquals(llvm::Value* v1, llvm::Value* v2, llvm::Value*& out);
+    bool handleStringEquals(llvm::Value* v1, llvm::Value* v2, llvm::Value*& out);
 
   private:
     Operator      op_;
@@ -55,8 +52,7 @@ namespace roe
     };
 
   public:
-    ASTLogical(Context& context, Operator op, ASTElementPtr operand1,
-               ASTElementPtr operand2);
+    ASTLogical(Context& context, Operator op, ASTElementPtr operand1, ASTElementPtr operand2);
 
   public:
     virtual llvm::Value* evaluate();

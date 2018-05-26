@@ -13,8 +13,7 @@ namespace roe
     parameters_.push_back(name);
   }
 
-  const ASTFunctionParameters::Parameters&
-  ASTFunctionParameters::parameters() const
+  const ASTFunctionParameters::Parameters& ASTFunctionParameters::parameters() const
   {
     return parameters_;
   }

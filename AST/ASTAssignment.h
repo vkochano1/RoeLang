@@ -16,12 +16,9 @@ namespace roe
 
   private:
     void processAssignmentToField(const ASTVariable& var, llvm::Value* from);
-    void processAssignmentToLocalStrVar(const ASTVariable& var, llvm::Value* to,
-                                        llvm::Value* from);
-    void processAssignmentToLocalIntVar(const ASTVariable& var, llvm::Value* to,
-                                        llvm::Value* from);
-    void processAssignmentToLocalFloatVar(const ASTVariable& var,
-                                          llvm::Value* to, llvm::Value* from);
+    void processAssignmentToLocalStrVar(const ASTVariable& var, llvm::Value* to, llvm::Value* from);
+    void processAssignmentToLocalIntVar(const ASTVariable& var, llvm::Value* to, llvm::Value* from);
+    void processAssignmentToLocalFloatVar(const ASTVariable& var, llvm::Value* to, llvm::Value* from);
 
   private:
     ASTElementPtr left_;

@@ -4,7 +4,6 @@
 
 namespace roe
 {
-
   class ASTArithmetical : public ASTElement
   {
   public:
@@ -17,8 +16,7 @@ namespace roe
     };
 
   public:
-    ASTArithmetical(Context& context, Operator op, ASTElementPtr operand1,
-                    ASTElementPtr operand2);
+    ASTArithmetical(Context& context, Operator op, ASTElementPtr operand1, ASTElementPtr operand2);
 
   public:
     virtual llvm::Value* evaluate() override;

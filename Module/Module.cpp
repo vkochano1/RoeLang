@@ -1,18 +1,18 @@
 #include <Functions/Bindings.h>
 #include <Module/Module.h>
-#include <llvm/Transforms/IPO/PassManagerBuilder.h>
+#include <llvm/IR/LegacyPassManager.h>
 #include <llvm/Transforms/IPO.h>
-#include  <llvm/IR/LegacyPassManager.h>
+#include <llvm/Transforms/IPO/PassManagerBuilder.h>
 
 namespace roe
 {
-
   Module::CompiledFunctionInfo::CompiledFunctionInfo(
-    const std::string& name, size_t nParams,
+    const std::string&     name,
+    size_t                 nParams,
     llvm::ExecutionEngine* executionEngine)
   {
     nParams_ = nParams;
-    fptr_ = reinterpret_cast<void*>(executionEngine->getFunctionAddress(name));
+    fptr_    = reinterpret_cast<void*>(executionEngine->getFunctionAddress(name));
   }
   Module::CompiledFunctionInfo::CompiledFunctionInfo()
   {
@@ -20,7 +20,10 @@ namespace roe
     nParams_ = 0;
   }
 
-  Context& Module::context() { return context_; }
+  Context& Module::context()
+  {
+    return context_;
+  }
 
   Module::CompiledFunctionInfo& Module::getFunc(const std::string& funcName)
 
@@ -33,13 +36,13 @@ namespace roe
     compiled_ = false;
 
     {
-      auto module    = std::make_unique<llvm::Module>(name, context_);
-      module_        = module.get();
-      engineBuilder_ = std::make_unique<llvm::EngineBuilder>(std::move(module));
+      auto module      = std::make_unique<llvm::Module>(name, context_);
+      module_          = module.get();
+      engineBuilder_   = std::make_unique<llvm::EngineBuilder>(std::move(module));
       executionEngine_ = engineBuilder_->create();
     }
 
-    context_.init(module_);
+    context_.init(this);
 
     roe::StringOps::registerBuiltins(context_);
     roe::Bindings::registerBuiltins(context_);
@@ -47,10 +50,13 @@ namespace roe
     driver_ = std::make_unique<roe::Driver>(context_);
   }
 
-  void Module::bindFunctionParameterConstraints(
-    const std::string& functionName,
-    std::initializer_list<std::shared_ptr<IConstraints>>
-      constraintsList)
+  llvm::Module* Module::nativeModule()
+  {
+    return module_;
+  }
+
+  void Module::bindParamsConstraints(
+    const std::string& functionName, std::initializer_list<std::shared_ptr<IConstraints>> constraintsList)
   {
     auto& roeRule = context().rule(functionName);
     auto  argIt   = constraintsList.begin();
@@ -85,7 +91,7 @@ namespace roe
   {
     if (compiled_)
     {
-        throw std::logic_error("Module is already compiled");
+      throw std::logic_error("Module is already compiled");
     }
 
     try
@@ -94,7 +100,7 @@ namespace roe
 
       compiled_ = true;
     }
-    catch(ASTException& ex)
+    catch (ASTException& ex)
     {
       std::ostringstream ostrm;
       ostrm << "Failed to generate IR code from AST due to:" << ex.what();
@@ -109,9 +115,10 @@ namespace roe
       std::logic_error("Module is not compiled to IR yet");
     }
 
-    /*std::string       out;
-    module_->print(out, nullptr);
-    ostrm << out << std::endl;*/
+    std::string              out;
+    llvm::raw_string_ostream llvmOstrm(out);
+    module_->print(llvmOstrm, nullptr);
+    ostrm << out << std::endl;
   }
 
   void Module::buildNative()
@@ -123,12 +130,12 @@ namespace roe
 
     context_.externalFunctions().addAllMappings(*executionEngine_);
 
-    llvm::PassManagerBuilder builder;
+    llvm::PassManagerBuilder          builder;
     llvm::legacy::FunctionPassManager passManager(module_);
     // -O3,  no size opt, aggressive inlining
-    builder.OptLevel = 3;
+    builder.OptLevel  = 3;
     builder.SizeLevel = 0;
-    builder.Inliner = llvm::createFunctionInliningPass();
+    builder.Inliner   = llvm::createFunctionInliningPass();
     builder.populateFunctionPassManager(passManager);
     passManager.doInitialization();
     for (const auto& rule : context_.rules())

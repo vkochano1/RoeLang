@@ -5,12 +5,10 @@
 
 namespace roe
 {
-
   class ASTStrSlice : public ASTElement
   {
   public:
-    ASTStrSlice(Context& context, ASTElementPtr base, ASTElementPtr from,
-                ASTElementPtr len);
+    ASTStrSlice(Context& context, ASTElementPtr base, ASTElementPtr from, ASTElementPtr len);
 
   public:
     virtual llvm::Value* evaluate() override;

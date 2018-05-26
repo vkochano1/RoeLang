@@ -3,9 +3,7 @@
 
 namespace roe
 {
-
-  ASTStrSlice::ASTStrSlice(Context& context, ASTElementPtr base,
-                           ASTElementPtr from, ASTElementPtr len)
+  ASTStrSlice::ASTStrSlice(Context& context, ASTElementPtr base, ASTElementPtr from, ASTElementPtr len)
     : ASTElement(context)
     , base_(base)
     , len_(len)
@@ -21,15 +19,13 @@ namespace roe
     llvm::Value* out = nullptr;
     if (!len_)
     {
-      out = context_.externalFunctions().makeCall(StringOps::GET_CHAR,
-                                                  {varValue, idx});
+      out = context_.externalFunctions().makeCall(StringOps::GET_CHAR, {varValue, idx});
     }
     else
     {
       auto* l = len_->evaluate();
-      out = allocString();
-      context_.externalFunctions().makeCall(StringOps::GET_SUBSTR,
-                                            {varValue, idx, l, out});
+      out     = allocString();
+      context_.externalFunctions().makeCall(StringOps::GET_SUBSTR, {varValue, idx, l, out});
     }
 
     return out;

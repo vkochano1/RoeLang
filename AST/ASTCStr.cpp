@@ -2,7 +2,6 @@
 
 namespace roe
 {
-
   ASTCstr::ASTCstr(Context& context, const std::string& value)
     : ASTElement(context)
     , value_(value)
