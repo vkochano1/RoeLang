@@ -55,7 +55,8 @@ namespace roe
     Module(const std::string& name);
     Context& context();
 
-    Module::CompiledFunctionInfo& getFunc(const std::string& funcName);
+    Module::CompiledFunctionInfo& function(const std::string& funcName);
+    CompiledFunctions& functions();
 
     void compileToIR();
     bool constructAST(const std::string& text);

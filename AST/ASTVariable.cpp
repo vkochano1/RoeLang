@@ -1,6 +1,5 @@
 #include <AST/ASTVariable.h>
 #include <Functions/FunctionRegistrar.h>
-#include <boost/algorithm/string.hpp>
 
 namespace roe
 {
@@ -12,8 +11,21 @@ namespace roe
     , tag_(-1)
   {
     var_ = var;
-    std::vector<std::string> varComponents;
-    boost::split(varComponents, var_, boost::is_any_of("."));
+
+    // don't have dependency on boost
+    auto  split = [] (const std::string& s, char delimiter)
+    {
+       std::vector<std::string> tokens;
+       std::string token;
+       std::istringstream tokenStream(s);
+       while (std::getline(tokenStream, token, delimiter))
+       {
+          tokens.push_back(token);
+       }
+       return tokens;
+    };
+
+    auto varComponents = split(var_, '.');
 
     if (2 != varComponents.size())
     {
@@ -42,7 +54,7 @@ namespace roe
       auto containerConstraints = context_.rule().getContainerForParam(baseName_);
       if (!containerConstraints)
       {
-        throw roe::ASTException() << "Couldn't resolve container for param";
+        throw roe::ASTException() << "Couldn't resolve container for param " << baseName_;
       }
       tag_ = containerConstraints->getTagFromFieldName(fieldStr);
       return true;

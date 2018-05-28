@@ -25,10 +25,18 @@ namespace roe
     return context_;
   }
 
-  Module::CompiledFunctionInfo& Module::getFunc(const std::string& funcName)
+  Module::CompiledFunctionInfo& Module::function(const std::string& funcName)
 
   {
-    return compiledFunctions_[funcName];
+    auto fit = compiledFunctions_.find(funcName);
+    if(fit == compiledFunctions_.end())
+      throw ASTException() << "Tried to call unknown function " << funcName;
+    return fit->second;
+  }
+
+  Module::CompiledFunctions& Module::functions()
+  {
+    return compiledFunctions_;
   }
 
   Module::Module(const std::string& name)

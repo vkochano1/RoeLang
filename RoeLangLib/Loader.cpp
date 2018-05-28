@@ -68,6 +68,6 @@ namespace roe
     if (fit == modules_.end())
       throw std::runtime_error("Module not found");
 
-    return fit->second->getFunc(functionName);
+    return fit->second->function(functionName);
   }
 }

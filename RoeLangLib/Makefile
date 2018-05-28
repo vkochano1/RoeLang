@@ -111,19 +111,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-RoeLangLib/CMakeFiles/RoeLang.dir/rule:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f CMakeFiles/Makefile2 RoeLangLib/CMakeFiles/RoeLang.dir/rule
-.PHONY : RoeLangLib/CMakeFiles/RoeLang.dir/rule
+RoeLangLib/CMakeFiles/RoeLangDynamic.dir/rule:
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f CMakeFiles/Makefile2 RoeLangLib/CMakeFiles/RoeLangDynamic.dir/rule
+.PHONY : RoeLangLib/CMakeFiles/RoeLangDynamic.dir/rule
 
 # Convenience name for target.
-RoeLang: RoeLangLib/CMakeFiles/RoeLang.dir/rule
+RoeLangDynamic: RoeLangLib/CMakeFiles/RoeLangDynamic.dir/rule
 
-.PHONY : RoeLang
+.PHONY : RoeLangDynamic
 
 # fast build rule for target.
-RoeLang/fast:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/build
-.PHONY : RoeLang/fast
+RoeLangDynamic/fast:
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build
+.PHONY : RoeLangDynamic/fast
 
 Loader.o: Loader.cpp.o
 
@@ -131,7 +131,7 @@ Loader.o: Loader.cpp.o
 
 # target to build an object file
 Loader.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/Loader.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/Loader.cpp.o
 .PHONY : Loader.cpp.o
 
 Loader.i: Loader.cpp.i
@@ -140,7 +140,7 @@ Loader.i: Loader.cpp.i
 
 # target to preprocess a source file
 Loader.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/Loader.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/Loader.cpp.i
 .PHONY : Loader.cpp.i
 
 Loader.s: Loader.cpp.s
@@ -149,7 +149,7 @@ Loader.s: Loader.cpp.s
 
 # target to generate assembly for a file
 Loader.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/Loader.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/Loader.cpp.s
 .PHONY : Loader.cpp.s
 
 __/AST/ASTArgList.o: __/AST/ASTArgList.cpp.o
@@ -158,7 +158,7 @@ __/AST/ASTArgList.o: __/AST/ASTArgList.cpp.o
 
 # target to build an object file
 __/AST/ASTArgList.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTArgList.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTArgList.cpp.o
 .PHONY : __/AST/ASTArgList.cpp.o
 
 __/AST/ASTArgList.i: __/AST/ASTArgList.cpp.i
@@ -167,7 +167,7 @@ __/AST/ASTArgList.i: __/AST/ASTArgList.cpp.i
 
 # target to preprocess a source file
 __/AST/ASTArgList.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTArgList.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTArgList.cpp.i
 .PHONY : __/AST/ASTArgList.cpp.i
 
 __/AST/ASTArgList.s: __/AST/ASTArgList.cpp.s
@@ -176,7 +176,7 @@ __/AST/ASTArgList.s: __/AST/ASTArgList.cpp.s
 
 # target to generate assembly for a file
 __/AST/ASTArgList.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTArgList.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTArgList.cpp.s
 .PHONY : __/AST/ASTArgList.cpp.s
 
 __/AST/ASTArithmetical.o: __/AST/ASTArithmetical.cpp.o
@@ -185,7 +185,7 @@ __/AST/ASTArithmetical.o: __/AST/ASTArithmetical.cpp.o
 
 # target to build an object file
 __/AST/ASTArithmetical.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTArithmetical.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTArithmetical.cpp.o
 .PHONY : __/AST/ASTArithmetical.cpp.o
 
 __/AST/ASTArithmetical.i: __/AST/ASTArithmetical.cpp.i
@@ -194,7 +194,7 @@ __/AST/ASTArithmetical.i: __/AST/ASTArithmetical.cpp.i
 
 # target to preprocess a source file
 __/AST/ASTArithmetical.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTArithmetical.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTArithmetical.cpp.i
 .PHONY : __/AST/ASTArithmetical.cpp.i
 
 __/AST/ASTArithmetical.s: __/AST/ASTArithmetical.cpp.s
@@ -203,7 +203,7 @@ __/AST/ASTArithmetical.s: __/AST/ASTArithmetical.cpp.s
 
 # target to generate assembly for a file
 __/AST/ASTArithmetical.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTArithmetical.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTArithmetical.cpp.s
 .PHONY : __/AST/ASTArithmetical.cpp.s
 
 __/AST/ASTAssignment.o: __/AST/ASTAssignment.cpp.o
@@ -212,7 +212,7 @@ __/AST/ASTAssignment.o: __/AST/ASTAssignment.cpp.o
 
 # target to build an object file
 __/AST/ASTAssignment.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTAssignment.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTAssignment.cpp.o
 .PHONY : __/AST/ASTAssignment.cpp.o
 
 __/AST/ASTAssignment.i: __/AST/ASTAssignment.cpp.i
@@ -221,7 +221,7 @@ __/AST/ASTAssignment.i: __/AST/ASTAssignment.cpp.i
 
 # target to preprocess a source file
 __/AST/ASTAssignment.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTAssignment.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTAssignment.cpp.i
 .PHONY : __/AST/ASTAssignment.cpp.i
 
 __/AST/ASTAssignment.s: __/AST/ASTAssignment.cpp.s
@@ -230,7 +230,7 @@ __/AST/ASTAssignment.s: __/AST/ASTAssignment.cpp.s
 
 # target to generate assembly for a file
 __/AST/ASTAssignment.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTAssignment.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTAssignment.cpp.s
 .PHONY : __/AST/ASTAssignment.cpp.s
 
 __/AST/ASTBlock.o: __/AST/ASTBlock.cpp.o
@@ -239,7 +239,7 @@ __/AST/ASTBlock.o: __/AST/ASTBlock.cpp.o
 
 # target to build an object file
 __/AST/ASTBlock.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTBlock.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTBlock.cpp.o
 .PHONY : __/AST/ASTBlock.cpp.o
 
 __/AST/ASTBlock.i: __/AST/ASTBlock.cpp.i
@@ -248,7 +248,7 @@ __/AST/ASTBlock.i: __/AST/ASTBlock.cpp.i
 
 # target to preprocess a source file
 __/AST/ASTBlock.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTBlock.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTBlock.cpp.i
 .PHONY : __/AST/ASTBlock.cpp.i
 
 __/AST/ASTBlock.s: __/AST/ASTBlock.cpp.s
@@ -257,7 +257,7 @@ __/AST/ASTBlock.s: __/AST/ASTBlock.cpp.s
 
 # target to generate assembly for a file
 __/AST/ASTBlock.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTBlock.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTBlock.cpp.s
 .PHONY : __/AST/ASTBlock.cpp.s
 
 __/AST/ASTCStr.o: __/AST/ASTCStr.cpp.o
@@ -266,7 +266,7 @@ __/AST/ASTCStr.o: __/AST/ASTCStr.cpp.o
 
 # target to build an object file
 __/AST/ASTCStr.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTCStr.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTCStr.cpp.o
 .PHONY : __/AST/ASTCStr.cpp.o
 
 __/AST/ASTCStr.i: __/AST/ASTCStr.cpp.i
@@ -275,7 +275,7 @@ __/AST/ASTCStr.i: __/AST/ASTCStr.cpp.i
 
 # target to preprocess a source file
 __/AST/ASTCStr.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTCStr.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTCStr.cpp.i
 .PHONY : __/AST/ASTCStr.cpp.i
 
 __/AST/ASTCStr.s: __/AST/ASTCStr.cpp.s
@@ -284,7 +284,7 @@ __/AST/ASTCStr.s: __/AST/ASTCStr.cpp.s
 
 # target to generate assembly for a file
 __/AST/ASTCStr.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTCStr.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTCStr.cpp.s
 .PHONY : __/AST/ASTCStr.cpp.s
 
 __/AST/ASTDouble.o: __/AST/ASTDouble.cpp.o
@@ -293,7 +293,7 @@ __/AST/ASTDouble.o: __/AST/ASTDouble.cpp.o
 
 # target to build an object file
 __/AST/ASTDouble.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTDouble.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTDouble.cpp.o
 .PHONY : __/AST/ASTDouble.cpp.o
 
 __/AST/ASTDouble.i: __/AST/ASTDouble.cpp.i
@@ -302,7 +302,7 @@ __/AST/ASTDouble.i: __/AST/ASTDouble.cpp.i
 
 # target to preprocess a source file
 __/AST/ASTDouble.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTDouble.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTDouble.cpp.i
 .PHONY : __/AST/ASTDouble.cpp.i
 
 __/AST/ASTDouble.s: __/AST/ASTDouble.cpp.s
@@ -311,7 +311,7 @@ __/AST/ASTDouble.s: __/AST/ASTDouble.cpp.s
 
 # target to generate assembly for a file
 __/AST/ASTDouble.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTDouble.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTDouble.cpp.s
 .PHONY : __/AST/ASTDouble.cpp.s
 
 __/AST/ASTElement.o: __/AST/ASTElement.cpp.o
@@ -320,7 +320,7 @@ __/AST/ASTElement.o: __/AST/ASTElement.cpp.o
 
 # target to build an object file
 __/AST/ASTElement.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTElement.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTElement.cpp.o
 .PHONY : __/AST/ASTElement.cpp.o
 
 __/AST/ASTElement.i: __/AST/ASTElement.cpp.i
@@ -329,7 +329,7 @@ __/AST/ASTElement.i: __/AST/ASTElement.cpp.i
 
 # target to preprocess a source file
 __/AST/ASTElement.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTElement.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTElement.cpp.i
 .PHONY : __/AST/ASTElement.cpp.i
 
 __/AST/ASTElement.s: __/AST/ASTElement.cpp.s
@@ -338,7 +338,7 @@ __/AST/ASTElement.s: __/AST/ASTElement.cpp.s
 
 # target to generate assembly for a file
 __/AST/ASTElement.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTElement.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTElement.cpp.s
 .PHONY : __/AST/ASTElement.cpp.s
 
 __/AST/ASTFunctionCall.o: __/AST/ASTFunctionCall.cpp.o
@@ -347,7 +347,7 @@ __/AST/ASTFunctionCall.o: __/AST/ASTFunctionCall.cpp.o
 
 # target to build an object file
 __/AST/ASTFunctionCall.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTFunctionCall.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTFunctionCall.cpp.o
 .PHONY : __/AST/ASTFunctionCall.cpp.o
 
 __/AST/ASTFunctionCall.i: __/AST/ASTFunctionCall.cpp.i
@@ -356,7 +356,7 @@ __/AST/ASTFunctionCall.i: __/AST/ASTFunctionCall.cpp.i
 
 # target to preprocess a source file
 __/AST/ASTFunctionCall.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTFunctionCall.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTFunctionCall.cpp.i
 .PHONY : __/AST/ASTFunctionCall.cpp.i
 
 __/AST/ASTFunctionCall.s: __/AST/ASTFunctionCall.cpp.s
@@ -365,7 +365,7 @@ __/AST/ASTFunctionCall.s: __/AST/ASTFunctionCall.cpp.s
 
 # target to generate assembly for a file
 __/AST/ASTFunctionCall.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTFunctionCall.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTFunctionCall.cpp.s
 .PHONY : __/AST/ASTFunctionCall.cpp.s
 
 __/AST/ASTFunctionParameters.o: __/AST/ASTFunctionParameters.cpp.o
@@ -374,7 +374,7 @@ __/AST/ASTFunctionParameters.o: __/AST/ASTFunctionParameters.cpp.o
 
 # target to build an object file
 __/AST/ASTFunctionParameters.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTFunctionParameters.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTFunctionParameters.cpp.o
 .PHONY : __/AST/ASTFunctionParameters.cpp.o
 
 __/AST/ASTFunctionParameters.i: __/AST/ASTFunctionParameters.cpp.i
@@ -383,7 +383,7 @@ __/AST/ASTFunctionParameters.i: __/AST/ASTFunctionParameters.cpp.i
 
 # target to preprocess a source file
 __/AST/ASTFunctionParameters.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTFunctionParameters.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTFunctionParameters.cpp.i
 .PHONY : __/AST/ASTFunctionParameters.cpp.i
 
 __/AST/ASTFunctionParameters.s: __/AST/ASTFunctionParameters.cpp.s
@@ -392,7 +392,7 @@ __/AST/ASTFunctionParameters.s: __/AST/ASTFunctionParameters.cpp.s
 
 # target to generate assembly for a file
 __/AST/ASTFunctionParameters.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTFunctionParameters.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTFunctionParameters.cpp.s
 .PHONY : __/AST/ASTFunctionParameters.cpp.s
 
 __/AST/ASTIf.o: __/AST/ASTIf.cpp.o
@@ -401,7 +401,7 @@ __/AST/ASTIf.o: __/AST/ASTIf.cpp.o
 
 # target to build an object file
 __/AST/ASTIf.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTIf.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTIf.cpp.o
 .PHONY : __/AST/ASTIf.cpp.o
 
 __/AST/ASTIf.i: __/AST/ASTIf.cpp.i
@@ -410,7 +410,7 @@ __/AST/ASTIf.i: __/AST/ASTIf.cpp.i
 
 # target to preprocess a source file
 __/AST/ASTIf.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTIf.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTIf.cpp.i
 .PHONY : __/AST/ASTIf.cpp.i
 
 __/AST/ASTIf.s: __/AST/ASTIf.cpp.s
@@ -419,7 +419,7 @@ __/AST/ASTIf.s: __/AST/ASTIf.cpp.s
 
 # target to generate assembly for a file
 __/AST/ASTIf.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTIf.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTIf.cpp.s
 .PHONY : __/AST/ASTIf.cpp.s
 
 __/AST/ASTLogical.o: __/AST/ASTLogical.cpp.o
@@ -428,7 +428,7 @@ __/AST/ASTLogical.o: __/AST/ASTLogical.cpp.o
 
 # target to build an object file
 __/AST/ASTLogical.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTLogical.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTLogical.cpp.o
 .PHONY : __/AST/ASTLogical.cpp.o
 
 __/AST/ASTLogical.i: __/AST/ASTLogical.cpp.i
@@ -437,7 +437,7 @@ __/AST/ASTLogical.i: __/AST/ASTLogical.cpp.i
 
 # target to preprocess a source file
 __/AST/ASTLogical.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTLogical.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTLogical.cpp.i
 .PHONY : __/AST/ASTLogical.cpp.i
 
 __/AST/ASTLogical.s: __/AST/ASTLogical.cpp.s
@@ -446,7 +446,7 @@ __/AST/ASTLogical.s: __/AST/ASTLogical.cpp.s
 
 # target to generate assembly for a file
 __/AST/ASTLogical.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTLogical.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTLogical.cpp.s
 .PHONY : __/AST/ASTLogical.cpp.s
 
 __/AST/ASTLong.o: __/AST/ASTLong.cpp.o
@@ -455,7 +455,7 @@ __/AST/ASTLong.o: __/AST/ASTLong.cpp.o
 
 # target to build an object file
 __/AST/ASTLong.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTLong.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTLong.cpp.o
 .PHONY : __/AST/ASTLong.cpp.o
 
 __/AST/ASTLong.i: __/AST/ASTLong.cpp.i
@@ -464,7 +464,7 @@ __/AST/ASTLong.i: __/AST/ASTLong.cpp.i
 
 # target to preprocess a source file
 __/AST/ASTLong.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTLong.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTLong.cpp.i
 .PHONY : __/AST/ASTLong.cpp.i
 
 __/AST/ASTLong.s: __/AST/ASTLong.cpp.s
@@ -473,7 +473,7 @@ __/AST/ASTLong.s: __/AST/ASTLong.cpp.s
 
 # target to generate assembly for a file
 __/AST/ASTLong.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTLong.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTLong.cpp.s
 .PHONY : __/AST/ASTLong.cpp.s
 
 __/AST/ASTRule.o: __/AST/ASTRule.cpp.o
@@ -482,7 +482,7 @@ __/AST/ASTRule.o: __/AST/ASTRule.cpp.o
 
 # target to build an object file
 __/AST/ASTRule.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTRule.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTRule.cpp.o
 .PHONY : __/AST/ASTRule.cpp.o
 
 __/AST/ASTRule.i: __/AST/ASTRule.cpp.i
@@ -491,7 +491,7 @@ __/AST/ASTRule.i: __/AST/ASTRule.cpp.i
 
 # target to preprocess a source file
 __/AST/ASTRule.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTRule.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTRule.cpp.i
 .PHONY : __/AST/ASTRule.cpp.i
 
 __/AST/ASTRule.s: __/AST/ASTRule.cpp.s
@@ -500,7 +500,7 @@ __/AST/ASTRule.s: __/AST/ASTRule.cpp.s
 
 # target to generate assembly for a file
 __/AST/ASTRule.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTRule.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTRule.cpp.s
 .PHONY : __/AST/ASTRule.cpp.s
 
 __/AST/ASTRules.o: __/AST/ASTRules.cpp.o
@@ -509,7 +509,7 @@ __/AST/ASTRules.o: __/AST/ASTRules.cpp.o
 
 # target to build an object file
 __/AST/ASTRules.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTRules.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTRules.cpp.o
 .PHONY : __/AST/ASTRules.cpp.o
 
 __/AST/ASTRules.i: __/AST/ASTRules.cpp.i
@@ -518,7 +518,7 @@ __/AST/ASTRules.i: __/AST/ASTRules.cpp.i
 
 # target to preprocess a source file
 __/AST/ASTRules.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTRules.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTRules.cpp.i
 .PHONY : __/AST/ASTRules.cpp.i
 
 __/AST/ASTRules.s: __/AST/ASTRules.cpp.s
@@ -527,7 +527,7 @@ __/AST/ASTRules.s: __/AST/ASTRules.cpp.s
 
 # target to generate assembly for a file
 __/AST/ASTRules.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTRules.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTRules.cpp.s
 .PHONY : __/AST/ASTRules.cpp.s
 
 __/AST/ASTStrSlice.o: __/AST/ASTStrSlice.cpp.o
@@ -536,7 +536,7 @@ __/AST/ASTStrSlice.o: __/AST/ASTStrSlice.cpp.o
 
 # target to build an object file
 __/AST/ASTStrSlice.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTStrSlice.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTStrSlice.cpp.o
 .PHONY : __/AST/ASTStrSlice.cpp.o
 
 __/AST/ASTStrSlice.i: __/AST/ASTStrSlice.cpp.i
@@ -545,7 +545,7 @@ __/AST/ASTStrSlice.i: __/AST/ASTStrSlice.cpp.i
 
 # target to preprocess a source file
 __/AST/ASTStrSlice.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTStrSlice.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTStrSlice.cpp.i
 .PHONY : __/AST/ASTStrSlice.cpp.i
 
 __/AST/ASTStrSlice.s: __/AST/ASTStrSlice.cpp.s
@@ -554,7 +554,7 @@ __/AST/ASTStrSlice.s: __/AST/ASTStrSlice.cpp.s
 
 # target to generate assembly for a file
 __/AST/ASTStrSlice.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTStrSlice.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTStrSlice.cpp.s
 .PHONY : __/AST/ASTStrSlice.cpp.s
 
 __/AST/ASTVariable.o: __/AST/ASTVariable.cpp.o
@@ -563,7 +563,7 @@ __/AST/ASTVariable.o: __/AST/ASTVariable.cpp.o
 
 # target to build an object file
 __/AST/ASTVariable.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTVariable.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTVariable.cpp.o
 .PHONY : __/AST/ASTVariable.cpp.o
 
 __/AST/ASTVariable.i: __/AST/ASTVariable.cpp.i
@@ -572,7 +572,7 @@ __/AST/ASTVariable.i: __/AST/ASTVariable.cpp.i
 
 # target to preprocess a source file
 __/AST/ASTVariable.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTVariable.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTVariable.cpp.i
 .PHONY : __/AST/ASTVariable.cpp.i
 
 __/AST/ASTVariable.s: __/AST/ASTVariable.cpp.s
@@ -581,7 +581,7 @@ __/AST/ASTVariable.s: __/AST/ASTVariable.cpp.s
 
 # target to generate assembly for a file
 __/AST/ASTVariable.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/AST/ASTVariable.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/AST/ASTVariable.cpp.s
 .PHONY : __/AST/ASTVariable.cpp.s
 
 __/Functions/Bindings.o: __/Functions/Bindings.cpp.o
@@ -590,7 +590,7 @@ __/Functions/Bindings.o: __/Functions/Bindings.cpp.o
 
 # target to build an object file
 __/Functions/Bindings.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Functions/Bindings.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Functions/Bindings.cpp.o
 .PHONY : __/Functions/Bindings.cpp.o
 
 __/Functions/Bindings.i: __/Functions/Bindings.cpp.i
@@ -599,7 +599,7 @@ __/Functions/Bindings.i: __/Functions/Bindings.cpp.i
 
 # target to preprocess a source file
 __/Functions/Bindings.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Functions/Bindings.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Functions/Bindings.cpp.i
 .PHONY : __/Functions/Bindings.cpp.i
 
 __/Functions/Bindings.s: __/Functions/Bindings.cpp.s
@@ -608,7 +608,7 @@ __/Functions/Bindings.s: __/Functions/Bindings.cpp.s
 
 # target to generate assembly for a file
 __/Functions/Bindings.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Functions/Bindings.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Functions/Bindings.cpp.s
 .PHONY : __/Functions/Bindings.cpp.s
 
 __/Functions/FunctionRegistrar.o: __/Functions/FunctionRegistrar.cpp.o
@@ -617,7 +617,7 @@ __/Functions/FunctionRegistrar.o: __/Functions/FunctionRegistrar.cpp.o
 
 # target to build an object file
 __/Functions/FunctionRegistrar.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Functions/FunctionRegistrar.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Functions/FunctionRegistrar.cpp.o
 .PHONY : __/Functions/FunctionRegistrar.cpp.o
 
 __/Functions/FunctionRegistrar.i: __/Functions/FunctionRegistrar.cpp.i
@@ -626,7 +626,7 @@ __/Functions/FunctionRegistrar.i: __/Functions/FunctionRegistrar.cpp.i
 
 # target to preprocess a source file
 __/Functions/FunctionRegistrar.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Functions/FunctionRegistrar.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Functions/FunctionRegistrar.cpp.i
 .PHONY : __/Functions/FunctionRegistrar.cpp.i
 
 __/Functions/FunctionRegistrar.s: __/Functions/FunctionRegistrar.cpp.s
@@ -635,7 +635,7 @@ __/Functions/FunctionRegistrar.s: __/Functions/FunctionRegistrar.cpp.s
 
 # target to generate assembly for a file
 __/Functions/FunctionRegistrar.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Functions/FunctionRegistrar.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Functions/FunctionRegistrar.cpp.s
 .PHONY : __/Functions/FunctionRegistrar.cpp.s
 
 __/Functions/StringOps.o: __/Functions/StringOps.cpp.o
@@ -644,7 +644,7 @@ __/Functions/StringOps.o: __/Functions/StringOps.cpp.o
 
 # target to build an object file
 __/Functions/StringOps.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Functions/StringOps.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Functions/StringOps.cpp.o
 .PHONY : __/Functions/StringOps.cpp.o
 
 __/Functions/StringOps.i: __/Functions/StringOps.cpp.i
@@ -653,7 +653,7 @@ __/Functions/StringOps.i: __/Functions/StringOps.cpp.i
 
 # target to preprocess a source file
 __/Functions/StringOps.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Functions/StringOps.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Functions/StringOps.cpp.i
 .PHONY : __/Functions/StringOps.cpp.i
 
 __/Functions/StringOps.s: __/Functions/StringOps.cpp.s
@@ -662,35 +662,8 @@ __/Functions/StringOps.s: __/Functions/StringOps.cpp.s
 
 # target to generate assembly for a file
 __/Functions/StringOps.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Functions/StringOps.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Functions/StringOps.cpp.s
 .PHONY : __/Functions/StringOps.cpp.s
-
-__/Lexer/Scanner.o: __/Lexer/Scanner.cpp.o
-
-.PHONY : __/Lexer/Scanner.o
-
-# target to build an object file
-__/Lexer/Scanner.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Lexer/Scanner.cpp.o
-.PHONY : __/Lexer/Scanner.cpp.o
-
-__/Lexer/Scanner.i: __/Lexer/Scanner.cpp.i
-
-.PHONY : __/Lexer/Scanner.i
-
-# target to preprocess a source file
-__/Lexer/Scanner.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Lexer/Scanner.cpp.i
-.PHONY : __/Lexer/Scanner.cpp.i
-
-__/Lexer/Scanner.s: __/Lexer/Scanner.cpp.s
-
-.PHONY : __/Lexer/Scanner.s
-
-# target to generate assembly for a file
-__/Lexer/Scanner.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Lexer/Scanner.cpp.s
-.PHONY : __/Lexer/Scanner.cpp.s
 
 __/Module/Context.o: __/Module/Context.cpp.o
 
@@ -698,7 +671,7 @@ __/Module/Context.o: __/Module/Context.cpp.o
 
 # target to build an object file
 __/Module/Context.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Module/Context.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Module/Context.cpp.o
 .PHONY : __/Module/Context.cpp.o
 
 __/Module/Context.i: __/Module/Context.cpp.i
@@ -707,7 +680,7 @@ __/Module/Context.i: __/Module/Context.cpp.i
 
 # target to preprocess a source file
 __/Module/Context.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Module/Context.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Module/Context.cpp.i
 .PHONY : __/Module/Context.cpp.i
 
 __/Module/Context.s: __/Module/Context.cpp.s
@@ -716,7 +689,7 @@ __/Module/Context.s: __/Module/Context.cpp.s
 
 # target to generate assembly for a file
 __/Module/Context.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Module/Context.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Module/Context.cpp.s
 .PHONY : __/Module/Context.cpp.s
 
 __/Module/Module.o: __/Module/Module.cpp.o
@@ -725,7 +698,7 @@ __/Module/Module.o: __/Module/Module.cpp.o
 
 # target to build an object file
 __/Module/Module.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Module/Module.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Module/Module.cpp.o
 .PHONY : __/Module/Module.cpp.o
 
 __/Module/Module.i: __/Module/Module.cpp.i
@@ -734,7 +707,7 @@ __/Module/Module.i: __/Module/Module.cpp.i
 
 # target to preprocess a source file
 __/Module/Module.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Module/Module.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Module/Module.cpp.i
 .PHONY : __/Module/Module.cpp.i
 
 __/Module/Module.s: __/Module/Module.cpp.s
@@ -743,7 +716,7 @@ __/Module/Module.s: __/Module/Module.cpp.s
 
 # target to generate assembly for a file
 __/Module/Module.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Module/Module.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Module/Module.cpp.s
 .PHONY : __/Module/Module.cpp.s
 
 __/Module/RoeRule.o: __/Module/RoeRule.cpp.o
@@ -752,7 +725,7 @@ __/Module/RoeRule.o: __/Module/RoeRule.cpp.o
 
 # target to build an object file
 __/Module/RoeRule.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Module/RoeRule.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Module/RoeRule.cpp.o
 .PHONY : __/Module/RoeRule.cpp.o
 
 __/Module/RoeRule.i: __/Module/RoeRule.cpp.i
@@ -761,7 +734,7 @@ __/Module/RoeRule.i: __/Module/RoeRule.cpp.i
 
 # target to preprocess a source file
 __/Module/RoeRule.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Module/RoeRule.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Module/RoeRule.cpp.i
 .PHONY : __/Module/RoeRule.cpp.i
 
 __/Module/RoeRule.s: __/Module/RoeRule.cpp.s
@@ -770,7 +743,7 @@ __/Module/RoeRule.s: __/Module/RoeRule.cpp.s
 
 # target to generate assembly for a file
 __/Module/RoeRule.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Module/RoeRule.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Module/RoeRule.cpp.s
 .PHONY : __/Module/RoeRule.cpp.s
 
 __/Module/VariableInfo.o: __/Module/VariableInfo.cpp.o
@@ -779,7 +752,7 @@ __/Module/VariableInfo.o: __/Module/VariableInfo.cpp.o
 
 # target to build an object file
 __/Module/VariableInfo.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Module/VariableInfo.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Module/VariableInfo.cpp.o
 .PHONY : __/Module/VariableInfo.cpp.o
 
 __/Module/VariableInfo.i: __/Module/VariableInfo.cpp.i
@@ -788,7 +761,7 @@ __/Module/VariableInfo.i: __/Module/VariableInfo.cpp.i
 
 # target to preprocess a source file
 __/Module/VariableInfo.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Module/VariableInfo.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Module/VariableInfo.cpp.i
 .PHONY : __/Module/VariableInfo.cpp.i
 
 __/Module/VariableInfo.s: __/Module/VariableInfo.cpp.s
@@ -797,7 +770,7 @@ __/Module/VariableInfo.s: __/Module/VariableInfo.cpp.s
 
 # target to generate assembly for a file
 __/Module/VariableInfo.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Module/VariableInfo.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Module/VariableInfo.cpp.s
 .PHONY : __/Module/VariableInfo.cpp.s
 
 __/Parser/Driver.o: __/Parser/Driver.cpp.o
@@ -806,7 +779,7 @@ __/Parser/Driver.o: __/Parser/Driver.cpp.o
 
 # target to build an object file
 __/Parser/Driver.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Parser/Driver.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Parser/Driver.cpp.o
 .PHONY : __/Parser/Driver.cpp.o
 
 __/Parser/Driver.i: __/Parser/Driver.cpp.i
@@ -815,7 +788,7 @@ __/Parser/Driver.i: __/Parser/Driver.cpp.i
 
 # target to preprocess a source file
 __/Parser/Driver.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Parser/Driver.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Parser/Driver.cpp.i
 .PHONY : __/Parser/Driver.cpp.i
 
 __/Parser/Driver.s: __/Parser/Driver.cpp.s
@@ -824,7 +797,7 @@ __/Parser/Driver.s: __/Parser/Driver.cpp.s
 
 # target to generate assembly for a file
 __/Parser/Driver.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Parser/Driver.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Parser/Driver.cpp.s
 .PHONY : __/Parser/Driver.cpp.s
 
 __/Parser/Parser.o: __/Parser/Parser.cpp.o
@@ -833,7 +806,7 @@ __/Parser/Parser.o: __/Parser/Parser.cpp.o
 
 # target to build an object file
 __/Parser/Parser.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Parser/Parser.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Parser/Parser.cpp.o
 .PHONY : __/Parser/Parser.cpp.o
 
 __/Parser/Parser.i: __/Parser/Parser.cpp.i
@@ -842,7 +815,7 @@ __/Parser/Parser.i: __/Parser/Parser.cpp.i
 
 # target to preprocess a source file
 __/Parser/Parser.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Parser/Parser.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Parser/Parser.cpp.i
 .PHONY : __/Parser/Parser.cpp.i
 
 __/Parser/Parser.s: __/Parser/Parser.cpp.s
@@ -851,7 +824,7 @@ __/Parser/Parser.s: __/Parser/Parser.cpp.s
 
 # target to generate assembly for a file
 __/Parser/Parser.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Parser/Parser.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Parser/Parser.cpp.s
 .PHONY : __/Parser/Parser.cpp.s
 
 __/Types/Types.o: __/Types/Types.cpp.o
@@ -860,7 +833,7 @@ __/Types/Types.o: __/Types/Types.cpp.o
 
 # target to build an object file
 __/Types/Types.cpp.o:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Types/Types.cpp.o
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Types/Types.cpp.o
 .PHONY : __/Types/Types.cpp.o
 
 __/Types/Types.i: __/Types/Types.cpp.i
@@ -869,7 +842,7 @@ __/Types/Types.i: __/Types/Types.cpp.i
 
 # target to preprocess a source file
 __/Types/Types.cpp.i:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Types/Types.cpp.i
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Types/Types.cpp.i
 .PHONY : __/Types/Types.cpp.i
 
 __/Types/Types.s: __/Types/Types.cpp.s
@@ -878,7 +851,7 @@ __/Types/Types.s: __/Types/Types.cpp.s
 
 # target to generate assembly for a file
 __/Types/Types.cpp.s:
-	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLang.dir/build.make RoeLangLib/CMakeFiles/RoeLang.dir/__/Types/Types.cpp.s
+	cd /home/vkochano/RoeLang/RoeLang && $(MAKE) -f RoeLangLib/CMakeFiles/RoeLangDynamic.dir/build.make RoeLangLib/CMakeFiles/RoeLangDynamic.dir/__/Types/Types.cpp.s
 .PHONY : __/Types/Types.cpp.s
 
 # Help Target
@@ -888,7 +861,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... RoeLang"
+	@echo "... RoeLangDynamic"
 	@echo "... edit_cache"
 	@echo "... Loader.o"
 	@echo "... Loader.i"
@@ -950,9 +923,6 @@ help:
 	@echo "... __/Functions/StringOps.o"
 	@echo "... __/Functions/StringOps.i"
 	@echo "... __/Functions/StringOps.s"
-	@echo "... __/Lexer/Scanner.o"
-	@echo "... __/Lexer/Scanner.i"
-	@echo "... __/Lexer/Scanner.s"
 	@echo "... __/Module/Context.o"
 	@echo "... __/Module/Context.i"
 	@echo "... __/Module/Context.s"

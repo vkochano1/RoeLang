@@ -77,6 +77,4 @@ ruleid = TEST3(C1, C2, C3)
   {
     print("failed");
   }
-
-  print("Done " + " with " + " test");
 }
