@@ -51,8 +51,8 @@ endforeach(LLVM_LIB)
 
 if (GENERATE_PARSER)
   add_custom_target( Generators ALL
-                    COMMAND cmake -E echo "Embedding LLVM dependencies..."
-                    COMMAND flex -o Lexer/Scanner.cpp Lexer/Scanner.ll 
+                    COMMAND cmake -E echo "Generating parsers..."
+                    COMMAND flex -o Lexer/Scanner.cpp Lexer/Scanner.ll
                     COMMAND bison --defines=${REPO_ROOT}/Parser/Parser.hh -o ${REPO_ROOT}/Parser/Parser.cpp ${REPO_ROOT}/Parser/Parser.yy
                     DEPENDS ${REPO_ROOT}/Lexer/Scanner.ll ${REPO_ROOT}/Parser/Parser.yy
                     )

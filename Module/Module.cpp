@@ -2,6 +2,7 @@
 #include <Module/Module.h>
 #include <llvm/IR/LegacyPassManager.h>
 #include <llvm/Transforms/IPO.h>
+#include <llvm/Transforms/Scalar.h>
 #include <llvm/Transforms/IPO/PassManagerBuilder.h>
 
 namespace roe
@@ -136,16 +137,17 @@ namespace roe
       std::logic_error("Module is not compiled to IR yet");
     }
 
-    context_.externalFunctions().addAllMappings(*executionEngine_);
-
     llvm::PassManagerBuilder          builder;
     llvm::legacy::FunctionPassManager passManager(module_);
     // -O3,  no size opt, aggressive inlining
     builder.OptLevel  = 3;
     builder.SizeLevel = 0;
     builder.Inliner   = llvm::createFunctionInliningPass();
+    auto* DCEPass = llvm::createAggressiveDCEPass();
     builder.populateFunctionPassManager(passManager);
+    passManager.add(DCEPass);
     passManager.doInitialization();
+
     for (const auto& rule : context_.rules())
     {
       auto* fptr = rule.second->funcPtr();
@@ -154,6 +156,8 @@ namespace roe
         passManager.run(*fptr);
       }
     }
+
+    context_.externalFunctions().addAllMappings(*executionEngine_);
 
     for (const auto& rule : context_.rules())
     {

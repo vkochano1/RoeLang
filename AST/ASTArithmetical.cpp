@@ -69,6 +69,9 @@ namespace roe
         case Operator::DIV:
           out = builder.CreateExactSDiv(left, right);
           break;
+        case Operator::MOD:
+          out = builder.CreateSRem(left, right);
+          break;
         defualt:
           throw((ASTException()) << "Opearand is not supported");
           break;

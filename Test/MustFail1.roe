@@ -1,0 +1,12 @@
+ruleid = TEST1(C1, C2, C3)
+{
+  h="aaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbcccccccccccccccccccccffffffffffffeeeeeeeeeeeeeeeeeeeeeee";
+  h = h + "TTTTT";
+  print("passedY");
+  print(h);
+  C1.tag38 = 11;
+  x = int(C1.tag38)/0.0;
+  x = x + 1;
+  print(x);
+  return;
+}

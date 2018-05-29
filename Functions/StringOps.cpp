@@ -124,9 +124,14 @@ namespace roe
 
   static void concatImpl(StringOps::String_t* dest, const char* s1, size_t l1, const char* s2, size_t l2)
   {
+    size_t newLen = l1 + l2;
+    if(StringOps::String_t::capacity <= newLen)
+    {
+      throw std::runtime_error("string is too long");
+    }
     std::memmove(dest->data_ptr(), s1, l1);
     std::memmove(dest->data_ptr() + l1, s2, l2);
-    dest->length()                       = l1 + l2;
+    dest->length()                       = newLen;
     *(dest->data_ptr() + dest->length()) = 0;
   }
 
@@ -167,6 +172,11 @@ namespace roe
   }
   void StringOps::assignChPtr(String_t* s1, const char* s2, int64_t len2)
   {
+    if(StringOps::String_t::capacity <= len2)
+    {
+      throw std::runtime_error("string is too long");
+    }
+
     std::strncpy(s1->data_ptr(), s2, len2);
     s1->length() = len2;
   }
@@ -203,6 +213,11 @@ namespace roe
   void StringOps::intToString(int64_t i, String_t* s)
   {
     std::string tmp = std::to_string(i);
+
+    if(StringOps::String_t::capacity <= tmp.length())
+    {
+      throw std::runtime_error("string is too long");
+    }
     s->length()     = tmp.length();
     std::memcpy(s->data_ptr(), tmp.c_str(), tmp.length());
   }
@@ -210,6 +225,12 @@ namespace roe
   void StringOps::doubleToString(double d, String_t* s)
   {
     std::string tmp = std::to_string(d);
+
+    if(StringOps::String_t::capacity <= tmp.length())
+    {
+      throw std::runtime_error("string is too long");
+    }
+
     s->length()     = tmp.length();
     std::memcpy(s->data_ptr(), tmp.c_str(), tmp.length());
   }

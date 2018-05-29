@@ -105,6 +105,10 @@ typedef roe::Parser::token_type token_type;
         return token::DIV;
 }
 
+"%" {
+        return token::MOD;
+}
+
 "," {
         return token::COMMA;
 }
@@ -125,6 +129,9 @@ typedef roe::Parser::token_type token_type;
         return token::ASSIGN;
 }
 
+"return" {
+        return token::RETURN;
+}
 -?[0-9]+ {
     yylval->longVal_ = atoi(yytext);
     return token::INTEGER;

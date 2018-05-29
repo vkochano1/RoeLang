@@ -28,6 +28,11 @@ endif()
 
 add_custom_target(RUN_TEST ALL
   COMMAND ${REPO_ROOT}/Test/Test Test1.roe * VERBATIM
-  COMMAND ${REPO_ROOT}/Test/Test Test2.roe TEST1 VERBATIM
+  COMMAND ${REPO_ROOT}/Test/Test Test2.roe * VERBATIM
+  COMMAND ${CMAKE_COMMAND} -E echo "The below rules must fail"
+  COMMAND ${REPO_ROOT}/Test/Test MustFail1.roe * -1 VERBATIM
+  COMMAND ${REPO_ROOT}/Test/Test MustFail2.roe * -1 VERBATIM
+  COMMAND ${REPO_ROOT}/Test/Test MustFail3.roe * -1 VERBATIM
+  COMMAND ${REPO_ROOT}/Test/Test MustFail4.roe * -1 VERBATIM
   DEPENDS ${REPO_ROOT}/Test/Test
 )

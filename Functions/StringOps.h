@@ -37,8 +37,8 @@ namespace roe
 
     struct String_t
     {
-      static constexpr const int64_t size = 64;
-      char                           data[size];
+      static constexpr const int64_t capacity = 64;
+      char                           data[capacity];
       int8_t                         len_;
 
       const int8_t& length() const

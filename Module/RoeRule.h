@@ -50,6 +50,7 @@ namespace roe
     // exec block
     llvm::BasicBlock* entryBlock();
     void entryBlock(llvm::BasicBlock* eb);
+
     // place to insert all local variables
     llvm::BasicBlock* localsBlock();
     void localsBlock(llvm::BasicBlock* lb);
@@ -61,6 +62,8 @@ namespace roe
     llvm::Function*                   function_;
     llvm::BasicBlock*                 entry_;
     llvm::BasicBlock*                 locals_;
+    llvm::BasicBlock*                 return_;
+
     Context&                          context_;
     std::unique_ptr<Builder>          builder_;
     ParameterToConstraints            paramToConstraints_;

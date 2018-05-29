@@ -1,4 +1,5 @@
 #include <AST/ASTIf.h>
+#include <AST/ASTReturn.h>
 
 namespace roe
 {
@@ -46,15 +47,28 @@ namespace roe
 
     builder.SetInsertPoint(ifMain);
 
-    mainBlock_->evaluate();
-
-    builder.CreateBr(ifEnd);
+    try
+    {
+      mainBlock_->evaluate();
+      builder.CreateBr(ifEnd);
+    }
+    catch(ReturnNotification&)
+    {
+      //Well, return statement was already generatd for mainBlock
+    }
 
     if (elseBlock_)
     {
-      builder.SetInsertPoint(ifElse);
-      elseBlock_->evaluate();
-      builder.CreateBr(ifEnd);
+      try
+      {
+        builder.SetInsertPoint(ifElse);
+        elseBlock_->evaluate();
+        builder.CreateBr(ifEnd);
+      }
+      catch(ReturnNotification&)
+      {
+        //Well, return statement was already generatd for elseBlock
+      }
     }
 
     builder.SetInsertPoint(ifEnd);

@@ -1,0 +1,5 @@
+ruleid = TEST1(C1, C2, C3)
+{
+  x  = y;
+  return;
+}

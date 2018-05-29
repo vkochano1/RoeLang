@@ -3,6 +3,8 @@
 #include <Module/Context.h>
 #include <Module/Module.h>
 #include <Module/RoeRule.h>
+#include <AST/ASTReturn.h>
+
 
 namespace roe
 {

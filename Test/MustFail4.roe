@@ -1,0 +1,13 @@
+ruleid = TEST1(C1, C2, C3)
+{
+  l=10;
+  d=11.5;
+  if(l != d)
+  {
+    if(l == "ABC")
+    {
+
+    }
+  }
+  return;
+}

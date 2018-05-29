@@ -12,7 +12,8 @@ namespace roe
       PLUS,
       MINUS,
       MUL,
-      DIV
+      DIV,
+      MOD
     };
 
   public:

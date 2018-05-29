@@ -13,3 +13,43 @@ ruleid = TEST1(C1, C2, C3)
     print("failed");
   }
 }
+
+ruleid = TEST2(C1, C2, C3)
+{
+
+  if( 1 < 2)
+  {
+      if (2 >= 0)
+      {
+        print("passed");
+        return;
+      }
+      else
+      {
+        print("failed");
+        return;
+      }
+  }
+  print("failed");
+  return;
+}
+
+ruleid = TEST3(C1, C2, C3)
+{
+
+  if( 1 < 2)
+  {
+      if (1 >= 2.0)
+      {
+        print("failed");
+        return;
+      }
+      else
+      {
+
+      }
+      print("passed");
+  }
+  return;
+  print("failed");
+}

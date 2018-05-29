@@ -13,3 +13,4 @@
 #include <AST/ASTRule.h>
 #include <AST/ASTStrSlice.h>
 #include <AST/ASTVariable.h>
+#include <AST/ASTReturn.h>

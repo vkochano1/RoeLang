@@ -73,12 +73,13 @@
 %token    	            MINUS		    "-"
 %token    	            MULT		    "*"
 %token    	            DIV		        "/"
+%token    	            MOD		        "%"
 %token    	            COMMA		    ","
 %token    	            SEMI_COL		";"
 %token    	            LPAREN		"("
 %token    	            RPAREN		")"
 %token    	            ASSIGN		"="
-
+%token    	            RETURN		"return"
 
 
 
@@ -344,6 +345,16 @@ factor:  factor MULT atomexpr
                               , $3)
             );
          }
+         | factor MOD atomexpr
+         {
+            $$ = std::shared_ptr<ASTElement>
+            (
+                new ASTArithmetical(driver.context()
+                              ,ASTArithmetical::Operator::MOD
+                              , $1
+                              , $3)
+            );
+         }
          | atomexpr
          {
             $$ = $1;
@@ -388,6 +399,10 @@ statement : expr SEMI_COL
    |if_expr SEMI_COL
    {
       $$ = $1;
+   }
+   | RETURN SEMI_COL
+   {
+     $$ = ASTElementPtr (new ASTReturn(driver.context()));
    }
 
 expr_list : /*epsilon*/ {$$ = std::shared_ptr<ASTElement> (new ASTBlock(driver.context()));}

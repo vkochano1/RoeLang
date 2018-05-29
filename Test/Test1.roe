@@ -49,6 +49,17 @@ ruleid = TEST2(C1, C2, C3)
   {
     print("failed");
   }
+
+  local6 = 14;
+  local7 = local6 % 3;
+  if( local7 == 2)
+  {
+    print("passed");
+  }
+  else
+  {
+    print ("failed");
+  }
 }
 
 ruleid = TEST3(C1, C2, C3)

@@ -54,7 +54,7 @@ namespace roe
     auto rit  = rules_.insert(std::make_pair(newRuleName, rule));
     if (rit.second == false)
     {
-      throw ASTException() << "Duplicate rule";
+      throw ASTException() << "Duplicate rule " << newRuleName;
     }
   }
 
@@ -65,7 +65,12 @@ namespace roe
 
   RoeRule& Context::rule(const std::string& name)
   {
-    return *rules_[name];
+    auto fit = rules_.find(name);
+    if(fit == rules_.end())
+    {
+      throw ASTException() << "Unknown rule " << name;
+    }
+    return *fit->second;
   }
 
   Context::~Context()

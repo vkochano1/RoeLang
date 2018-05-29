@@ -5,7 +5,7 @@ namespace roe
 {
   void Types::init(Context& context)
   {
-    auto* arrayType     = llvm::ArrayType::get(llvm::Type::getInt8Ty(context), String::size);
+    auto* arrayType     = llvm::ArrayType::get(llvm::Type::getInt8Ty(context), String::capacity);
     auto* stringLenType = llvm::Type::getInt8Ty(context);
 
     std::vector<llvm::Type*> structFieldTypes = {arrayType, stringLenType};
