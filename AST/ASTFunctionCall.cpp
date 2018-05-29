@@ -85,6 +85,10 @@ namespace roe
       {
         retValue = context_.externalFunctions().makeCall(StringOps::TO_INT_CHPTR, values);
       }
+      else if (isFloat(firstArg))
+      {
+        retValue = context_.externalFunctions().makeCall(StringOps::DOUBLE_TO_INT, values);
+      }
       else
       {
         throw ASTException() << "Invalid str arguments";

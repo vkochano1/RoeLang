@@ -31,6 +31,7 @@ namespace roe
 
     static const std::string INT_TO_STR;
     static const std::string DOUBLE_TO_STR;
+    static const std::string DOUBLE_TO_INT;
     static const std::string GET_CHAR;
     static const std::string GET_LENGTH;
     static const std::string GET_SUBSTR;
@@ -80,6 +81,7 @@ namespace roe
 
     // Cnnversions
     static int64_t charPtrToInt(const char* s);
+    static int64_t doubleToInt(double d);
     static int64_t stringToInt(const String_t* s);
     static double charPtrToDouble(const char* s);
     static double stringToDouble(const String_t* s);

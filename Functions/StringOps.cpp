@@ -15,6 +15,7 @@ namespace roe
   const std::string StringOps::EQUALS_CHPTR_AND_STR   = "EqualsCharPtrAndStr";
   const std::string StringOps::EQUALS_CHPTR_AND_CHPTR = "EqualsCharPtrAndCharPtr";
   const std::string StringOps::TO_INT_CHPTR           = "CharPtrToInt";
+  const std::string StringOps::DOUBLE_TO_INT           = "DoubleToInt";
   const std::string StringOps::TO_INT_STR             = "StrToInt";
   const std::string StringOps::TO_DOUBLE_CHPTR        = "CharPtrToDouble";
   const std::string StringOps::TO_DOUBLE_STR          = "StrToDouble";
@@ -23,6 +24,7 @@ namespace roe
   const std::string StringOps::GET_CHAR               = "GetChar";
   const std::string StringOps::GET_SUBSTR             = "GetSubstr";
   const std::string StringOps::GET_LENGTH             = "GetLength";
+
 
   void StringOps::registerConcatBuiltins(Context& context)
   {
@@ -81,6 +83,9 @@ namespace roe
   {
     context.externalFunctions().registerExternal(
       StringOps::TO_INT_STR, &StringOps::stringToInt, context.types().longType(), {context.types().stringPtrType()});
+
+    context.externalFunctions().registerExternal(
+        StringOps::DOUBLE_TO_INT, &StringOps::doubleToInt, context.types().longType(), {context.types().floatType()});
 
     context.externalFunctions().registerExternal(
       StringOps::TO_INT_CHPTR, &StringOps::charPtrToInt, context.types().longType(), {context.types().charPtrType()});
@@ -245,6 +250,11 @@ namespace roe
   {
     char* endp = nullptr;
     return std::strtol(s, &endp, 10);
+  }
+
+  int64_t StringOps::doubleToInt(double d)
+  {
+    return static_cast<int64_t>(d);
   }
 
   double StringOps::stringToDouble(const String_t* s)
