@@ -38,22 +38,42 @@ namespace roe
   {
     llvm::Value* container = context_.rule().getParamValue(astVar.baseName());
     llvm::Value* tagVal    = llvm::ConstantInt::get(context_.types().longType(), astVar.tag());
+    auto constraints = context_.rule().getContainerForParam(astVar.baseName());
 
     if (isCStr(from))
     {
+      if(constraints && !constraints->stringAssignmentAllowed())
+      {
+        throw ASTException() << "String assignment is not allowed";
+      }
+
       auto astCStr = std::dynamic_pointer_cast<ASTCstr>(right_);
       context_.externalFunctions().makeCall(Bindings::SET_FIELD_CHPTR, {container, tagVal, from, astCStr->length()});
     }
     else if (isString(from))
     {
+      if(constraints && !constraints->stringAssignmentAllowed())
+      {
+        throw ASTException() << "String assignment is not allowed";
+      }
       context_.externalFunctions().makeCall(Bindings::SET_FIELD_STRING, {container, tagVal, from});
     }
     else if (isLong(from))
     {
+      if(!constraints || !constraints->longAssignmentAllowed())
+      {
+        throw ASTException() << "Long assignment is not allowed";
+      }
+
       context_.externalFunctions().makeCall(Bindings::SET_FIELD_INT, {container, tagVal, from});
     }
     else if (isFloat(from))
     {
+      if(!constraints || !constraints->doubleAssignmentAllowed())
+      {
+        throw ASTException() << "Long assignment is not allowed";
+      }
+
       context_.externalFunctions().makeCall(Bindings::SET_FIELD_DOUBLE, {container, tagVal, from});
     }
     else

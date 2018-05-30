@@ -10,6 +10,9 @@ namespace roe
     class DummyConstraints : public IConstraints
     {
     public:
+      virtual bool longAssignmentAllowed() const  {return true;}
+      virtual bool doubleAssignmentAllowed() const  {return true;}
+      virtual bool stringAssignmentAllowed() const  {return true;}
       DummyConstraints();
     };
 

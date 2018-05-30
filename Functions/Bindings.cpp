@@ -16,7 +16,7 @@ namespace roe
   const std::string Bindings::SET_FIELD_DOUBLE = "setFieldDouble";
   const std::string Bindings::SET_STR_CHAR     = "setChar";
 
-  int64_t IConstraints::getTagFromFieldName(const std::string& val)
+  int64_t IConstraints::getTagFromFieldName(const std::string& val) const 
   {
     auto fit = fieldNameToTagMapping_.find(val);
     if (fit == fieldNameToTagMapping_.end())

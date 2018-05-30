@@ -39,7 +39,10 @@ namespace roe
     using FieldNameToTagMapping = std::unordered_map<std::string, int64_t>;
 
   public:
-    virtual int64_t getTagFromFieldName(const std::string& fieldName);
+    virtual int64_t getTagFromFieldName(const std::string& fieldName) const;
+    virtual bool longAssignmentAllowed() const  {return false;}
+    virtual bool doubleAssignmentAllowed() const  {return false;}
+    virtual bool stringAssignmentAllowed() const  {return true;}  
 
     virtual ~IConstraints()
     {
