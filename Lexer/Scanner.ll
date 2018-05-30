@@ -142,12 +142,19 @@ typedef roe::Parser::token_type token_type;
     return token::DOUBLE;
 }
 
-\'[A-Za-z0-9_,.\-]\' {
+\'.\' {
     yylval->longVal_ = static_cast<int>(yytext[1]);
     return token::INTEGER;
 }
 
-\"[A-Za-z0-9_,.\- ]*\" {
+\'[\\][0-9]*\' {
+    char* endP = nullptr;
+    auto val = std::strtol(&yytext[2], &endP, 10);
+    yylval->longVal_ = static_cast<int>(val);
+    return token::INTEGER;
+}
+
+\".*\" {
     yylval->stringVal_ = std::string(&yytext[1], yyleng - 2);
     return token::STRING;
 }

@@ -14,6 +14,7 @@ namespace roe
   const std::string Bindings::SET_FIELD_CHPTR  = "setFieldCharPtr";
   const std::string Bindings::SET_FIELD_INT    = "setFieldInt";
   const std::string Bindings::SET_FIELD_DOUBLE = "setFieldDouble";
+  const std::string Bindings::SET_STR_CHAR     = "setChar";
 
   int64_t IConstraints::getTagFromFieldName(const std::string& val)
   {
@@ -64,6 +65,10 @@ namespace roe
     context.externalFunctions().registerExternal(
       PRINT_DOUBLE, &Bindings::printDouble, context.types().voidType(),
       {context.types().longType(), context.types().floatType()});
+
+      context.externalFunctions().registerExternal(
+        SET_STR_CHAR, &Bindings::setStrChar, context.types().voidType(),
+        {context.types().stringPtrType(), context.types().longType(), context.types().longType()});
   }
 
   void Bindings::printString(void* data, const StringOps::String_t* str)
@@ -119,4 +124,13 @@ namespace roe
     IContainerAccess* access = reinterpret_cast<IContainerAccess*>(data);
     access->setField(tag, val);
   }
+
+  void Bindings::setStrChar(StringOps::String_t* s, int64_t val, int64_t idx)
+  {
+    if(idx < s->length())
+    {
+      *(s->data_ptr() + idx) = static_cast<int64_t>(val);
+    }
+  }
+
 }

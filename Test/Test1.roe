@@ -67,7 +67,8 @@ ruleid = TEST3(C1, C2, C3)
   str1 = "ABC";
   str2 = str(4.55);
   str3 = str(6);
-
+  str4 = "ABCF %^ D\55D";
+  setChar(str4, 'Z', 1);
   local1 = int(str3) + int(str2);
 
   if (local1 == 10)

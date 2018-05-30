@@ -62,13 +62,14 @@ namespace roe
     static const std::string SET_FIELD_CHPTR;
     static const std::string SET_FIELD_INT;
     static const std::string SET_FIELD_DOUBLE;
-
+    static const std::string SET_STR_CHAR;
   public:
     static void getFieldString(void*, int64_t tag, StringOps::String_t* s);
     static void setFieldString(void*, int64_t tag, StringOps::String_t* s);
     static void setFieldCharPtr(void*, int64_t tag, const char* s, int64_t len);
     static void setFieldInt(void*, int64_t tag, int64_t val);
     static void setFieldDouble(void*, int64_t tag, double val);
+    static void setStrChar(StringOps::String_t* s, int64_t val, int64_t idx);
 
     // Print
     static void printString(void*, const StringOps::String_t* s);

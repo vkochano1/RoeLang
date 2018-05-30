@@ -3,12 +3,22 @@ cmake_minimum_required(VERSION 3.9)
 project(RoeLang)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS "-O0 -s ")
 
 option(EMBED_LLVM_LIBS "Embed all llvm libs into libRoeLang.a" OFF)
+message("EMBED_LLVM_LIBS is ${EMBED_LLVM_LIBS}")
+
 option(BUILD_STATIC " Build libRoeLang.a"  OFF)
+message("BUILD_STATIC is ${BUILD_STATIC}")
+
 option(BUILD_DYNAMIC "Build libRoeLang.so" ON)
+message("BUILD_DYNAMIC is ${BUILD_DYNAMIC}")
+
 option(BUILD_TESTS   "Build Test"          ON)
+message("BUILD_TESTS is ${BUILD_TESTS}")
+
 option(GENERATE_PARSER "Generate Parser and Scanner source code" OFF)
+message("GENERATE_PARSER is ${GENERATE_PARSER}")
 
 if (NOT DEFINED REPO_ROOT)
   set (REPO_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
@@ -30,7 +40,7 @@ LLVMVectorize LLVMLinker LLVMX86Disassembler
 LLVMX86AsmParser  LLVMX86CodeGen  LLVMGlobalISel
 LLVMSelectionDAG  LLVMAsmPrinter  LLVMDebugInfoCodeView
 LLVMDebugInfoMSF  LLVMCodeGen  LLVMScalarOpts
-LLVMInstCombine  LLVMAggressiveInstCombine
+LLVMInstCombine LLVMAggressiveInstCombine
 LLVMTransformUtils  LLVMBitWriter  LLVMX86Desc
 LLVMMCDisassembler  LLVMX86Info  LLVMX86AsmPrinter
 LLVMX86Utils  LLVMMCJIT  LLVMExecutionEngine
@@ -60,8 +70,11 @@ endif()
 
 ######################### Common settings #######################
 
-set(CMAKE_CXX_FLAGS "-O0 -s ")
-include_directories(${LLVM_INCLUDE_DIR} ${REPO_ROOT} ${REPO_ROOT}/RoeLangLib)
+include_directories(
+${LLVM_INCLUDE_DIR}
+${REPO_ROOT}
+${REPO_ROOT}/RoeLangLib
+${REPO_ROOT}/Lexer)
 
 ######################### Targets #######################
 
