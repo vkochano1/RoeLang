@@ -1,24 +1,13 @@
 #pragma once
 
-#include <Module/Context.h>
-#include <Parser/Driver.h>
-#include <memory>
-
-#include "llvm/ExecutionEngine/GenericValue.h"
-#include "llvm/IR/IRBuilder.h"
-#include "llvm/Support/Casting.h"
-#include "llvm/Support/TargetSelect.h"
-#include "llvm/Support/raw_ostream.h"
-#include "llvm/Target/TargetMachine.h"
-#include "llvm/Target/TargetOptions.h"
-#include <llvm/ExecutionEngine/ExecutionEngine.h>
-#include <llvm/ExecutionEngine/MCJIT.h>
-
 #include <Functions/FunctionRegistrar.h>
+#include <Module/Context.h>
+#include <memory>
 
 namespace roe
 {
   class IContainerAccess;
+  class Driver;
 
   class Module final
   {

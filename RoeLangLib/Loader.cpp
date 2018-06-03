@@ -1,7 +1,16 @@
 #include <RoeLangLib/Loader.h>
+#include <Parser/Driver.h>
+
 #include <fstream>
+#include <sstream>
 #include <iterator>
 #include <thread>
+
+#include <llvm/ExecutionEngine/ExecutionEngine.h>
+#include <llvm/ExecutionEngine/MCJIT.h>
+#include <llvm/Support/TargetSelect.h>
+#include <llvm/Target/TargetMachine.h>
+#include <llvm/Target/TargetOptions.h>
 
 namespace roe
 {

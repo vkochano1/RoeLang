@@ -2,11 +2,19 @@
 
 ruleid = TEST1(C1, C2, C3)
 {
+
   local  = 21 + 2 * 2;
   local2 = "text";
   local3 = 1234.000 - 1234.000;
   local4 = local2 + "_text";
-
+  if( local2 like  "[ft]ex[tj]" )
+  {
+     print ("passed");
+  }
+  else
+  {
+    print ("failed");
+  }
   if (local == 25 and local4 == "text_text" and local3 == 0)
   {
     print("passed");
@@ -52,13 +60,13 @@ ruleid = TEST2(C1, C2, C3)
 
   local6 = 14.7;
   local7 = int(local6) % 3;
-  if( local7 == 2)
+  if (local7 == 2)
   {
     print("passed");
   }
   else
   {
-    print ("failed");
+    print("failed");
   }
 }
 

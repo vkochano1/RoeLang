@@ -1,47 +1,42 @@
 
-set(CMAKE_CXX_FLAGS "-O0 -s ")
 
-file(GLOB AST_CPP       "${REPO_ROOT}/AST/*.cpp")
-file(GLOB TYPES_CPP     "${REPO_ROOT}/Types/*.cpp")
-file(GLOB MODULE_CPP    "${REPO_ROOT}/Module/*.cpp")
-file(GLOB FUNCTIONS_CPP "${REPO_ROOT}/Functions/*.cpp")
-file(GLOB LEXER_CPP     "${REPO_ROOT}/Lexer/*.cpp")
-file(GLOB PARSER_CPP    "${REPO_ROOT}/Parser/*.cpp")
+file(GLOB AST_CPP       "${ROE_ROOT}/AST/*.cpp")
+file(GLOB TYPES_CPP     "${ROE_ROOT}/Types/*.cpp")
+file(GLOB MODULE_CPP    "${ROE_ROOT}/Module/*.cpp")
+file(GLOB FUNCTIONS_CPP "${ROE_ROOT}/Functions/*.cpp")
+file(GLOB LEXER_CPP     "${ROE_ROOT}/Lexer/*.cpp")
+file(GLOB PARSER_CPP    "${ROE_ROOT}/Parser/*.cpp")
 
-set (ROE_LANG_LIB_SRC
-${AST_CPP}
-${TYPES_CPP}
-${LEXER_CPP}
-${PARSER_CPP}
-${MODULE_CPP}
-${FUNCTIONS_CPP}
-Loader.cpp)
+set (ROE_LANG_LIB_SRC ${AST_CPP} ${TYPES_CPP} ${LEXER_CPP} ${PARSER_CPP} ${MODULE_CPP} ${FUNCTIONS_CPP} Loader.cpp)
 
-if (BUILD_STATIC)
+################################### Static lib #########################################
+add_library(RoeLangStatic STATIC ${ROE_LANG_LIB_SRC})
+target_include_directories(RoeLangStatic PUBLIC ${LLVM_INCLUDE_DIR} ${ROE_ROOT} ${ROE_ROOT}/Lexer)
 
-  add_library(RoeLangStatic STATIC ${ROE_LANG_LIB_SRC})
+######################### Static lib with dependencies ##################################
 
-  if (EMBED_LLVM_LIBS)
-    ###### Embedded RoeLangLib #################
-
-    set(LLVM_ARCH_COMMAND_ARGS ${REPO_ROOT}/RoeLangLib/libRoeLang.a)
-
-    foreach (LLVM_ARCH_LIB ${LLVM_LIBS_TO_ARCHIVE})
-      list (APPEND LLVM_ARCH_COMMAND_ARGS  ${LLVM_ARCH_LIB})
-    endforeach(LLVM_ARCH_LIB)
-
-    add_custom_target( EmbededRoeLang ALL
-                  COMMAND cmake -E echo "Embeding LLVM dependencies..."
-                  COMMAND ar -rc libRoeLangEmb.a ${LLVM_ARCH_COMMAND_ARGS} VERBATIM
-                  DEPENDS ${REPO_ROOT}/RoeLangLib/libRoeLang.a
+add_custom_target( EmbededRoeLang
+                   COMMAND cmake -E echo "Embeding LLVM dependencies..."
+                   COMMAND ${ROE_ROOT}/RoeLangLib/combine.sh ${LLVM_LIB_DIR} ${ROE_ROOT}/RoeLangLib/libRoeLangEmb.a
+                   DEPENDS ${ROE_ROOT}/RoeLangLib/libRoeLangStatic.a
                  )
-    add_dependencies(EmbededRoeLang RoeLangStatic)
-  endif()
 
-endif()
+add_dependencies(EmbededRoeLang RoeLangStatic)
 
-if (BUILD_DYNAMIC)
+################################### Dynamic libs #########################################
 
-  add_library(RoeLangDynamic SHARED ${ROE_LANG_LIB_SRC} )
-  target_link_libraries(RoeLangDynamic ${LLVM_LIB_NAMES})
-endif()
+add_library(RoeLangDynamic SHARED ${ROE_LANG_LIB_SRC} )
+target_include_directories(RoeLangDynamic PUBLIC ${LLVM_INCLUDE_DIR} ${ROE_ROOT} ${ROE_ROOT}/Lexer)
+target_link_libraries(RoeLangDynamic ${LLVM_LIB_NAMES})
+
+
+################################### Installation #########################################
+
+install(TARGETS RoeLangDynamic LIBRARY DESTINATION lib)
+install(TARGETS RoeLangStatic  ARCHIVE DESTINATION lib)
+
+install(FILES ${ROE_ROOT}/RoeLangLib/libRoeLangEmb.a DESTINATION lib)
+install(DIRECTORY ../Types DESTINATION include/  FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY ../Module DESTINATION include/  FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY ../Functions DESTINATION include/  FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY ../RoeLangLib DESTINATION include/  FILES_MATCHING PATTERN "*.h")

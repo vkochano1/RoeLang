@@ -65,6 +65,10 @@ typedef roe::Parser::token_type token_type;
         return token::NOT_KEYWORD;
 }
 
+"like" {
+        return token::LIKE_KEYWORD;
+}
+
 "!=" {
         return token::NOT_EQUAL;
 }

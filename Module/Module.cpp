@@ -1,9 +1,8 @@
-#include <Functions/Bindings.h>
 #include <Module/Module.h>
-#include <llvm/IR/LegacyPassManager.h>
-#include <llvm/Transforms/IPO.h>
-#include <llvm/Transforms/Scalar.h>
-#include <llvm/Transforms/IPO/PassManagerBuilder.h>
+
+#include <Functions/Bindings.h>
+#include <Module/ForwardDeclsImpl.h>
+#include <Parser/Driver.h>
 
 namespace roe
 {
@@ -30,7 +29,7 @@ namespace roe
 
   {
     auto fit = compiledFunctions_.find(funcName);
-    if(fit == compiledFunctions_.end())
+    if (fit == compiledFunctions_.end())
       throw ASTException() << "Tried to call unknown function " << funcName;
     return fit->second;
   }
@@ -45,7 +44,7 @@ namespace roe
     compiled_ = false;
 
     {
-      auto module      = std::make_unique<llvm::Module>(name, context_);
+      auto module      = std::make_unique<llvm::Module>(name, context_.native());
       module_          = module.get();
       engineBuilder_   = std::make_unique<llvm::EngineBuilder>(std::move(module));
       executionEngine_ = engineBuilder_->create();
@@ -65,7 +64,9 @@ namespace roe
   }
 
   void Module::bindParamsConstraints(
-    const std::string& functionName, std::initializer_list<std::shared_ptr<IConstraints>> constraintsList)
+    const std::string& functionName,
+    std::initializer_list<std::shared_ptr<IConstraints>>
+      constraintsList)
   {
     auto& roeRule = context().rule(functionName);
     auto  argIt   = constraintsList.begin();
@@ -143,7 +144,7 @@ namespace roe
     builder.OptLevel  = 3;
     builder.SizeLevel = 0;
     builder.Inliner   = llvm::createFunctionInliningPass();
-    auto* DCEPass = llvm::createAggressiveDCEPass();
+    auto* DCEPass     = llvm::createAggressiveDCEPass();
     builder.populateFunctionPassManager(passManager);
     passManager.add(DCEPass);
     passManager.doInitialization();

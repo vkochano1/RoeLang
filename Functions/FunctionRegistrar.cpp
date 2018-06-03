@@ -1,9 +1,8 @@
 #include <Exceptions/ASTException.h>
 #include <Functions/FunctionRegistrar.h>
 #include <Module/Context.h>
+#include <Module/ForwardDeclsImpl.h>
 #include <Module/Module.h>
-#include <iostream>
-#include <llvm/Support/raw_ostream.h>
 
 namespace roe
 {

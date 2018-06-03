@@ -4,8 +4,10 @@
 
 namespace roe
 {
-  class ReturnNotification {};
-  
+  class ReturnNotification
+  {
+  };
+
   class ASTReturn : public ASTElement
   {
   public:

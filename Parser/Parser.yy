@@ -80,7 +80,7 @@
 %token    	            RPAREN		")"
 %token    	            ASSIGN		"="
 %token    	            RETURN		"return"
-
+%token    	            LIKE_KEYWORD		  "like"
 
 
 %token <longVal_> 	    INTEGER		"integer"
@@ -163,8 +163,7 @@ variable : NAME
 atomexpr : variable
 	   {
 	       $$ = $1;
-	   }
-	   |
+	   }|
 	   variable '[' atomexpr ']'
 	   {
 	       $$ = std::shared_ptr<ASTElement> ( new ASTStrSlice (driver.context(), $1, $3, ASTElementPtr()));
@@ -289,6 +288,19 @@ compare_exp : addexpr MORE addexpr
                               ,ASTCompare::Operator::LESS_OR_EQUAL
                               , $1
                               , $3)
+            );
+          }
+          |
+          variable LIKE_KEYWORD STRING
+          {
+            std::shared_ptr<ASTCstr> elem( new ASTCstr(driver.context(),$3));
+            
+            $$ = std::shared_ptr<ASTElement>
+            (
+                new ASTLogical(driver.context()
+                              ,ASTLogical::Operator::LIKE
+                              , $1
+                              , elem)
             );
           }
           | LPAREN or_exp RPAREN

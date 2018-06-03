@@ -6,8 +6,8 @@ namespace roe
   ASTStrSlice::ASTStrSlice(Context& context, ASTElementPtr base, ASTElementPtr from, ASTElementPtr len)
     : ASTElement(context)
     , base_(base)
-    , len_(len)
     , from_(from)
+    , len_(len)
   {
   }
 

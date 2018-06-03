@@ -739,7 +739,7 @@ namespace roe {
     break;
 
   case 14:
-#line 169 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 168 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
 	       (yylhs.value.astElement_) = std::shared_ptr<ASTElement> ( new ASTStrSlice (driver.context(), (yystack_[3].value.astElement_), (yystack_[1].value.astElement_), ASTElementPtr()));
 	   }
@@ -747,7 +747,7 @@ namespace roe {
     break;
 
   case 15:
-#line 174 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 173 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
 	       (yylhs.value.astElement_) = std::shared_ptr<ASTElement> ( new ASTStrSlice (driver.context(), (yystack_[5].value.astElement_), (yystack_[3].value.astElement_), (yystack_[1].value.astElement_)));
 	   }
@@ -755,7 +755,7 @@ namespace roe {
     break;
 
   case 16:
-#line 178 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 177 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
            (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
 	   }
@@ -763,7 +763,7 @@ namespace roe {
     break;
 
   case 17:
-#line 182 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 181 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
 	       (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
 	   }
@@ -771,7 +771,7 @@ namespace roe {
     break;
 
   case 18:
-#line 186 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 185 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
 	   }
@@ -779,7 +779,7 @@ namespace roe {
     break;
 
   case 19:
-#line 190 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 189 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -793,7 +793,7 @@ namespace roe {
     break;
 
   case 20:
-#line 200 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 199 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
           }
@@ -801,7 +801,7 @@ namespace roe {
     break;
 
   case 21:
-#line 204 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 203 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
           (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -816,7 +816,7 @@ namespace roe {
     break;
 
   case 22:
-#line 215 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 214 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
              (yylhs.value.astElement_) =(yystack_[0].value.astElement_);
           }
@@ -824,7 +824,7 @@ namespace roe {
     break;
 
   case 23:
-#line 220 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 219 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -835,7 +835,7 @@ namespace roe {
     break;
 
   case 24:
-#line 227 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 226 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
           }
@@ -843,7 +843,7 @@ namespace roe {
     break;
 
   case 25:
-#line 232 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 231 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -857,7 +857,7 @@ namespace roe {
     break;
 
   case 26:
-#line 242 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 241 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -871,7 +871,7 @@ namespace roe {
     break;
 
   case 27:
-#line 252 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 251 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -885,7 +885,7 @@ namespace roe {
     break;
 
   case 28:
-#line 263 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 262 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -899,7 +899,7 @@ namespace roe {
     break;
 
   case 29:
-#line 274 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 273 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -913,7 +913,7 @@ namespace roe {
     break;
 
   case 30:
-#line 285 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 284 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -929,21 +929,37 @@ namespace roe {
   case 31:
 #line 295 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
-             (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
-          }
-#line 935 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
-
-  case 32:
-#line 299 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+            std::shared_ptr<ASTCstr> elem( new ASTCstr(driver.context(),(yystack_[0].value.stringVal_)));
+            
+            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
+            (
+                new ASTLogical(driver.context()
+                              ,ASTLogical::Operator::LIKE
+                              , (yystack_[2].value.astElement_)
+                              , elem)
+            );
           }
 #line 943 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
+  case 32:
+#line 307 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+    {
+             (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
+          }
+#line 951 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
+    break;
+
   case 33:
-#line 303 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 311 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+    {
+            (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+          }
+#line 959 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
+    break;
+
+  case 34:
+#line 315 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -953,11 +969,11 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 957 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
+#line 973 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 34:
-#line 314 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+  case 35:
+#line 326 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -967,19 +983,19 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
           }
-#line 971 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
-
-  case 35:
-#line 324 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-	        (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-          }
-#line 979 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
+#line 987 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 36:
-#line 329 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 336 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+    {
+	        (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+          }
+#line 995 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
+    break;
+
+  case 37:
+#line 341 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
            (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -989,11 +1005,11 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
          }
-#line 993 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
+#line 1009 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 37:
-#line 339 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+  case 38:
+#line 351 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -1003,11 +1019,11 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
          }
-#line 1007 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
+#line 1023 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 38:
-#line 349 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+  case 39:
+#line 361 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_) = std::shared_ptr<ASTElement>
             (
@@ -1017,152 +1033,152 @@ namespace roe {
                               , (yystack_[0].value.astElement_))
             );
          }
-#line 1021 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
-
-  case 39:
-#line 359 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-            (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-         }
-#line 1029 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
-
-  case 40:
-#line 366 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-   (yylhs.value.astElement_)=std::shared_ptr<ASTElement>( new ASTAssignment(driver.context(),(yystack_[2].value.astElement_), (yystack_[0].value.astElement_)) );
-}
 #line 1037 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 41:
+  case 40:
 #line 371 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+    {
+            (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+         }
+#line 1045 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
+    break;
+
+  case 41:
+#line 378 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+    {
+   (yylhs.value.astElement_)=std::shared_ptr<ASTElement>( new ASTAssignment(driver.context(),(yystack_[2].value.astElement_), (yystack_[0].value.astElement_)) );
+}
+#line 1053 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
+    break;
+
+  case 42:
+#line 383 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
             (yylhs.value.astElement_)=std::shared_ptr<ASTElement>
             ( new ASTIf(driver.context(),(yystack_[2].value.astElement_), (yystack_[0].value.astElement_), ASTElementPtr()) );
         }
-#line 1046 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
-
-  case 42:
-#line 377 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-           (yylhs.value.astElement_)=std::shared_ptr<ASTElement>( new ASTIf(driver.context(),(yystack_[4].value.astElement_), (yystack_[2].value.astElement_), (yystack_[0].value.astElement_)) );
-        }
-#line 1054 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
-
-  case 43:
-#line 382 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-         (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-    }
 #line 1062 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 44:
-#line 387 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+  case 43:
+#line 389 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
-	      (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-    }
+           (yylhs.value.astElement_)=std::shared_ptr<ASTElement>( new ASTIf(driver.context(),(yystack_[4].value.astElement_), (yystack_[2].value.astElement_), (yystack_[0].value.astElement_)) );
+        }
 #line 1070 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 45:
-#line 392 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+  case 44:
+#line 394 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
-      (yylhs.value.astElement_)=(yystack_[1].value.astElement_);
-   }
+         (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+    }
 #line 1078 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 46:
-#line 396 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+  case 45:
+#line 399 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
-      (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-   }
+	      (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+    }
 #line 1086 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 47:
-#line 400 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+  case 46:
+#line 404 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
-      (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
+      (yylhs.value.astElement_)=(yystack_[1].value.astElement_);
    }
 #line 1094 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 48:
-#line 404 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+  case 47:
+#line 408 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
-     (yylhs.value.astElement_) = ASTElementPtr (new ASTReturn(driver.context()));
+      (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
    }
 #line 1102 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
+  case 48:
+#line 412 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+    {
+      (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
+   }
+#line 1110 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
+    break;
+
   case 49:
-#line 408 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {(yylhs.value.astElement_) = std::shared_ptr<ASTElement> (new ASTBlock(driver.context()));}
-#line 1108 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
+#line 416 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+    {
+     (yylhs.value.astElement_) = ASTElementPtr (new ASTReturn(driver.context()));
+   }
+#line 1118 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 50:
-#line 411 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 420 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+    {(yylhs.value.astElement_) = std::shared_ptr<ASTElement> (new ASTBlock(driver.context()));}
+#line 1124 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
+    break;
+
+  case 51:
+#line 423 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
                 dynamic_cast<ASTBlock*>((yystack_[1].value.astElement_).get())->addElement((yystack_[0].value.astElement_));
                 (yylhs.value.astElement_)=(yystack_[1].value.astElement_);
             }
-#line 1117 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
-
-  case 51:
-#line 418 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-          (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
-        }
-#line 1125 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
-    break;
-
-  case 52:
-#line 422 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-          (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
-        }
 #line 1133 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
-  case 53:
-#line 427 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+  case 52:
+#line 430 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
-            (yylhs.value.astRule_) = std::shared_ptr<ASTRule> (new ASTRule(driver.context(), (yystack_[4].value.stringVal_), (yystack_[2].value.astParameters_), (yystack_[0].value.astElement_)));
-       }
+          (yylhs.value.astElement_) = (yystack_[0].value.astElement_);
+        }
 #line 1141 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
+  case 53:
+#line 434 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+    {
+          (yylhs.value.astElement_) = (yystack_[1].value.astElement_);
+        }
+#line 1149 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
+    break;
+
   case 54:
-#line 431 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {}
-#line 1147 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
+#line 439 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+    {
+            (yylhs.value.astRule_) = std::shared_ptr<ASTRule> (new ASTRule(driver.context(), (yystack_[4].value.stringVal_), (yystack_[2].value.astParameters_), (yystack_[0].value.astElement_)));
+       }
+#line 1157 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 55:
-#line 433 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
-    {
-          driver.rules().addRule((yystack_[0].value.astRule_));
-       }
-#line 1155 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
+#line 443 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+    {}
+#line 1163 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
   case 56:
-#line 437 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+#line 445 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
+    {
+          driver.rules().addRule((yystack_[0].value.astRule_));
+       }
+#line 1171 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
+    break;
+
+  case 57:
+#line 449 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:859
     {
        }
-#line 1162 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
+#line 1178 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
     break;
 
 
-#line 1166 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
+#line 1182 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:859
             default:
               break;
             }
@@ -1417,52 +1433,54 @@ namespace roe {
   }
 
 
-  const signed char Parser::yypact_ninf_ = -61;
+  const signed char Parser::yypact_ninf_ = -73;
 
   const signed char Parser::yytable_ninf_ = -1;
 
   const signed char
   Parser::yypact_[] =
   {
-     -61,    -4,    19,    14,   -61,   -61,    22,    49,    44,   -61,
-       9,    52,    50,   -61,    74,    -6,    53,   -61,   -61,   -61,
-      75,   -61,   -61,   -61,   -11,   -61,    45,    46,   -61,    77,
-      78,   -61,   -61,    58,    80,   -61,    58,    28,    -6,    -6,
-      -6,    -6,    -6,    -6,    -6,   -61,   -61,    58,    58,    70,
-       4,    95,   -61,   -61,    79,   -61,    13,    97,   -61,   -61,
-     -61,    36,    46,    46,   -61,   -61,   -61,   -61,     5,    79,
-      58,    50,    58,    -6,    -6,    -6,    -6,    -6,    -6,    58,
-     -61,   -61,    -6,   -61,    95,    99,   -61,    45,    45,    45,
-      45,    45,    45,    97,    76,    50,   -61,   -61
+     -73,    54,    68,     7,   -73,   -73,    11,    46,    40,   -73,
+      -4,    41,    62,   -73,    51,    77,    53,   -73,   -73,   -73,
+      60,   -73,   -73,   -73,    32,   -73,    42,    36,   -73,    55,
+      67,   -73,   -73,    73,    70,   -73,    73,    50,    77,    77,
+      77,    77,    77,    77,    77,   -73,   -73,    73,    73,   -13,
+       4,    88,   -73,   -73,    99,   -73,    13,    76,   -73,   -73,
+     -73,    66,   -11,    36,    36,   -73,   -73,   -73,   -73,     6,
+       5,    99,    69,    73,    62,    73,    77,    77,    77,    77,
+      77,    77,    73,   -73,   -73,    77,   -73,   -73,    88,   113,
+     -73,    42,    42,    42,    42,    42,    42,    76,    85,    62,
+     -73,   -73
   };
 
   const unsigned char
   Parser::yydefact_[] =
   {
-      54,    56,     0,     0,    55,     1,     0,     0,     5,     7,
+      55,    57,     0,     0,    56,     1,     0,     0,     5,     7,
        0,     0,     0,     6,     0,     0,     0,     2,     3,     4,
-      12,    49,    17,    16,    13,    39,    44,    35,    43,    46,
-       0,    51,    53,     0,     0,    48,     8,     0,     0,     0,
-       0,     0,     0,     0,     0,    47,    45,     0,     0,    13,
-       0,    20,    22,    24,    32,    18,     0,    10,    52,    50,
-      40,     0,    33,    34,    36,    37,    38,    23,     0,    32,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-      11,    14,     0,    31,    19,    41,    21,    27,    28,    25,
-      26,    29,    30,     9,     0,     0,    15,    42
+      12,    50,    17,    16,    13,    40,    45,    36,    44,    47,
+       0,    52,    54,     0,     0,    49,     8,     0,     0,     0,
+       0,     0,     0,     0,     0,    48,    46,     0,     0,    13,
+       0,    20,    22,    24,    33,    18,     0,    10,    53,    51,
+      41,    13,     0,    34,    35,    37,    38,    39,    23,    13,
+       0,    33,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,    11,    14,     0,    32,    31,    19,    42,
+      21,    27,    28,    25,    26,    29,    30,     9,     0,     0,
+      15,    43
   };
 
   const signed char
   Parser::yypgoto_[] =
   {
-     -61,   -61,   -61,   -61,   -61,   -12,   -34,   -30,    37,   -40,
-     -61,   -32,    30,   -61,   -61,    12,    69,   -61,   -60,   -61,
-     -61,   -61
+     -73,   -73,   -73,   -73,   -73,   -12,   -34,   -30,    47,   -36,
+     -73,   -32,    26,   -73,   -73,    -8,    82,   -73,   -72,   -73,
+     -73,   -73
   };
 
   const signed char
   Parser::yydefgoto_[] =
   {
-      -1,    22,    10,    56,    23,    49,    25,    50,    51,    52,
+      -1,    22,    10,    56,    23,    61,    25,    50,    51,    52,
       53,    26,    27,    28,    29,    30,    31,    37,    32,     4,
        1,     2
   };
@@ -1470,59 +1488,64 @@ namespace roe {
   const unsigned char
   Parser::yytable_[] =
   {
-      24,    54,     3,    24,    54,    61,    57,    67,    64,    65,
-      66,    85,    70,    70,    38,    54,    69,    15,    68,     5,
-      39,    17,    18,    19,    20,    24,    24,    34,    71,    83,
-      11,    14,    86,    12,    79,    97,    24,    80,    54,     6,
-      54,    87,    88,    89,    90,    91,    92,    54,    94,    93,
-      60,    15,     7,    14,    16,    17,    18,    19,    20,    24,
-      34,    40,    41,    58,    42,    43,    44,    47,    81,    82,
-      62,    63,     8,    15,     9,    35,    16,    17,    18,    19,
-      20,    48,    13,    24,    21,    17,    18,    19,    20,    73,
-      74,    75,    76,    77,    78,    40,    41,    33,    36,    45,
-      46,    39,    72,    95,    55,    70,    59,    84,    96
+      24,    54,    89,    24,    54,    62,    57,    34,    65,    66,
+      67,    68,    73,    73,    72,    54,    71,    11,    70,    39,
+      12,    49,    84,    85,    49,    24,    24,   101,    74,    86,
+      60,    38,     6,    72,    82,    49,    69,    83,    39,    90,
+      34,    54,     7,    54,    91,    92,    93,    94,    95,    96,
+      54,    98,    97,    14,    42,    43,    44,    38,    40,    41,
+       3,    49,    24,    49,    39,    14,    63,    64,     5,     8,
+      49,     9,    13,    15,    33,    35,    16,    45,    17,    18,
+      19,    20,    47,    36,    73,    15,    58,    24,    16,    46,
+      17,    18,    19,    20,    55,    75,    48,    21,    39,    87,
+      15,    17,    18,    19,    20,    17,    18,    19,    20,    76,
+      77,    78,    79,    80,    81,    40,    41,    99,   100,    59,
+      88
   };
 
   const unsigned char
   Parser::yycheck_[] =
   {
-      12,    33,     6,    15,    36,    39,    36,    47,    42,    43,
-      44,    71,     8,     8,    25,    47,    48,    23,    48,     0,
-      31,    27,    28,    29,    30,    37,    38,    15,    24,    24,
-      21,     3,    72,    24,    21,    95,    48,    24,    70,    25,
-      72,    73,    74,    75,    76,    77,    78,    79,    82,    79,
-      38,    23,    30,     3,    26,    27,    28,    29,    30,    71,
-      48,    16,    17,    35,    18,    19,    20,     9,    32,    33,
-      40,    41,    23,    23,    30,    22,    26,    27,    28,    29,
-      30,    23,    30,    95,    34,    27,    28,    29,    30,    10,
-      11,    12,    13,    14,    15,    16,    17,    23,    23,    22,
-      22,    31,     7,     4,    24,     8,    37,    70,    32
+      12,    33,    74,    15,    36,    39,    36,    15,    42,    43,
+      44,    47,     8,     8,    27,    47,    48,    21,    48,    32,
+      24,    33,    33,    34,    36,    37,    38,    99,    24,    24,
+      38,    25,    25,    27,    21,    47,    48,    24,    32,    75,
+      48,    73,    31,    75,    76,    77,    78,    79,    80,    81,
+      82,    85,    82,     3,    18,    19,    20,    25,    16,    17,
+       6,    73,    74,    75,    32,     3,    40,    41,     0,    23,
+      82,    31,    31,    23,    23,    22,    26,    22,    28,    29,
+      30,    31,     9,    23,     8,    23,    36,    99,    26,    22,
+      28,    29,    30,    31,    24,     7,    23,    35,    32,    30,
+      23,    28,    29,    30,    31,    28,    29,    30,    31,    10,
+      11,    12,    13,    14,    15,    16,    17,     4,    33,    37,
+      73
   };
 
   const unsigned char
   Parser::yystos_[] =
   {
-       0,    56,    57,     6,    55,     0,    25,    30,    23,    30,
-      38,    21,    24,    30,     3,    23,    26,    27,    28,    29,
-      30,    34,    37,    40,    41,    42,    47,    48,    49,    50,
-      51,    52,    54,    23,    51,    22,    23,    53,    25,    31,
-      16,    17,    18,    19,    20,    22,    22,     9,    23,    41,
-      43,    44,    45,    46,    47,    24,    39,    43,    35,    52,
-      51,    42,    48,    48,    42,    42,    42,    45,    43,    47,
-       8,    24,     7,    10,    11,    12,    13,    14,    15,    21,
-      24,    32,    33,    24,    44,    54,    45,    47,    47,    47,
-      47,    47,    47,    43,    42,     4,    32,    54
+       0,    57,    58,     6,    56,     0,    25,    31,    23,    31,
+      39,    21,    24,    31,     3,    23,    26,    28,    29,    30,
+      31,    35,    38,    41,    42,    43,    48,    49,    50,    51,
+      52,    53,    55,    23,    52,    22,    23,    54,    25,    32,
+      16,    17,    18,    19,    20,    22,    22,     9,    23,    42,
+      44,    45,    46,    47,    48,    24,    40,    44,    36,    53,
+      52,    42,    43,    49,    49,    43,    43,    43,    46,    42,
+      44,    48,    27,     8,    24,     7,    10,    11,    12,    13,
+      14,    15,    21,    24,    33,    34,    24,    30,    45,    55,
+      46,    48,    48,    48,    48,    48,    48,    44,    43,     4,
+      33,    55
   };
 
   const unsigned char
   Parser::yyr1_[] =
   {
-       0,    36,    37,    37,    37,    38,    38,    38,    39,    39,
-      39,    40,    41,    42,    42,    42,    42,    42,    42,    43,
-      43,    44,    44,    45,    45,    46,    46,    46,    46,    46,
-      46,    46,    46,    47,    47,    47,    48,    48,    48,    48,
-      49,    50,    50,    51,    51,    52,    52,    52,    52,    53,
-      53,    54,    54,    55,    56,    56,    57
+       0,    37,    38,    38,    38,    39,    39,    39,    40,    40,
+      40,    41,    42,    43,    43,    43,    43,    43,    43,    44,
+      44,    45,    45,    46,    46,    47,    47,    47,    47,    47,
+      47,    47,    47,    47,    48,    48,    48,    49,    49,    49,
+      49,    50,    51,    51,    52,    52,    53,    53,    53,    53,
+      54,    54,    55,    55,    56,    57,    57,    58
   };
 
   const unsigned char
@@ -1531,9 +1554,9 @@ namespace roe {
        0,     2,     1,     1,     1,     0,     3,     1,     0,     3,
        1,     4,     1,     1,     4,     6,     1,     1,     3,     3,
        1,     3,     1,     2,     1,     3,     3,     3,     3,     3,
-       3,     3,     1,     3,     3,     1,     3,     3,     3,     1,
-       3,     5,     7,     1,     1,     2,     1,     2,     2,     0,
-       2,     1,     3,     7,     0,     2,     1
+       3,     3,     3,     1,     3,     3,     1,     3,     3,     3,
+       1,     3,     5,     7,     1,     1,     2,     1,     2,     2,
+       0,     2,     1,     3,     7,     0,     2,     1
   };
 
 
@@ -1547,7 +1570,7 @@ namespace roe {
   "\"else keyword\"", "\"end of line\"", "\"ruleid\"", "\"and\"", "\"or\"",
   "\"not\"", "\"!=\"", "\"==\"", "\">\"", "\"<\"", "\">=\"", "\"<=\"",
   "\"+\"", "\"-\"", "\"*\"", "\"/\"", "\"%\"", "\",\"", "\";\"", "\"(\"",
-  "\")\"", "\"=\"", "\"return\"", "\"integer\"", "\"double\"",
+  "\")\"", "\"=\"", "\"return\"", "\"like\"", "\"integer\"", "\"double\"",
   "\"string\"", "\"name\"", "'['", "']'", "':'", "'{'", "'}'", "$accept",
   "constant", "parameters", "arg_list", "func_call", "variable",
   "atomexpr", "or_exp", "and_exp", "not_exp", "compare_exp", "addexpr",
@@ -1560,11 +1583,11 @@ namespace roe {
   Parser::yyrline_[] =
   {
        0,   110,   110,   114,   118,   124,   127,   132,   139,   142,
-     147,   153,   158,   163,   168,   173,   177,   181,   185,   189,
-     199,   203,   214,   219,   226,   231,   241,   251,   262,   273,
-     284,   294,   298,   302,   313,   323,   328,   338,   348,   358,
-     365,   370,   376,   381,   386,   391,   395,   399,   403,   408,
-     410,   417,   421,   426,   431,   432,   436
+     147,   153,   158,   163,   167,   172,   176,   180,   184,   188,
+     198,   202,   213,   218,   225,   230,   240,   250,   261,   272,
+     283,   294,   306,   310,   314,   325,   335,   340,   350,   360,
+     370,   377,   382,   388,   393,   398,   403,   407,   411,   415,
+     420,   422,   429,   433,   438,   443,   444,   448
   };
 
   // Print the state stack on the debug stream.
@@ -1610,14 +1633,14 @@ namespace roe {
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,    33,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,    34,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,    31,     2,    32,     2,     2,     2,     2,     2,     2,
+       2,    32,     2,    33,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,    34,     2,    35,     2,     2,     2,     2,
+       2,     2,     2,    35,     2,    36,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -1633,9 +1656,9 @@ namespace roe {
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25,    26,    27,    28,    29,    30
+      25,    26,    27,    28,    29,    30,    31
     };
-    const unsigned int user_token_number_max_ = 285;
+    const unsigned int user_token_number_max_ = 286;
     const token_number_type undef_token_ = 2;
 
     if (static_cast<int>(t) <= yyeof_)
@@ -1648,8 +1671,8 @@ namespace roe {
 
 
 } // roe
-#line 1652 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:1167
-#line 442 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:1168
+#line 1675 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.cpp" // lalr1.cc:1167
+#line 454 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.yy" // lalr1.cc:1168
  /*** Additional Code ***/
 
 void roe::Parser::error(const Parser::location_type& l,

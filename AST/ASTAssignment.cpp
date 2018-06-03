@@ -36,13 +36,13 @@ namespace roe
 
   void ASTAssignment::processAssignmentToField(const ASTVariable& astVar, llvm::Value* from)
   {
-    llvm::Value* container = context_.rule().getParamValue(astVar.baseName());
-    llvm::Value* tagVal    = llvm::ConstantInt::get(context_.types().longType(), astVar.tag());
-    auto constraints = context_.rule().getContainerForParam(astVar.baseName());
+    llvm::Value* container   = context_.rule().getParamValue(astVar.baseName());
+    llvm::Value* tagVal      = llvm::ConstantInt::get(context_.types().longType(), astVar.tag());
+    auto         constraints = context_.rule().getContainerForParam(astVar.baseName());
 
     if (isCStr(from))
     {
-      if(constraints && !constraints->stringAssignmentAllowed())
+      if (constraints && !constraints->stringAssignmentAllowed(astVar.tag()))
       {
         throw ASTException() << "String assignment is not allowed";
       }
@@ -52,7 +52,7 @@ namespace roe
     }
     else if (isString(from))
     {
-      if(constraints && !constraints->stringAssignmentAllowed())
+      if (constraints && !constraints->stringAssignmentAllowed(astVar.tag()))
       {
         throw ASTException() << "String assignment is not allowed";
       }
@@ -60,7 +60,7 @@ namespace roe
     }
     else if (isLong(from))
     {
-      if(!constraints || !constraints->longAssignmentAllowed())
+      if (!constraints || !constraints->longAssignmentAllowed(astVar.tag()))
       {
         throw ASTException() << "Long assignment is not allowed";
       }
@@ -69,7 +69,7 @@ namespace roe
     }
     else if (isFloat(from))
     {
-      if(!constraints || !constraints->doubleAssignmentAllowed())
+      if (!constraints || !constraints->doubleAssignmentAllowed(astVar.tag()))
       {
         throw ASTException() << "Long assignment is not allowed";
       }
@@ -92,6 +92,11 @@ namespace roe
     auto from   = right_->evaluate();
     from        = loadValueIfNeeded(from);
     auto astVar = std::dynamic_pointer_cast<ASTVariable>(left_);
+
+    if (!isCStr(from) && !isString(from) && !isLong(from) && !isFloat(from))
+    {
+        throw ASTException() << "Invalid assignment rvalue type";
+    }
 
     if (!astVar)
     {

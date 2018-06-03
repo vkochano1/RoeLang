@@ -12,8 +12,10 @@ namespace roe
   public:
     virtual llvm::Value* evaluate() override;
     llvm::Value*         length() const;
+    const std::string&   originalValue() const; 
 
   private:
     std::string value_;
+    std::string originalValue_;
   };
 }

@@ -1,8 +1,7 @@
 #pragma once
 
 #include <Functions/StringOps.h>
-#include <llvm/IR/DerivedTypes.h>
-#include <llvm/IR/LLVMContext.h>
+#include <Module/ForwardDecls.h>
 #include <unordered_map>
 
 namespace roe

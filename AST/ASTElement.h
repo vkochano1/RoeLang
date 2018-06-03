@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Module/ForwardDeclsImpl.h>
+
 #include <Exceptions/ASTException.h>
 #include <Module/Context.h>
 #include <llvm/IR/DerivedTypes.h>

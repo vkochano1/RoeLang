@@ -40,13 +40,10 @@ namespace roe
 
   public:
     virtual int64_t getTagFromFieldName(const std::string& fieldName) const;
-    virtual bool longAssignmentAllowed() const  {return false;}
-    virtual bool doubleAssignmentAllowed() const  {return false;}
-    virtual bool stringAssignmentAllowed() const  {return true;}  
-
-    virtual ~IConstraints()
-    {
-    }
+    virtual bool longAssignmentAllowed  (int64_t tag) const;
+    virtual bool doubleAssignmentAllowed(int64_t tag) const;
+    virtual bool stringAssignmentAllowed(int64_t tag) const;
+    virtual ~IConstraints();
 
   protected:
     FieldNameToTagMapping fieldNameToTagMapping_;
@@ -66,6 +63,7 @@ namespace roe
     static const std::string SET_FIELD_INT;
     static const std::string SET_FIELD_DOUBLE;
     static const std::string SET_STR_CHAR;
+
   public:
     static void getFieldString(void*, int64_t tag, StringOps::String_t* s);
     static void setFieldString(void*, int64_t tag, StringOps::String_t* s);

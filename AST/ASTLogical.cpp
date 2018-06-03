@@ -22,9 +22,33 @@ namespace roe
     v1 = loadValueIfNeeded(v1);
     v2 = loadValueIfNeeded(v2);
 
+    llvm::Value* out = nullptr;
+
+    if(op_ == Operator::LIKE)
+    {
+      
+      if (!isCStr(v2) || !isString(v1))
+      {
+        throw ASTException() << "Invalid arguments for like expression";
+      }
+      auto strPtr = std::dynamic_pointer_cast<ASTCstr> (operand2_);
+
+      if(!strPtr)
+      {
+        throw ASTException() << "Invalid cast to CStr";
+      }
+
+      void* regexPtr = context_.addMatchRegex(strPtr->originalValue());
+      // todo I32
+      llvm::Value* regexData = llvm::ConstantInt::get(context_.types().longType(), reinterpret_cast<int64_t> (regexPtr) );
+
+      out = context_.externalFunctions().makeCall(StringOps::REGEX_MATCH, { v1, regexData });
+
+      return out;
+    }
+
     normalizeValues(v1, v2);
 
-    llvm::Value* out = nullptr;
     switch (op_)
     {
       case Operator::AND:
@@ -33,7 +57,8 @@ namespace roe
       case Operator::OR:
         out = builder.CreateOr(v1, v2);
         break;
-      defualt:
+
+      default:
         throw ASTException() << "Invalid arguments for logical expression";
         break;
     };

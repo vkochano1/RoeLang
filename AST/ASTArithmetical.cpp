@@ -2,6 +2,7 @@
 #include <AST/ASTCStr.h>
 #include <Functions/FunctionRegistrar.h>
 #include <Functions/StringOps.h>
+#include <llvm/IR/IRBuilder.h>
 
 namespace roe
 {
@@ -15,8 +16,6 @@ namespace roe
 
   bool ASTArithmetical::processStringConcat(llvm::Value* left, llvm::Value* right, llvm::Value*& out)
   {
-    auto& builder = context_.builder();
-
     out = nullptr;
 
     if (isString(left) && isString(right))
@@ -72,7 +71,7 @@ namespace roe
         case Operator::MOD:
           out = builder.CreateSRem(left, right);
           break;
-        defualt:
+        default:
           throw((ASTException()) << "Opearand is not supported");
           break;
       };
@@ -111,7 +110,6 @@ namespace roe
 
   llvm::Value* ASTArithmetical::evaluate()
   {
-    auto& builder = context_.builder();
     auto  left    = operand1_->evaluate();
     auto  right   = operand2_->evaluate();
 

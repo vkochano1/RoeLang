@@ -15,7 +15,7 @@ namespace roe
   const std::string StringOps::EQUALS_CHPTR_AND_STR   = "EqualsCharPtrAndStr";
   const std::string StringOps::EQUALS_CHPTR_AND_CHPTR = "EqualsCharPtrAndCharPtr";
   const std::string StringOps::TO_INT_CHPTR           = "CharPtrToInt";
-  const std::string StringOps::DOUBLE_TO_INT           = "DoubleToInt";
+  const std::string StringOps::DOUBLE_TO_INT          = "DoubleToInt";
   const std::string StringOps::TO_INT_STR             = "StrToInt";
   const std::string StringOps::TO_DOUBLE_CHPTR        = "CharPtrToDouble";
   const std::string StringOps::TO_DOUBLE_STR          = "StrToDouble";
@@ -24,7 +24,7 @@ namespace roe
   const std::string StringOps::GET_CHAR               = "GetChar";
   const std::string StringOps::GET_SUBSTR             = "GetSubstr";
   const std::string StringOps::GET_LENGTH             = "GetLength";
-
+  const std::string StringOps::REGEX_MATCH            = "RegexMatch";
 
   void StringOps::registerConcatBuiltins(Context& context)
   {
@@ -85,7 +85,7 @@ namespace roe
       StringOps::TO_INT_STR, &StringOps::stringToInt, context.types().longType(), {context.types().stringPtrType()});
 
     context.externalFunctions().registerExternal(
-        StringOps::DOUBLE_TO_INT, &StringOps::doubleToInt, context.types().longType(), {context.types().floatType()});
+      StringOps::DOUBLE_TO_INT, &StringOps::doubleToInt, context.types().longType(), {context.types().floatType()});
 
     context.externalFunctions().registerExternal(
       StringOps::TO_INT_CHPTR, &StringOps::charPtrToInt, context.types().longType(), {context.types().charPtrType()});
@@ -125,12 +125,22 @@ namespace roe
     registerAssignBuiltins(context);
     registerEqualsBuiltins(context);
     registerConversionBuiltins(context);
+
+    context.externalFunctions().registerExternal(
+      StringOps::REGEX_MATCH, &StringOps::regexMatch, context.types().boolType(),
+      {context.types().stringPtrType(), context.types().longType() });
+  }
+
+  bool StringOps::regexMatch(const String_t* s, void* regexAddr)
+  {
+    std::regex& regex =  *reinterpret_cast<std::regex*> (regexAddr);
+    return std::regex_match(s->c_str(), s->c_str() + s->length(), regex);
   }
 
   static void concatImpl(StringOps::String_t* dest, const char* s1, size_t l1, const char* s2, size_t l2)
   {
     size_t newLen = l1 + l2;
-    if(StringOps::String_t::capacity <= newLen)
+    if (StringOps::String_t::capacity <= newLen)
     {
       throw std::runtime_error("string is too long");
     }
@@ -177,7 +187,7 @@ namespace roe
   }
   void StringOps::assignChPtr(String_t* s1, const char* s2, int64_t len2)
   {
-    if(StringOps::String_t::capacity <= len2)
+    if (StringOps::String_t::capacity <= len2)
     {
       throw std::runtime_error("string is too long");
     }
@@ -219,11 +229,11 @@ namespace roe
   {
     std::string tmp = std::to_string(i);
 
-    if(StringOps::String_t::capacity <= tmp.length())
+    if (StringOps::String_t::capacity <= tmp.length())
     {
       throw std::runtime_error("string is too long");
     }
-    s->length()     = tmp.length();
+    s->length() = tmp.length();
     std::memcpy(s->data_ptr(), tmp.c_str(), tmp.length());
   }
 
@@ -231,12 +241,12 @@ namespace roe
   {
     std::string tmp = std::to_string(d);
 
-    if(StringOps::String_t::capacity <= tmp.length())
+    if (StringOps::String_t::capacity <= tmp.length())
     {
       throw std::runtime_error("string is too long");
     }
 
-    s->length()     = tmp.length();
+    s->length() = tmp.length();
     std::memcpy(s->data_ptr(), tmp.c_str(), tmp.length());
   }
 

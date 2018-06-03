@@ -1,23 +1,24 @@
 #include <Module/Context.h>
+#include <Module/ForwardDeclsImpl.h>
 #include <Types/Types.h>
 
 namespace roe
 {
   void Types::init(Context& context)
   {
-    auto* arrayType     = llvm::ArrayType::get(llvm::Type::getInt8Ty(context), String::capacity);
-    auto* stringLenType = llvm::Type::getInt8Ty(context);
+    auto* arrayType     = llvm::ArrayType::get(llvm::Type::getInt8Ty(context.native()), String::capacity);
+    auto* stringLenType = llvm::Type::getInt8Ty(context.native());
 
     std::vector<llvm::Type*> structFieldTypes = {arrayType, stringLenType};
 
-    stringType_    = llvm::StructType::create(context, structFieldTypes, "string");
+    stringType_    = llvm::StructType::create(context.native(), structFieldTypes, "string");
     stringPtrType_ = llvm::PointerType::get(stringType_, 0);
-    charPtrType_   = llvm::PointerType::get(llvm::Type::getInt8Ty(context), 0);
-    longType_      = llvm::Type::getInt64Ty(context);
+    charPtrType_   = llvm::PointerType::get(llvm::Type::getInt8Ty(context.native()), 0);
+    longType_      = llvm::Type::getInt64Ty(context.native());
     longPtrType_   = llvm::PointerType::get(longType_, 0);
-    boolType_      = llvm::Type::getInt1Ty(context);
-    voidType_      = llvm::Type::getVoidTy(context);
-    floatType_     = llvm::Type::getDoubleTy(context);
+    boolType_      = llvm::Type::getInt1Ty(context.native());
+    voidType_      = llvm::Type::getVoidTy(context.native());
+    floatType_     = llvm::Type::getDoubleTy(context.native());
     floatPtrType_  = llvm::PointerType::get(floatType_, 0);
 
     rvalueToVarType_ = TypeMapping{{charPtrType_, stringType_},

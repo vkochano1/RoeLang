@@ -1,15 +1,9 @@
 #pragma once
 
-#include <assert.h>
-
-#include <Types/Types.h>
-#include <iostream>
-#include <llvm/ExecutionEngine/ExecutionEngine.h>
-#include <llvm/IR/Module.h>
-#include <tuple>
-
 #include <Functions/Bindings.h>
 #include <Module/RoeRule.h>
+#include <Types/Types.h>
+#include <regex>
 
 namespace roe
 {
@@ -17,16 +11,19 @@ namespace roe
   class Context;
   class Module;
 
-  class Context final : public llvm::LLVMContext
+  class Context final
   {
   public:
     using Rules = std::unordered_map<std::string, std::shared_ptr<RoeRule>>;
+    using RegexPtr = std::unique_ptr<std::regex>;
+    using RegexPtrContainer = std::vector<RegexPtr>;
 
   public:
     Context();
+    ~Context();
+
     Context(const Context&) = delete;
     Context& operator=(const Context&) = delete;
-    ~Context();
 
     void init(Module* module);
 
@@ -35,12 +32,14 @@ namespace roe
     RoeRule& rule();
     Rules&   rules();
     RoeRule& rule(const std::string& name);
-    Types&            types();
-    IPrinter*         printer();
-    RoeRule::Builder& builder();
+    Types&             types();
+    IPrinter*          printer();
+    RoeRule::Builder&  builder();
+    llvm::LLVMContext& native();
 
   public:
-    void addNewRule(const std::string& newRuleName, const ASTFunctionParameters::Parameters& params);
+    void addNewRule(const std::string& newRuleName, const RoeRule::FunctionParameters& params);
+    void* addMatchRegex(const std::string& regex);
     void setCurrentRule(const std::string& name);
     FunctionRegistrar& externalFunctions();
 
@@ -49,7 +48,9 @@ namespace roe
     Module*                            module_;
     std::shared_ptr<RoeRule>           currentRule_;
     std::unique_ptr<Types>             types_;
+    std::unique_ptr<llvm::LLVMContext> nativeContext_;
     std::unique_ptr<IPrinter>          printer_;
     std::unique_ptr<FunctionRegistrar> functionRegistrar_;
+    RegexPtrContainer                  regexPtrContainer_;
   };
 }

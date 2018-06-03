@@ -35,6 +35,7 @@ namespace roe
     static const std::string GET_CHAR;
     static const std::string GET_LENGTH;
     static const std::string GET_SUBSTR;
+    static const std::string REGEX_MATCH;
 
     struct String_t
     {
@@ -90,7 +91,7 @@ namespace roe
     static int64_t getChar(const String_t* s, int64_t);
     static void getSubstr(const String_t* s, int64_t from, int64_t len, String_t* out);
     static int64_t getLength(const String_t* s);
-
+    static bool regexMatch(const String_t* s, void* regexAddr);
   public:
     static void registerBuiltins(Context& ctx);
     static void registerConcatBuiltins(Context& ctx);

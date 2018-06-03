@@ -52,9 +52,9 @@ namespace roe
       mainBlock_->evaluate();
       builder.CreateBr(ifEnd);
     }
-    catch(ReturnNotification&)
+    catch (ReturnNotification&)
     {
-      //Well, return statement was already generatd for mainBlock
+      // Well, return statement was already generatd for mainBlock
     }
 
     if (elseBlock_)
@@ -65,9 +65,9 @@ namespace roe
         elseBlock_->evaluate();
         builder.CreateBr(ifEnd);
       }
-      catch(ReturnNotification&)
+      catch (ReturnNotification&)
       {
-        //Well, return statement was already generatd for elseBlock
+        // Well, return statement was already generatd for elseBlock
       }
     }
 

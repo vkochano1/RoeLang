@@ -166,10 +166,11 @@ namespace roe {
         RPAREN = 279,
         ASSIGN = 280,
         RETURN = 281,
-        INTEGER = 282,
-        DOUBLE = 283,
-        STRING = 284,
-        NAME = 285
+        LIKE_KEYWORD = 282,
+        INTEGER = 283,
+        DOUBLE = 284,
+        STRING = 285,
+        NAME = 286
       };
     };
 
@@ -477,12 +478,12 @@ namespace roe {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 108,     ///< Last index in yytable_.
+      yylast_ = 120,     ///< Last index in yytable_.
       yynnts_ = 22,  ///< Number of nonterminal symbols.
       yyfinal_ = 5, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
-      yyntokens_ = 36  ///< Number of tokens.
+      yyntokens_ = 37  ///< Number of tokens.
     };
 
 
@@ -493,7 +494,7 @@ namespace roe {
 
 
 } // roe
-#line 497 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.hh" // lalr1.cc:377
+#line 498 "/home/vkochano/RoeLang/RoeLang/Parser/Parser.hh" // lalr1.cc:377
 
 
 

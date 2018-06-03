@@ -1,31 +1,29 @@
 #pragma once
 
-#include <AST/ASTFunctionParameters.h>
 #include <Functions/Bindings.h>
+#include <Module/ForwardDecls.h>
 #include <Module/VariableInfo.h>
 
-#include <llvm/IR/DerivedTypes.h>
-#include <llvm/IR/Function.h>
-#include <llvm/IR/IRBuilder.h>
-#include <llvm/IR/LLVMContext.h>
-
+#include <memory>
 #include <unordered_map>
 #include <unordered_set>
+#include <vector>
 
 namespace roe
 {
   class RoeRule final
   {
   public:
-    using Builder                = llvm::IRBuilder<>;
+    using Builder                = roe::IRBuilder;
     using ParameterToValue       = std::unordered_map<std::string, llvm::Value*>;
     using ParameterToConstraints = std::unordered_map<std::string, std::shared_ptr<IConstraints>>;
     using DeclaredVariables      = std::unordered_map<std::string, VariableInfo>;
+    using FunctionParameters     = std::vector<std::string>;
 
   public:
-    RoeRule(Context& context, const std::string& ruleName, const ASTFunctionParameters::Parameters& params);
+    RoeRule(Context& context, const std::string& ruleName, const FunctionParameters& params);
 
-    void init(const std::string& ruleName, const ASTFunctionParameters::Parameters& params);
+    void init(const std::string& ruleName, const FunctionParameters& params);
 
     // cached
     Context&        context();
@@ -37,7 +35,7 @@ namespace roe
     llvm::Value* getParamValue(const std::string& name);
     void bindParameter(const std::string& name, std::shared_ptr<IConstraints> constraints);
     std::shared_ptr<IConstraints> getContainerForParam(const std::string& paramName);
-    const ASTFunctionParameters::Parameters& params() const;
+    const FunctionParameters& params() const;
 
     // local variable
   public:
@@ -56,17 +54,17 @@ namespace roe
     void localsBlock(llvm::BasicBlock* lb);
 
   private:
-    mutable DeclaredVariables         declaredVariables_;
-    ASTFunctionParameters::Parameters params_;
-    ParameterToValue                  paramToValue_;
-    llvm::Function*                   function_;
-    llvm::BasicBlock*                 entry_;
-    llvm::BasicBlock*                 locals_;
-    llvm::BasicBlock*                 return_;
+    mutable DeclaredVariables declaredVariables_;
+    FunctionParameters        params_;
+    ParameterToValue          paramToValue_;
+    llvm::Function*           function_;
+    llvm::BasicBlock*         entry_;
+    llvm::BasicBlock*         locals_;
+    llvm::BasicBlock*         return_;
 
-    Context&                          context_;
-    std::unique_ptr<Builder>          builder_;
-    ParameterToConstraints            paramToConstraints_;
-    std::string                       ruleName_;
+    Context&                 context_;
+    std::unique_ptr<Builder> builder_;
+    ParameterToConstraints   paramToConstraints_;
+    std::string              ruleName_;
   };
 }

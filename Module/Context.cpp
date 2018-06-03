@@ -1,6 +1,8 @@
 #include <Exceptions/ASTException.h>
 #include <Functions/FunctionRegistrar.h>
 #include <Module/Context.h>
+#include <Module/ForwardDeclsImpl.h>
+
 #include <assert.h>
 #include <iostream>
 
@@ -33,9 +35,15 @@ namespace roe
   Context::Context()
   {
     module_ = nullptr;
+    nativeContext_.reset(new llvm::LLVMContext());
     printer_.reset(new DefaultPrinter());
     types_             = std::make_unique<Types>(*this);
     functionRegistrar_ = std::make_unique<FunctionRegistrar>(*this);
+  }
+
+  llvm::LLVMContext& Context::native()
+  {
+    return *nativeContext_;
   }
 
   IPrinter* Context::printer()
@@ -48,13 +56,26 @@ namespace roe
     return *functionRegistrar_;
   }
 
-  void Context::addNewRule(const std::string& newRuleName, const ASTFunctionParameters::Parameters& params)
+  void Context::addNewRule(const std::string& newRuleName, const RoeRule::FunctionParameters& params)
   {
     auto rule = std::make_shared<RoeRule>(*this, newRuleName, params);
     auto rit  = rules_.insert(std::make_pair(newRuleName, rule));
     if (rit.second == false)
     {
       throw ASTException() << "Duplicate rule " << newRuleName;
+    }
+  }
+
+  void* Context::addMatchRegex(const std::string& regexStr)
+  {
+    try
+    {
+      regexPtrContainer_.push_back(std::make_unique<std::regex> (regexStr, std::regex::optimize |  std::regex::egrep));
+      return reinterpret_cast<void*> (regexPtrContainer_.back().get());
+    }
+    catch(std::regex_error& ex)
+    {
+      throw ASTException() << "Invalid regex syntax " << ex.what();
     }
   }
 
@@ -66,7 +87,7 @@ namespace roe
   RoeRule& Context::rule(const std::string& name)
   {
     auto fit = rules_.find(name);
-    if(fit == rules_.end())
+    if (fit == rules_.end())
     {
       throw ASTException() << "Unknown rule " << name;
     }

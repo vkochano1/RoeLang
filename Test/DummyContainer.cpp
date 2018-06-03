@@ -4,7 +4,6 @@ namespace roe
 {
   namespace test
   {
-
     DummyConstraints::DummyConstraints()
     {
       fieldNameToTagMapping_ = {{"Symbol", 55},   {"Suffix", 65}, {"Side", 54},      {"OrdType", 40},

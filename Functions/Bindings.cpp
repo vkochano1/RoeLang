@@ -16,7 +16,7 @@ namespace roe
   const std::string Bindings::SET_FIELD_DOUBLE = "setFieldDouble";
   const std::string Bindings::SET_STR_CHAR     = "setChar";
 
-  int64_t IConstraints::getTagFromFieldName(const std::string& val) const 
+  int64_t IConstraints::getTagFromFieldName(const std::string& val) const
   {
     auto fit = fieldNameToTagMapping_.find(val);
     if (fit == fieldNameToTagMapping_.end())
@@ -25,6 +25,24 @@ namespace roe
     }
 
     return fit->second;
+  }
+
+  bool IConstraints::longAssignmentAllowed(int64_t) const
+  {
+    return false;
+  }
+
+  bool IConstraints::doubleAssignmentAllowed(int64_t) const
+  {
+    return false;
+  }
+  bool IConstraints::stringAssignmentAllowed(int64_t) const
+  {
+    return true;
+  }
+
+  IConstraints::~IConstraints()
+  {
   }
 
   void Bindings::registerBuiltins(Context& context)
@@ -66,9 +84,9 @@ namespace roe
       PRINT_DOUBLE, &Bindings::printDouble, context.types().voidType(),
       {context.types().longType(), context.types().floatType()});
 
-      context.externalFunctions().registerExternal(
-        SET_STR_CHAR, &Bindings::setStrChar, context.types().voidType(),
-        {context.types().stringPtrType(), context.types().longType(), context.types().longType()});
+    context.externalFunctions().registerExternal(
+      SET_STR_CHAR, &Bindings::setStrChar, context.types().voidType(),
+      {context.types().stringPtrType(), context.types().longType(), context.types().longType()});
   }
 
   void Bindings::printString(void* data, const StringOps::String_t* str)
@@ -127,10 +145,9 @@ namespace roe
 
   void Bindings::setStrChar(StringOps::String_t* s, int64_t val, int64_t idx)
   {
-    if(idx < s->length())
+    if (idx < s->length())
     {
       *(s->data_ptr() + idx) = static_cast<int64_t>(val);
     }
   }
-
 }

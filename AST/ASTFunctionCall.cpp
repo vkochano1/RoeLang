@@ -34,8 +34,7 @@ namespace roe
     {
       return false;
     }
-
-    auto& builder = context_.builder();
+    
     args_->evaluate();
 
     auto argList = std::dynamic_pointer_cast<ASTArgList>(args_);

@@ -13,16 +13,15 @@ namespace roe
     var_ = var;
 
     // don't have dependency on boost
-    auto  split = [] (const std::string& s, char delimiter)
-    {
-       std::vector<std::string> tokens;
-       std::string token;
-       std::istringstream tokenStream(s);
-       while (std::getline(tokenStream, token, delimiter))
-       {
-          tokens.push_back(token);
-       }
-       return tokens;
+    auto split = [](const std::string& s, char delimiter) {
+      std::vector<std::string> tokens;
+      std::string              token;
+      std::istringstream       tokenStream(s);
+      while (std::getline(tokenStream, token, delimiter))
+      {
+        tokens.push_back(token);
+      }
+      return tokens;
     };
 
     auto varComponents = split(var_, '.');
@@ -86,7 +85,6 @@ namespace roe
   llvm::Value* ASTVariable::evaluateField()
   {
     processContainerField();
-    auto& builder = context_.rule().builder();
 
     llvm::Value* result    = allocString();
     llvm::Value* container = context_.rule().getParamValue(baseName());

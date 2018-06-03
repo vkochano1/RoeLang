@@ -48,7 +48,8 @@ namespace roe
     enum class Operator : uint8_t
     {
       AND,
-      OR
+      OR,
+      LIKE
     };
 
   public:

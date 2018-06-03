@@ -1,14 +1,15 @@
+#include <Module/ForwardDeclsImpl.h>
+
 #include <AST/ASTElement.h>
+#include <AST/ASTReturn.h>
 #include <Exceptions/ASTException.h>
 #include <Module/Context.h>
 #include <Module/Module.h>
 #include <Module/RoeRule.h>
-#include <AST/ASTReturn.h>
-
 
 namespace roe
 {
-  RoeRule::RoeRule(Context& context, const std::string& ruleName, const ASTFunctionParameters::Parameters& params)
+  RoeRule::RoeRule(Context& context, const std::string& ruleName, const FunctionParameters& params)
     : context_(context)
     , ruleName_(ruleName)
   {
@@ -16,14 +17,14 @@ namespace roe
     init(ruleName_, params);
   }
 
-  const ASTFunctionParameters::Parameters& RoeRule::params() const
+  const RoeRule::FunctionParameters& RoeRule::params() const
   {
     return params_;
   }
 
-  void RoeRule::init(const std::string& ruleID, const ASTFunctionParameters::Parameters& params)
+  void RoeRule::init(const std::string& ruleID, const FunctionParameters& params)
   {
-    builder_.reset(new Builder(context_));
+    builder_.reset(new Builder(context_.native()));
 
     std::vector<llvm::Type*> funcParams(params.size(), context_.types().voidPtrType());
 

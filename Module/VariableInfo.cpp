@@ -1,4 +1,5 @@
 #include <Module/Context.h>
+#include <Module/ForwardDeclsImpl.h>
 #include <Module/VariableInfo.h>
 
 namespace roe
