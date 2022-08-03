@@ -10,25 +10,16 @@ option(GENERATE_PARSER "Generate Parser and Scanner source code" OFF)
 message("GENERATE_PARSER is ${GENERATE_PARSER}")
 
 set (ROE_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
-set (LLVM_INCLUDE_DIR /usr/local/include/)
-set (LLVM_LIB_DIR /usr/local/lib/)
+
+if(NOT LLVM_ROOT)
+	set (LLVM_ROOT /usr/local/)
+endif()
+
+set (LLVM_INCLUDE_DIR  ${LLVM_ROOT}/include/)
+set (LLVM_LIB_DIR  ${LLVM_ROOT}/lib/)
 
 
-set (LLVM_LIB_NAMES
-LLVMPasses LLVMipo LLVMInstrumentation
-LLVMVectorize LLVMLinker LLVMX86Disassembler
-LLVMX86AsmParser  LLVMX86CodeGen  LLVMGlobalISel
-LLVMSelectionDAG  LLVMAsmPrinter  LLVMDebugInfoCodeView
-LLVMDebugInfoMSF  LLVMCodeGen  LLVMScalarOpts
-LLVMInstCombine LLVMAggressiveInstCombine
-LLVMTransformUtils  LLVMBitWriter  LLVMX86Desc
-LLVMMCDisassembler  LLVMX86Info  LLVMX86AsmPrinter
-LLVMX86Utils  LLVMMCJIT  LLVMExecutionEngine
-LLVMTarget  LLVMAnalysis  LLVMProfileData
-LLVMRuntimeDyld  LLVMObject  LLVMMCParser
-LLVMBitReader  LLVMMC  LLVMCore
-LLVMBinaryFormat  LLVMSupport  LLVMDemangle
-)
+set (LLVM_LIB_NAMES tinfo LLVMLTO LLVMPasses LLVMMCJIT  LLVMObjCARCOpts LLVMSymbolize LLVMDebugInfoPDB LLVMDebugInfoDWARF LLVMFuzzMutate LLVMTableGen LLVMDlltoolDriver LLVMLineEditor LLVMOrcJIT LLVMCoverage LLVMMIRParser LLVMBPFDisassembler LLVMBPFCodeGen LLVMBPFAsmParser LLVMBPFDesc LLVMBPFInfo LLVMBPFAsmPrinter LLVMObjectYAML LLVMLibDriver LLVMOption LLVMWindowsManifest LLVMX86Disassembler LLVMX86AsmParser LLVMX86CodeGen LLVMGlobalISel LLVMSelectionDAG LLVMAsmPrinter LLVMX86Desc LLVMMCDisassembler LLVMX86Info LLVMX86AsmPrinter LLVMX86Utils  LLVMInterpreter LLVMExecutionEngine LLVMRuntimeDyld LLVMCodeGen LLVMTarget LLVMCoroutines LLVMipo LLVMInstrumentation LLVMVectorize LLVMScalarOpts LLVMLinker LLVMIRReader LLVMAsmParser LLVMInstCombine LLVMBitWriter LLVMAggressiveInstCombine LLVMTransformUtils LLVMAnalysis LLVMProfileData LLVMObject LLVMMCParser LLVMMC LLVMDebugInfoCodeView LLVMDebugInfoMSF LLVMBitReader LLVMCore LLVMBinaryFormat LLVMSupport LLVMDemangle)
 
 
 ######################## FLEX & BISON ###########################

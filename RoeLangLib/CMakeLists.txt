@@ -26,8 +26,13 @@ add_dependencies(EmbededRoeLang RoeLangStatic)
 ################################### Dynamic libs #########################################
 
 add_library(RoeLangDynamic SHARED ${ROE_LANG_LIB_SRC} )
+
+message("Using LLVM include dir: " ${LLVM_INCLUDE_DIR} )
+message("Using LLVM lib dir: "     ${LLVM_LIB_DIR} )
+
 target_include_directories(RoeLangDynamic PUBLIC ${LLVM_INCLUDE_DIR} ${ROE_ROOT} ${ROE_ROOT}/Lexer)
 target_link_libraries(RoeLangDynamic ${LLVM_LIB_NAMES})
+target_link_directories(RoeLangDynamic PUBLIC $${LLVM_LIB_DIR})
 
 
 ################################### Installation #########################################
@@ -35,7 +40,7 @@ target_link_libraries(RoeLangDynamic ${LLVM_LIB_NAMES})
 install(TARGETS RoeLangDynamic LIBRARY DESTINATION lib)
 install(TARGETS RoeLangStatic  ARCHIVE DESTINATION lib)
 
-install(FILES ${ROE_ROOT}/RoeLangLib/libRoeLangEmb.a DESTINATION lib)
+#install(FILES ${ROE_ROOT}/RoeLangLib/libRoeLangEmb.a DESTINATION lib)
 install(DIRECTORY ../Types DESTINATION include/  FILES_MATCHING PATTERN "*.h")
 install(DIRECTORY ../Module DESTINATION include/  FILES_MATCHING PATTERN "*.h")
 install(DIRECTORY ../Functions DESTINATION include/  FILES_MATCHING PATTERN "*.h")
